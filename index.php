@@ -1,85 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú lateral responsive - MagtimusPro</title>
-
-    <link rel="stylesheet" href="css/estilos.css">
-
-    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AGENDA FABRICA MARIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/estiloslogin.css">
+    <link rel="shortcut icon" href="assets/icono_FM.jpg" type="image/x-icon">
 </head>
-<body id="body">
-    
-    <header>
-        <div class="icon__menu">
-            <i class="fas fa-bars" id="btn_open"></i>
-        </div>
-    </header>
 
-    <div class="menu__side" id="menu_side">
+<body>
 
-        <div class="name__page">
-            <i class="fab fa-youtube"></i>
-            <h4>MagtimusPro</h4>
+    <div class="contenedor-formulario contenedor">
+        <div class="imagen-formulario"> <!-- aqui va la imagen de la empresa-->
+            <img class="imagen-bacground" src="#" alt="" style="width: 700px;">
         </div>
 
-        <div class="options__menu">	
-
-            <a href="#" class="selected">
-                <div class="option">
-                    <i class="fas fa-home" title="Inicio"></i>
-                    <h4>Inicio</h4>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="option">
-                    <i class="far fa-file" title="Portafolio"></i>
-                    <h4>Portafolio</h4>
-                </div>
-            </a>
-            
-            <a href="#">
-                <div class="option">
-                    <i class="fas fa-video" title="Cursos"></i>
-                    <h4>Cursos</h4>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="option">
-                    <i class="far fa-sticky-note" title="Blog"></i>
-                    <h4>Blog</h4>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="option">
-                    <i class="far fa-id-badge" title="Contacto"></i>
-                    <h4>Contacto</h4>
-                </div>
-            </a>
-
-            <a href="#">
-                <div class="option">
-                    <i class="far fa-address-card" title="Nosotros"></i>
-                    <h4>Nosotros</h4>
-                </div>
-            </a>
-
-        </div>
-
+        <form class="formulario" action="main.php" method="post" name="confir">
+            <div class="texto-formulario">
+                <h2>Bienvenido de nuevo</h2>
+                <p>Inicia sesión con tu cuenta</p>
+            </div>
+            <div class="input">
+                <label for="usuario">Usuario</label>
+                <input placeholder="Ingresa tu nombre" type="text" id="usuario" name ="user">
+            </div>
+            <div class="input">
+                <label for="contraseña">Contraseña</label>
+                <input placeholder="Ingresa tu contraseña" type="password" id="contraseña" name = "password">
+            </div>
+            <div class="password-olvidada">
+                <a href="#">¿Olvidaste tu contraseña?</a>
+            </div>
+            <div class="input">
+                <input type="submit" value="Login">
+            </div>
+        </form>
     </div>
 
-    <main>
-        <h1>Title Exemple</h1><br>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam sapiente cumque dicta animi explicabo sequi. Ex amet et, dolor eligendi commodi consectetur quo voluptatibus, cum nemo porro veniam at blanditiis?</p> <br>
-
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Provident adipisci beatae impedit quia, deleniti quasi sequi iusto exercitationem nihil nulla, laboriosam dolore corrupti fuga officiis? Odit a mollitia id magnam amet delectus quia blanditiis reprehenderit explicabo eveniet! Rem voluptatum explicabo ipsum quae, dolorum, laudantium doloribus a, illum saepe sapiente accusantium dicta reiciendis? Amet iure porro voluptatum error fugit odit voluptas?</p>
-    </main>
-
-    <script src="js/script.js"></script>
 </body>
+
 </html>

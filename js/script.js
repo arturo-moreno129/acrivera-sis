@@ -1,39 +1,41 @@
-//Ejecutar función en el evento click
-document.getElementById("btn_open").addEventListener("click", open_close_menu);
 
-//Declaramos variables
-var side_menu = document.getElementById("menu_side");
-var btn_open = document.getElementById("btn_open");
-var body = document.getElementById("body");
+const cloud = document.getElementById("cloud");
+const barraLateral = document.querySelector(".barra-lateral");
+const spans = document.querySelectorAll("span");
+const palanca = document.querySelector(".switch");
+const circulo = document.querySelector(".circulo");
+const menu = document.querySelector(".menu");
+const main = document.querySelector("main");
 
-//Evento para mostrar y ocultar menú
-    function open_close_menu(){
-        body.classList.toggle("body_move");
-        side_menu.classList.toggle("menu__side_move");
+menu.addEventListener("click",()=>{
+    barraLateral.classList.toggle("max-barra-lateral");
+    if(barraLateral.classList.contains("max-barra-lateral")){
+        menu.children[0].style.display = "none";
+        menu.children[1].style.display = "block";
     }
-
-//Si el ancho de la página es menor a 760px, ocultará el menú al recargar la página
-
-if (window.innerWidth < 760){
-
-    body.classList.add("body_move");
-    side_menu.classList.add("menu__side_move");
-}
-
-//Haciendo el menú responsive(adaptable)
-
-window.addEventListener("resize", function(){
-
-    if (window.innerWidth > 760){
-
-        body.classList.remove("body_move");
-        side_menu.classList.remove("menu__side_move");
+    else{
+        menu.children[0].style.display = "block";
+        menu.children[1].style.display = "none";
     }
-
-    if (window.innerWidth < 760){
-
-        body.classList.add("body_move");
-        side_menu.classList.add("menu__side_move");
+    if(window.innerWidth<=320){
+        barraLateral.classList.add("mini-barra-lateral");
+        main.classList.add("min-main");
+        spans.forEach((span)=>{
+            span.classList.add("oculto");
+        })
     }
+});
 
+palanca.addEventListener("click",()=>{
+    let body = document.body;
+    body.classList.toggle("dark-mode");
+    circulo.classList.toggle("prendido");
+});
+
+cloud.addEventListener("click",()=>{
+    barraLateral.classList.toggle("mini-barra-lateral");
+    main.classList.toggle("min-main");
+    spans.forEach((span)=>{
+        span.classList.toggle("oculto");
+    });
 });
