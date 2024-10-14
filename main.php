@@ -17,8 +17,9 @@
     <div class="barra-lateral">
         <div>
             <div class="nombre-pagina">
-                <ion-icon id="cloud" name="cloud-outline"></ion-icon>
-                <span>Apex</span>
+                <!--<ion-icon id="cloud" name="cloud-outline"></ion-icon>
+                <span>Camiones Rivera</span>-->
+                <center><img src="imagenes/logo.png" style="width: 150px;" alt=""></center>
             </div>
         </div>
 
@@ -87,24 +88,11 @@
             </div>
 
             <div class="usuario">
-                <img src="/Jhampier.jpg" alt="">
+                <img src="imagenes/user.png" alt="">
                 <div class="info-usuario">
                     <div class="nombre-email">
                         <span class="nombre">Jhampier</span>
                         <span class="email">jhampier@gmail.com</span>
-                    </div>
-                    <!-- Example single danger button -->
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Action
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
                     </div>
                     <ion-icon name="ellipsis-vertical-outline"></ion-icon>
                 </div>
@@ -115,7 +103,7 @@
 
 
     <main>
-
+       
     </main>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
