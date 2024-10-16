@@ -1,4 +1,3 @@
-
 const cloud = document.getElementById("cloud");
 const barraLateral = document.querySelector(".barra-lateral");
 const spans = document.querySelectorAll("span");
@@ -6,6 +5,14 @@ const palanca = document.querySelector(".switch");//--------
 const circulo = document.querySelector(".circulo");//--------
 const menu = document.querySelector(".menu");
 const main = document.querySelector("main");
+
+const modoOscuroGuardado = localStorage.getItem('modoprueba');
+const cuerpo = document.body;
+
+if (modoOscuroGuardado === 'activado') {
+    cuerpo.classList.add('dark-mode');
+    circulo.classList.toggle("prendido");
+}
 
 
 menu.addEventListener("click", () => {
@@ -31,12 +38,18 @@ palanca.addEventListener("click", () => {
     let body = document.body;
     body.classList.toggle("dark-mode");
     circulo.classList.toggle("prendido");
+    if (cuerpo.classList.contains('dark-mode')) {
+        localStorage.setItem('modoprueba', 'activado');
+    } else {
+        localStorage.setItem('modoprueba', 'desactivado');
+    }
 });
 
-cloud.addEventListener("click", () => {
+/******** */
+/*cloud.addEventListener("click", () => {
     barraLateral.classList.toggle("mini-barra-lateral");
     main.classList.toggle("min-main");
     spans.forEach((span) => {
         span.classList.toggle("oculto");
     });
-});
+});*/
