@@ -1,6 +1,6 @@
 <?php
 include "header.php";
-//session_start();
+session_start();
 $nombre = $_POST["firstname"];
 $apellidoP = $_POST["lastname"];
 $apellidoM = $_POST["surname"];
@@ -11,7 +11,7 @@ echo $nombre, $apellidoP, $apellidoM,$formattedDate;
 
 
 //archivo resguardo
-/*if (!empty($_FILES['file']['tmp_name']) && !empty($_FILES['file1']['tmp_name'])) {
+if (!empty($_FILES['file']['tmp_name']) && !empty($_FILES['file1']['tmp_name'])) {
     if (isset($_FILES['file'])) {
         $uploadDir = 'archivos/mipruebita/'; // Cambia esto por tu ruta deseada
         $tempFile = $_FILES['file']['tmp_name']; // Archivo temporal
@@ -72,4 +72,3 @@ echo $nombre, $apellidoP, $apellidoM,$formattedDate;
     }
 }*/
 include "footer.php";
-?>
