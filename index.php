@@ -21,7 +21,7 @@
             <img class="imagen-bacground" src="#" alt="" style="width: 700px;">
         </div>
 
-        <form class="formulario" action="main.php" method="post" name="confir">
+        <form class="formulario" action="registro.php" method="post" name="confir">
             <div class="texto-formulario">
                 <h2>Bienvenido de nuevo</h2>
                 <p>Inicia sesión con tu cuenta</p>

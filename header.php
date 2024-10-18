@@ -9,7 +9,6 @@ include("conexion.php")
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sidebar</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/estilos.css">
 </head>
 
 <body>
@@ -23,31 +22,31 @@ include("conexion.php")
             <div class="nombre-pagina">
                 <!--<ion-icon id="cloud" name="cloud-outline"></ion-icon>
                 <span>Camiones Rivera</span>-->
-                <img src="imagenes/logo.png" style="width: 150px;" alt="">
+                <img id="cloud" src="imagenes/logo.png" style="width: 150px;" alt="">
             </div>
         </div>
 
         <nav class="navegacion">
             <ul>
                 <li>
-                    <a id="inbox" href="#">
+                    <a href="registro.php">
                         <ion-icon name="document-outline"></ion-icon>
+                        <span>Registro</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="resguardos.php">
+                        <ion-icon name="build-outline"></ion-icon>
                         <span>Resguardos</span>
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <ion-icon name="build-outline"></ion-icon>
+                        <ion-icon name="paper-plane-outline"></ion-icon>
                         <span>Mantenimientos</span>
                     </a>
                 </li>
                 <!--<li>
-                    <a href="#">
-                        <ion-icon name="paper-plane-outline"></ion-icon>
-                        <span>Sent</span>
-                    </a>
-                </li>
-                <li>
                     <a href="#">
                         <ion-icon name="document-text-outline"></ion-icon>
                         <span>Drafts</span>
@@ -104,3 +103,22 @@ include("conexion.php")
         </div>
 
     </div>
+    <main>
+        <?php
+        session_start();
+        if (isset($_SESSION["alert"]) && $_SESSION["alert"] == "Se guardo correctamente el registro") {
+        ?>
+            <div class="alert alert-danger" role="alert" id="alertaa" style="background-color: rgba(149, 236, 149, 0.452);">
+                <strong>¡<?php print $_SESSION['alert']; ?>!</strong>
+            </div>
+        <?php
+
+        } elseif(isset($_SESSION["alert"]) && $_SESSION["alert"] == "Error al subor archivo") {
+        ?>
+            <div class="alert alert-danger" role="alert" id="alertaa" style="background-color: rgba(247, 88, 88, 0.452);">
+                <strong>¡<?php print $_SESSION['alert']; ?>!</strong>
+            </div>
+        <?php
+        }
+        unset($_SESSION["alert"]);
+        ?>

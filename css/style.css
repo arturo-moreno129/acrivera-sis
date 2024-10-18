@@ -20,7 +20,10 @@
     --color-scroll: rgb(192, 192, 192);
     --color-scroll-hover: rgb(134, 134, 134);
 
+        /*** variables cradas por mi******/
     --color-fondo-body: rgb(238, 238, 238);
+    --color-tbody: rgb(238, 238, 238);
+    --color-td: rgb(0, 0, 0);
 }
 
 .dark-mode {
@@ -42,7 +45,10 @@
 
     --color-scroll: rgb(68, 69, 74);
     --color-scroll-hover: rgb(85, 85, 85);
-    --color-fondo-body: rgb(0, 0 ,0);
+
+    /*** variables cradas por mi******/
+    --color-fondo-body: rgb(0, 0, 0);
+    --color-td: rgb(238, 238, 238);
 }
 
 * {
@@ -332,6 +338,7 @@ main.min-main {
 
 h1 {
     font-size: 4vw;
+    color: var(--color-menu-hover-texto);;
 }
 #input-search {
     width: 50vw;
@@ -404,7 +411,6 @@ h1 {
 table {
     border-spacing: 1;
     border-collapse: collapse;
-    background: white;
     border-radius: 6px;
     overflow: hidden;
     max-width: 1090px;
@@ -417,9 +423,16 @@ table * {
     position: relative;
 }
 
+td{
+    background-color: white;
+    color: black
+}
+th{
+    color: var(--color-td);
+}
 table td, table th {
     padding-left: 8px;
-    color: var(--color-menu-hover-texto);
+    
 }
 
 table thead tr {
@@ -430,7 +443,6 @@ table thead tr {
 
 table tbody tr {
     height: 48px;
-    border-bottom: 1px solid #E3F1D5;
 }
 
 table tbody tr:last-child {
@@ -514,4 +526,57 @@ table th.r {
     table tbody tr td:nth-child(5):before {
         content: "PDF MANTENIMIENTO";
     }
+}
+
+/********* estilo de registro******************/
+.contenedor-form input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .contenedor-form input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .contenedor-form input[type=submit]:hover {
+    background-color: #45a049;
+  }
+  
+  .contenedor-form {
+    border-radius: 5px;
+    background-color: white;
+    padding: 20px;
+    width: 80%;
+    margin-left: 8vw;
+  }
+/*******************estilos pop-up******************/
+
+.contenedor-pop-up{
+    width: 400px;
+    background-color: red;
+    color: white;
+    border-radius: 6px;
+    position: absolute;
+    top: 30%;
+    left: 20%;
+}
+/***** estilos alert***/
+.alert{
+    height: 50px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
 }

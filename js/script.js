@@ -14,7 +14,6 @@ if (modoOscuroGuardado === 'activado') {
     circulo.classList.toggle("prendido");
 }
 
-
 menu.addEventListener("click", () => {
     barraLateral.classList.toggle("max-barra-lateral");
     if (barraLateral.classList.contains("max-barra-lateral")) {
@@ -46,10 +45,10 @@ palanca.addEventListener("click", () => {
 });
 
 /******** */
-/*cloud.addEventListener("click", () => {
+cloud.addEventListener("click", () => {
     barraLateral.classList.toggle("mini-barra-lateral");
     main.classList.toggle("min-main");
     spans.forEach((span) => {
         span.classList.toggle("oculto");
     });
-});*/
+});

@@ -1,9 +1,8 @@
 <?php
 include "header.php";
 ?>
-<main>
     <div class="contnedor-buscador">
-        <form action="main.php" id="form" method="post">
+        <form action="resguardos.php" id="form" method="post">
             <center>
                 <h1>BUSCADOR</h1>
             </center>
@@ -26,7 +25,7 @@ include "header.php";
                     <?php
                     $nombre = strtoupper($_POST["nombre"]);
                     $url_files = strtr($nombre, " ", "_");
-                    $new_url_files = "resguardos/" . $url_files . "/";
+                    $new_url_files = "archivos/" . $url_files . "/";
                     $query = "select*From evidencia where nombre = '$nombre'";
                     $result = mysqli_query($con, $query);
                     if ($result) {
@@ -37,11 +36,11 @@ include "header.php";
                                 <td>' . $row["fecha"] . '</td>
                                 <td>' . $row["dispositivo"] . '</td>
                                 <td>' .
-                                        ($row["id_usuario"] == 1 ? '<a href="' . $row["url_resguardo"] . '" target="_blank" style="pointer-events:auto" rel="noopener noreferrer"> <img id="pdf-icon" src="imagenes/pdf_img.png" alt="" style="width: 35px;"> </a>' : '<img id="pdf-icon" src="imagenes/error.png" alt="" style="width: 35px;">') .
-                                        '</td>
-                                <td>
-                                    <a href="' . $new_url_files . $row["url_mantenimienti"] . '" target="_blank" rel="noopener noreferrer"><img id="pdf-icon" src="imagenes\pdf_img.png" alt="" style="width: 35px;></a>
-                                </td>
+                                        ($row["url_resguardo"] != null ? '<a href="'. $new_url_files . $row["url_resguardo"] . '" target="_blank" style="pointer-events:auto" rel="noopener noreferrer"> <img id="pdf-icon" src="imagenes/pdf_img.png" alt="" style="width: 35px;"> </a>' : '<img id="pdf-icon" src="imagenes/error.png" alt="" style="width: 35px;">') .
+                                '</td>
+                                <td>' .
+                                        ($row["url_mantenimiento"] != null ? '<a href="' . $new_url_files . $row["url_mantenimiento"] . '" target="_blank" rel="noopener noreferrer"><img id="pdf-icon" src="imagenes\pdf_img.png" alt="" style="width: 35px;></a>': '<img id="pdf-icon" src="imagenes/error.png" alt="" style="width: 35px;">') .
+                                '</td>
                                 <td>
                                     <a href="load_img.php" target="_blank" value = "arturo" rel="noopener noreferrer"><img id="pdf-icon" src="imagenes\icon_img.png" alt=""></a>                    
                                 </td>
@@ -53,7 +52,6 @@ include "header.php";
                 <?php endif; ?>
             </tbody>
     </table>
-</main>
 <?php
 include "footer.php"
 ?>
