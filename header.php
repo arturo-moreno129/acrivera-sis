@@ -7,7 +7,7 @@ include("conexion.php")
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar</title>
+    <title>ACRIVERA</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -91,11 +91,11 @@ include("conexion.php")
             </div>
 
             <div class="usuario">
-                <img src="imagenes/user.png" alt="">
+                <img src="imagenes/user.jpg" alt="">
                 <div class="info-usuario">
                     <div class="nombre-email">
-                        <span class="nombre">Jhampier</span>
-                        <span class="email">jhampier@gmail.com</span>
+                        <span class="nombre">JMoreno</span>
+                        <span class="email">Soporte</span>
                     </div>
                     <ion-icon name="ellipsis-vertical-outline"></ion-icon>
                 </div>

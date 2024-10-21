@@ -7,46 +7,49 @@ $apellidoM = $_POST["surname"];
 $fechaRegistro = $_POST["fecha-registro"];
 $dateTime = DateTime::createFromFormat('Y-m-d', $fechaRegistro);
 $formattedDate = $dateTime->format('d/m/Y');
-echo $nombre, $apellidoP, $apellidoM,$formattedDate;
+echo $nombre, $apellidoP, $apellidoM, $formattedDate;
 
 
 //archivo resguardo
-if (!empty($_FILES['file']['tmp_name']) && !empty($_FILES['file1']['tmp_name'])) {
-    if (isset($_FILES['file'])) {
-        $uploadDir = 'archivos/mipruebita/'; // Cambia esto por tu ruta deseada
-        $tempFile = $_FILES['file']['tmp_name']; // Archivo temporal
-        $newFileName = 'resguardo1.pdf'; // Nombre nuevo
-    
-        // Mover y renombrar el archivo al mismo tiempo
-        if (move_uploaded_file($tempFile, $uploadDir . $newFileName)) {
-            echo "Correcto";
-        } else {
-            echo "Error al subir el archivo.";
-        }
+if (isset($_FILES['file'])) {
+    $uploadDir = 'archivos/mipruebita/'; // Cambia esto por tu ruta deseada
+    $tempFile = $_FILES['file']['tmp_name']; // Archivo temporal
+    $newFileName = 'resguardo1.pdf'; // Nombre nuevo
+
+    // Mover y renombrar el archivo al mismo tiempo
+    if (move_uploaded_file($tempFile, $uploadDir . $newFileName)) {
+        $_SESSION["alert"] = "Se guardo correctamente el registro";
+        header("location: registro.php");
     } else {
-        echo "No se subió ningún archivo.";
+        $_SESSION["alert"] = "Error al subor archivo";
+        header("location: registro.php");
     }
-    //archivo mantenimiento
-    if (isset($_FILES['file1'])) {
-        $uploadDir = 'archivos/mipruebita/'; // Cambia esto por tu ruta deseada
-        $tempFile = $_FILES['file1']['tmp_name']; // Archivo temporal
-        $newFileName = 'mantenimiento1.pdf'; // Nombre nuevo
-    
-        // Mover y renombrar el archivo al mismo tiempo
-        if (move_uploaded_file($tempFile, $uploadDir . $newFileName)) {
-            echo "correcto";
-        } else {
-            echo "Error al subir el archivo.";
-        }
-    } else {
-        echo "No se subió ningún archivo.";
-    }
-    $_SESSION["alert"] = "Se guardo correctamente el registro";
-    header("location: registro.php");
 } else {
     $_SESSION["alert"] = "Error al subor archivo";
     header("location: registro.php");
 }
+//archivo mantenimiento
+if (isset($_FILES['file1'])) {
+    $uploadDir = 'archivos/mipruebita/'; // Cambia esto por tu ruta deseada
+    $tempFile = $_FILES['file1']['tmp_name']; // Archivo temporal
+    $newFileName = 'mantenimiento1.pdf'; // Nombre nuevo
+
+    // Mover y renombrar el archivo al mismo tiempo
+    if (move_uploaded_file($tempFile, $uploadDir . $newFileName)) {
+        $_SESSION["alert"] = "Se guardo correctamente el registro";
+        header("location: registro.php");
+    } else {
+        $_SESSION["alert"] = "Error al subor archivo";
+        header("location: registro.php");
+    }
+} else {
+    $_SESSION["alert"] = "Error al subor archivo";
+    header("location: registro.php");
+}
+
+
+
+
 
 
 /*********************ESTE ES PARA SUBIR MULTIPLES ARCHIVOS********************/

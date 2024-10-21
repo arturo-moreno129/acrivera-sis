@@ -52,3 +52,18 @@ cloud.addEventListener("click", () => {
         span.classList.toggle("oculto");
     });
 });
+///**para ocultar y mostrar si se quiere subir archivo */
+function myFunction(number, numer2, file) {
+    var checkBox = document.getElementById(numer2);
+    var text = document.getElementById(number);
+
+    var inputElement = document.getElementById(file);
+
+    if (checkBox.checked == true) {
+        text.style.display = "block";
+        inputElement.required = true;
+    } else {
+        text.style.display = "none";
+        inputElement.required = false;
+    }
+}
