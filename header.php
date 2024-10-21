@@ -91,7 +91,7 @@ include("conexion.php")
             </div>
 
             <div class="usuario">
-                <img src="imagenes/user.jpg" alt="">
+                <img src="imagenes/user.png" alt="">
                 <div class="info-usuario">
                     <div class="nombre-email">
                         <span class="nombre">JMoreno</span>

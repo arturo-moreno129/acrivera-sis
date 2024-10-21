@@ -565,7 +565,7 @@ table th.r {
 
 .contenedor-pop-up{
     width: 400px;
-    background-color: red;
+    color: red;
     color: white;
     border-radius: 6px;
     position: absolute;
@@ -579,4 +579,12 @@ table th.r {
     padding: 10px;
     border-radius: 15px;
     text-align: center;
+}
+
+/***************** Estilo status-usuario*************/
+.status-usuario{
+    color: var(--color-texto);
+}
+.status-usuario a{
+    color: var(--color-texto);
 }
