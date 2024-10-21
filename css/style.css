@@ -137,7 +137,6 @@ body {
     font-size: 25px;
 }
 
-
 /*------------> Botón*/
 .barra-lateral .boton {
     width: 100%;
@@ -586,5 +585,8 @@ table th.r {
     color: var(--color-texto);
 }
 .status-usuario a{
+    color: var(--color-texto);
+}
+#log-out{
     color: var(--color-texto);
 }

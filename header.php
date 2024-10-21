@@ -97,7 +97,7 @@ include("conexion.php")
                         <span class="nombre">JMoreno</span>
                         <span class="email">Soporte</span>
                     </div>
-                    <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+                    <a title="Cerrar Sesión" id="log-out" href="index.php" style="text-decoration: none;"><i class="fa-solid fa-right-from-bracket" style="cursor: pointer;"></i></a>
                 </div>
             </div>
         </div>
