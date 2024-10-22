@@ -21,18 +21,19 @@
             <img class="imagen-bacground" src="#" alt="" style="width: 700px;">
         </div>
 
-        <form class="formulario" action="registro.php" method="post" name="confir">
+        <form class="formulario" action="sesion.php" method="post" name="confir">
             <div class="texto-formulario">
                 <h2>Bienvenido de nuevo</h2>
                 <p>Inicia sesión con tu cuenta</p>
             </div>
             <div class="input">
                 <label for="usuario">Usuario</label>
-                <input placeholder="Ingresa tu nombre" type="text" id="usuario" name ="user">
+                <input placeholder="Ingresa tu nombre" type="text" id="user" name ="user">
             </div>
             <div class="input">
                 <label for="contraseña">Contraseña</label>
                 <input placeholder="Ingresa tu contraseña" type="password" id="contraseña" name = "password">
+                <p style="color: white;"><input type="checkbox" name="" id="" style="width: 30px;">Mostrar contraseña</p>
             </div>
             <div class="password-olvidada">
                 <a href="#">¿Olvidaste tu contraseña?</a>
