@@ -45,13 +45,13 @@ palanca.addEventListener("click", () => {
 });
 
 /******** */
-cloud.addEventListener("click", () => {
+/*cloud.addEventListener("click", () => {
     barraLateral.classList.toggle("mini-barra-lateral");
     main.classList.toggle("min-main");
     spans.forEach((span) => {
         span.classList.toggle("oculto");
     });
-});
+});*/
 ///**para ocultar y mostrar si se quiere subir archivo */
 function myFunction(number, numer2, file) {
     var checkBox = document.getElementById(numer2);
