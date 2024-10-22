@@ -32,8 +32,8 @@
             </div>
             <div class="input">
                 <label for="contraseña">Contraseña</label>
-                <input placeholder="Ingresa tu contraseña" type="password" id="contraseña" name = "password">
-                <p style="color: white;"><input type="checkbox" name="" id="" style="width: 30px;">Mostrar contraseña</p>
+                <input placeholder="Ingresa tu contraseña" type="password" id="myPass" name = "password">
+                <p style="color: white;"><input type="checkbox" name="" id="checkbox3" style="width: 30px;" onclick="functionPass()">Mostrar contraseña</p>
             </div>
             <div class="password-olvidada">
                 <a href="#">¿Olvidaste tu contraseña?</a>
@@ -43,7 +43,9 @@
             </div>
         </form>
     </div>
-
+    <footer>
+        <script src="js/script.js"></script>
+    </footer>
 </body>
 
 </html>

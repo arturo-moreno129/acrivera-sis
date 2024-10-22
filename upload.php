@@ -1,5 +1,4 @@
 <?php
-include "header.php";
 session_start();
 $nombre = $_POST["firstname"];
 $apellidoP = $_POST["lastname"];
@@ -7,11 +6,12 @@ $apellidoM = $_POST["surname"];
 $fechaRegistro = $_POST["fecha-registro"];
 $dateTime = DateTime::createFromFormat('Y-m-d', $fechaRegistro);
 $formattedDate = $dateTime->format('d/m/Y');
-echo $nombre, $apellidoP, $apellidoM, $formattedDate;
+echo $nombre, $apellidoP, $apellidoM, $formattedDate, $_FILES['file']['name'];
+
 
 
 //archivo resguardo
-if (isset($_FILES['file'])) {
+if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
     $uploadDir = 'archivos/mipruebita/'; // Cambia esto por tu ruta deseada
     $tempFile = $_FILES['file']['tmp_name']; // Archivo temporal
     $newFileName = 'resguardo1.pdf'; // Nombre nuevo
@@ -24,12 +24,9 @@ if (isset($_FILES['file'])) {
         $_SESSION["alert"] = "Error al subor archivo";
         header("location: registro.php");
     }
-} else {
-    $_SESSION["alert"] = "Error al subor archivo";
-    header("location: registro.php");
 }
 //archivo mantenimiento
-if (isset($_FILES['file1'])) {
+if (isset($_FILES['file1']) && $_FILES['file1']['error'] === UPLOAD_ERR_OK) {
     $uploadDir = 'archivos/mipruebita/'; // Cambia esto por tu ruta deseada
     $tempFile = $_FILES['file1']['tmp_name']; // Archivo temporal
     $newFileName = 'mantenimiento1.pdf'; // Nombre nuevo
@@ -42,9 +39,6 @@ if (isset($_FILES['file1'])) {
         $_SESSION["alert"] = "Error al subor archivo";
         header("location: registro.php");
     }
-} else {
-    $_SESSION["alert"] = "Error al subor archivo";
-    header("location: registro.php");
 }
 
 

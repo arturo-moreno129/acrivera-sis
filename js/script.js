@@ -67,3 +67,11 @@ function myFunction(number, numer2, file) {
         inputElement.required = false;
     }
 }
+function functionPass() {
+    var x = document.getElementById("myPass");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
