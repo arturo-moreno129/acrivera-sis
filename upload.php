@@ -6,11 +6,15 @@ $apellidoM = $_POST["surname"];
 $fechaRegistro = $_POST["fecha-registro"];
 $dateTime = DateTime::createFromFormat('Y-m-d', $fechaRegistro);
 $formattedDate = $dateTime->format('d/m/Y');
-echo $nombre, $apellidoP, $apellidoM, $formattedDate, $_FILES['file']['name'];
 
+if (empty($_FILES['file']['name'])) {
+    echo $nombre, $apellidoP, $apellidoM, $formattedDate, $_FILES['file']['name'];
+}
+else{
+    echo "ejecutando otro codigo";
+}
 
-
-//archivo resguardo
+/*//archivo resguardo
 if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
     $uploadDir = 'archivos/mipruebita/'; // Cambia esto por tu ruta deseada
     $tempFile = $_FILES['file']['tmp_name']; // Archivo temporal

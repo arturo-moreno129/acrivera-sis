@@ -1,5 +1,5 @@
 <?php
-include("conexion.php")
+include("conexion.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +9,12 @@ include("conexion.php")
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACRIVERA</title>
     <link rel="stylesheet" href="css/style.css">
+
+    <script src='fullcalendar/packages/core/index.global.js'></script>
+    <script src='fullcalendar/packages/core/locales/es.global.js'></script>
+    <script src='fullcalendar/dist/index.global.min.js'></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="assets/icono_FM.jpg" type="image/x-icon">
 </head>
 
 <body>
@@ -28,6 +34,12 @@ include("conexion.php")
 
         <nav class="navegacion">
             <ul>
+                <!--<li>
+                    <a href="#">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                        <span>Usuario</span>
+                    </a>
+                </li>-->
                 <li>
                     <a href="registro.php">
                         <ion-icon name="document-outline"></ion-icon>
@@ -40,19 +52,13 @@ include("conexion.php")
                         <span>Resguardos</span>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
+                <!--<li>
+                    <a href="mantenimientos.php">
                         <ion-icon name="paper-plane-outline"></ion-icon>
                         <span>Mantenimientos</span>
                     </a>
-                </li>
+                </li>-->
                 <!--<li>
-                    <a href="#">
-                        <ion-icon name="document-text-outline"></ion-icon>
-                        <span>Drafts</span>
-                    </a>
-                </li>
-                <li>
                     <a href="#">
                         <ion-icon name="bookmark-outline"></ion-icon>
                         <span>Important</span>
@@ -113,7 +119,7 @@ include("conexion.php")
             </div>
         <?php
 
-        } elseif(isset($_SESSION["alert"]) && $_SESSION["alert"] == "Error al subor archivo") {
+        } elseif (isset($_SESSION["alert"]) && $_SESSION["alert"] == "Error al subor archivo") {
         ?>
             <div class="alert alert-danger" role="alert" id="alertaa" style="background-color: rgba(247, 88, 88, 0.452);">
                 <strong>¡<?php print $_SESSION['alert']; ?>!</strong>

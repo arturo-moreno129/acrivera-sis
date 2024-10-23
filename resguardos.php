@@ -35,7 +35,7 @@ include "header.php";
                 $new_url_files = "archivos/" . $url_files . "/";
                 $query = "select*From evidencia where nombre = '$nombre'";
                 $result = mysqli_query($con, $query);
-                if ($result) {
+                if ($row = mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_array($result)) {
                         echo
                         '<tr>
@@ -46,6 +46,9 @@ include "header.php";
                                 <td>' . ($row["url_mantenimiento"] != null ? '<a href="' . $new_url_files . $row["url_resguardo"] . '" target="_blank" style="pointer-events:auto" rel="noopener noreferrer"> <img id="pdf-icon" src="imagenes/pdf_img.png" alt="" style="width: 35px;"> </a>' : '<img id="pdf-icon" src="imagenes/error.png" alt="" style="width: 35px;">') .'</td>
                             </tr>';
                     }
+                }
+                else{
+                    $_SESSION["alert"] = "No se encontro el suaurio";
                 }
                 //echo strtoupper($nombre) 
                 ?>

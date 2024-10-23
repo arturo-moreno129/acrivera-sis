@@ -1,6 +1,9 @@
-<?php include("header.php") ?>
+<?php
+include("header.php");
+include("scriptCalendar.php");
+?>
 
 <!--CONTENEDOR DEL CALENDARIO-->
-<div id='calendar'></div>
+<center><div id='calendar'></div></center>
 
 <?php include("footer.php") ?>

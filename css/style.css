@@ -590,3 +590,10 @@ table th.r {
 #log-out{
     color: var(--color-texto);
 }
+#calendar{
+    width: 65%;
+    height: auto;
+}
+#calendar h2{
+    color: var(--color-texto);
+}
