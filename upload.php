@@ -8,10 +8,13 @@ $dateTime = DateTime::createFromFormat('Y-m-d', $fechaRegistro);
 $formattedDate = $dateTime->format('d/m/Y');
 
 if (empty($_FILES['file']['name'])) {
-    echo $nombre, $apellidoP, $apellidoM, $formattedDate, $_FILES['file']['name'];
+    //echo $nombre, $apellidoP, $apellidoM, $formattedDate, $_FILES['file']['name'];
+    $_SESSION["alert"] = "entro";
+    header("location: registro.php");
 }
 else{
-    echo "ejecutando otro codigo";
+    $_SESSION["alert"] = "no entro";
+    header("location: registro.php");
 }
 
 /*//archivo resguardo

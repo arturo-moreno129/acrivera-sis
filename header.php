@@ -1,5 +1,10 @@
 <?php
 include("conexion.php");
+session_start();
+if (!isset($_SESSION['ususario'])) {
+    //echo "<h1>existe</h1>";
+    header("location:index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +18,7 @@ include("conexion.php");
     <script src='fullcalendar/packages/core/index.global.js'></script>
     <script src='fullcalendar/packages/core/locales/es.global.js'></script>
     <script src='fullcalendar/dist/index.global.min.js'></script>
-    <link rel="stylesheet" href="style.css">
+    <!--<link rel="stylesheet" href="style.css">-->
     <link rel="shortcut icon" href="assets/icono_FM.jpg" type="image/x-icon">
 </head>
 
@@ -103,7 +108,7 @@ include("conexion.php");
                         <span class="nombre">JMoreno</span>
                         <span class="email">Soporte</span>
                     </div>
-                    <a title="Cerrar Sesión" id="log-out" href="index.php" style="text-decoration: none;"><i class="fa-solid fa-right-from-bracket" style="cursor: pointer;"></i></a>
+                    <a title="Cerrar Sesión" id="log-out" href="logout.php" style="text-decoration: none;"><i class="fa-solid fa-right-from-bracket" style="cursor: pointer;"></i></a>
                 </div>
             </div>
         </div>
@@ -111,20 +116,14 @@ include("conexion.php");
     </div>
     <main>
         <?php
-        session_start();
-        if (isset($_SESSION["alert"]) && $_SESSION["alert"] == "Se guardo correctamente el registro") {
+        //session_start();
+        if (isset($_SESSION["alert"])) {
         ?>
             <div class="alert alert-danger" role="alert" id="alertaa" style="background-color: rgba(149, 236, 149, 0.452);">
                 <strong>¡<?php print $_SESSION['alert']; ?>!</strong>
             </div>
         <?php
-
-        } elseif (isset($_SESSION["alert"]) && $_SESSION["alert"] == "Error al subor archivo") {
-        ?>
-            <div class="alert alert-danger" role="alert" id="alertaa" style="background-color: rgba(247, 88, 88, 0.452);">
-                <strong>¡<?php print $_SESSION['alert']; ?>!</strong>
-            </div>
-        <?php
+            unset($_SESSION["alert"]);
         }
-        unset($_SESSION["alert"]);
+
         ?>
