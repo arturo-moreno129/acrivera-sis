@@ -104,8 +104,8 @@ if (!isset($_SESSION['ususario'])) {
                 <img src="imagenes/user.png" alt="">
                 <div class="info-usuario">
                     <div class="nombre-email">
-                        <span class="nombre">JMoreno</span>
-                        <span class="email">Soporte</span>
+                        <span class="nombre"><?php echo $_SESSION['ususario'];?></span>
+                        <span class="email"><?php echo $_SESSION['puesto'];?></span>
                     </div>
                     <a title="Cerrar Sesión" id="log-out" href="logout.php" style="text-decoration: none;"><i class="fa-solid fa-right-from-bracket" style="cursor: pointer;"></i></a>
                 </div>

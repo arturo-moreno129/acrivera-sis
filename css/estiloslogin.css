@@ -28,17 +28,16 @@ body{
 }
 
 .imagen-formulario{
-    background-image: url('');
+    background-image: url();
     background-position: center center;
     background-size: cover;
     height: 100px;
     flex: 0 0 calc(60%);
     position: relative;
-    
 }
 .imagen-bacground{
-    margin-top: 150px;
-    margin-left: 20px;
+    margin-top: 90px;
+    margin-left: 150px;
     margin-right: 20px;
 }
 .imagen-formulario::before{
@@ -48,7 +47,7 @@ body{
    bottom: 0;
    left: 0;
    right: 0;
-   background: linear-gradient(to right,rgba(141,169,196,.5), rgba(19, 64, 116, .5) );
+   background: linear-gradient(to right,rgba(141,169,196,.2), rgba(19, 64, 116, .2) );
    
 }
 

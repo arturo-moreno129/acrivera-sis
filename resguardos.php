@@ -7,7 +7,7 @@ include "header.php";
 <h2 id="filtrado">Filtrar por:</h2>
 
 <select id="mySelect" class="form-control">
-    <option value="">Selecciona</option>
+    <option value="">SELECCIONA FILTRO DE BÚSQUEDA</option>
     <option value="0">USUARIO</option>
     <option value="1">FECHA</option>
     <option value="2">DISPOSITIVO</option>

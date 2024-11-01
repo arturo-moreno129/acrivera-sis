@@ -70,7 +70,7 @@ function resguardo($array, $urlinsert, $mydate, $mydevice, $mycon,$myflag)
         # code...
         //archivo
         if (isset($_FILES[$array[$i]['dato']]) && $_FILES[$array[$i]['dato']]['error'] === UPLOAD_ERR_OK) {
-            $uploadDir = 'archivos/' . $urlinsert . "/"; // Cambia esto por tu ruta deseada
+            $uploadDir = 'carpetas/' . $urlinsert . "/"; // Cambia esto por tu ruta deseada
             $tempFile = $_FILES[$array[$i]['dato']]['tmp_name']; // Archivo temporal
             $newFileName = strval($array[$i]['tipo']) . '_' . strval($array[$i]['cant'] + 1) . '.pdf'; // Nombre nuevo
             //comprobamos si exite la carpeta con ese nombre

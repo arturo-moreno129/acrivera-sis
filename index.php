@@ -18,7 +18,7 @@
 
     <div class="contenedor-formulario contenedor">
         <div class="imagen-formulario"> <!-- aqui va la imagen de la empresa-->
-            <img class="imagen-bacground" src="#" alt="" style="width: 700px;">
+            <img class="imagen-bacground" src="./imagenes/acrivera_logo.png" alt="" style="width: 400px;">
         </div>
 
         <form class="formulario" action="sesion.php" method="post" name="confir">

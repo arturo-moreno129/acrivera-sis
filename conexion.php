@@ -10,7 +10,7 @@
 			echo"conexion yes";
         }
     }catch(Exception $ex){
-        echo $ex=getMessage();
+        //echo $ex=getMessage();
         echo 'error';
     }
 ?>
