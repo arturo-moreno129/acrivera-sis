@@ -14,12 +14,11 @@ if (!isset($_SESSION['ususario'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACRIVERA</title>
     <link rel="stylesheet" href="css/style.css">
-
+    <link rel="shortcut icon" href="./imagenes/logo_acr_white.png" type="image/x-icon" id="favicon">
     <script src='fullcalendar/packages/core/index.global.js'></script>
     <script src='fullcalendar/packages/core/locales/es.global.js'></script>
     <script src='fullcalendar/dist/index.global.min.js'></script>
     <!--<link rel="stylesheet" href="style.css">-->
-    <link rel="shortcut icon" href="assets/icono_FM.jpg" type="image/x-icon">
 </head>
 
 <body>

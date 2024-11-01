@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/estiloslogin.css">
-    <link rel="shortcut icon" href="assets/icono_FM.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="./imagenes/logo_acr_white.png" type="image/x-icon" id="favicon">
 </head>
 
 <body>
