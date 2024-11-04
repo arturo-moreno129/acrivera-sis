@@ -34,7 +34,7 @@ include "header.php";
         <tbody>
             <?php
             $new_url_files = "carpetas/";
-            $query = "select * From evidencia ORDER BY NOMBRE"; //where nombre = '$nombre'";
+            $query = "select * From evidencia ORDER BY fecha"; //where nombre = '$nombre'";
             $result = mysqli_query($con, $query);
             if ($row = mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_array($result)) {

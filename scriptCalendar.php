@@ -17,24 +17,24 @@
       select: function(arg) {
         console.log(arg.start.toISOString().split('.')[0]);
 
-        var claveUser = "1299790";
-        var comparation = prompt("Ingrese la contraseña");
-        if (claveUser == comparation) {
-          var title = prompt("Titulo del evento:");
-          if (title) {
-            calendar.addEvent({
-              title: title,
-              start: arg.start,
-              end: arg.end,
-              allDay: arg.allDay,
-            });
-          }
+        //var claveUser = "1299790";
+        //var comparation = prompt("Ingrese la contraseña");
+        //if (claveUser == comparation) {
+        var title = prompt("Titulo del evento:");
+        if (title) {
+          calendar.addEvent({
+            title: title,
+            start: arg.start,
+            end: arg.end,
+            //allDay: arg.allDay,
+          });
         }
+        //}
         calendar.unselect();
       },
       eventClick: function(arg) {
         if (arg.event.groupId == 1) {
-          alert("No puedes eliminar este elemento");
+          alert("No tienes permiso para editar o eliminar elementos de otros usuarios.");
         } else {
           arg.event.remove()
         }
@@ -43,9 +43,12 @@
       dayMaxEvents: true, // allow "more" link when too many events
       events: [{
           title: "prueba",
-          start: '2024-09-25T06:00:00',
-          end: '2024-09-25T06:30:00',
-          color: '#FF0000'
+          start: '2024-11-04T05:00:00',
+          end: '2024-11-04T06:30:00',
+          color: '#FF0000',
+          groupId: 1,
+          //editable: true,
+          resourceEditableSe: false
         },
         /*
               {
@@ -100,6 +103,19 @@
                 start: "2024-01-28",
               },*/
       ],
+      eventDragStart: function(info) {
+        // Mostrar un mensaje al iniciar el arrastre
+        console.log('Iniciaste el arrastre de: ' + info.event.title);
+
+        // También puedes hacer otras cosas, como cambiar el estilo del evento
+        info.el.style.opacity = '0.5'; // Ejemplo de cambiar opacidad
+      },
+      eventDrop: function(info) {
+        // Aquí puedes manejar el evento después de que se suelta
+        console.log('El evento ' + info.event.title + ' fue movido a: ' + info.event.start);
+        // Restablecer el estilo del evento
+        info.el.style.opacity = ''; // Restablecer opacidad
+      }
     });
 
     calendar.render();

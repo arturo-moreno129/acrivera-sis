@@ -56,12 +56,12 @@ if (!isset($_SESSION['ususario'])) {
                         <span>Resguardos</span>
                     </a>
                 </li>
-                <!--<li>
+                <li>
                     <a href="mantenimientos.php">
                         <ion-icon name="paper-plane-outline"></ion-icon>
                         <span>Mantenimientos</span>
                     </a>
-                </li>-->
+                </li>
                 <!--<li>
                     <a href="#">
                         <ion-icon name="bookmark-outline"></ion-icon>
@@ -104,8 +104,8 @@ if (!isset($_SESSION['ususario'])) {
                 <img src="imagenes/user.png" alt="">
                 <div class="info-usuario">
                     <div class="nombre-email">
-                        <span class="nombre"><?php echo $_SESSION['ususario'];?></span>
-                        <span class="email"><?php echo $_SESSION['puesto'];?></span>
+                        <span class="nombre"><?php echo $_SESSION['ususario']; ?></span>
+                        <span class="email"><?php echo $_SESSION['puesto']; ?></span>
                     </div>
                     <a title="Cerrar Sesión" id="log-out" href="logout.php" style="text-decoration: none;"><i class="fa-solid fa-right-from-bracket" style="cursor: pointer;"></i></a>
                 </div>
@@ -119,7 +119,7 @@ if (!isset($_SESSION['ususario'])) {
         if (isset($_SESSION["alert"])) {
         ?>
             <div class="alert alert-danger" role="alert" id="alertaa" style="background-color: rgba(149, 236, 149, 0.452);">
-                <strong>¡<?php print $_SESSION['alert']; ?>!</strong>
+                <strong>¡<?php print $_SESSION['alert']; ?>!</strong><a href="resguardos.php">¡Ir a la Sección de Resguardos!</a>
             </div>
         <?php
             unset($_SESSION["alert"]);
