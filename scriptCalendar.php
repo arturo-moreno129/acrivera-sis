@@ -25,30 +25,26 @@
         //if (claveUser == comparation) {
 
         Swal.fire({
-          title: 'Detalles del evento',
+          title: 'Detalles del mantenimiento',
           html: `
-            <input id="swal-input-title" class="swal2-input" placeholder="Título del evento">
-            <input id="swal-input-description" class="swal2-input" placeholder="Descripción"><br><br>
+            <input id="swal-input-title" class="swal2-input" placeholder="Nombre del usuario" onkeyup="this.value = this.value.toUpperCase();"><br><br>
+            <input id="swal-input-dispo" class="swal2-input" placeholder="Nombre del dispositivo" onkeyup="this.value = this.value.toUpperCase();"><br><br>
             <table>
               <thead>
-               <tr>
-                    <th>Se realizó</th>
+                <tr>
+                    <th>Tipo de mantenimiento</th>
                     <th>No.</th>
                 </tr>
-              <?php
-              $arrayCheck = ["Pantalla", "Exterior teclado y ratón", "Interior / Exterior gabinete", "Arreglo cableado", "Bloqueo de USB", "Eliminación de cookies", "Eliminación de temporales", "Borrar Archivos infectados", "Papelera de reciclaje", "Compactación de discos", "Escritorio", "Mis documentos", "Favoritos", "Correo", "Unidades de Disco", "Sistema Operativo", "Office", "Antivirus", "Intelisis", "Utilerías", "Exploradores"];
-              for ($i = 1; $i < count($arrayCheck); $i++) { ?>
                 <tr>
-                    <td>
-                      <label for="myCheck"><?php echo $arrayCheck[$i] ?></label>
-                    </td>
-                    <td>
-                      <input type="checkbox" id="<?php echo $arrayCheck[$i] ?>">
-                    </td>
+                    <td><label for="html">Programado</label><br></td>
+                    <td><input type="radio" id="swal-input-programado" name="option" value="1" checked></td>
                 </tr>
-                <?php } ?>
+                 <tr>
+                    <td><label for="css">Solicitado</label><br></td>
+                    <td><input type="radio" id="swal-input-solicitado" name="option" value="2"></td>
+                </tr>
               </thead>
-            </table>
+            </table> 
         `,
           focusConfirm: false,
           showCancelButton: true,
@@ -56,20 +52,29 @@
           cancelButtonText: 'Cancelar',
           preConfirm: () => {
             const title = document.getElementById('swal-input-title').value;
-            const description = document.getElementById('swal-input-description').value;
+            const dispo = document.getElementById('swal-input-dispo').value;
+            const opciones = document.getElementsByName('option');
+            var seleccion = '';
+            for (const opcion of opciones) {
+              if (opcion.checked) {
+                seleccion = opcion.value;
+                break;
+              }
+            }
+            option = seleccion;
             if (!title) {
-              Swal.showValidationMessage('Por favor, ingrese un título válido');
+              Swal.showValidationMessage('Por favor, ingrese el usuario');
             }
             return {
               title,
-              description
+              dispo,
             };
           }
         }).then((result) => {
           if (result.isConfirmed) {
             const {
               title,
-              description
+              dispo
             } = result.value;
             /**PRUEBA ENVIO DE DATOS A PHP */
 
@@ -89,11 +94,6 @@
             inputTitle.name = "phptitle";
             inputTitle.value = title;
 
-            const inputDescription = document.createElement("input");
-            inputDescription.type = "hidden";
-            inputDescription.name = "phpdescription";
-            inputDescription.value = description;
-
             const inputDate = document.createElement("input");
             inputDate.type = "hidden";
             inputDate.name = "phpdate";
@@ -104,11 +104,22 @@
             inputUser.name = "phpuser";
             inputUser.value = "<?php echo $_SESSION['id_usuario']; ?>";
 
+            const inputRadio = document.createElement("input");
+            inputRadio.type = "hidden";
+            inputRadio.name = "phpRadio";
+            inputRadio.value = option;
+
+            const inputdispo = document.createElement("input");
+            inputRadio.type = "hidden";
+            inputRadio.name = "phpdispo";
+            inputRadio.value = dispo;
+
             // Agregar campos y enviar formulario
             form.appendChild(inputTitle);
-            form.appendChild(inputDescription);
             form.appendChild(inputDate);
+            form.appendChild(inputdispo);
             form.appendChild(inputUser);
+            form.appendChild(inputRadio);
             document.body.appendChild(form);
             form.submit();
             /********************************* */
@@ -169,11 +180,11 @@
         $resulEventos = mysqli_query($con, $SqlEventos);
         while ($dataEvento = mysqli_fetch_array($resulEventos)) { ?> {
             _id: '<?php echo $dataEvento['id_mantenimiento']; ?>',
-            title: '<?php echo $dataEvento['titulo']; ?>',
+            title: '<?php echo $dataEvento['usuario']; ?>',
             start: '<?php echo $dataEvento['fecha']; ?>',
             color: '<?php echo ($dataEvento['estatus'] == 1) ? "#60c4f3" : "red" ?>',
             editable: '<?= ($dataEvento['estatus'] == 1 && $dataEvento['id_usuario'] == $_SESSION['id_usuario']) ?>',
-            //groupId: '<?php echo ($dataEvento['estatus'] == 1 && $dataEvento['id_usuario'] == $_SESSION['id_usuario']) ? 1 : 0 ?>',
+            groupId: '<?php echo ($dataEvento['estatus'] == 1 && $dataEvento['id_usuario'] == $_SESSION['id_usuario']) ? 1 : 0 ?>',
           },
         <?php } ?>
         /*{
@@ -197,6 +208,7 @@
           overlap: true,
           display: "block",
           backgroundColor: "#3788d8",
+          color: "#fffff"
           borderColor: "#ff0000",
           textColor: "#333333",
           extendedProps: {

@@ -337,7 +337,7 @@ main.min-main {
 
 h1 {
     font-size: 4vw;
-    color: var(--color-menu-hover-texto);;
+    color: var(--color-menu-hover-texto);
 }
 #input-search {
     width: 50vw;
@@ -680,9 +680,11 @@ table th.r {
   }*/
 
 
-  .fc-toolbar-title{
-    color: black !important;
+.fc-toolbar-title{
+    color: var(--color-menu-hover-texto);
    }
 h1, h2{
-    color: black;
+    color: var(--color-menu-hover-texto);
 }
+
+/*****************************************************/

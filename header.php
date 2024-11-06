@@ -61,8 +61,14 @@ if (!isset($_SESSION['ususario'])) {
                     </a>
                 </li>
                 <li>
+                    <a href="calendario.php">
+                        <ion-icon name="calendar-outline"></ion-icon>
+                        <span>Calendario</span>
+                    </a>
+                </li>
+                <li>
                     <a href="mantenimientos.php">
-                        <ion-icon name="construct-outline"></ion-icon>
+                        <ion-icon name="bar-chart-outline"></ion-icon>
                         <span>Mantenimientos</span>
                     </a>
                 </li>
