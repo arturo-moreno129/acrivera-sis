@@ -16,6 +16,7 @@ if ($row = mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         if ($row['usuario'] == $user) {
             if (password_verify($pass, $row["contrasena"])) {
+                $_SESSION['id_usuario'] = $row['id_usuario'];
                 $_SESSION['ususario'] = $row['usuario'];
                 $_SESSION['nombre'] = $row['nombre'];
                 $_SESSION['apellidoP'] = $row['apellidoP'];

@@ -19,6 +19,10 @@ if (!isset($_SESSION['ususario'])) {
     <script src='fullcalendar/packages/core/locales/es.global.js'></script>
     <script src='fullcalendar/dist/index.global.min.js'></script>
     <!--<link rel="stylesheet" href="style.css">-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
+
 </head>
 
 <body>
@@ -52,13 +56,13 @@ if (!isset($_SESSION['ususario'])) {
                 </li>
                 <li>
                     <a href="resguardos.php">
-                        <ion-icon name="build-outline"></ion-icon>
+                        <ion-icon name="folder-outline"></ion-icon>
                         <span>Resguardos</span>
                     </a>
                 </li>
                 <li>
                     <a href="mantenimientos.php">
-                        <ion-icon name="paper-plane-outline"></ion-icon>
+                        <ion-icon name="construct-outline"></ion-icon>
                         <span>Mantenimientos</span>
                     </a>
                 </li>
@@ -118,9 +122,14 @@ if (!isset($_SESSION['ususario'])) {
         //session_start();
         if (isset($_SESSION["alert"])) {
         ?>
-            <div class="alert alert-danger" role="alert" id="alertaa" style="background-color: rgba(149, 236, 149, 0.452);">
-                <strong>¡<?php print $_SESSION['alert']; ?>!</strong><a href="resguardos.php">¡Ir a la Sección de Resguardos!</a>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alertaa" style="background-color: rgba(149, 236, 149, 0.452);">
+                <strong>¡<?php print $_SESSION['alert']; ?>!</strong>
+                <a href="resguardos.php">¡Ir a la Sección de Resguardos!</a>
+                <button type="button" class="close" aria-label="Cerrar" onclick="document.getElementById('alertaa').style.display='none';">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+
         <?php
             unset($_SESSION["alert"]);
         }

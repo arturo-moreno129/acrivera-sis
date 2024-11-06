@@ -597,12 +597,7 @@ table th.r {
 #calendar h2{
     color: var(--color-texto);
 }
-#filtrado{
-    color: var(--color-texto);
-}
-#icono-acr {
-    
-}
+
 
 /*****************************************formularios multioles pasos******************/
 /*
@@ -685,3 +680,9 @@ table th.r {
   }*/
 
 
+  .fc-toolbar-title{
+    color: black !important;
+   }
+h1, h2{
+    color: black;
+}
