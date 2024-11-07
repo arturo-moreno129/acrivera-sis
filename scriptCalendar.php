@@ -27,8 +27,9 @@
         Swal.fire({
           title: 'Detalles del mantenimiento',
           html: `
-            <input id="swal-input-title" class="swal2-input" placeholder="Nombre del usuario" onkeyup="this.value = this.value.toUpperCase();"><br><br>
-            <input id="swal-input-dispo" class="swal2-input" placeholder="Nombre del dispositivo" onkeyup="this.value = this.value.toUpperCase();"><br><br>
+            <input id="swal-input-title" class="swal2-input" placeholder="Nombre del usuario" onkeyup="this.value = this.value.toUpperCase();"><br>
+            <input id="swal-input-dispo" class="swal2-input" placeholder="Nombre del dispositivo" onkeyup="this.value = this.value.toUpperCase();"><br>
+            <input id="swal-input-mail" class="swal2-input" placeholder="Correo destino" onkeyup="this.value = this.value.toUpperCase();"><br><br> 
             <table>
               <thead>
                 <tr>
@@ -53,6 +54,7 @@
           preConfirm: () => {
             const title = document.getElementById('swal-input-title').value;
             const dispo = document.getElementById('swal-input-dispo').value;
+            const mail = document.getElementById('swal-input-mail').value;
             const opciones = document.getElementsByName('option');
             var seleccion = '';
             for (const opcion of opciones) {
@@ -65,16 +67,19 @@
             if (!title) {
               Swal.showValidationMessage('Por favor, ingrese el usuario');
             }
+            
             return {
               title,
               dispo,
+              mail
             };
           }
         }).then((result) => {
           if (result.isConfirmed) {
             const {
               title,
-              dispo
+              dispo,
+              mail
             } = result.value;
             /**PRUEBA ENVIO DE DATOS A PHP */
 
@@ -110,9 +115,14 @@
             inputRadio.value = option;
 
             const inputdispo = document.createElement("input");
-            inputRadio.type = "hidden";
-            inputRadio.name = "phpdispo";
-            inputRadio.value = dispo;
+            inputdispo.type = "hidden";
+            inputdispo.name = "phpdispo";
+            inputdispo.value = dispo;
+
+            const inputMail = document.createElement("input");
+            inputMail.type = "hidden";
+            inputMail.name = "phpmail";
+            inputMail.value = mail;
 
             // Agregar campos y enviar formulario
             form.appendChild(inputTitle);
@@ -120,6 +130,7 @@
             form.appendChild(inputdispo);
             form.appendChild(inputUser);
             form.appendChild(inputRadio);
+            form.appendChild(inputMail);
             document.body.appendChild(form);
             form.submit();
             /********************************* */
