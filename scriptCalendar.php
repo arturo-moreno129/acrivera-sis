@@ -29,7 +29,8 @@
           html: `
             <input id="swal-input-title" class="swal2-input" placeholder="Nombre del usuario" onkeyup="this.value = this.value.toUpperCase();"><br>
             <input id="swal-input-dispo" class="swal2-input" placeholder="Nombre del dispositivo" onkeyup="this.value = this.value.toUpperCase();"><br>
-            <input id="swal-input-mail" class="swal2-input" placeholder="Correo destino" onkeyup="this.value = this.value.toUpperCase();"><br><br> 
+            <input id="swal-input-mail" class="swal2-input" placeholder="Correo destino"><br><br>
+            <button id="sendEmailButton" class="swal2-confirm swal2-styled">Send Email</button>
             <table>
               <thead>
                 <tr>
@@ -51,10 +52,24 @@
           showCancelButton: true,
           confirmButtonText: 'Guardar',
           cancelButtonText: 'Cancelar',
+          didOpen: () => {
+            const sendEmailButton = document.getElementById('sendEmailButton');
+            sendEmailButton.onclick = () => {
+              const email = document.getElementById('swal-input-mail').value;
+              const subject = "Mailtrap is awesome";
+              const body = `Hey,%0D%0A%0D%0AJust wanted to let you know your service rocks!%0D%0A%0D%0ACheers,%0D%0ASatisfied user :)`;
+
+              if (email) {
+                window.open(`mailto:${email}?subject=${subject}&body=${body}`);
+              } else {
+                alert("Por favor, ingrese una dirección de correo electrónico.");
+              }
+            };
+          },
           preConfirm: () => {
             const title = document.getElementById('swal-input-title').value;
             const dispo = document.getElementById('swal-input-dispo').value;
-            const mail = document.getElementById('swal-input-mail').value;
+            //const mail = document.getElementById('swal-input-mail').value;
             const opciones = document.getElementsByName('option');
             var seleccion = '';
             for (const opcion of opciones) {
@@ -67,11 +82,11 @@
             if (!title) {
               Swal.showValidationMessage('Por favor, ingrese el usuario');
             }
-            
+
             return {
               title,
               dispo,
-              mail
+              //mail
             };
           }
         }).then((result) => {
@@ -79,7 +94,7 @@
             const {
               title,
               dispo,
-              mail
+              //mail
             } = result.value;
             /**PRUEBA ENVIO DE DATOS A PHP */
 
@@ -119,10 +134,10 @@
             inputdispo.name = "phpdispo";
             inputdispo.value = dispo;
 
-            const inputMail = document.createElement("input");
+            /*const inputMail = document.createElement("input");
             inputMail.type = "hidden";
             inputMail.name = "phpmail";
-            inputMail.value = mail;
+            inputMail.value = mail;*/
 
             // Agregar campos y enviar formulario
             form.appendChild(inputTitle);
@@ -130,7 +145,7 @@
             form.appendChild(inputdispo);
             form.appendChild(inputUser);
             form.appendChild(inputRadio);
-            form.appendChild(inputMail);
+            //form.appendChild(inputMail);
             document.body.appendChild(form);
             form.submit();
             /********************************* */

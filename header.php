@@ -117,7 +117,7 @@ if (!isset($_SESSION['ususario'])) {
                         <span class="nombre"><?php echo $_SESSION['ususario']; ?></span>
                         <span class="email"><?php echo $_SESSION['puesto']; ?></span>
                     </div>
-                    <a title="Cerrar Sesión" id="log-out" href="logout.php" style="text-decoration: none;"><i class="fa-solid fa-right-from-bracket" style="cursor: pointer;"></i></a>
+                    <a title="Cerrar Sesión" id="log-out" href="logout.php" style="text-decoration: none;"><i class="fa-solid fa-right-from-bracket"    "></i></a>
                 </div>
             </div>
         </div>

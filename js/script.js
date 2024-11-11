@@ -6,6 +6,8 @@ const circulo = document.querySelector(".circulo");//--------
 const menu = document.querySelector(".menu");
 const main = document.querySelector("main");
 
+const btn = document.querySelector(".push");
+
 const modoOscuroGuardado = localStorage.getItem('modoprueba');
 const cuerpo = document.body;
 
@@ -43,6 +45,8 @@ palanca.addEventListener("click", () => {
     localStorage.setItem('modoprueba', 'desactivado');
   }
 });
+
+
 
 /******** */
 /*cloud.addEventListener("click", () => {
@@ -171,3 +175,44 @@ function fixStepIndicator(n) {
   //... and adds the "active" class to the current step:
   x[n].className += " active";
 }*/
+
+/*****************para notificaciones push*************/
+// 1. Solicitar permiso para notificaciones
+/*function pedirPermisoNotificaciones() {
+  if (Notification.permission !== "granted") {
+      Notification.requestPermission().then((permiso) => {
+          if (permiso === "granted") {
+              console.log("Permiso para notificaciones otorgado.");
+          } else {
+              console.log("Permiso para notificaciones denegado.");
+          }
+      });
+  }
+}
+
+// 2. Función para mostrar la notificación
+function mostrarNotificacion(title) {
+  if (Notification.permission === "granted") {
+      var img = "/";
+      var text = '¡OYE! Tu tarea "' + title + '" ahora está vencida.';
+      var notification = new Notification("Lista de tareas", {
+          body: text,
+          icon: img
+      });
+
+      // Opcional: acción al hacer clic en la notificación
+      notification.onclick = () => {
+          window.focus(); // Enfoca la ventana
+          notification.close(); // Cierra la notificación
+      };
+  } else {
+      console.log("El permiso de notificación no ha sido otorgado.");
+  }
+}
+
+// Llama a esta función cuando cargue la página para pedir permiso al usuario
+pedirPermisoNotificaciones();
+mostrarNotificacion()*/
+
+// Ejemplo de uso: Llamar a mostrarNotificacion cuando sea necesario
+// mostrarNotificacion("Nombre de la tarea");

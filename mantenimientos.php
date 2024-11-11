@@ -4,8 +4,8 @@ include "header.php";
 if (isset($_SESSION['pop-up'])) {
 ?><script>
     Swal.fire({
-    title: "Good job!",
-    text: "You clicked the button!",
+    title: "Buen trbajo!",
+    text: "¡Se guardo correctamente el mantenimiento!",
     icon: "success"
     });
     </script>
