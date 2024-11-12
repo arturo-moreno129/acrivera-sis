@@ -29,8 +29,6 @@
           html: `
             <input id="swal-input-title" class="swal2-input" placeholder="Nombre del usuario" onkeyup="this.value = this.value.toUpperCase();"><br>
             <input id="swal-input-dispo" class="swal2-input" placeholder="Nombre del dispositivo" onkeyup="this.value = this.value.toUpperCase();"><br>
-            <input id="swal-input-mail" class="swal2-input" placeholder="Correo destino"><br><br>
-            <button id="sendEmailButton" class="swal2-confirm swal2-styled">Send Email</button>
             <table>
               <thead>
                 <tr>
@@ -52,20 +50,6 @@
           showCancelButton: true,
           confirmButtonText: 'Guardar',
           cancelButtonText: 'Cancelar',
-          didOpen: () => {
-            const sendEmailButton = document.getElementById('sendEmailButton');
-            sendEmailButton.onclick = () => {
-              const email = document.getElementById('swal-input-mail').value;
-              const subject = "Mailtrap is awesome";
-              const body = `Hey,%0D%0A%0D%0AJust wanted to let you know your service rocks!%0D%0A%0D%0ACheers,%0D%0ASatisfied user :)`;
-
-              if (email) {
-                window.open(`mailto:${email}?subject=${subject}&body=${body}`);
-              } else {
-                alert("Por favor, ingrese una dirección de correo electrónico.");
-              }
-            };
-          },
           preConfirm: () => {
             const title = document.getElementById('swal-input-title').value;
             const dispo = document.getElementById('swal-input-dispo').value;
