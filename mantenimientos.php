@@ -44,7 +44,7 @@ unset($_SESSION["pop-up"]) ?>
         <thead>
         <tbody>
             <?php
-            $query = "select * From mantenimietos ORDER BY fecha"; //where nombre = '$nombre'";
+            $query = "select * From mantenimientos ORDER BY fecha"; //where nombre = '$nombre'";
             $result = mysqli_query($con, $query);
             if ($row = mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_array($result)) {
