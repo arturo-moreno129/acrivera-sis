@@ -9,7 +9,7 @@ $dispo = $_POST['phpdispo'];
 $correo = "correo@oulook.com";//$_POST['phpmail'];
 // Procesar los datos...
 //echo "Titulo: $title, Descripcion: $description, Fecha: $date, Usuario: $user";
-$query = "INSERT INTO mantenimietos VALUES(default,'$name','$date','$dispo','$tipoMan',1,'$correo','$user')";
+$query = "INSERT INTO mantenimientos VALUES(default,'$name','$date','$dispo','$tipoMan',1,'$correo','$user')";
 $resul = mysqli_query($con, $query);
 $_SESSION['pop-up'] = 1;
 header("location:mantenimientos.php");
