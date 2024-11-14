@@ -66,6 +66,9 @@
             if (!title) {
               Swal.showValidationMessage('Por favor, ingrese el usuario');
             }
+            if (!dispo) {
+              Swal.showValidationMessage('Por favor, ingrese el dispositivo');
+            }
 
             return {
               title,
@@ -156,7 +159,6 @@
       },
       eventClick: function(arg) {
         if (arg.event.groupId == 0) {
-          //alert("No tienes permiso para editar o eliminar elementos de otros usuarios.");
           Swal.fire({
             title: "Acceso denegado",
             text: "No tienes permiso para editar o eliminar elementos de otros usuarios o aquellos que ya están finalizados.",
@@ -164,32 +166,48 @@
           });
         } else {
           Swal.fire({
-            title: "¿Estas seguro de que quierres eliminar este elemento?",
+            title: "¿Qué quiere realizar?",
             showDenyButton: true,
-            //showCancelButton: true,
+            showCancelButton: true,
             confirmButtonText: "Eliminar",
-            denyButtonText: `Cancelar`
+            denyButtonText: "Finalizar tarea"
           }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
-              Swal.fire("Se elimino correctamente el elemento!", "", "success");
-              arg.event.remove();
+              // Enviar solicitud AJAX para eliminar el evento
+              fetch('crud-calendar.php', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                  },
+                  //body: `id=${arg.event.id}`
+                  body: `action=eliminar&id=${arg.event.id}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                  if (data.status === "success") {
+                    Swal.fire(data.message, "", "success");
+                    arg.event.remove(); // Remueve el evento del calendario si se eliminó correctamente
+                  } else {
+                    Swal.fire("Error", data.message, "error");
+                  }
+                })
+                .catch(error => Swal.fire("Error", "No se pudo conectar con el servidor.", "error"));
             } else if (result.isDenied) {
-              Swal.fire("Los cambios no fueron realizados", "", "info");
+              Swal.fire("¡Tarea finalizada correctamente!", "", "info");
             }
           });
-
         }
       },
+
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
       events: [
         <?php
         include('conexion.php');
-        $SqlEventos   = ("SELECT * FROM mantenimietos");
+        $SqlEventos   = ("SELECT * FROM mantenimientos");
         $resulEventos = mysqli_query($con, $SqlEventos);
         while ($dataEvento = mysqli_fetch_array($resulEventos)) { ?> {
-            _id: '<?php echo $dataEvento['id_mantenimiento']; ?>',
+            id: '<?php echo $dataEvento['id_mantenimiento']; ?>',
             title: '<?php echo $dataEvento['usuario']; ?>',
             start: '<?php echo $dataEvento['fecha']; ?>',
             color: '<?php echo ($dataEvento['estatus'] == 1) ? "#60c4f3" : "red" ?>',
@@ -234,7 +252,7 @@
           color: '#FF0000',
           groupId: 1,
           editable: false,
-        },
+        }/*,
         {
           title: "Conference",
           start: "2024-11-05",
