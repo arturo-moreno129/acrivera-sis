@@ -216,3 +216,51 @@ mostrarNotificacion()*/
 
 // Ejemplo de uso: Llamar a mostrarNotificacion cuando sea necesario
 // mostrarNotificacion("Nombre de la tarea");
+
+/**************************para tabs******************* */
+function openPage(pageName, elmnt, color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+/********************************NUEVO EVENTO PARA LAS CARDS**************** */
+const cards = document.querySelectorAll(".card");//--------
+
+// Itera sobre todas las tarjetas y les agrega el evento de clic
+/*document.querySelector(".card") esta función selecciona únicamente el primer elemento con la clase .card en 
+el DOM, por lo que el evento se aplica solo a la primera tarjeta.
+Para solucionar este problema, debes usar document.querySelectorAll(".card") 
+para seleccionar todas las tarjetas, y luego agregar el evento de clic a cada una de ellas mediante un bucle.*/
+cards.forEach((card) => {
+  card.addEventListener("click", () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      }
+    });
+  });
+});

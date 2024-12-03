@@ -688,3 +688,68 @@ h1, h2{
 }
 
 /*****************************************************/
+/* Set height of body and the document to 100% */
+
+  /* Style tab links */
+  .tablink {
+    background-color: #555;
+    color: black;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 20px;
+    width: 25%;
+  }
+  
+  .tablink:hover {
+    background-color: #777;
+  }
+  
+  /* Style the tab content (and add height:100% for full page content) */
+  .tabcontent {
+    color: black;
+    display: none;
+    padding: 100px 20px;
+    height: 100%;
+  }
+  
+  #Home {background-color: white;}
+  #News {background-color: white;}
+  #Contact {background-color: white;}
+  #About {background-color: white;}
+
+  .prueba{
+    border-bottom: solid 3px black;
+    border-right: solid 3px black;
+    border-radius: 5px;
+  }
+
+  /*******************CARD**********************/
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: auto;
+    padding: 2px 16px;
+}
+
+  .card {
+    width: 300px; /* Ajusta el ancho de cada tarjeta según sea necesario */
+    text-align: left;
+    margin: 10px;
+    display: flex;
+    flex-direction:row; /* Organiza elementos en una columna */
+    align-items: center;    /* Centra horizontalmente los elementos */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(55, 162, 233, 0.658);
+  }
