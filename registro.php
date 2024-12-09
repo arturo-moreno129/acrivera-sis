@@ -1,13 +1,29 @@
 <?php include 'header.php'; ?>
 <div class="contenedor-form"><!--para que pueda subir multiples archivos: enctype=multipart/form-data-->
     <form action="upload.php" method="POST" enctype=multipart/form-data>
-        <label for="fname">Nombre(s)</label>
-        <input type="text" id="fname" name="firstname" placeholder="Nombre" onkeyup="this.value = this.value.toUpperCase();" required autofocus>
-        <label for="lname">Apellido Paterno</label>
-        <input type="text" id="lname" name="lastname" placeholder="Apellido Paterno" onkeyup="this.value = this.value.toUpperCase();" required>
-        <label for="fname">Apelldio Materno</label>
-        <input type="text" id="fname" name="surname" placeholder="Apellido Materno" onkeyup="this.value = this.value.toUpperCase();" required>
-        <label for="lname">Dispositivo</label>
+        <select name="select-user" id="select-user">
+            <option value="0">--SELECCION--</option>
+            <?php
+            
+            $query = "SELECT * FROM evidencia ORDER BY nombre";
+            $result = mysqli_query($con, $query); //esto me regresu los renglones de la consulta
+            if ($row = mysqli_num_rows($result) > 0) { //comprovamos si nos devuelve la consulta
+                # code...
+                while ($row = mysqli_fetch_array($result)) { //recorremos lo que se almaceno
+                    # code...
+                    echo '<option value="' . htmlspecialchars($row["nombre"]) . '">' . htmlspecialchars($row["nombre"]) . '</option>';
+                }
+            }
+            ?>
+        </select>
+        <input type="checkbox" id="check-newUser" onclick="newUser()"><label for="">REGISTRAR NUEVO USUARIO</label><br>
+        <label class="display-info-l" for="fname" style="display: none;">Nombre(s)</label>
+        <input class="display-info" type="text" id="fname" name="firstname" placeholder="Nombre" onkeyup="this.value = this.value.toUpperCase();"  autofocus style="display: none;">
+        <label class="display-info-l" for="lname" style="display: none;">Apellido Paterno</label>
+        <input class="display-info" type="text" id="lname" name="lastname" placeholder="Apellido Paterno" onkeyup="this.value = this.value.toUpperCase();"  style="display: none;">
+        <label class="display-info-l" for="fname" style="display: none;">Apelldio Materno</label>
+        <input class="display-info" type="text" id="fname" name="surname" placeholder="Apellido Materno" onkeyup="this.value = this.value.toUpperCase();"  style="display: none;">
+        <label class="display-info-l" for="lname" style="display: none;">Dispositivo</label>
         <select id="#" class="form-control" name="dispositivo" required>
             <option value="">--SELECCION--</option>
             <option value="PC-COMPLETA">PC-COMPLETA</option>

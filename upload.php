@@ -1,6 +1,7 @@
 <?php
 include "conexion.php";
 session_start();
+$selectUser = $_POST["select-user"];
 $nombre = $_POST["firstname"];
 $apellidoP = $_POST["lastname"];
 $apellidoM = $_POST["surname"];

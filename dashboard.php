@@ -49,7 +49,7 @@ include 'header.php'
 </div>-->
 
 <div id="News" class="tabcontent">
-  <!--<div>
+  <div>
     <canvas id="myChart"></canvas>
   </div>
 
@@ -59,11 +59,11 @@ include 'header.php'
     const ctx = document.getElementById('myChart');
 
     new Chart(ctx, {
-      type: 'pie',
+      type: 'bar',
       data: {
         labels: ['4', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
-          label: '# of Votes',
+          label: ['perro','gato'],
           data: [12, 19, 3, 5, 2, 3],
           borderWidth: 1,
         }]
@@ -77,7 +77,7 @@ include 'header.php'
         }
       }
     });
-  </script>-->
+  </script>
 </div>
 
 <div id="Contact" class="tabcontent">

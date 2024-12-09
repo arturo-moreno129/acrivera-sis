@@ -101,6 +101,30 @@ function myFunction1() {
   }
 }
 
+//***************FUNCION PARA APARECER TEXTOS */
+function newUser() {
+  var inputs = document.querySelectorAll(".display-info");
+  var check = document.getElementById("check-newUser");
+  var select = document.getElementById("select-user");
+
+  if (check.checked === true) {
+    select.value = 0;
+    select.style.display = "none"
+    inputs.forEach(function (input) {
+      input.style.display = ""; // Mostrar el campo
+      input.required = true;   // Quitar el atributo `required`
+    });
+  } else {
+    select.style.display = ""
+    inputs.forEach(function (input) {
+      input.style.display = "none"; // Ocultar el campo
+      input.required = false;       // Asegurar que no sea obligatorio
+    });
+  }
+}
+
+
+
 
 /*para from multiple steps*/
 /*var currentTab = 1; // Current tab is set to be the first tab (0)
