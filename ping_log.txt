@@ -1,0 +1,7 @@
+
+Haciendo ping a 140.240.13.207 con 32 bytes de datos:
+PING: error en la transmisi¢n. Error general. 
+
+Estad¡sticas de ping para 140.240.13.207:
+    Paquetes: enviados = 1, recibidos = 0, perdidos = 1
+    (100% perdidos),

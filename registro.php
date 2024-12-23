@@ -1,10 +1,11 @@
 <?php include 'header.php'; ?>
 <div class="contenedor-form"><!--para que pueda subir multiples archivos: enctype=multipart/form-data-->
     <form action="upload.php" method="POST" enctype=multipart/form-data>
+        <label id = "display-text-name" for="fname" style="display: block;">Selecciona el ususario:(Si no encuentra el usuario, diríjase al apartado de Seleccione la casilla "Nuevo Usuario".)</label>
         <select name="select-user" id="select-user">
             <option value="0">--SELECCION--</option>
             <?php
-            
+
             $query = "SELECT * FROM evidencia ORDER BY nombre";
             $result = mysqli_query($con, $query); //esto me regresu los renglones de la consulta
             if ($row = mysqli_num_rows($result) > 0) { //comprovamos si nos devuelve la consulta
@@ -16,13 +17,13 @@
             }
             ?>
         </select>
-        <input type="checkbox" id="check-newUser" onclick="newUser()"><label for="">REGISTRAR NUEVO USUARIO</label><br>
+        <input type="checkbox" id="check-newUser" onclick="newUser()"><label for="">NUEVO USUARIO</label><br>
         <label class="display-info-l" for="fname" style="display: none;">Nombre(s)</label>
-        <input class="display-info" type="text" id="fname" name="firstname" placeholder="Nombre" onkeyup="this.value = this.value.toUpperCase();"  autofocus style="display: none;">
+        <input class="display-info" type="text" id="fname" name="firstname" placeholder="Nombre" onkeyup="this.value = this.value.toUpperCase();" autofocus style="display: none;">
         <label class="display-info-l" for="lname" style="display: none;">Apellido Paterno</label>
-        <input class="display-info" type="text" id="lname" name="lastname" placeholder="Apellido Paterno" onkeyup="this.value = this.value.toUpperCase();"  style="display: none;">
+        <input class="display-info" type="text" id="lname" name="lastname" placeholder="Apellido Paterno" onkeyup="this.value = this.value.toUpperCase();" style="display: none;">
         <label class="display-info-l" for="fname" style="display: none;">Apelldio Materno</label>
-        <input class="display-info" type="text" id="fname" name="surname" placeholder="Apellido Materno" onkeyup="this.value = this.value.toUpperCase();"  style="display: none;">
+        <input class="display-info" type="text" id="fname" name="surname" placeholder="Apellido Materno" onkeyup="this.value = this.value.toUpperCase();" style="display: none;">
         <label class="display-info-l" for="lname" style="display: none;">Dispositivo</label>
         <select id="#" class="form-control" name="dispositivo" required>
             <option value="">--SELECCION--</option>

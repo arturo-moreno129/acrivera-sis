@@ -9,14 +9,26 @@ include 'header.php'
 <div id="Home" class="tabcontent">
   <div class="container">
     <?php
-    $myarray = ["brother ventas", "Kyocera recepcion", "brother ventas", "Kyocera recepcion"];
+    $myarray = ["TORRE DE CONTROL", 
+                "RECEPCIÓN", 
+                "VENTAS AFUERA", 
+                "VENTAS ADENTRO",
+                "RECURSOS HUMANOS",
+                "CONTABILIDAD",
+                "COMPRAS",
+                "RECEPCIÓN",
+                "GARANTÍAS",
+                "ALMACÉN",
+                "SERVICIO",
+                "HOJALATERIA Y PINTURA"
+              ];
     for ($i = 0; $i < count($myarray); $i++) {
 
     ?>
       <div class="card" style="cursor: pointer;">
-        <center><img src="imagenes/chek.png" alt="Avatar" style="width:100px"></center>
+        <center><img src="imagenes/toner.png" alt="Avatar" ></center>
         <div class="container">
-          <h4><b><?php echo $myarray[$i]; ?></b></h4>
+          <h4><b><?php echo $myarray[$i]; ?></b><br</h4>
           <p>existencias: 80pz</p>
         </div>
       </div>
@@ -26,45 +38,25 @@ include 'header.php'
   </div>
 </div>
 
-
-
-
-<!--<div class="container">
-    <div class="card" style="cursor: pointer;">
-      <center><img src="imagenes/chek.png" alt="Avatar" style="width:100px"></center>
-      <div class="container">
-        <h4><b>Toner Brother Recepción</b></h4>
-        <p>Existencias:28</p>
-      </div>
-    </div>
-    <div class="card" style="cursor: pointer;">
-      <center><img src="imagenes/chek.png" alt="Avatar" style="width:100px"></center>
-      <div class="container">
-        <h4><b>Toner Brother Recepción</b></h4>
-        <p>Existencias:28</p>
-      </div>
-    </div>
-  </div>
-
-</div>-->
-
 <div id="News" class="tabcontent">
   <div>
     <canvas id="myChart"></canvas>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
 
   <script>
     const ctx = document.getElementById('myChart');
 
     new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
-        labels: ['4', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['FALTANTES', 'SOBRANTES', 'CORRECTOS'],
         datasets: [{
-          label: ['perro','gato'],
-          data: [12, 19, 3, 5, 2, 3],
+          label: 'cantidad',
+          data: [12, 19, 30],
           borderWidth: 1,
         }]
       },
@@ -81,9 +73,34 @@ include 'header.php'
 </div>
 
 <div id="Contact" class="tabcontent">
-  <h3>Contact</h3>
-  <p>Get in touch, or swing by for a cup of coffee.</p>
+  <div id="myChart1"></div>
 </div>
+
+<script>
+  var options = {
+    series: [44, 55, 13, 43, 22],
+    chart: {
+      width: 380,
+      type: 'pie',
+    },
+    labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
+    responsive: [{
+      breakpoint: 480,
+      options: {
+        chart: {
+          width: 200
+        },
+        legend: {
+          position: 'bottom'
+        }
+      }
+    }]
+  };
+
+  var chart = new ApexCharts(document.querySelector("#myChart1"), options);
+  chart.render();
+</script>
+
 
 <div id="About" class="tabcontent">
   <h3>About</h3>
