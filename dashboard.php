@@ -103,8 +103,7 @@ include 'header.php'
 
 
 <div id="About" class="tabcontent">
-  <h3>About</h3>
-  <p>Who we are and what we do.</p>
+  <?php include 'ip.php' ?>
 </div>
 
 <?php
