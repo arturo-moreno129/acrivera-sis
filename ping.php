@@ -1,9 +1,9 @@
 <?php
 header('Content-Type: application/json');
-$direccion = "8.8.8.8";
+//$direccion = "8.8.8.8";
     # code...
-    if (isset($direccion)) {
-        $ip = escapeshellcmd($direccion);
+    if (isset($_GET["host"])) {
+        $ip = escapeshellcmd($_GET["host"]);
         $os = PHP_OS;
     
         if (stripos($os, 'WIN') === 0) {

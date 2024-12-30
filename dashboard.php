@@ -2,9 +2,9 @@
 include 'header.php'
 ?>
 <button class="tablink" onclick="openPage('Home', this, 'white')" id="defaultOpen">Inventario</button>
-<button class="tablink" onclick="openPage('News', this, 'white')">News</button>
-<button class="tablink" onclick="openPage('Contact', this, 'white')">Contact</button>
-<button class="tablink" onclick="openPage('About', this, 'white')">About</button>
+<!--<button class="tablink" onclick="openPage('News', this, 'white')">News</button>
+<button class="tablink" onclick="openPage('Contact', this, 'white')">Contact</button>-->
+<button class="tablink" onclick="openPage('About', this, 'white')">PING</button>
 
 <div id="Home" class="tabcontent">
   <div class="container">

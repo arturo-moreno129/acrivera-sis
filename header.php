@@ -21,6 +21,7 @@ if (!isset($_SESSION['ususario'])) {
     <!--<link rel="stylesheet" href="style.css">-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
 
 </head>
@@ -79,9 +80,9 @@ if (!isset($_SESSION['ususario'])) {
                     </a>
                 </li>
                 <!--<li>
-                    <a href="#">
+                    <a href="ip.php">
                         <ion-icon name="alert-circle-outline"></ion-icon>
-                        <span>Spam</span>
+                        <span>Ping</span>
                     </a>
                 </li>
                 <li>

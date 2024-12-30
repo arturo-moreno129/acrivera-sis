@@ -753,3 +753,21 @@ h1, h2{
   .card:hover {
     box-shadow: 0 8px 16px 0 rgba(55, 162, 233, 0.658);
   }
+
+  .card-ip {
+    width: 450px; /* Ajusta el ancho de cada tarjeta según sea necesario */
+    height: 300px;
+    text-align: left;
+    margin: 10px;
+    display: flex;
+    flex-direction:row; /* Organiza elementos en una columna */
+    align-items: center;    /* Centra horizontalmente los elementos */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-ip:hover {
+    box-shadow: 0 8px 16px 0 rgba(55, 162, 233, 0.658);
+  }
