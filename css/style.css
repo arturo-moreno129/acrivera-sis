@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500&display=swap');*/
 
 :root {
     --color-barra-lateral: rgb(96, 196, 243);
@@ -753,7 +753,7 @@ h1, h2{
   .card:hover {
     box-shadow: 0 8px 16px 0 rgba(55, 162, 233, 0.658);
   }
-
+/************************ES PARA LAS CARDS DE LAS IP*****************/
   .card-ip {
     width: 450px; /* Ajusta el ancho de cada tarjeta según sea necesario */
     height: 300px;
@@ -766,8 +766,60 @@ h1, h2{
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
   }
 
   .card-ip:hover {
     box-shadow: 0 8px 16px 0 rgba(55, 162, 233, 0.658);
   }
+
+/**********************Estado de wifi************************/
+
+.wifi {
+    width: 50px;
+    height: 50px;
+    background-size: contain; /* Ajusta la imagen para cubrir el contenedor */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    margin-left: 900px;
+    position: relative; /* Necesario si usas position: absolute dentro */
+}
+
+.wifi .online-msg {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Asegura que ocupe todo el contenedor */
+    height: 100%;
+    background-image: url("../imagenes/online.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.wifi .offline-msg {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../imagenes/offline.png"); /* Cambiado a una imagen diferente */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.wifi.offline .online-msg {
+    display: none;
+}
+
+.wifi.offline .offline-msg {
+    display: block;
+}
+.contenedor-logs {
+    display: flex; /* Activa el modelo de flexbox */
+    gap: 10px; /* Espaciado entre los párrafos */
+    margin-left: 90px;
+}

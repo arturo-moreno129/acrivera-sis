@@ -90,3 +90,6 @@ const onMouseODedoLevantado = () => {
 ["mouseup", "touchend"].forEach(nombreDeEvento => {
     $canvas.addEventListener(nombreDeEvento, onMouseODedoLevantado);
 });
+
+
+

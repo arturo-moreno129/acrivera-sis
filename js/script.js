@@ -291,3 +291,23 @@ cards.forEach((card) => {
     });
   });
 });
+
+
+//****************funcion estado del internet *********/
+const statusWifi = document.querySelector(".wifi");
+  window.addEventListener("load", () => {
+    const handleNetworkChange = () => {
+      if (navigator.onLine) {
+        statusWifi.classList.remove("offline");
+        statusWifi.classList.add("online");
+      } else {
+        statusWifi.classList.add("offline");
+        statusWifi.classList.remove("online");
+        Swal.fire("Se perdio la conexion");
+        //location.reload();
+      }
+    };
+
+    window.addEventListener("online", handleNetworkChange);
+    window.addEventListener("offline", handleNetworkChange);
+  });

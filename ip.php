@@ -11,7 +11,7 @@
             const hosts = document.getElementById("hosts").value.split(",").map(h => h.trim());
             startMonitoring(hosts);
         });*/
-
+    var maximo = 0;
     document.addEventListener("DOMContentLoaded", function() {
         const defaultHosts = "140.240.13.133,140.240.13.131,140.240.13.230,140.240.13.233";
         const hosts = defaultHosts.split(",").map(h => h.trim());
@@ -28,7 +28,7 @@
             const canvasContainer = document.createElement("div");
             canvasContainer.innerHTML = `
 
-                       <div class="card-ip" style="cursor: pointer;">
+                       <div id = "${host}" class="card-ip" style="cursor: pointer;">
                         <canvas id="chart-${host}" ></canvas>
                        </div> 
                     
@@ -43,7 +43,7 @@
                 data: {
                     labels: [], // Tiempos
                     datasets: [{
-                        label: `Tiempo de respuesta (ms) - ${host}`,
+                        label: `Direccion IP - ${host}`,
                         data: [],
                         borderColor: "blue",
                         backgroundColor: "rgba(0, 0, 255, 0.2)",
@@ -73,18 +73,28 @@
             });
 
             // Iniciar el monitoreo para este host
-            setInterval(() => pingHost(host), 2500); // Ping cada 5 segundos
+            setInterval(() => pingHost(host), 2500); // Ping cada 2,5 segundos
         });
     }
 
     function pingHost(host) {
+
         fetch(`ping.php?host=${encodeURIComponent(host)}`)
             .then(response => response.json())
             .then(data => {
                 if (data.status === "success" && data.time !== null) {
                     const chart = charts[host];
                     const time = new Date().toLocaleTimeString();
-
+                    console.log(data);
+                    //para hacer un sombreado cuando el ping sea muy alto***////
+                    if (data.time > 20) {
+                        const card = document.getElementById(data.ip);
+                        card.style.border = "solid 2px red"
+                        //console.log(data.ip);
+                    } else {
+                        const card = document.getElementById(data.ip);
+                        card.style.border = "none"
+                    }
                     // Agregar datos al gráfico
                     chart.data.labels.push(time);
                     chart.data.datasets[0].data.push(parseFloat(data.time));
@@ -96,11 +106,29 @@
                     }
 
                     chart.update();
+                } else {
+                    //console.warn(`No se pudo hacer ping a ${host}:`, data.message || "Sin detalles.");
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "bottom-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: "error",
+                        title: `Se perdio la conexion al host ${host}`
+                    });
                 }
             })
-            .catch(error => console.error(`Error al hacer ping a ${host}:`, error));
+            .catch(error => console.log(console.error(`Error al hacer ping a ${host}:`, error)));
     }
 </script>
+<!--<script src="prueba.js"></script>-->
 <?php
 //include "footer.php"
 ?>

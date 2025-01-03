@@ -103,6 +103,10 @@ include 'header.php'
 
 
 <div id="About" class="tabcontent">
+  <div class="wifi">
+    <div class="online-msg"></div>
+    <div class="offline-msg"></div>
+  </div>
   <?php include 'ip.php' ?>
 </div>
 
