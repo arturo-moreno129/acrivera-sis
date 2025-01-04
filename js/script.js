@@ -294,8 +294,10 @@ cards.forEach((card) => {
 
 
 //****************funcion estado del internet *********/
-const statusWifi = document.querySelector(".wifi");
-  window.addEventListener("load", () => {
+window.addEventListener("load", () => {
+  const statusWifi = document.querySelector(".wifi");
+
+  if (statusWifi) {
     const handleNetworkChange = () => {
       if (navigator.onLine) {
         statusWifi.classList.remove("offline");
@@ -303,11 +305,14 @@ const statusWifi = document.querySelector(".wifi");
       } else {
         statusWifi.classList.add("offline");
         statusWifi.classList.remove("online");
-        Swal.fire("Se perdio la conexion");
-        //location.reload();
+        Swal.fire("Se perdió la conexión");
       }
     };
 
     window.addEventListener("online", handleNetworkChange);
     window.addEventListener("offline", handleNetworkChange);
-  });
+
+    // Llama al manejador inmediatamente para establecer el estado inicial.
+    handleNetworkChange();
+  }
+});

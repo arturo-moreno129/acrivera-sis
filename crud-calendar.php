@@ -16,7 +16,17 @@ function eliminarEvento($id_mantenimiento)
         return ["status" => "error", "message" => "Error al eliminar el elemento."];
     }
 }
-
+function finalizarEvento($id_mantenimiento){
+    global $con; // Usa la conexión global
+    $id_mantenimiento = intval($id_mantenimiento); // Convierte a entero para seguridad
+    $sqlFinalizarTarea = "UPDATE mantenimientos SET estatus = 0 WHERE id_mantenimiento = '$id_mantenimiento'";
+    $resultadoFinal = mysqli_query($con,$sqlFinalizarTarea);
+    if ($resultadoFinal) {
+        return ["status" => "success", "message" => "Elemento finalizado correctamente."];
+    } else {
+        return ["status" => "error", "message" => "Error al finalizar el elemento."];
+    }
+}
 // Función para actualizar un evento
 function actualizarEvento($id_mantenimiento, $nuevoDato)
 {
@@ -54,7 +64,14 @@ if (isset($_POST['action'])) {
                 $response = ["status" => "error", "message" => "Parámetros insuficientes para actualizar."];
             }
             break;
-
+        case 'finalizarTarea':
+            # code...
+            if (isset($_POST['id'])) {
+                $response = finalizarEvento($_POST['id']);
+            } else {
+                $response = ["status" => "error", "message" => "ID no proporcionado."];
+            }
+            break;
         default:
             $response = ["status" => "error", "message" => "Acción no válida."];
             break;

@@ -193,7 +193,31 @@
                 })
                 .catch(error => Swal.fire("Error", "No se pudo conectar con el servidor.", "error"));
             } else if (result.isDenied) {
-              Swal.fire("¡Tarea finalizada correctamente!", "", "info");
+              fetch('crud-calendar.php', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                  },
+                  body: `action=finalizarTarea&id=${arg.event.id}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                  if (data.status === "success") {
+                    Swal.fire({
+                      title: data.message,
+                      icon: "success",
+                      confirmButtonText: "OK"
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        location.reload(); // Recarga la página cuando el usuario presiona "OK"
+                      }
+                    });
+
+                  } else {
+                    Swal.fire("Error", data.message, "error");
+                  }
+                })
+              //Swal.fire("¡Tarea finalizada correctamente!", "", "info");
             }
           });
         }

@@ -1,7 +1,7 @@
 <?php include 'header.php'; ?>
 <div class="contenedor-form"><!--para que pueda subir multiples archivos: enctype=multipart/form-data-->
     <form action="upload.php" method="POST" enctype=multipart/form-data>
-        <label id = "display-text-name" for="fname" style="display: block;">Selecciona el ususario:(Si no encuentra el usuario, diríjase al apartado de Seleccione la casilla "Nuevo Usuario".)</label>
+        <label id = "display-text-name" for="fname" style="display: block;">Selecciona el ususario:(Si no encuentra el usuario, diríjase al apartado de "Nuevo Usuario" y seleccione la casilla)</label>
         <select name="select-user" id="select-user">
             <option value="0">--SELECCION--</option>
             <?php
@@ -17,7 +17,7 @@
             }
             ?>
         </select>
-        <input type="checkbox" id="check-newUser" onclick="newUser()"><label for="">NUEVO USUARIO</label><br>
+        <input type="checkbox" id="check-newUser" onclick="newUser()" ><label for="" style="color: red;">NUEVO USUARIO</label><br>
         <label class="display-info-l" for="fname" style="display: none;">Nombre(s)</label>
         <input class="display-info" type="text" id="fname" name="firstname" placeholder="Nombre" onkeyup="this.value = this.value.toUpperCase();" autofocus style="display: none;">
         <label class="display-info-l" for="lname" style="display: none;">Apellido Paterno</label>

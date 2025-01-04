@@ -781,7 +781,6 @@ h1, h2{
     background-size: contain; /* Ajusta la imagen para cubrir el contenedor */
     background-position: center; /* Centra la imagen */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
-    margin-left: 900px;
     position: relative; /* Necesario si usas position: absolute dentro */
 }
 

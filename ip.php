@@ -85,7 +85,6 @@
                 if (data.status === "success" && data.time !== null) {
                     const chart = charts[host];
                     const time = new Date().toLocaleTimeString();
-                    console.log(data);
                     //para hacer un sombreado cuando el ping sea muy alto***////
                     if (data.time > 20) {
                         const card = document.getElementById(data.ip);
