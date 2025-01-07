@@ -36,6 +36,7 @@ unset($_SESSION["pop-up"]) ?>
     <thead>
         <tr><!--th para encabezados-->
             <th>USUARIO</th>
+            <th style="text-align: center;">Realizado por</th>
             <th style="text-align: center;">FECHA</th>
             <th style="text-align: center;">DISPOSITIVO</th>
             <th style="text-align: center;">TIPO DE MANTENIMEINTO</th>
@@ -44,13 +45,15 @@ unset($_SESSION["pop-up"]) ?>
         <thead>
         <tbody>
             <?php
-            $query = "select * From mantenimientos ORDER BY fecha"; //where nombre = '$nombre'";
+            //$query = "SELECT * From mantenimientos ORDER BY fecha"; //where nombre = '$nombre'";
+            $query = "SELECT * from mantenimientos as m inner join usuario as u on m.id_usuario = u.id_usuario ORDER BY fecha";
             $result = mysqli_query($con, $query);
             if ($row = mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_array($result)) {
                     echo
                     '<tr>
-                                <td>' . $row["usuario"] . '</td>
+                                <td>' . $row["usuario_final"] . '</td>
+                                <td style="text-align: center;">' . $row["usuario"] . '</td>
                                 <td style="text-align: center;">' . $row["fecha"] . '</td>
                                 <td style="text-align: center;">' . $row["dispositivo"] . '</td>
                                 <td style="text-align: center;">' . ($row["tipoMan"]==1?"Programado":"Solicitado") . '</td>

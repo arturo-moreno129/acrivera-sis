@@ -3,6 +3,24 @@ include("header.php");
 include("scriptCalendar.php");
 ?>
 <!--CONTENEDOR DEL CALENDARIO-->
-<center><div id='calendar'></div></center>
+
+<div class="flex-box-calendar">
+    <div class="container-calendar">
+        <h1>ESTATUS</h1>
+        <div class="status">
+            <div class="circle green"></div>
+            <div class="label">EN PROCESO</div>
+        </div>
+        <div class="status">
+            <div class="circle red"></div>
+            <div class="label">FINALIZADO</div>
+        </div>
+        
+    </div>
+    <div id='calendar'></div>
+</div>
+
+<!--<div id='calendar'></div>-->
+
 
 <?php include("footer.php") ?>

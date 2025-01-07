@@ -822,3 +822,75 @@ h1, h2{
     gap: 10px; /* Espaciado entre los párrafos */
     margin-left: 90px;
 }
+
+/******** contenedor calendario***************/
+.flex-box-calendar{
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+/*#sidebar-info{
+    width: 250px;
+    margin: 10px;
+    background-color: #393f4b;
+    border-radius: 10px;
+}
+#info-color{
+    width: 100px;
+      height: 100px;
+      border-radius: 50%; /* Hace que el div sea redondo 
+      background-color: #f39c12; /* Color de fondo 
+      display: flex; /* Para centrar el texto 
+      align-items: center; /* Centrado vertical 
+      justify-content: center; /* Centrado horizontal 
+      font-size: 16px; /* Tamaño del texto 
+      color: #fff; /* Color del texto 
+      margin: 10px auto; /* Separación entre círculos y centrado 
+}*/
+.container-calendar {
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: gray; /* Fondo del contenedor */
+    text-align: center;
+    margin-right: 20px;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  .status {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+
+  .circle.green {
+    background-color: #3788d8; /* Verde azulado */
+  }
+
+  .circle.red {
+    background-color: #ff0000; /* Rojo */
+  }
+
+  .label {
+    background-color: #000; /* Fondo negro para las etiquetas */
+    color: #fff; /* Texto blanco */
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    text-align: center;
+    flex-grow: 1;
+  }
+

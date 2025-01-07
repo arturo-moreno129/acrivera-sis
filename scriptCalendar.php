@@ -232,7 +232,7 @@
         $resulEventos = mysqli_query($con, $SqlEventos);
         while ($dataEvento = mysqli_fetch_array($resulEventos)) { ?> {
             id: '<?php echo $dataEvento['id_mantenimiento']; ?>',
-            title: '<?php echo $dataEvento['usuario']; ?>',
+            title: '<?php echo $dataEvento['usuario_final']; ?>',
             start: '<?php echo $dataEvento['fecha']; ?>',
             color: '<?php echo ($dataEvento['estatus'] == 1) ? "#60c4f3" : "red" ?>',
             editable: '<?= ($dataEvento['estatus'] == 1 && $dataEvento['id_usuario'] == $_SESSION['id_usuario']) ?>',
