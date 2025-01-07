@@ -87,7 +87,7 @@
                     const time = new Date().toLocaleTimeString();
                     let dataTime = (data.time === null)?1: data.time;
                     //para hacer un sombreado cuando el ping sea muy alto***////
-                    if (dataTime > 20) {
+                    if (dataTime > 10) {
                         const card = document.getElementById(data.ip);
                         card.style.border = "solid 2px red"
                         //console.log(data.ip);
