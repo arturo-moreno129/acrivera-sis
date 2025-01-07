@@ -6,7 +6,7 @@
             <option value="0">--SELECCION--</option>
             <?php
 
-            $query = "SELECT * FROM evidencia ORDER BY nombre";
+            $query = "SELECT DISTINCT nombre FROM evidencia ORDER BY nombre";
             $result = mysqli_query($con, $query); //esto me regresu los renglones de la consulta
             if ($row = mysqli_num_rows($result) > 0) { //comprovamos si nos devuelve la consulta
                 # code...

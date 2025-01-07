@@ -82,11 +82,12 @@
         fetch(`ping.php?host=${encodeURIComponent(host)}`)
             .then(response => response.json())
             .then(data => {
-                if (data.status === "success" && data.time !== null) {
+                if (data.status === "success") { //&& data.time !== null ->para cuando es por wifi
                     const chart = charts[host];
                     const time = new Date().toLocaleTimeString();
+                    let dataTime = (data.time === null)?1: data.time;
                     //para hacer un sombreado cuando el ping sea muy alto***////
-                    if (data.time > 20) {
+                    if (dataTime > 20) {
                         const card = document.getElementById(data.ip);
                         card.style.border = "solid 2px red"
                         //console.log(data.ip);
@@ -96,7 +97,7 @@
                     }
                     // Agregar datos al gráfico
                     chart.data.labels.push(time);
-                    chart.data.datasets[0].data.push(parseFloat(data.time));
+                    chart.data.datasets[0].data.push(parseFloat(dataTime));
 
                     // Limitar el número de puntos en el gráfico
                     if (chart.data.labels.length > 30) {
@@ -107,7 +108,7 @@
                     chart.update();
                 } else {
                     //console.warn(`No se pudo hacer ping a ${host}:`, data.message || "Sin detalles.");
-                    const Toast = Swal.mixin({
+                    /*const Toast = Swal.mixin({
                         toast: true,
                         position: "bottom-end",
                         showConfirmButton: false,
@@ -121,7 +122,7 @@
                     Toast.fire({
                         icon: "error",
                         title: `Se perdio la conexion al host ${host}`
-                    });
+                    });*/
                 }
             })
             .catch(error => console.log(console.error(`Error al hacer ping a ${host}:`, error)));
