@@ -26,7 +26,7 @@
         <input class="display-info" type="text" id="fname" name="surname" placeholder="Apellido Materno" onkeyup="this.value = this.value.toUpperCase();" style="display: none;">
         <label class="display-info-l" for="lname" style="display: none;">Dispositivo</label>
         <select id="#" class="form-control" name="dispositivo" required>
-            <option value="">--SELECCION--</option>
+            <option value="">--SELECCIONA EL DISPOSITIVO--</option>
             <option value="PC-COMPLETA">PC-COMPLETA</option>
             <option value="TABLET">TABLET</option>
             <option value="IPAD">IPAD</option>

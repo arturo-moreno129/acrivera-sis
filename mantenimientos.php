@@ -57,7 +57,7 @@ unset($_SESSION["pop-up"]) ?>
                                 <td style="text-align: center;">' . $row["fecha"] . '</td>
                                 <td style="text-align: center;">' . $row["dispositivo"] . '</td>
                                 <td style="text-align: center;">' . ($row["tipoMan"]==1?"Programado":"Solicitado") . '</td>
-                                <td style="text-align: center;">' . ($row["estatus"]==1?'<img title="En proceso" id="pdf-icon" src="imagenes/load.png" alt="" style="width: 35px; cursor: pointer;">' : '<img title="Realizado" id="pdf-icon" src="imagenes/chek.png" alt="" style="width: 35px; cursor: pointer;"> </a>') . '</td>
+                                <td style="text-align: center;">' . ($row["estatus"]==1?'<img title="En proceso" id="pdf-icon" src="imagenes/proceso.png" alt="" style="width: 120px; cursor: pointer;">' : '<img title="Realizado" id="pdf-icon" src="imagenes/terminada.png" alt="" style="width: 100px; cursor: pointer;"> </a>') . '</td>
                             </tr>';
                 }
             }
