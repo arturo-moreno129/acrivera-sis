@@ -73,13 +73,13 @@ if (!isset($_SESSION['ususario'])) {
                         <span>Calendario</span>
                     </a>
                 </li>
-                <li>
+                <!--<li>
                     <a href="mantenimientos.php">
                         <ion-icon name="bar-chart-outline"></ion-icon>
                         <span>Mantenimientos</span>
                     </a>
                 </li>
-                <!--<li>
+                <li>
                     <a href="ip.php">
                         <ion-icon name="alert-circle-outline"></ion-icon>
                         <span>Ping</span>

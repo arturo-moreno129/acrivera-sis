@@ -20,7 +20,7 @@
     --color-scroll: rgb(192, 192, 192);
     --color-scroll-hover: rgb(134, 134, 134);
 
-        /*** variables cradas por mi******/
+    /*** variables cradas por mi******/
     --color-fondo-body: rgb(238, 238, 238);
     --color-tbody: rgb(238, 238, 238);
     --color-td: rgb(0, 0, 0);
@@ -339,6 +339,7 @@ h1 {
     font-size: 4vw;
     color: var(--color-menu-hover-texto);
 }
+
 #input-search {
     width: 50vw;
     height: 3vw;
@@ -347,19 +348,22 @@ h1 {
     text-align: center;
     font-size: 2vw;
 }
-#input-button{
+
+#input-button {
     width: 200px;
     height: 40px;
     font-size: 20px;
     border: 3px solid var(--color-texto);
     border-radius: 20px;
 }
+
 @media only screen and (max-width: 600px) {
-    #input-button{
+    #input-button {
         width: 100px;
         font-size: 15px;
     }
 }
+
 /*------------------> Responsive*/
 @media (max-height: 660px) {
     .barra-lateral .nombre-pagina {
@@ -415,23 +419,26 @@ table {
     max-width: 1090px;
     width: 100%;
     margin: 0 auto;
-    position: relative;    
+    position: relative;
 }
 
 table * {
     position: relative;
 }
 
-td{
+td {
     background-color: white;
     color: black
 }
-th{
+
+th {
     color: var(--color-td);
 }
-table td, table th {
+
+table td,
+table th {
     padding-left: 8px;
-    
+
 }
 
 table thead tr {
@@ -528,7 +535,8 @@ table th.r {
 }
 
 /********* estilo de registro******************/
-.contenedor-form input[type=text], select {
+.contenedor-form input[type=text],
+select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -536,9 +544,9 @@ table th.r {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-  }
-  
-  .contenedor-form input[type=submit] {
+}
+
+.contenedor-form input[type=submit] {
     width: 100%;
     background-color: #4CAF50;
     color: white;
@@ -547,22 +555,23 @@ table th.r {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
-  
-  .contenedor-form input[type=submit]:hover {
+}
+
+.contenedor-form input[type=submit]:hover {
     background-color: #45a049;
-  }
-  
-  .contenedor-form {
+}
+
+.contenedor-form {
     border-radius: 5px;
     background-color: white;
     padding: 20px;
     width: 80%;
     margin-left: 8vw;
-  }
+}
+
 /*******************estilos pop-up******************/
 
-.contenedor-pop-up{
+.contenedor-pop-up {
     width: 400px;
     color: red;
     color: white;
@@ -571,8 +580,9 @@ table th.r {
     top: 30%;
     left: 20%;
 }
+
 /***** estilos alert***/
-.alert{
+.alert {
     height: 50px;
     margin: 10px;
     padding: 10px;
@@ -581,20 +591,24 @@ table th.r {
 }
 
 /***************** Estilo status-usuario*************/
-.status-usuario{
+.status-usuario {
     color: var(--color-texto);
 }
-.status-usuario a{
+
+.status-usuario a {
     color: var(--color-texto);
 }
-#log-out{
+
+#log-out {
     color: var(--color-texto);
 }
-#calendar{
+
+#calendar {
     width: 65%;
     height: auto;
 }
-#calendar h2{
+
+#calendar h2 {
     color: var(--color-texto);
 }
 
@@ -680,18 +694,20 @@ table th.r {
   }*/
 
 
-.fc-toolbar-title{
+.fc-toolbar-title {
     color: var(--color-menu-hover-texto);
-   }
-h1, h2{
+}
+
+h1,
+h2 {
     color: var(--color-menu-hover-texto);
 }
 
 /*****************************************************/
 /* Set height of body and the document to 100% */
 
-  /* Style tab links */
-  .tablink {
+/* Style tab links */
+.tablink {
     background-color: #555;
     color: black;
     float: left;
@@ -701,33 +717,44 @@ h1, h2{
     padding: 14px 16px;
     font-size: 20px;
     width: 25%;
-  }
-  
-  .tablink:hover {
+}
+
+.tablink:hover {
     background-color: #777;
-  }
-  
-  /* Style the tab content (and add height:100% for full page content) */
-  .tabcontent {
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
     color: black;
     display: none;
     padding: 100px 20px;
     height: 100%;
-  }
-  
-  #Home {background-color: white;}
-  #News {background-color: white;}
-  #Contact {background-color: white;}
-  #About {background-color: white;}
+}
 
-  .prueba{
+#Home {
+    background-color: white;
+}
+
+#News {
+    background-color: white;
+}
+
+#Contact {
+    background-color: white;
+}
+
+#About {
+    background-color: white;
+}
+
+.prueba {
     border-bottom: solid 3px black;
     border-right: solid 3px black;
     border-radius: 5px;
-  }
+}
 
-  /*******************CARD**********************/
-  .container {
+/*******************CARD**********************/
+.container {
     width: 100%;
     max-width: 1200px;
     display: flex;
@@ -737,51 +764,62 @@ h1, h2{
     padding: 2px 16px;
 }
 
-  .card {
-    width: 300px; /* Ajusta el ancho de cada tarjeta según sea necesario */
+.card {
+    width: 300px;
+    /* Ajusta el ancho de cada tarjeta según sea necesario */
     text-align: left;
     margin: 10px;
     display: flex;
-    flex-direction:row; /* Organiza elementos en una columna */
-    align-items: center;    /* Centra horizontalmente los elementos */
+    flex-direction: row;
+    /* Organiza elementos en una columna */
+    align-items: center;
+    /* Centra horizontalmente los elementos */
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card:hover {
+}
+
+.card:hover {
     box-shadow: 0 8px 16px 0 rgba(55, 162, 233, 0.658);
-  }
+}
+
 /************************ES PARA LAS CARDS DE LAS IP*****************/
-  .card-ip {
-    width: 450px; /* Ajusta el ancho de cada tarjeta según sea necesario */
+.card-ip {
+    width: 450px;
+    /* Ajusta el ancho de cada tarjeta según sea necesario */
     height: 300px;
     text-align: left;
     margin: 10px;
     display: flex;
-    flex-direction:row; /* Organiza elementos en una columna */
-    align-items: center;    /* Centra horizontalmente los elementos */
+    flex-direction: row;
+    /* Organiza elementos en una columna */
+    align-items: center;
+    /* Centra horizontalmente los elementos */
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 
-  }
+}
 
-  .card-ip:hover {
+.card-ip:hover {
     box-shadow: 0 8px 16px 0 rgba(55, 162, 233, 0.658);
-  }
+}
 
 /**********************Estado de wifi************************/
 
 .wifi {
     width: 50px;
     height: 50px;
-    background-size: contain; /* Ajusta la imagen para cubrir el contenedor */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
-    position: relative; /* Necesario si usas position: absolute dentro */
+    background-size: contain;
+    /* Ajusta la imagen para cubrir el contenedor */
+    background-position: center;
+    /* Centra la imagen */
+    background-repeat: no-repeat;
+    /* Evita que la imagen se repita */
+    position: relative;
+    /* Necesario si usas position: absolute dentro */
 }
 
 .wifi .online-msg {
@@ -789,7 +827,8 @@ h1, h2{
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%; /* Asegura que ocupe todo el contenedor */
+    width: 100%;
+    /* Asegura que ocupe todo el contenedor */
     height: 100%;
     background-image: url("../imagenes/online.png");
     background-size: contain;
@@ -804,7 +843,8 @@ h1, h2{
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("../imagenes/offline.png"); /* Cambiado a una imagen diferente */
+    background-image: url("../imagenes/offline.png");
+    /* Cambiado a una imagen diferente */
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -817,20 +857,24 @@ h1, h2{
 .wifi.offline .offline-msg {
     display: block;
 }
+
 .contenedor-logs {
-    display: flex; /* Activa el modelo de flexbox */
-    gap: 10px; /* Espaciado entre los párrafos */
+    display: flex;
+    /* Activa el modelo de flexbox */
+    gap: 10px;
+    /* Espaciado entre los párrafos */
     margin-left: 90px;
 }
 
 /******** contenedor calendario***************/
-.flex-box-calendar{
+.flex-box-calendar {
     width: 100%;
     max-width: 1200px;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
 }
+
 /*#sidebar-info{
     width: 250px;
     margin: 10px;
@@ -853,44 +897,52 @@ h1, h2{
     width: 300px;
     padding: 20px;
     border-radius: 10px;
-    background-color: gray; /* Fondo del contenedor */
+    background-color: gray;
+    /* Fondo del contenedor */
     text-align: center;
     margin-right: 20px;
-  }
+}
 
-  h1 {
+h1 {
     font-size: 24px;
     margin-bottom: 30px;
-  }
+}
 
-  .status {
+.status {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-  }
+}
 
-  .circle {
+.circle {
     width: 20px;
     height: 20px;
     border-radius: 50%;
     margin-right: 15px;
-  }
+}
 
-  .circle.green {
-    background-color: #3788d8; /* Verde azulado */
-  }
+.circle.green {
+    background-color: #3788d8;
+    /* Verde azulado */
+}
 
-  .circle.red {
-    background-color: #ff0000; /* Rojo */
-  }
+.circle.red {
+    background-color: #ff0000;
+    /* Rojo */
+}
 
-  .label {
-    background-color: #000; /* Fondo negro para las etiquetas */
-    color: #fff; /* Texto blanco */
+.label {
+    background-color: #000;
+    /* Fondo negro para las etiquetas */
+    color: #fff;
+    /* Texto blanco */
     padding: 10px 20px;
     border-radius: 20px;
     font-size: 14px;
     text-align: center;
     flex-grow: 1;
-  }
+}
 
+.label.link:hover {
+    background-color: #373939;
+}
