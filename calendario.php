@@ -16,7 +16,7 @@ include("scriptCalendar.php");
             <div class="label">FINALIZADO</div>
         </div>
         <div class="status">
-            <div class="label link"><a href="mantenimientos.php" style="text-decoration: none; color:white;">LISTADO DE MANTENIMEINTOS</a></div>
+            <div class="label link"><a href="mantenimientos.php" style="text-decoration: none; color:white;">VER LISTADO DE MANTENIMEINTOS</a></div>
         </div>
         
     </div>
