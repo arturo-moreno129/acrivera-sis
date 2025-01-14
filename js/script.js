@@ -122,6 +122,7 @@ function newUser() {
     inputs.forEach(function (input) {
       input.style.display = "none"; // Ocultar el campo
       input.required = false;       // Asegurar que no sea obligatorio
+      input.value = null;
     });
   }
 }
