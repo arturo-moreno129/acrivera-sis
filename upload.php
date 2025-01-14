@@ -9,7 +9,7 @@ $fechaRegistro = $_POST["fecha-registro"];
 $dis = $_POST["dispositivo"];
 $dateTime = DateTime::createFromFormat('Y-m-d', $fechaRegistro);
 $formattedDate = $dateTime->format('d/m/Y');
-$nomCompleto = sprintf("%s %s %s", trim($nombre), trim($apellidoP), trim($apellidoM));
+$nomCompleto = ($selectUser == 0 ?sprintf("%s %s %s", trim($nombre), trim($apellidoP), trim($apellidoM)):$selectUser);//sprintf("%s %s %s", trim($nombre), trim($apellidoP), trim($apellidoM));
 
 /*******realizamo la consulta***********/
 $query = "SELECT count(url_resguardo) as resguardos, count(url_mantenimiento) as mantenimiento from evidencia where nombre = '$nomCompleto'";
