@@ -18,13 +18,13 @@
             ?>
         </select>
         <input type="checkbox" id="check-newUser" onclick="newUser()" ><label for="" style="color: red;">NUEVO USUARIO</label><br>
-        <label class="display-info-l" for="fname" style="display: none;">Nombre(s)</label>
+        <label class="display-info" for="fname" style="display: none;">Nombre(s)</label>
         <input class="display-info" type="text" id="fname" name="firstname" placeholder="Nombre" onkeyup="this.value = this.value.toUpperCase();" autofocus style="display: none;">
-        <label class="display-info-l" for="lname" style="display: none;">Apellido Paterno</label>
+        <label class="display-info" for="lname" style="display: none;">Apellido Paterno</label>
         <input class="display-info" type="text" id="lname" name="lastname" placeholder="Apellido Paterno" onkeyup="this.value = this.value.toUpperCase();" style="display: none;">
-        <label class="display-info-l" for="fname" style="display: none;">Apelldio Materno</label>
+        <label class="display-info" for="fname" style="display: none;">Apelldio Materno</label>
         <input class="display-info" type="text" id="fname" name="surname" placeholder="Apellido Materno" onkeyup="this.value = this.value.toUpperCase();" style="display: none;">
-        <label class="display-info-l" for="lname" style="display: none;">Dispositivo</label>
+        <label class="display-info" for="lname" style="display: none;">Dispositivo</label>
         <select id="#" class="form-control" name="dispositivo" required>
             <option value="">--SELECCIONA EL DISPOSITIVO--</option>
             <option value="PC-COMPLETA">PC-COMPLETA</option>
