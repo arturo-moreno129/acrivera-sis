@@ -74,9 +74,9 @@ if (!isset($_SESSION['ususario'])) {
                     </a>
                 </li>
                 <!--<li>
-                    <a href="mantenimientos.php">
-                        <ion-icon name="bar-chart-outline"></ion-icon>
-                        <span>Mantenimientos</span>
+                    <a href="perfil.php">
+                        <ion-icon name="person-outline"></ion-icon>
+                        <span>Perfil</span>
                     </a>
                 </li>
                 <li>
@@ -130,15 +130,15 @@ if (!isset($_SESSION['ususario'])) {
         if (isset($_SESSION["alert"])) {
         ?>
             <div class=" alert alert-danger alert-dismissible fade show" role="alert" id="alertaa" style="background-color: rgba(149, 236, 149, 0.452);">
-                            <strong>¡<?php print $_SESSION['alert']; ?>!</strong>
-                            <a href="resguardos.php">¡Ir a la Sección de Resguardos!</a>
-                            <button type="button" class="close" aria-label="Cerrar" onclick="document.getElementById('alertaa').style.display='none';">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                </div>
+                <strong>¡<?php print $_SESSION['alert']; ?>!</strong>
+                <a href="resguardos.php">¡Ir a la Sección de Resguardos!</a>
+                <button type="button" class="close" aria-label="Cerrar" onclick="document.getElementById('alertaa').style.display='none';">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
-            <?php
+        <?php
             unset($_SESSION["alert"]);
         }
 
-            ?>
+        ?>

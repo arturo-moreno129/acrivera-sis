@@ -475,6 +475,7 @@ table th.r {
     text-align: center;
 }
 
+
 @media screen and (max-width: 35.5em) {
     table {
         display: block;
@@ -945,4 +946,16 @@ h1 {
 
 .label.link:hover {
     background-color: #373939;
+}
+/*************************************PERFIL DE USUARIO****************************/
+.contenedor{
+    width: 500px;
+    height: 500px;
+    background-color: red;
+    
+}
+.info-text{
+    width: 300px;
+    height: 100px;
+    background-color: blue;
 }

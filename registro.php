@@ -32,8 +32,8 @@
             <option value="IPAD">IPAD</option>
             <option value="LAPTOP">LAPTOP</option>
             <option value="MOUSE">MOUSE</option>
-            <option value="MOUSE">UPS</option>
-            <option value="MOUSE">OTRO</option>
+            <option value="UPS">UPS</option>
+            <option value="OTRO">OTRO</option>
         </select>
         <!--<input type="text" id="lname" name="device" placeholder="Dispositivo" onkeyup="this.value = this.value.toUpperCase();" required><br>-->
         <p>Fecha de registro: <input type="date" name="fecha-registro" id="" required></p><br>
