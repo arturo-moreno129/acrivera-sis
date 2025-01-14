@@ -97,23 +97,23 @@ function insert($nom, $fecha, $dispo, $url, $conetion,$flag)
    switch ($flag) {
     case 'R':
         # code...
-        $query = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo','$url[0]',null,1,1)";
-        mysqli_query($conetion, $query);
+        $query_1 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo','$url[0]',null,1,1)";
+        mysqli_query($conetion, $query_1);
         break;
     case 'M':
         # code...
-        $query = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo',null,'$url[1]',1,1)";
-        mysqli_query($conetion, $query);
+        $query_2 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo',null,'$url[0]',1,1)";
+        mysqli_query($conetion, $query_2);
         break;
     case 'A':
         # code...
-        $query = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo','$url[0]','$url[1]',1,1)";
-        mysqli_query($conetion, $query);
+        $query_3 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo','$url[0]','$url[1]',1,1)";
+        mysqli_query($conetion, $query_3);
         break;
     default:
         # code...
-        $query = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo',null,null,1,1)";
-        mysqli_query($conetion, $query);
+        $query_4 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo',null,null,1,1)";
+        mysqli_query($conetion, $query_4);
         $_SESSION["alert"] = "¡Se guardo con exito!";
         break;
    }
