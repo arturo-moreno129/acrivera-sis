@@ -792,10 +792,10 @@ h2 {
     height: 300px;
     text-align: left;
     margin: 10px;
-    display: flex;
-    flex-direction: row;
+    /*display: flex;
+    /*flex-direction: row;
     /* Organiza elementos en una columna */
-    align-items: center;
+    /*align-items: center;
     /* Centra horizontalmente los elementos */
     background-color: #f9f9f9;
     padding: 20px;

@@ -18,17 +18,18 @@
         startMonitoring(hosts);
     });
     const charts = {}; // Almacena los gráficos para cada host
-
+    const names = ["DATALOADER","MENSAJE BIENVENIDA ","FORTINET","ACTIVE DIRECTORY"];//prueba
     function startMonitoring(hosts) {
         const chartContainer = document.getElementById("charts");
         chartContainer.innerHTML = ""; // Limpiar gráficos previos
-
+        var i = 0;//prueba
         hosts.forEach(host => {
             // Crear un contenedor para el gráfico
             const canvasContainer = document.createElement("div");
             canvasContainer.innerHTML = `
-
+                        
                        <div id = "${host}" class="card-ip" style="cursor: pointer;">
+                       <h4>Nombre del host: ${names[i]}</h4><br>
                         <canvas id="chart-${host}" ></canvas>
                        </div> 
                     
@@ -73,6 +74,7 @@
             });
 
             // Iniciar el monitoreo para este host
+            i++
             setInterval(() => pingHost(host), 2500); // Ping cada 2,5 segundos
         });
     }
