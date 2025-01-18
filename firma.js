@@ -14,15 +14,15 @@ const obtenerYReal = (clientY) => clientY - $canvas.getBoundingClientRect().top;
 let haComenzadoDibujo = false; // Bandera que indica si el usuario está presionando el botón del mouse sin soltarlo
 
 
-/*const limpiarCanvas = () => {
+const limpiarCanvas = () => {
     // Colocar color blanco en fondo de canvas
     contexto.fillStyle = COLOR_FONDO;
     contexto.fillRect(0, 0, $canvas.width, $canvas.height);
 };
 limpiarCanvas();
-$btnLimpiar.onclick = limpiarCanvas;*/
+$btnLimpiar.onclick = limpiarCanvas;
 // Escuchar clic del botón para descargar el canvas
-/*$btnDescargar.onclick = () => {
+$btnDescargar.onclick = () => {
     const enlace = document.createElement('a');
     // El título
     enlace.download = "Firma.png";
@@ -30,7 +30,7 @@ $btnLimpiar.onclick = limpiarCanvas;*/
     enlace.href = $canvas.toDataURL();
     // Hacer click en él
     enlace.click();
-};*/
+};
 
 window.obtenerImagen = () => {
     return $canvas.toDataURL();
