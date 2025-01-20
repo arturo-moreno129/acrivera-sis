@@ -73,16 +73,16 @@ if (!isset($_SESSION['ususario'])) {
                         <span>Calendario</span>
                     </a>
                 </li>
-                <!--<li>
-                    <a href="perfil.php">
+                <li>
+                    <a href="firma.php">
                         <ion-icon name="person-outline"></ion-icon>
                         <span>Perfil</span>
                     </a>
-                </li>
+                <!--</li>
                 <li>
-                    <a href="ip.php">
-                        <ion-icon name="alert-circle-outline"></ion-icon>
-                        <span>Ping</span>
+                    <a href="perfil.php">
+                        <ion-icon name="person-outline"></ion-icon>
+                        <span>Perfil</span>
                     </a>
                 </li>
                 <li>
