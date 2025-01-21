@@ -357,7 +357,7 @@ h1 {
     border-radius: 20px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) {
     #input-button {
         width: 100px;
         font-size: 15px;
@@ -375,7 +375,7 @@ h1 {
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     .barra-lateral {
         position: fixed;
         left: -250px;
@@ -403,6 +403,9 @@ h1 {
 
     .contnedor-buscador {
         margin-top: 60px;
+    }
+    .menu{
+        background-color: #7fddf9;
     }
 }
 

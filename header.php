@@ -74,9 +74,9 @@ if (!isset($_SESSION['ususario'])) {
                     </a>
                 </li>
                 <li>
-                    <a href="firma.php">
-                        <ion-icon name="person-outline"></ion-icon>
-                        <span>Perfil</span>
+                    <a href="registro_archivo.php">
+                    <ion-icon name="pencil-outline"></ion-icon>
+                        <span>Registro</span>
                     </a>
                 <!--</li>
                 <li>
@@ -142,3 +142,4 @@ if (!isset($_SESSION['ususario'])) {
         }
 
         ?>
+       

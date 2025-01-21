@@ -37,8 +37,9 @@ $btnDescargar.onclick = () => {
     })
         .then(response => response.text())
         .then(data => {
-            console.log(data); // Mostrar respuesta del servidor
-            alert('Imagen guardada exitosamente en el servidor.');
+            //console.log(data); // Mostrar respuesta del servidor
+            Swal.fire("Imagen guardada exitosamente en el servidor.");
+            //alert('Imagen guardada exitosamente en el servidor.');
         })
         .catch(error => {
             console.error('Error al guardar la imagen:', error);
