@@ -74,11 +74,13 @@ if (!isset($_SESSION['ususario'])) {
                     </a>
                 </li>
                 <li>
-                    <a href="registro_archivo.php">
-                    <ion-icon name="pencil-outline"></ion-icon>
-                        <span>Registro</span>
-                    </a>
-                <!--</li>
+                    <?php if ($_SESSION['id_usuario'] == 1): ?>
+                        <a href="registro_archivo.php">
+                            <ion-icon name="pencil-outline"></ion-icon>
+                            <span>Registro</span>
+                        </a>
+                    <?php endif; ?>
+                    <!--</li>
                 <li>
                     <a href="perfil.php">
                         <ion-icon name="person-outline"></ion-icon>
@@ -118,7 +120,8 @@ if (!isset($_SESSION['ususario'])) {
                         <span class="nombre"><?php echo $_SESSION['ususario']; ?></span>
                         <span class="email"><?php echo $_SESSION['puesto']; ?></span>
                     </div>
-                    <a title="Cerrar Sesión" id="log-out" href="logout.php" style="text-decoration: none;"><ion-icon name="log-out-outline"></ion-icon></a>
+                    <a title="Cerrar Sesión" id="log-out" href="logout.php" style="text-decoration: none;"><ion-icon
+                            name="log-out-outline"></ion-icon></a>
                 </div>
             </div>
         </div>
@@ -128,18 +131,19 @@ if (!isset($_SESSION['ususario'])) {
         <?php
         //session_start();
         if (isset($_SESSION["alert"])) {
-        ?>
-            <div class=" alert alert-danger alert-dismissible fade show" role="alert" id="alertaa" style="background-color: rgba(149, 236, 149, 0.452);">
+            ?>
+            <div class=" alert alert-danger alert-dismissible fade show" role="alert" id="alertaa"
+                style="background-color: rgba(149, 236, 149, 0.452);">
                 <strong>¡<?php print $_SESSION['alert']; ?>!</strong>
                 <a href="resguardos.php">¡Ir a la Sección de Resguardos!</a>
-                <button type="button" class="close" aria-label="Cerrar" onclick="document.getElementById('alertaa').style.display='none';">
+                <button type="button" class="close" aria-label="Cerrar"
+                    onclick="document.getElementById('alertaa').style.display='none';">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
-        <?php
+            <?php
             unset($_SESSION["alert"]);
         }
 
         ?>
-       

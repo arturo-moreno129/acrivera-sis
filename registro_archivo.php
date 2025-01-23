@@ -6,7 +6,7 @@ include 'header.php';
     <center>
         <h2 style="color: black;"><strong>REGISTRO MANTENIMIENTO</strong></h2><br>
     </center>
-    <form action="create_registre.php" method="POST">
+    <form action="create_registre.php" method="POST"><!--create_registre.php va esto puse firma.php para pruebas-->
         <label id="display-text-name" for="fname" style="display: block;">Selecciona el ususario:(Si no encuentra el usuario, diríjase al apartado de "Nuevo Usuario" y seleccione la casilla)</label><br>
         <input type="checkbox" id="check-newUser" onclick="newUser()"><label for="" style="color: red;">NUEVO USUARIO</label><br>
         <select name="select-user" id="select-user">

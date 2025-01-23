@@ -38,8 +38,8 @@ $btnDescargar.onclick = () => {
         .then(response => response.text())
         .then(data => {
             //console.log(data); // Mostrar respuesta del servidor
-            Swal.fire("Imagen guardada exitosamente en el servidor.");
-            //alert('Imagen guardada exitosamente en el servidor.');
+            //Swal.fire("Imagen guardada exitosamente en el servidor.");//poner despues, ipad no lo procesa
+            alert('Imagen guardada exitosamente en el servidor.');
         })
         .catch(error => {
             console.error('Error al guardar la imagen:', error);
@@ -52,7 +52,7 @@ window.obtenerImagen = () => {
 };
 
 $btnGenerarDocumento.onclick = () => {
-    window.open("documento.php");
+    window.open("imagenes_guardadas/salida.pdf");
 };
 const onClicOToqueIniciado = evento => {
     // En este evento solo se ha iniciado el clic, así que dibujamos un punto

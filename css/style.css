@@ -407,6 +407,9 @@ h1 {
     .menu{
         background-color: #7fddf9;
     }
+    .usuario img{
+        height: 50px;
+    }
 }
 
 

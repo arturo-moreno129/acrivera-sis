@@ -42,7 +42,7 @@ if (isset($datos['imagen'])) {
 function incrustacion($ruta_img)
 {
     // Cargar el archivo Excel existente
-    $inputFileName = "imagenes_guardadas/prueba_firma.xlsx";
+    $inputFileName = "imagenes_guardadas/archivo_modificado.xlsx";
     $spreadsheet = IOFactory::load($inputFileName);
 
     // Seleccionar la hoja donde se agregará la firma
@@ -56,8 +56,8 @@ function incrustacion($ruta_img)
     $drawing->setHeight(54); // Altura en píxeles
     $drawing->setCoordinates('B74'); // Celda donde se colocará la firma (por ejemplo, B10)
     $drawing->setWorksheet($sheet);
-    $drawing->setOffsetX(30); // Desplazamiento horizontal (en píxeles)
-    $drawing->setOffsetY(6); // Desplazamiento vertical (en píxeles)
+    $drawing->setOffsetX(60); // Desplazamiento horizontal (en píxeles)
+    $drawing->setOffsetY(2); // Desplazamiento vertical (en píxeles)
 
     // Guardar el archivo Excel con la firma
     $outputFileName = "imagenes_guardadas/archivo_con_firma.xlsx";
