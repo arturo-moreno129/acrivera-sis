@@ -109,8 +109,9 @@ function newUser() {
   var text = document.getElementById("display-text-name");
 
   if (check.checked === true) {
-    select.value = 0;
+    select.value = "";
     select.style.display = "none"
+    select.required = false
     text.style.display = "none"
     inputs.forEach(function (input) {
       input.style.display = ""; // Mostrar el campo
@@ -118,6 +119,7 @@ function newUser() {
     });
   } else {
     select.style.display = ""
+    select.required = true
     text.style.display = ""
     inputs.forEach(function (input) {
       input.style.display = "none"; // Ocultar el campo
