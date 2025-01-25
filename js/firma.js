@@ -52,7 +52,8 @@ window.obtenerImagen = () => {
 };
 
 $btnGenerarDocumento.onclick = () => {
-    window.open("imagenes_guardadas/salida.pdf");
+    //window.open("imagenes_guardadas/salida.pdf",);
+    window.open('imagenes_guardadas/salida.pdf','Encuesta Inicial', 'location=no,scrollbars=yes,resizable = no');
 };
 const onClicOToqueIniciado = evento => {
     // En este evento solo se ha iniciado el clic, así que dibujamos un punto

@@ -75,7 +75,7 @@ if (!isset($_SESSION['ususario'])) {
                 </li>
                 <li>
                     <?php if ($_SESSION['id_usuario'] == 1): ?>
-                        <a href="registro_archivo.php">
+                        <a href="card_registro.php">
                             <ion-icon name="pencil-outline"></ion-icon>
                             <span>Registro</span>
                         </a>
