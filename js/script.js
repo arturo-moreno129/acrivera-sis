@@ -1,18 +1,18 @@
 const cloud = document.getElementById("cloud");
 const barraLateral = document.querySelector(".barra-lateral");
 const spans = document.querySelectorAll("span");
-const palanca = document.querySelector(".switch");//--------
-const circulo = document.querySelector(".circulo");//--------
+const palanca = document.querySelector(".switch"); //--------
+const circulo = document.querySelector(".circulo"); //--------
 const menu = document.querySelector(".menu");
 const main = document.querySelector("main");
 
 const btn = document.querySelector(".push");
 
-const modoOscuroGuardado = localStorage.getItem('modoprueba');
+const modoOscuroGuardado = localStorage.getItem("modoprueba");
 const cuerpo = document.body;
 
-if (modoOscuroGuardado === 'activado') {
-  cuerpo.classList.add('dark-mode');
+if (modoOscuroGuardado === "activado") {
+  cuerpo.classList.add("dark-mode");
   circulo.classList.toggle("prendido");
 }
 
@@ -21,8 +21,7 @@ menu.addEventListener("click", () => {
   if (barraLateral.classList.contains("max-barra-lateral")) {
     menu.children[0].style.display = "none";
     menu.children[1].style.display = "block";
-  }
-  else {
+  } else {
     menu.children[0].style.display = "block";
     menu.children[1].style.display = "none";
   }
@@ -31,7 +30,7 @@ menu.addEventListener("click", () => {
     main.classList.add("min-main");
     spans.forEach((span) => {
       span.classList.add("oculto");
-    })
+    });
   }
 });
 
@@ -39,14 +38,12 @@ palanca.addEventListener("click", () => {
   let body = document.body;
   body.classList.toggle("dark-mode");
   circulo.classList.toggle("prendido");
-  if (cuerpo.classList.contains('dark-mode')) {
-    localStorage.setItem('modoprueba', 'activado');
+  if (cuerpo.classList.contains("dark-mode")) {
+    localStorage.setItem("modoprueba", "activado");
   } else {
-    localStorage.setItem('modoprueba', 'desactivado');
+    localStorage.setItem("modoprueba", "desactivado");
   }
 });
-
-
 
 /******** */
 /*cloud.addEventListener("click", () => {
@@ -80,7 +77,6 @@ function functionPass() {
   }
 }
 
-
 function myFunction1() {
   var input, filter, table, tr, td, i, txtValue, y;
   y = document.getElementById("mySelect").value;
@@ -110,27 +106,24 @@ function newUser() {
 
   if (check.checked === true) {
     select.value = "";
-    select.style.display = "none"
-    select.required = false
-    text.style.display = "none"
+    select.style.display = "none";
+    select.required = false;
+    text.style.display = "none";
     inputs.forEach(function (input) {
       input.style.display = ""; // Mostrar el campo
-      input.required = true;   // Quitar el atributo `required`
+      input.required = true; // Quitar el atributo `required`
     });
   } else {
-    select.style.display = ""
-    select.required = true
-    text.style.display = ""
+    select.style.display = "";
+    select.required = true;
+    text.style.display = "";
     inputs.forEach(function (input) {
       input.style.display = "none"; // Ocultar el campo
-      input.required = false;       // Asegurar que no sea obligatorio
+      input.required = false; // Asegurar que no sea obligatorio
       input.value = null;
     });
   }
 }
-
-
-
 
 /*para from multiple steps*/
 /*var currentTab = 1; // Current tab is set to be the first tab (0)
@@ -262,11 +255,8 @@ function openPage(pageName, elmnt, color) {
   elmnt.style.backgroundColor = color;
 }
 
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
-
 /********************************NUEVO EVENTO PARA LAS CARDS**************** */
-const cards = document.querySelectorAll(".card");//--------
+const cards = document.querySelectorAll(".card"); //--------
 
 // Itera sobre todas las tarjetas y les agrega el evento de clic
 /*document.querySelector(".card") esta función selecciona únicamente el primer elemento con la clase .card en 
@@ -282,19 +272,18 @@ cards.forEach((card) => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
+      confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
           title: "Deleted!",
           text: "Your file has been deleted.",
-          icon: "success"
+          icon: "success",
         });
       }
     });
   });
 });
-
 
 //****************funcion estado del internet *********/
 window.addEventListener("load", () => {
@@ -319,3 +308,160 @@ window.addEventListener("load", () => {
     handleNetworkChange();
   }
 });
+
+// Get the element with id="defaultOpen" and click on it
+const defaultOpen = document.getElementById("defaultOpen");
+if (defaultOpen) {
+  defaultOpen.click();
+}
+
+//para verificar si essta seleccionado el raqdio button.
+document.querySelectorAll('input[name="option"]').forEach((radio) => {
+  radio.addEventListener("change", function () {
+    if (this.value == 2) {
+      //si selecciona no asociar
+      const radiobuttons = document.querySelectorAll(".asociar");
+      radiobuttons.forEach(function (radiobuttons) {
+        radiobuttons.style.display = "none"; // Mostrar el campo
+        radiobuttons.required = false; // Quitar el atributo `required`
+      });
+      const noasociar = document.querySelectorAll(".no-asociar");
+      noasociar.forEach(function (noasociar) {
+        noasociar.style.display = "block";
+      });
+    } else {
+      //si selecciona asiciar
+      const radiobuttons = document.querySelectorAll(".asociar");
+      radiobuttons.forEach(function (radiobuttons) {
+        radiobuttons.style.display = "block"; // Mostrar el campo
+        radiobuttons.required = true; // Quitar el atributo `required`
+      });
+      const noasociar = document.querySelectorAll(".no-asociar");
+      noasociar.forEach(function (noasociar) {
+        noasociar.style.display = "none";
+      });
+    }
+  });
+});
+
+/// agregar valores a tabla
+var datosTabla = [];
+function agregarFila() {
+  var CANTIDAD = document.getElementById("CANTIDAD").value;
+  var DESCRIPCION = document.getElementById("DESCRIPCION").value;
+  var MARCA = document.getElementById("MARCA").value;
+  var MODELO = document.getElementById("MODELO").value;
+  var SERIE = document.getElementById("SERIE").value;
+  var FISICO = document.getElementById("FISICO").value;
+
+  if (
+    CANTIDAD === "" ||
+    DESCRIPCION === "" ||
+    MARCA === "" ||
+    MODELO === "" ||
+    SERIE === "" ||
+    FISICO === ""
+  ) {
+    //alert("Por favor, ingresa todos los datos.");
+    Swal.fire({
+      title: "Valores vacios",
+      text: "Falta texto por capturar..!",
+      icon: "error",
+    });
+    return;
+  }
+
+  var tabla = document.getElementById("tabla").getElementsByTagName("tbody")[0];
+  var nuevaFila = tabla.insertRow();
+
+  var celdaCantidad = nuevaFila.insertCell(0);
+  var celdaDescripcion = nuevaFila.insertCell(1);
+  var celdaMarca = nuevaFila.insertCell(2);
+  var celdaModelo = nuevaFila.insertCell(3);
+  var celdaSerie = nuevaFila.insertCell(4);
+  var celdaFisico = nuevaFila.insertCell(5);
+  //var celdaAccion = nuevaFila.insertCell(6);
+
+  celdaCantidad.innerHTML = CANTIDAD;
+  celdaDescripcion.innerHTML = DESCRIPCION;
+  celdaMarca.innerHTML = MARCA;
+  celdaModelo.innerHTML = MODELO;
+  celdaSerie.innerHTML = SERIE;
+  celdaFisico.innerHTML = FISICO;
+
+  datosTabla.push({
+    cantidad: CANTIDAD,
+    descripcion: DESCRIPCION,
+    marca: MARCA,
+    modelo: MODELO,
+    serie: SERIE,
+    fisico: FISICO,
+  });
+  //celdaAccion.innerHTML ='<button type="button" onclick="eliminarFila(this)">Eliminar</button>';
+
+  document.getElementById("CANTIDAD").value = 0;
+  document.getElementById("DESCRIPCION").value = " ";
+  document.getElementById("MARCA").value = " ";
+  document.getElementById("MODELO").value = " ";
+  document.getElementById("SERIE").value = " ";
+  document.getElementById("FISICO").value = " ";
+}
+
+function eliminarFila(btn) {
+  var fila = btn.parentNode.parentNode;
+  fila.parentNode.removeChild(fila);
+}
+
+function validarFormulario(event) {
+  var filas = document.getElementById("tabla").getElementsByTagName("tbody")[0]
+    .rows.length;
+
+  if (filas === 0) {
+    alert("Debes agregar al menos una fila antes de enviar.");
+    return false; // Evita que el formulario se envíe
+  }
+  return true; // Permite el envío si hay datos en la tabla
+}
+
+
+
+
+document.getElementById('btnenviar').addEventListener('click', (event) => {
+  event.preventDefault(); // Evita el envío por defecto del formulario
+
+  var tabla = document.getElementById("tabla");
+  var filas = tabla.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+  var datosTabla = [];
+
+  for (var i = 0; i < filas.length; i++) {
+      var celdas = filas[i].getElementsByTagName("td");
+
+      datosTabla.push({
+          cantidad: celdas[0].innerText.trim(),
+          descripcion: celdas[1].innerText.trim(),
+          marca: celdas[2].innerText.trim(),
+          modelo: celdas[3].innerText.trim(),
+          serie: celdas[4].innerText.trim(),
+          fisico: celdas[5].innerText.trim()
+      });
+  }
+
+  console.log("Datos que se enviarán:", datosTabla); // Verificar datos antes de enviarlos
+
+  fetch('create_mant.php', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ datosTabla }) // Enviar en formato JSON
+  })
+  .then(response => response.text()) // Leer la respuesta como texto para depuración
+  .then(data => {
+      console.log("Respuesta del servidor:", data);
+  })
+  .catch(error => {
+      console.error('Error de transmisión:', error);
+  });
+});
+

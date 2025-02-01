@@ -3,9 +3,9 @@ include 'header.php';
 ?>
 
 <div class="contenedor-form">
-    <center>
-        <h2 style="color: black;"><strong>REGISTRO MANTENIMIENTO</strong></h2><br>
-    </center>
+        <center>
+            <h2 style="color: black;"><strong>REGISTRO MANTENIMIENTO</strong></h2><br>
+        </center>
     <form action="create_registre.php" method="POST"><!--create_registre.php va esto puse firma.php para pruebas-->
         <label id="display-text-name" for="fname" style="display: block;">Selecciona el ususario:(Si no encuentra el
             usuario, diríjase al apartado de "Nuevo Usuario" y seleccione la casilla)</label><br>
@@ -68,15 +68,17 @@ include 'header.php';
             <thead>
                 <tr>
                     <th>Tipo de mantenimiento</th>
-                    <th style="text-align: center;" >Check</th>
+                    <th style="text-align: center;">Check</th>
                 </tr>
                 <tr>
                     <td><label for="html">Programado</label><br></td>
-                    <td style="text-align: center;"><input type="radio" id="swal-input-programado" name="option" value="Programado" checked></td>
+                    <td style="text-align: center;"><input type="radio" id="swal-input-programado" name="option"
+                            value="Programado" checked></td>
                 </tr>
                 <tr>
                     <td><label for="css">Solicitado</label><br></td>
-                    <td style="text-align: center;"><input type="radio" id="swal-input-solicitado" name="option" value="Solicitado"></td>
+                    <td style="text-align: center;"><input type="radio" id="swal-input-solicitado" name="option"
+                            value="Solicitado"></td>
                 </tr>
             </thead>
         </table>
@@ -181,7 +183,7 @@ include 'header.php';
                     <td><label for="html">Exploradores</label><br></td>
                     <td style="text-align: center;"><input type="checkbox" name="EXPLO" id=""></td>
                 </tr>
-                
+
             </thead>
         </table>
 

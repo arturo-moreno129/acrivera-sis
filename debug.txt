@@ -1,0 +1,4 @@
+{"datosTabla":[{"cantidad":"1","descripcion":"SDASD","marca":"DSAF","modelo":"DASF","serie":"ASDF","fisico":"DSFADS"}]}
+{"datosTabla":[{"cantidad":"2","descripcion":"ASDFADSF","marca":"ASDFA","modelo":"ASDFDAS","serie":"DASFADS","fisico":"DSFDASF"},{"cantidad":"4","descripcion":"ADSFASDF","marca":"ASDF","modelo":"ADFS","serie":"SDAFADSF","fisico":"ADSFADSF"},{"cantidad":"4","descripcion":"PERRO","marca":"PERRO","modelo":"PERRO","serie":"PERRO","fisico":"PERRO"}]}
+{"datosTabla":[{"cantidad":"2","descripcion":"ASDFADSF","marca":"ASDFA","modelo":"ASDFDAS","serie":"DASFADS","fisico":"DSFDASF"},{"cantidad":"4","descripcion":"ADSFASDF","marca":"ASDF","modelo":"ADFS","serie":"SDAFADSF","fisico":"ADSFADSF"},{"cantidad":"4","descripcion":"PERRO","marca":"PERRO","modelo":"PERRO","serie":"PERRO","fisico":"PERRO"}]}
+{"datosTabla":[{"cantidad":"32","descripcion":"ADSF","marca":"ADSF","modelo":"ASDF","serie":"ASDF","fisico":"ADFAS"}]}

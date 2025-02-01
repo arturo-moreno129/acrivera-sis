@@ -813,7 +813,37 @@ h2 {
 .card-ip:hover {
     box-shadow: 0 8px 16px 0 rgba(55, 162, 233, 0.658);
 }
+/***********************CARD OPTIONS*************************/
+.container-options {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: auto;
+    padding: 55px;
+}
+.card-option {
+    width: 450px;
+    /* Ajusta el ancho de cada tarjeta según sea necesario */
+    height: 300px;
+    text-align: center;
+    margin: 10px;
+    /*display: flex;
+    /*flex-direction: row;
+    /* Organiza elementos en una columna */
+    /*align-items: center;
+    /* Centra horizontalmente los elementos */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 
+}
+
+.card-option:hover {
+    box-shadow: 0 8px 16px 0 rgba(55, 162, 233, 0.658);
+}
 /**********************Estado de wifi************************/
 
 .wifi {
@@ -964,4 +994,34 @@ h1 {
     width: 300px;
     height: 100px;
     background-color: blue;
+}
+
+
+/***************************PENDIENTES ESTILO****************/
+.titulo-pendiente {
+    width: 100%;
+    height: 100px;
+    /* Ajusta el ancho de cada tarjeta según sea necesario */
+    text-align: center;
+    /* Organiza elementos en una columna */
+    
+    /* Centra horizontalmente los elementos */
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.titulo-pendiente h1{
+    color: black;
+    font-size: 50px;
+}
+#btninsertTable{
+  background-color: #04AA6D; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
