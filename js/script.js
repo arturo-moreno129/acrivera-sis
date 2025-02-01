@@ -399,7 +399,7 @@ function agregarFila() {
   });
   //celdaAccion.innerHTML ='<button type="button" onclick="eliminarFila(this)">Eliminar</button>';
 
-  document.getElementById("CANTIDAD").value = 0;
+  document.getElementById("CANTIDAD").value = null;
   document.getElementById("DESCRIPCION").value = " ";
   document.getElementById("MARCA").value = " ";
   document.getElementById("MODELO").value = " ";
@@ -412,7 +412,7 @@ function eliminarFila(btn) {
   fila.parentNode.removeChild(fila);
 }
 
-function validarFormulario(event) {
+/*function validarFormulario(event) {
   var filas = document.getElementById("tabla").getElementsByTagName("tbody")[0]
     .rows.length;
 
@@ -421,7 +421,7 @@ function validarFormulario(event) {
     return false; // Evita que el formulario se envíe
   }
   return true; // Permite el envío si hay datos en la tabla
-}
+}*/
 
 
 
@@ -431,6 +431,7 @@ document.getElementById('btnenviar').addEventListener('click', (event) => {
 
   var tabla = document.getElementById("tabla");
   var filas = tabla.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+  var nombreUsu = document.querySelector('#select-user').value;
 
   var datosTabla = [];
 
@@ -443,18 +444,25 @@ document.getElementById('btnenviar').addEventListener('click', (event) => {
           marca: celdas[2].innerText.trim(),
           modelo: celdas[3].innerText.trim(),
           serie: celdas[4].innerText.trim(),
-          fisico: celdas[5].innerText.trim()
+          fisico: celdas[5].innerText.trim(),
       });
   }
+  var datosfinale ={
+    nombre: nombreUsu,
+    datos:datosTabla
+  };
 
-  console.log("Datos que se enviarán:", datosTabla); // Verificar datos antes de enviarlos
-
-  fetch('create_mant.php', {
+  console.log("Datos que se enviarán:", datosfinale); // Verificar datos antes de enviarlos
+  if (datosTabla.length <= 0) {
+    alert('Debes agregar al menos una fila antes de enviar.');
+    return;
+  }
+  fetch('create_registro.php', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ datosTabla }) // Enviar en formato JSON
+      body: JSON.stringify({ datosfinale }) // Enviar en formato JSON
   })
   .then(response => response.text()) // Leer la respuesta como texto para depuración
   .then(data => {

@@ -10,14 +10,14 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 $datosJSON = file_get_contents("php://input");
 
 // Mostrar el JSON recibido para depuración
-file_put_contents("debug.txt", $datosJSON . PHP_EOL, FILE_APPEND); // Guarda el JSON en un archivo para revisar
-var_dump($datosJSON); // Para ver qué llega al servidor
+/*file_put_contents("debug.txt", $datosJSON . PHP_EOL, FILE_APPEND); // Guarda el JSON en un archivo para revisar
+var_dump($datosJSON); // Para ver qué llega al servidor*/
 
-// Intentar decodificar el JSON
+//Decodificar el JSON
 $datos = json_decode($datosJSON, true);
-
-if ($datos && isset($datos["datosTabla"])) {
-    foreach ($datos["datosTabla"] as $fila) {
+//print_r($datos['datosfinale']['datos']);
+if ($datos && $datos['datosfinale']['datos']) {
+    foreach ($datos['datosfinale']['datos'] as $fila) {
         echo "Cantidad: " . $fila["cantidad"] . "<br>";
         echo "Descripción: " . $fila["descripcion"] . "<br>";
         echo "Marca: " . $fila["marca"] . "<br>";
@@ -26,7 +26,7 @@ if ($datos && isset($datos["datosTabla"])) {
         echo "Físico: " . $fila["fisico"] . "<br>";
         echo "---------------------------<br>";
     }
-
+    //para tener el ultimo resguardo y hacer consecutivo
     echo json_encode(["status" => "success", "message" => "Datos guardados correctamente"]);
 } else {
     echo json_encode(["status" => "error", "message" => "No se recibieron datos"]);

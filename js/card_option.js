@@ -6,12 +6,12 @@ const firmaMant = document.querySelector("#firma-mante");
 
 if (resguardo) {
   resguardo.addEventListener("click", () => {
-    window.location.assign("registro_resguardo.php");
+    window.location.assign("registro_resg.php");
   });
 }
 if (mant) {
   mant.addEventListener("click", () => {
-    window.location.assign("registro_mante.php");
+    window.location.assign("registro_mant.php");
   });
 }
 if (firmaRes) {
