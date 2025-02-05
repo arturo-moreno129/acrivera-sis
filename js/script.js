@@ -432,6 +432,10 @@ document.getElementById('btnenviar').addEventListener('click', (event) => {
   var tabla = document.getElementById("tabla");
   var filas = tabla.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
   var nombreUsu = document.querySelector('#select-user').value;
+  var dispo = document.querySelector('[name="dispositivo"]').value;
+  var fecha = document.querySelector('[name="fecha-registro"]').value; //seleccionado por nombre
+  var equipo = document.querySelector('input[name="option1"]:checked').value;//obtiene el valor seleccionado
+  var puesto = document.querySelector('[name="puesto"]').value;
 
   var datosTabla = [];
 
@@ -449,7 +453,11 @@ document.getElementById('btnenviar').addEventListener('click', (event) => {
   }
   var datosfinale ={
     nombre: nombreUsu,
-    datos:datosTabla
+    datos:datosTabla,
+    dispositivo: dispo,
+    fecha: fecha,
+    equipo: equipo,
+    puesto:puesto
   };
 
   console.log("Datos que se enviarán:", datosfinale); // Verificar datos antes de enviarlos
