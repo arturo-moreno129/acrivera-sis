@@ -24,7 +24,7 @@ $spreadsheet = IOFactory::load($inputFileName);
 $worksheet = $spreadsheet->getActiveSheet();
 
 //********************PARA EL NUMERO DE RESGUARDO */
-$query = "SELECT COUNT(url_resguardo) as resguardos FROM evidencia";
+$query = "SELECT COUNT(url_resguardo) as resguardos from evidencia where fecha > date('2024-12-31')";
 $result = mysqli_query($con, $query);
 $maximo = mysqli_fetch_assoc($result);
 $maximo['resguardos'] += 1;
@@ -95,9 +95,17 @@ if ($datos && $datos['datosfinale']['datos']) {
     $outputFileName = 'imagenes_guardadas/archivo_modificado_RESGUARDO.xlsx';
     $writer = new Xlsx($spreadsheet);
     $writer->save($outputFileName);
+    //************************INSERAR DATOS***************** */
+    $query_select = "SELECT count(url_resguardo) as resguardos from evidencia where nombre = '$usuario'";
+    $result_select = mysqli_query($con, $query_select);
+    $maximo_select = mysqli_fetch_assoc($result_select);
+    $maximo_select['resguardos']+=1;
+    $ur_resguardo = "RESGUARDO_" . $maximo_select["resguardos"] . ".pdf";
+
+    $query_insert = "INSERT INTO VALUES(DEFAULT, '$usuario','$fecha')";
     ///***************convertir a pdf */
     $rutaExcel = "C:/xampp/htdocs/acrivera-sis/imagenes_guardadas/archivo_modificado_RESGUARDO.xlsx";
-    $rutaPdf = "C:/xampp/htdocs/acrivera-sis/imagenes_guardadas/salida_resguardo.pdf";
+    $rutaPdf = "C:/xampp/htdocs/acrivera-sis/imagenes_guardadas/{$ur_resguardo}";
     // Construir el comando
     $salida = shell_exec("py excelTOpdf.py " . escapeshellarg($rutaExcel) . " " . escapeshellarg($rutaPdf));
 
