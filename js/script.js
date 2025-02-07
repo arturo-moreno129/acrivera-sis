@@ -474,9 +474,11 @@ document.getElementById('btnenviar').addEventListener('click', (event) => {
   })
   .then(response => response.text()) // Leer la respuesta como texto para depuración
   .then(data => {
+      Swal.fire("Faltan datos por llenar!");
       console.log("Respuesta del servidor:", data);
   })
   .catch(error => {
+      Swal.fire("Error de transmisión, contactar al área de soporte");
       console.error('Error de transmisión:', error);
   });
 });

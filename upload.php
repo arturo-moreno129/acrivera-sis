@@ -1,7 +1,7 @@
 <?php
 include "conexion.php";
 session_start();
-$selectUser = $_POST["select-user"];
+$selectUser = (isset($_POST["select-user"])?$_POST["select-user"]:0);
 $nombre = $_POST["firstname"];
 $apellidoP = $_POST["lastname"];
 $apellidoM = $_POST["surname"];
@@ -97,27 +97,27 @@ function insert($nom, $fecha, $dispo, $url, $conetion,$flag)
    switch ($flag) {
     case 'R':
         # code...
-        $query_1 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo','$url[0]',null,'{$_SESSION['id_usuario']}',1)";
+        $query_1 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo','$url[0]',null,'{$_SESSION['id_usuario']}',1,0)";
         mysqli_query($conetion, $query_1);
         break;
     case 'M':
         # code...
-        $query_2 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo',null,'$url[0]','{$_SESSION['id_usuario']}',1)";
+        $query_2 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo',null,'$url[0]','{$_SESSION['id_usuario']}',1,1)";
         mysqli_query($conetion, $query_2);
         break;
     case 'A':
         # code...
-        $query_3 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo','$url[0]','$url[1]','{$_SESSION['id_usuario']}',1)";
+        $query_3 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo','$url[0]','$url[1]','{$_SESSION['id_usuario']}',1,1)";
         mysqli_query($conetion, $query_3);
         break;
     default:
         # code...
-        $query_4 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo',null,null,'{$_SESSION['id_usuario']}',1)";
+        $query_4 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo',null,null,'{$_SESSION['id_usuario']}',1,0)";
         mysqli_query($conetion, $query_4);
         $_SESSION["alert"] = "¡Se guardo con exito!";
         break;
    }
-   header("location: registro.php");
+    header("location: registro.php");
     /*if (str_starts_with($url, 'R')) {
         $query = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo','$url',null,1,1)";
         mysqli_query($conetion, $query);

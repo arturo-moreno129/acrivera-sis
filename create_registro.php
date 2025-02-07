@@ -102,7 +102,8 @@ if ($datos && $datos['datosfinale']['datos']) {
     $maximo_select['resguardos']+=1;
     $ur_resguardo = "RESGUARDO_" . $maximo_select["resguardos"] . ".pdf";
 
-    $query_insert = "INSERT INTO VALUES(DEFAULT, '$usuario','$fecha')";
+    $query_insert = "INSERT INTO evidencia VALUES(DEFAULT, '$usuario','$fecha','$dispositivo','$ur_resguardo','{$_SESSION['id_usuario']}',0,2)";
+    $result_insert = mysqli_query($con, $query_insert);
     ///***************convertir a pdf */
     $rutaExcel = "C:/xampp/htdocs/acrivera-sis/imagenes_guardadas/archivo_modificado_RESGUARDO.xlsx";
     $rutaPdf = "C:/xampp/htdocs/acrivera-sis/imagenes_guardadas/{$ur_resguardo}";
