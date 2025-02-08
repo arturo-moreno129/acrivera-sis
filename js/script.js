@@ -423,63 +423,88 @@ function eliminarFila(btn) {
   return true; // Permite el envío si hay datos en la tabla
 }*/
 
-
-
-
-document.getElementById('btnenviar').addEventListener('click', (event) => {
+document.getElementById("btnenviar").addEventListener("click", (event) => {
   event.preventDefault(); // Evita el envío por defecto del formulario
 
   var tabla = document.getElementById("tabla");
   var filas = tabla.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
-  var nombreUsu = document.querySelector('#select-user').value;
+  var nombreselect = document.querySelector("#select-user").value;
   var dispo = document.querySelector('[name="dispositivo"]').value;
   var fecha = document.querySelector('[name="fecha-registro"]').value; //seleccionado por nombre
-  var equipo = document.querySelector('input[name="option1"]:checked').value;//obtiene el valor seleccionado
+  var equipo = document.querySelector('input[name="option1"]:checked').value; //obtiene el valor seleccionado
   var puesto = document.querySelector('[name="puesto"]').value;
+  ///************nuevo nombre ***************/
+  var nom = document.querySelector("#fname1").value;
+  var apeM = document.querySelector("#lname1").value;
+  var apeP = document.querySelector("#Sname1").value;
+  var nombreUsu = "";
+  if (nombreselect != "") {
+    nombreUsu = nombreselect;
+  } else {
+    nom = nom.trim();
+    apeM = apeM.trim();
+    apeP = apeP.trim();
+    nombreUsu = nom.concat(" ", apeM, " ", apeP);
+  }
 
   var datosTabla = [];
 
   for (var i = 0; i < filas.length; i++) {
-      var celdas = filas[i].getElementsByTagName("td");
+    var celdas = filas[i].getElementsByTagName("td");
 
-      datosTabla.push({
-          cantidad: celdas[0].innerText.trim(),
-          descripcion: celdas[1].innerText.trim(),
-          marca: celdas[2].innerText.trim(),
-          modelo: celdas[3].innerText.trim(),
-          serie: celdas[4].innerText.trim(),
-          fisico: celdas[5].innerText.trim(),
-      });
+    datosTabla.push({
+      cantidad: celdas[0].innerText.trim(),
+      descripcion: celdas[1].innerText.trim(),
+      marca: celdas[2].innerText.trim(),
+      modelo: celdas[3].innerText.trim(),
+      serie: celdas[4].innerText.trim(),
+      fisico: celdas[5].innerText.trim(),
+    });
   }
-  var datosfinale ={
+  var datosfinale = {
     nombre: nombreUsu,
-    datos:datosTabla,
+    datos: datosTabla,
     dispositivo: dispo,
     fecha: fecha,
     equipo: equipo,
-    puesto:puesto
+    puesto: puesto,
   };
 
   console.log("Datos que se enviarán:", datosfinale); // Verificar datos antes de enviarlos
-  if (datosTabla.length <= 0) {
-    alert('Debes agregar al menos una fila antes de enviar.');
+  if (
+    datosfinale.nombre == "" ||
+    datosfinale.dispositivo == "" ||
+    datosfinale.fecha == "" ||
+    datosfinale.equipo == "" ||
+    datosfinale.puesto == ""
+  ) {
+    console.log("faltan datos");
     return;
   }
-  fetch('create_registro.php', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ datosfinale }) // Enviar en formato JSON
+  if (datosTabla.length <= 0) {
+    alert("Debes agregar al menos una fila antes de enviar.");
+    return;
+  }
+  fetch("create_registro.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ datosfinale }), // Enviar en formato JSON
   })
-  .then(response => response.text()) // Leer la respuesta como texto para depuración
-  .then(data => {
-      Swal.fire("Faltan datos por llenar!");
+    .then((response) => response.text()) // Leer la respuesta como texto para depuración
+    .then((data) => {
+      Swal.fire({
+        title: "LISTO",
+        text: "Se creo exitosamente el registro...!",
+        icon: "success",
+      }).then(() => {
+        window.location.assign("resguardos.php");
+      });
       console.log("Respuesta del servidor:", data);
-  })
-  .catch(error => {
+    })
+    .catch((error) => {
       Swal.fire("Error de transmisión, contactar al área de soporte");
-      console.error('Error de transmisión:', error);
-  });
+      console.error("Error de transmisión:", error);
+    });
 });
-

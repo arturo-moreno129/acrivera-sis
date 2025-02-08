@@ -3,7 +3,7 @@
     <center>
         <h2 style="color: black;"><strong>REGISTRO REGUARDO</strong></h2><br>
     </center>
-    <form action="create_registro.php" method="post" onsubmit="return validarFormulario(event)">
+    <form action="#" method="post" onsubmit="return validarFormulario(event)">
         <label id="display-text-name" for="fname" style="display: block;">Selecciona el ususario:(Si no encuentra el
             usuario, diríjase al apartado de "Nuevo Usuario" y seleccione la casilla)</label><br>
         <input type="checkbox" id="check-newUser" onclick="newUser()"><label for="" style="color: red;">NUEVO
@@ -25,13 +25,13 @@
         </select>
 
         <label class="display-info" for="fname" style="display: none;">Nombre(s)</label>
-        <input class="display-info" type="text" id="fname" name="firstname" placeholder="Nombre"
+        <input class="display-info" type="text" id="fname1" name="firstname" placeholder="Nombre"
             onkeyup="this.value = this.value.toUpperCase();" autofocus style="display: none;">
         <label class="display-info" for="lname" style="display: none;">Apellido Paterno</label>
-        <input class="display-info" type="text" id="lname" name="lastname" placeholder="Apellido Paterno"
+        <input class="display-info" type="text" id="lname1" name="lastname" placeholder="Apellido Paterno"
             onkeyup="this.value = this.value.toUpperCase();" style="display: none;">
         <label class="display-info" for="fname" style="display: none;">Apelldio Materno</label>
-        <input class="display-info" type="text" id="fname" name="surname" placeholder="Apellido Materno"
+        <input class="display-info" type="text" id="Sname1" name="surname" placeholder="Apellido Materno"
             onkeyup="this.value = this.value.toUpperCase();" style="display: none;">
 
         <label class="display-info-1" for="fname" style="display: block;">Puesto</label>

@@ -102,11 +102,32 @@ if ($datos && $datos['datosfinale']['datos']) {
     $maximo_select['resguardos']+=1;
     $ur_resguardo = "RESGUARDO_" . $maximo_select["resguardos"] . ".pdf";
 
-    $query_insert = "INSERT INTO evidencia VALUES(DEFAULT, '$usuario','$fecha','$dispositivo','$ur_resguardo','{$_SESSION['id_usuario']}',0,2)";
+    $query_insert = "INSERT INTO evidencia VALUES(DEFAULT, '$usuario','$fecha','$dispositivo','$ur_resguardo',null,'{$_SESSION['id_usuario']}',0,2)";
     $result_insert = mysqli_query($con, $query_insert);
-    ///***************convertir a pdf */
+    ///***************convertir a pdf y guardar*************************/
+    
+
+    $uploadDir = 'carpetas/' . $usuario; // Cambia esto por tu ruta deseada
+    //$tempFile = $_FILES[$array[$i]['dato']]['tmp_name']; // Archivo temporal
+    //$newFileName = strval($array[$i]['tipo']) . '_' . strval($array[$i]['cant'] + 1) . '.pdf'; // Nombre nuevo
+    //comprobamos si exite la carpeta con ese nombre
+    
+    if (!file_exists($uploadDir)) {
+        mkdir($uploadDir, 0777);
+    }
+    // Mover y renombrar el archivo al mismo tiempo
+    /*if (move_uploaded_file($tempFile, $uploadDir . $newFileName)) {
+        $_SESSION["alert"] = "¡Se guardo con exito!";
+        //header("location: registro.php");
+    } else {
+        $_SESSION["alert"] = "¡Error al subor archivo!";
+        //header("location: registro.php");
+    }*/
+
+
+
     $rutaExcel = "C:/xampp/htdocs/acrivera-sis/imagenes_guardadas/archivo_modificado_RESGUARDO.xlsx";
-    $rutaPdf = "C:/xampp/htdocs/acrivera-sis/imagenes_guardadas/{$ur_resguardo}";
+    $rutaPdf = "C:/xampp/htdocs/acrivera-sis/{$uploadDir}/{$ur_resguardo}";
     // Construir el comando
     $salida = shell_exec("py excelTOpdf.py " . escapeshellarg($rutaExcel) . " " . escapeshellarg($rutaPdf));
 
@@ -114,4 +135,5 @@ if ($datos && $datos['datosfinale']['datos']) {
 } else {
     echo json_encode(["status" => "error", "message" => "No se recibieron datos"]);
 }
+
 ?>
