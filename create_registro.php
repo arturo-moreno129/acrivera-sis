@@ -102,7 +102,7 @@ if ($datos && $datos['datosfinale']['datos']) {
     $maximo_select['resguardos']+=1;
     $ur_resguardo = "RESGUARDO_" . $maximo_select["resguardos"] . ".pdf";
 
-    $query_insert = "INSERT INTO evidencia VALUES(DEFAULT, '$usuario','$fecha','$dispositivo','$ur_resguardo',null,'{$_SESSION['id_usuario']}',0,2)";
+    $query_insert = "INSERT INTO evidencia VALUES(DEFAULT, '$usuario','$fecha','$dispositivo','$ur_resguardo',null,'{$_SESSION['id_usuario']}',0,1)";
     $result_insert = mysqli_query($con, $query_insert);
     ///***************convertir a pdf y guardar*************************/
     

@@ -316,7 +316,7 @@ if (defaultOpen) {
 }
 
 //para verificar si essta seleccionado el raqdio button.
-document.querySelectorAll('input[name="option"]').forEach((radio) => {
+document.querySelectorAll('input[name="option_1"]').forEach((radio) => {
   radio.addEventListener("change", function () {
     if (this.value == 2) {
       //si selecciona no asociar

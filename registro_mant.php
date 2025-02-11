@@ -3,40 +3,36 @@ include 'header.php';
 ?>
 
 <div class="contenedor-form">
-        <center>
-            <h2 style="color: black;"><strong>REGISTRO MANTENIMIENTO</strong></h2><br>
-        </center>
-    <form action="create_registre.php" method="POST"><!--create_registre.php va esto puse firma.php para pruebas-->
-        <label id="display-text-name" for="fname" style="display: block;">Selecciona el ususario:(Si no encuentra el
-            usuario, diríjase al apartado de "Nuevo Usuario" y seleccione la casilla)</label><br>
-        <input type="checkbox" id="check-newUser" onclick="newUser()"><label for="" style="color: red;">NUEVO
-            USUARIO</label><br>
-        <select name="select-user" id="select-user" required>
-            <option value="">--SELECCIONA EL USUARIO--</option> <!-- el valor antes era asi=>value = "0"-->
-            <?php
+    <center>
+        <h2 style="color: black;"><strong>REGISTRO MANTENIMIENTO</strong></h2><br>
+    </center>
+    <form action="create_mante.php" method="POST"><!--create_registre.php va esto puse firma.php para pruebas-->
 
-            $query = "SELECT DISTINCT nombre FROM evidencia ORDER BY nombre";
-            $result = mysqli_query($con, $query); //esto me regresu los renglones de la consulta
-            if ($row = mysqli_num_rows($result) > 0) { //comprovamos si nos devuelve la consulta
-                # code...
-                while ($row = mysqli_fetch_array($result)) { //recorremos lo que se almaceno
-                    # code...
-                    echo '<option value="' . htmlspecialchars($row["nombre"]) . '">' . htmlspecialchars($row["nombre"]) . '</option>';
+        <label class="display-info" for="lname" style="display: block;">Asociar con archivo registro</label><br>
+        <input type="radio" name="option_1" id=""  value = "1" checked>Asociar
+        <input type="radio" name="option_1" id=""  value="2" >No Asociar <br><br>
+        <select name="doc-resg" id="" class="asociar">
+            <option value="">---SELCCIONA EL DOCUMENTO---</option>
+            <?php 
+                $query_report = "SELECT * FROM evidencia WHERE estatus = 0 and url_mantenimiento is null";
+                $result_consulta = mysqli_query($con,$query_report);
+                while($row_report = mysqli_fetch_array($result_consulta)){
+                    echo '<option value="'.$row_report['id_evidencia'].'">Nombre: '.$row_report['nombre'].' Fecha: '.$row_report['fecha'].' Dispositivo: '.$row_report['dispositivo'].'</option>';
                 }
-            }
             ?>
         </select>
 
-        <label class="display-info" for="fname" style="display: none;">Nombre(s)</label>
-        <input class="display-info" type="text" id="fname" name="firstname" placeholder="Nombre"
+
+        <label class="no-asociar" for="fname" style="display: none;">Nombre(s)</label>
+        <input class="no-asociar" type="text" id="fname" name="firstname" placeholder="Nombre"
             onkeyup="this.value = this.value.toUpperCase();" autofocus style="display: none;">
-        <label class="display-info" for="lname" style="display: none;">Apellido Paterno</label>
-        <input class="display-info" type="text" id="lname" name="lastname" placeholder="Apellido Paterno"
+        <label class="no-asociar" for="lname" style="display: none;">Apellido Paterno</label>
+        <input class="no-asociar" type="text" id="lname" name="lastname" placeholder="Apellido Paterno"
             onkeyup="this.value = this.value.toUpperCase();" style="display: none;">
-        <label class="display-info" for="fname" style="display: none;">Apelldio Materno</label>
-        <input class="display-info" type="text" id="fname" name="surname" placeholder="Apellido Materno"
+        <label class="no-asociar" for="fname" style="display: none;">Apelldio Materno</label>
+        <input class="no-asociar" type="text" id="fname" name="surname" placeholder="Apellido Materno"
             onkeyup="this.value = this.value.toUpperCase();" style="display: none;">
-        <label class="display-info" for="lname" style="display: none;">Dispositivo</label>
+        <label class="display-info" for="lname" style="display: block;">Dispositivo</label>
         <select id="#" class="form-control" name="dispositivo" required>
             <option value="">--SELECCIONA EL DISPOSITIVO--</option>
             <option value="PC-COMPLETA">PC-COMPLETA</option>

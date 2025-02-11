@@ -7,6 +7,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 //*************VALORES PARA EXCEL**************************/
 $datos = [
+    'id' => $_POST['doc-resg'],
     'usuario' => (empty($_POST['select-user']) ? sprintf("%s %s %s", trim($_POST["firstname"]), trim($_POST["lastname"]), trim($_POST["surname"])) : $_POST['select-user']),//$_POST['select-user'],
     'dispositivo' => $_POST['dispositivo'],
     'fecha' => $_POST['fecha-registro'],
@@ -39,19 +40,19 @@ $datos = [
 
 ];
 
-//print_r($datos);
+print_r($datos);
 //para optener el ultimo valor
 
 //********************************************************/
 try {
     //********************************OBTENER EL ULTIMO VALOR***************************** */
-    $query = "SELECT count(url_resguardo) as resguardos from evidencia where nombre = '{$datos['usuario']}'";
+    $query = "SELECT count(url_mantenimiento) as mantenimiento from evidencia where nombre = '{$datos['usuario']}'";
     $result = mysqli_query($con, $query);
     $maximo = mysqli_fetch_assoc($result);
-    $maximo['resguardos']+=1;
-    $ur_resguardo = "RESGUARDO_" . $maximo["resguardos"] . ".pdf";
+    $maximo['mantenimiento'] += 1;
+    $ur_mantenimiwnto = "MANTENIIENTO_" . $maximo["mantenimiento"] . ".pdf";
     //*********************************************** */
-    $query_1 = "INSERT INTO evidencia VALUES(DEFAULT,'{$datos['usuario']}','{$datos['fecha']}','{$datos['dispositivo']}','$ur_resguardo',null,'{$_SESSION['id_usuario']}',0,0)";
+    $query_1 = "UPDATE evidencia set url_mantenimiento = '$ur_mantenimiwnto', estatus_mant = 0 WHERE id_evidencia = ";//"INSERT INTO evidencia VALUES(DEFAULT,'{$datos['usuario']}','{$datos['fecha']}','{$datos['dispositivo']}',null,'$ur_resguardo','{$_SESSION['id_usuario']}',0,0)";
     $result_1 = mysqli_query($con, $query_1);
 
     //*********************************************************** */
@@ -112,7 +113,14 @@ try {
     // Mostrar la salida del comando
     //echo "<pre>$salida</pre>";
     /************************************************************** */
-    header('location:card_registro.php');
+    echo 'Swal.fire({
+        title: "LISTO",
+        text: "Se creo exitosamente el registro...!",
+        icon: "success",
+      }).then(() => {
+        window.location.assign("resguardos.php");
+      });';
+    //header('location:card_registro.php');
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }
