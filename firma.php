@@ -10,7 +10,7 @@ include 'header.php'
 
     <button id="btnLimpiar">Limpiar</button>
     <button id="btnDescargar">Enviar</button>
-    <button id="btnGenerarDocumento">Visualizar</button>
+    <!--<button id="btnGenerarDocumento">Visualizar</button>-->
     <br>
     <script src="js/firma.js"></script>
 </div>

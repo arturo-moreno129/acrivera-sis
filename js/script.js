@@ -499,7 +499,7 @@ document.getElementById("btnenviar").addEventListener("click", (event) => {
         text: "Se creo exitosamente el registro...!",
         icon: "success",
       }).then(() => {
-        window.location.assign("resguardos.php");
+        window.location.assign("card_registro.php");
       });
       console.log("Respuesta del servidor:", data);
     })

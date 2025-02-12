@@ -6,9 +6,17 @@ require 'vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 //*************VALORES PARA EXCEL**************************/
+if (isset($_POST['doc-resg']) && !empty($_POST['doc-resg'])) {
+    list($nombre, $id_evidencia) = explode(',', $_POST['doc-resg']);
+    $id_eve = $id_evidencia;
+    $nom = $nombre;
+} else {
+    $id_eve = null;
+    $nom = null;
+}
 $datos = [
-    'id' => $_POST['doc-resg'],
-    'usuario' => (empty($_POST['select-user']) ? sprintf("%s %s %s", trim($_POST["firstname"]), trim($_POST["lastname"]), trim($_POST["surname"])) : $_POST['select-user']),//$_POST['select-user'],
+    'id' => $id_eve,
+    'usuario' => (empty($nom) ? sprintf("%s %s %s", trim($_POST["firstname"]), trim($_POST["lastname"]), trim($_POST["surname"])) : $nom),//$_POST['select-user'],
     'dispositivo' => $_POST['dispositivo'],
     'fecha' => $_POST['fecha-registro'],
     'tipoMan' => ($_POST['option'] == "Solicitado" ? 'J9' : 'D9'),
@@ -40,7 +48,7 @@ $datos = [
 
 ];
 
-print_r($datos);
+//print_r($datos);
 //para optener el ultimo valor
 
 //********************************************************/
@@ -50,17 +58,24 @@ try {
     $result = mysqli_query($con, $query);
     $maximo = mysqli_fetch_assoc($result);
     $maximo['mantenimiento'] += 1;
-    $ur_mantenimiwnto = "MANTENIIENTO_" . $maximo["mantenimiento"] . ".pdf";
+    $ur_mantenimiento = "MANTENIIENTO_" . $maximo["mantenimiento"] . ".pdf";
     //*********************************************** */
-    $query_1 = "UPDATE evidencia set url_mantenimiento = '$ur_mantenimiwnto', estatus_mant = 0 WHERE id_evidencia = ";//"INSERT INTO evidencia VALUES(DEFAULT,'{$datos['usuario']}','{$datos['fecha']}','{$datos['dispositivo']}',null,'$ur_resguardo','{$_SESSION['id_usuario']}',0,0)";
-    $result_1 = mysqli_query($con, $query_1);
-
+    if ($datos['id'] != null) {
+        $query_1 = "UPDATE evidencia set url_mantenimiento = '$ur_mantenimiento', estatus_mant = 0 WHERE id_evidencia = {$datos['id']}";//"INSERT INTO evidencia VALUES(DEFAULT,'{$datos['usuario']}','{$datos['fecha']}','{$datos['dispositivo']}',null,'$ur_resguardo','{$_SESSION['id_usuario']}',0,0)";
+        $result_1 = mysqli_query($con, $query_1);
+        //printf("entro".$result_1);
+    } else {
+        $query_2 = "INSERT INTO evidencia VALUE(default,'{$datos['usuario']}','{$datos['fecha']}','{$datos['dispositivo']}',null,'{$ur_mantenimiento}',{$_SESSION['id_usuario']},1,0)";
+        $result_2 = mysqli_query($con, $query_2);
+        //printf("entro".$result_2);
+    }
     //*********************************************************** */
+
     $fecha_convertida = date("d/m/Y", strtotime($datos['fecha']));
     $numeroReporte = "PM" . str_replace("/", "", $fecha_convertida);
 
     // Cargar el archivo existente
-    $inputFileName = 'imagenes_guardadas/plantilla.xlsx'; // Ruta al archivo existente
+    $inputFileName = 'imagenes_guardadas/plantilla_mantenimiento.xlsx'; // Ruta al archivo existente
     $spreadsheet = IOFactory::load($inputFileName);
 
     // Seleccionar la hoja activa (o especificar una por índice o nombre)
@@ -99,28 +114,23 @@ try {
     $worksheet->setCellValue("F67", $datos['explorador']);
 
     // Guardar los cambios en un nuevo archivo
-    $outputFileName = 'imagenes_guardadas/archivo_modificado.xlsx';
+    $outputFileName = 'imagenes_guardadas/archivo_modificado_mantenimiento.xlsx';
     $writer = new Xlsx($spreadsheet);
     $writer->save($outputFileName);
 
     //echo "El archivo se ha modificado y guardado como '$outputFileName'.";
-
+    $uploadDir = 'carpetas/' . $datos['usuario'];
     //********************************convertir archivo excel a pdf
-    $rutaExcel = "C:/xampp/htdocs/acrivera-sis/imagenes_guardadas/archivo_modificado.xlsx";
-    $rutaPdf = "C:/xampp/htdocs/acrivera-sis/carpetas/{$datos['usuario']}/$ur_resguardo";
+    $rutaExcel = "C:/xampp/htdocs/acrivera-sis/imagenes_guardadas/archivo_modificado_mantenimiento.xlsx";
+    $rutaPdf = "C:/xampp/htdocs/acrivera-sis/{$uploadDir}/$ur_mantenimiento";
     // Construir el comando
     $salida = shell_exec("py excelTOpdf.py " . escapeshellarg($rutaExcel) . " " . escapeshellarg($rutaPdf));
     // Mostrar la salida del comando
     //echo "<pre>$salida</pre>";
-    /************************************************************** */
-    echo 'Swal.fire({
-        title: "LISTO",
-        text: "Se creo exitosamente el registro...!",
-        icon: "success",
-      }).then(() => {
-        window.location.assign("resguardos.php");
-      });';
-    //header('location:card_registro.php');
+    //redireccionamiento
+    
+    header('location:card_registro.php');
+
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }

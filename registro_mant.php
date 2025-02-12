@@ -17,7 +17,8 @@ include 'header.php';
                 $query_report = "SELECT * FROM evidencia WHERE estatus = 0 and url_mantenimiento is null";
                 $result_consulta = mysqli_query($con,$query_report);
                 while($row_report = mysqli_fetch_array($result_consulta)){
-                    echo '<option value="'.$row_report['id_evidencia'].'">Nombre: '.$row_report['nombre'].' Fecha: '.$row_report['fecha'].' Dispositivo: '.$row_report['dispositivo'].'</option>';
+                    $value = $row_report['nombre'].",".$row_report['id_evidencia'];
+                    echo '<option value="'.$value.'">Nombre: '.$row_report['nombre'].' Fecha: '.$row_report['fecha'].' Dispositivo: '.$row_report['dispositivo'].'</option>';
                 }
             ?>
         </select>

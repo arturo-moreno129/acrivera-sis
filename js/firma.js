@@ -26,20 +26,23 @@ $btnLimpiar.onclick = limpiarCanvas;
 $btnDescargar.onclick = () => {
     // Convertir el contenido del canvas a Base64
     const base64Image = $canvas.toDataURL(); // Obtiene la imagen en formato Base64
-
+    const paremetroUrl = new URLSearchParams(window.location.search);
+    const id = paremetroUrl.get("id");
+    const card = paremetroUrl.get("card");
     // Enviar al servidor
-    fetch('create_document.php', {
+    fetch('incrutar_firma.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ imagen: base64Image }),
+        body: JSON.stringify({ imagen: base64Image,id_usu: id, cards: card }),
+        //body: JSON.stringify({ datosfinale }),
     })
         .then(response => response.text())
         .then(data => {
-            //console.log(data); // Mostrar respuesta del servidor
-            //Swal.fire("Imagen guardada exitosamente en el servidor.");//poner despues, ipad no lo procesa
-            alert('Imagen guardada exitosamente en el servidor.');
+            console.log("retorno",data); // Mostrar respuesta del servidor
+            Swal.fire("Imagen guardada exitosamente en el servidor.");//poner despues, ipad no lo procesa
+            //alert('Imagen guardada exitosamente en el servidor.');//para la ipad
         })
         .catch(error => {
             console.error('Error al guardar la imagen:', error);
@@ -51,10 +54,25 @@ window.obtenerImagen = () => {
     return $canvas.toDataURL();
 };
 
-$btnGenerarDocumento.onclick = () => {
+/*$btnGenerarDocumento.onclick = () => {
     //window.open("imagenes_guardadas/salida.pdf",);
+    const paremetroUrl = new URLSearchParams(window.location.search);
+    const id = paremetroUrl.get("id");
+    fetch('previsualizar.php',{
+        method : 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({id}),
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log("se visualizo contenido",data)
+    }).catch(error => {
+        console.error('Error al guardar la imagen:', error);
+    });
     window.open('imagenes_guardadas/salida.pdf','Encuesta Inicial', 'location=no,scrollbars=yes,resizable = no');
-};
+};*/
 const onClicOToqueIniciado = evento => {
     // En este evento solo se ha iniciado el clic, así que dibujamos un punto
     xAnterior = xActual;
