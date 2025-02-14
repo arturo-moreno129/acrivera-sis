@@ -107,7 +107,7 @@ if ($datos && $datos['datosfinale']['datos']) {
     ///***************convertir a pdf y guardar*************************/
     
 
-    $uploadDir = 'carpetas/' . $usuario; // Cambia esto por tu ruta deseada
+    $uploadDir = 'carpetas/'.$usuario; // Cambia esto por tu ruta deseada
     //$tempFile = $_FILES[$array[$i]['dato']]['tmp_name']; // Archivo temporal
     //$newFileName = strval($array[$i]['tipo']) . '_' . strval($array[$i]['cant'] + 1) . '.pdf'; // Nombre nuevo
     //comprobamos si exite la carpeta con ese nombre
@@ -125,11 +125,13 @@ if ($datos && $datos['datosfinale']['datos']) {
     }*/
 
 
-
+    echo "direccion".$uploadDir;
     $rutaExcel = "C:/xampp/htdocs/acrivera-sis/imagenes_guardadas/archivo_modificado_RESGUARDO.xlsx";
-    $rutaPdf = "C:/xampp/htdocs/acrivera-sis/{$uploadDir}/{$ur_resguardo}";
+    $rutaPdf = "C:/xampp/htdocs/acrivera-sis/carpetas/JOSE ARTURO MORENO AGUILAR/RESGUARDO.pdf";
     // Construir el comando
-    $salida = shell_exec("py excelTOpdf.py " . escapeshellarg($rutaExcel) . " " . escapeshellarg($rutaPdf));
+    //$salida = shell_exec("py excelTOpdf.py " . escapeshellarg($rutaExcel) . " " . escapeshellarg($rutaPdf))
+    $comando = "py excelTOpdf.py " . escapeshellarg($rutaExcel) . " " . escapeshellarg($rutaPdf) . " > C:/xampp/htdocs/acrivera-sis/carpetas/log.txt 2>&1";
+    $salida = shell_exec($comando);
 
     echo json_encode(["status" => "success", "message" => "Datos guardados correctamente"]);
 } else {

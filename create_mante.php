@@ -124,7 +124,11 @@ try {
     $rutaExcel = "C:/xampp/htdocs/acrivera-sis/imagenes_guardadas/archivo_modificado_mantenimiento.xlsx";
     $rutaPdf = "C:/xampp/htdocs/acrivera-sis/{$uploadDir}/$ur_mantenimiento";
     // Construir el comando
-    $salida = shell_exec("py excelTOpdf.py " . escapeshellarg($rutaExcel) . " " . escapeshellarg($rutaPdf));
+
+    //$comando = "py excelTOpdf.py " . escapeshellarg($rutaExcel) . " " . escapeshellarg($rutaPdf) . " > C:/xampp/htdocs/acrivera-sis/carpetas/log.txt 2>&1";
+    //$salida = shell_exec($comando);
+    $comand = "py excelTOpdf.py " . escapeshellarg($rutaExcel) . " " . escapeshellarg($rutaPdf) . " > C:/xampp/htdocs/acrivera-sis/carpetas/log.txt 2>&1";
+    $salida = shell_exec($comand);
     // Mostrar la salida del comando
     //echo "<pre>$salida</pre>";
     //redireccionamiento

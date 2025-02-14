@@ -1,0 +1,2 @@
+Recibido: C:/xampp/htdocs/acrivera-sis/imagenes_guardadas/archivo_modificado_RESGUARDO.xlsxC:/xampp/htdocs/acrivera-sis/carpetas/JOSE ARTURO MORENO AGUILAR/RESGUARDO.pdf
+Archivo PDF generado exitosamente: C:/xampp/htdocs/acrivera-sis/carpetas/JOSE ARTURO MORENO AGUILAR/RESGUARDO.pdf
