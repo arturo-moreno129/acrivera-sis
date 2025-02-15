@@ -124,10 +124,8 @@ if ($datos && $datos['datosfinale']['datos']) {
         //header("location: registro.php");
     }*/
 
-
-    echo "direccion".$uploadDir;
     $rutaExcel = "C:/xampp/htdocs/acrivera-sis/imagenes_guardadas/archivo_modificado_RESGUARDO.xlsx";
-    $rutaPdf = "C:/xampp/htdocs/acrivera-sis/carpetas/JOSE ARTURO MORENO AGUILAR/RESGUARDO.pdf";
+    $rutaPdf = "C:/xampp/htdocs/acrivera-sis/{$uploadDir}/{$ur_resguardo}";
 
     $comando = "py excelTOpdf.py " . escapeshellarg($rutaExcel) . " " . escapeshellarg($rutaPdf) . " > C:/xampp/htdocs/acrivera-sis/carpetas/log.txt 2>&1";
     $salida = shell_exec($comando);
