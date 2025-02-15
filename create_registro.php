@@ -128,8 +128,7 @@ if ($datos && $datos['datosfinale']['datos']) {
     echo "direccion".$uploadDir;
     $rutaExcel = "C:/xampp/htdocs/acrivera-sis/imagenes_guardadas/archivo_modificado_RESGUARDO.xlsx";
     $rutaPdf = "C:/xampp/htdocs/acrivera-sis/carpetas/JOSE ARTURO MORENO AGUILAR/RESGUARDO.pdf";
-    // Construir el comando
-    //$salida = shell_exec("py excelTOpdf.py " . escapeshellarg($rutaExcel) . " " . escapeshellarg($rutaPdf))
+
     $comando = "py excelTOpdf.py " . escapeshellarg($rutaExcel) . " " . escapeshellarg($rutaPdf) . " > C:/xampp/htdocs/acrivera-sis/carpetas/log.txt 2>&1";
     $salida = shell_exec($comando);
 
