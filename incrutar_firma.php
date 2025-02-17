@@ -48,6 +48,15 @@ function consultaSQL($idUsr,$conectio,$card){
             }
         }
     }
+    if ($card == 0) {
+        # code...
+        $query_update = "UPDATE evidencia SET estatus = 1 WHERE id_evidencia = {$idUsr}";
+        mysqli_query($conectio,$query_update);
+    }elseif($card == 1){
+        $query_update = "UPDATE evidencia SET estatus_mant = 1 WHERE id_evidencia = {$idUsr}";
+        mysqli_query($conectio,$query_update);
+    }
+    
     return $array_datos;
 }
 function incrustacion($array){
