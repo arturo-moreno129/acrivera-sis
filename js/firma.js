@@ -40,14 +40,15 @@ $btnDescargar.onclick = () => {
     })
         .then(response => response.text())
         .then(data => {
-            console.log("id",data); // Mostrar respuesta del servidor
+            const datosjson = JSON.parse(data)//desparciar para acceder a sus propiedades
+            console.log(datosjson.id); // Mostrar respuesta del servidor
             //Swal.fire("Firma registrada exitosamente.");//poner despues, ipad no lo procesa
             Swal.fire({
                 title: "LISTO",
                 text: "Firma registrada exitosamente....!",
                 icon: "success",
               }).then(() => {
-                window.location.assign("pendientes.php");
+                window.location.assign(`pendientes.php?id=${datosjson.id}`);
               });
             //alert('Imagen guardada exitosamente en el servidor.');//para la ipad
         })
