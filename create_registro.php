@@ -15,6 +15,7 @@ var_dump($datosJSON); // Para ver qué llega al servidor*/
 
 //Decodificar el JSON
 $datos = json_decode($datosJSON, true);
+$nom_completo_registre = $_SESSION['nombre']." ".$_SESSION['apellidoP']." ".$_SESSION['apellidoM'];
 //print_r($datos['datosfinale']['datos']);
 
 /** INICIA LA CONSTRUCCION DEL EXCEL********************* */
@@ -58,6 +59,8 @@ $worksheet->setCellValue('L7', $fecha_formateada);
 $worksheet->setCellValue($celdaEquipo, 'X');
 $worksheet->setCellValue('B56', mb_convert_case($usuario, MB_CASE_TITLE, "UTF-8"));
 $worksheet->setCellValue('B58', mb_convert_case($puesto, MB_CASE_TITLE, "UTF-8"));
+$worksheet->setCellValue('F56', mb_convert_case($nom_completo_registre, MB_CASE_TITLE, "UTF-8"));
+$worksheet->setCellValue('F58', mb_convert_case($_SESSION['puesto'], MB_CASE_TITLE, "UTF-8"));
 
 $celdainit = 22;
 if ($datos && $datos['datosfinale']['datos']) {

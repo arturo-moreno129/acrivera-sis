@@ -25,7 +25,7 @@ if (isset($datos['imagen'])) {
     if (file_put_contents($rutaDestino, $imagenDecodificada)) {
         //echo "Imagen guardada exitosamente en: $rutaDestino\n"." y el id es: {$datos['id_usu']}."." y la card es:{$datos['cards']}";
         $array_info = consultaSQL($datos['id_usu'],$con,$datos['cards']);
-        incrustacion($array_info);
+        incrustacion($array_info,$datos['cards']);
         echo json_encode(["id" => "{$datos['id_usu']}"]);
     } else {
         echo "Error al guardar la imagen.";
@@ -60,7 +60,7 @@ function consultaSQL($idUsr,$conectio,$card){
     
     return $array_datos;
 }
-function incrustacion($array){
+function incrustacion($array,$dat){
     // Rutas del archivo Excel y el archivo PDF de salida
     //$rutaExcel = "C:/xampp/htdocs/acrivera-sis/imagenes_guardadas/archivo_con_firma.xlsx";
     $directorio = 'carpetas/'.$array[0].'/';
@@ -68,7 +68,9 @@ function incrustacion($array){
     $rutaPdf = $directorio.$document;//"C:/xampp/htdocs/acrivera-sis/{$directorio}/{$document}";
     // Construir el comando
     //echo $rutaPdf;
-    $salida = shell_exec("py prueba_firma_pdf.py " . escapeshellarg($rutaPdf));
+    $comand = "py prueba_firma_pdf.py " . escapeshellarg($rutaPdf) . " " . escapeshellarg($dat) . " > C:/xampp/htdocs/acrivera-sis/carpetas/log.txt 2>&1";
+    $salida = shell_exec($comand);
+    //echo "<pre>$salida</pre>";
 
     // Mostrar la salida del comando
     //echo "<pre>$salida</pre>";

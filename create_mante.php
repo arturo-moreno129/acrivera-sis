@@ -18,6 +18,7 @@ if (isset($_POST['doc-resg']) && !empty($_POST['doc-resg'])) {
     $fech = null;
     $dis = null;
 }
+$nom_completo_registre = $_SESSION['nombre']." ".$_SESSION['apellidoP']." ".$_SESSION['apellidoM'];
 $datos = [
     'id' => $id_eve,
     'usuario' => (empty($nom) ? sprintf("%s %s %s", trim($_POST["firstname"]), trim($_POST["lastname"]), trim($_POST["surname"])) : $nom),//$_POST['select-user'],
@@ -90,7 +91,7 @@ try {
     $worksheet->setCellValue($datos['tipoMan'], '✓');// '✓' //TIPO DE MANTENIMIENTI
     $worksheet->setCellValue('F15', mb_convert_case($datos['usuario'], MB_CASE_TITLE, "UTF-8")); //NOMBRE PARTE SUPERIOR
     $worksheet->setCellValue('B76', mb_convert_case($datos['usuario'], MB_CASE_TITLE, "UTF-8"));//NOMBRE PARTE INFERIOR
-    $worksheet->setCellValue("C17", $datos['puesto']);
+    $worksheet->setCellValue("C17", mb_convert_case($datos['puesto'], MB_CASE_TITLE, "UTF-8"));
     $worksheet->setCellValue("J17", $datos['numSerie']);
     $worksheet->setCellValue("D19", $datos['disco']);
     $worksheet->setCellValue("D21", $datos['memoria']);
@@ -116,6 +117,7 @@ try {
     $worksheet->setCellValue("F63", $datos['intelisis']);
     $worksheet->setCellValue("F65", $datos['utilerias']);
     $worksheet->setCellValue("F67", $datos['explorador']);
+    $worksheet->setCellValue("F76", mb_convert_case($nom_completo_registre, MB_CASE_TITLE, "UTF-8"));
 
     // Guardar los cambios en un nuevo archivo
     $outputFileName = 'imagenes_guardadas/archivo_modificado_mantenimiento.xlsx';

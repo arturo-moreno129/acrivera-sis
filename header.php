@@ -74,12 +74,10 @@ if (!isset($_SESSION['ususario'])) {
                     </a>
                 </li>
                 <li>
-                    <?php if ($_SESSION['id_usuario'] == 1): ?>
-                        <a href="card_registro.php">
-                            <ion-icon name="pencil-outline"></ion-icon>
-                            <span>Registro</span>
-                        </a>
-                    <?php endif; ?>
+                    <a href="card_registro.php">
+                        <ion-icon name="pencil-outline"></ion-icon>
+                        <span>Registro</span>
+                    </a>
                     <!--</li>
                 <li>
                     <a href="perfil.php">
@@ -131,7 +129,7 @@ if (!isset($_SESSION['ususario'])) {
         <?php
         //session_start();
         if (isset($_SESSION["alert"])) {
-            ?>
+        ?>
             <div class=" alert alert-danger alert-dismissible fade show" role="alert" id="alertaa"
                 style="background-color: rgba(149, 236, 149, 0.452);">
                 <strong>¡<?php print $_SESSION['alert']; ?>!</strong>
@@ -142,7 +140,7 @@ if (!isset($_SESSION['ususario'])) {
                 </button>
             </div>
 
-            <?php
+        <?php
             unset($_SESSION["alert"]);
         }
 
