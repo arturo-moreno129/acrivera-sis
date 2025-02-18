@@ -23,9 +23,10 @@ if (isset($datos['imagen'])) {
 
     // Guardar la imagen en el servidor
     if (file_put_contents($rutaDestino, $imagenDecodificada)) {
-        echo "Imagen guardada exitosamente en: $rutaDestino\n"." y el id es: {$datos['id_usu']}."." y la card es:{$datos['cards']}";
+        //echo "Imagen guardada exitosamente en: $rutaDestino\n"." y el id es: {$datos['id_usu']}."." y la card es:{$datos['cards']}";
         $array_info = consultaSQL($datos['id_usu'],$con,$datos['cards']);
         incrustacion($array_info);
+        echo json_encode(["id" => "{$datos['id_usu']}"]);
     } else {
         echo "Error al guardar la imagen.";
     }
@@ -66,11 +67,11 @@ function incrustacion($array){
     $document = $array[1];
     $rutaPdf = $directorio.$document;//"C:/xampp/htdocs/acrivera-sis/{$directorio}/{$document}";
     // Construir el comando
-    echo $rutaPdf;
+    //echo $rutaPdf;
     $salida = shell_exec("py prueba_firma_pdf.py " . escapeshellarg($rutaPdf));
 
     // Mostrar la salida del comando
-    echo "<pre>$salida</pre>";
+    //echo "<pre>$salida</pre>";
 }
 
 ?>

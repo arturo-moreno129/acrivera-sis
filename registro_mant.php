@@ -11,13 +11,14 @@ include 'header.php';
         <label class="display-info" for="lname" style="display: block;">Asociar con archivo registro</label><br>
         <input type="radio" name="option_1" id=""  value = "1" checked>Asociar
         <input type="radio" name="option_1" id=""  value="2" >No Asociar <br><br>
+        <label class="asociar" for="#" style="display: block;">Selecciona el documento a relacionar</label>
         <select name="doc-resg" id="" class="asociar">
             <option value="">---SELCCIONA EL DOCUMENTO---</option>
             <?php 
                 $query_report = "SELECT * FROM evidencia WHERE estatus = 0 and url_mantenimiento is null";
                 $result_consulta = mysqli_query($con,$query_report);
                 while($row_report = mysqli_fetch_array($result_consulta)){
-                    $value = $row_report['nombre'].",".$row_report['id_evidencia'];
+                    $value = $row_report['nombre'].",".$row_report['id_evidencia'].",".$row_report['fecha'].",".$row_report['dispositivo'];
                     echo '<option value="'.$value.'">Nombre: '.$row_report['nombre'].' Fecha: '.$row_report['fecha'].' Dispositivo: '.$row_report['dispositivo'].'</option>';
                 }
             ?>
@@ -33,8 +34,8 @@ include 'header.php';
         <label class="no-asociar" for="fname" style="display: none;">Apelldio Materno</label>
         <input class="no-asociar" type="text" id="fname" name="surname" placeholder="Apellido Materno"
             onkeyup="this.value = this.value.toUpperCase();" style="display: none;">
-        <label class="display-info" for="lname" style="display: block;">Dispositivo</label>
-        <select id="#" class="form-control" name="dispositivo" required>
+        <label class="no-asociar" for="lname" style="display: none;">Dispositivo</label>
+        <select id="#" style="display: none;" class="no-asociar" name="dispositivo">
             <option value="">--SELECCIONA EL DISPOSITIVO--</option>
             <option value="PC-COMPLETA">PC-COMPLETA</option>
             <option value="TABLET">TABLET</option>
@@ -45,7 +46,7 @@ include 'header.php';
             <option value="OTRO">OTRO</option>
         </select>
         <!--<input type="text" id="lname" name="device" placeholder="Dispositivo" onkeyup="this.value = this.value.toUpperCase();" required><br>-->
-        <p>Fecha de registro: <input type="date" name="fecha-registro" id="" required></p><br>
+        <p class="no-asociar" style="display: none;">Fecha de registro: <input class="no-asociar" type="date" name="fecha-registro" id=""></p><br>
         <!--puesto-->
         <label class="#" for="fpuesto" style="display: block;">Puesto</label>
         <input class="#" type="text" id="fpuesto" name="puesto" placeholder="Puesto del usuario"

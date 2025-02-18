@@ -7,18 +7,22 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 //*************VALORES PARA EXCEL**************************/
 if (isset($_POST['doc-resg']) && !empty($_POST['doc-resg'])) {
-    list($nombre, $id_evidencia) = explode(',', $_POST['doc-resg']);
+    list($nombre, $id_evidencia, $fecha,$dispositivo) = explode(',', $_POST['doc-resg']);
     $id_eve = $id_evidencia;
     $nom = $nombre;
+    $fech = $fecha;
+    $dis = $dispositivo;
 } else {
     $id_eve = null;
     $nom = null;
+    $fech = null;
+    $dis = null;
 }
 $datos = [
     'id' => $id_eve,
     'usuario' => (empty($nom) ? sprintf("%s %s %s", trim($_POST["firstname"]), trim($_POST["lastname"]), trim($_POST["surname"])) : $nom),//$_POST['select-user'],
-    'dispositivo' => $_POST['dispositivo'],
-    'fecha' => $_POST['fecha-registro'],
+    'dispositivo' => ($dis == null?$_POST['dispositivo']:$dis),
+    'fecha' => ($fech==null?$_POST['fecha-registro']:$fech),
     'tipoMan' => ($_POST['option'] == "Solicitado" ? 'J9' : 'D9'),
     'puesto' => $_POST['puesto'],
     'numSerie' => $_POST['Nserie'],

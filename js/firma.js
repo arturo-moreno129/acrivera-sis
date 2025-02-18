@@ -40,8 +40,15 @@ $btnDescargar.onclick = () => {
     })
         .then(response => response.text())
         .then(data => {
-            console.log("retorno",data); // Mostrar respuesta del servidor
-            Swal.fire("Imagen guardada exitosamente en el servidor.");//poner despues, ipad no lo procesa
+            console.log("id",data); // Mostrar respuesta del servidor
+            //Swal.fire("Firma registrada exitosamente.");//poner despues, ipad no lo procesa
+            Swal.fire({
+                title: "LISTO",
+                text: "Firma registrada exitosamente....!",
+                icon: "success",
+              }).then(() => {
+                window.location.assign("pendientes.php");
+              });
             //alert('Imagen guardada exitosamente en el servidor.');//para la ipad
         })
         .catch(error => {

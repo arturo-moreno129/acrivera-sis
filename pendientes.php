@@ -11,7 +11,7 @@
     if (mysqli_num_rows($result) > 0) {
         echo '<a style="text-decoration: none" href="firma.php?id='.$_GET['id'].'&card=0" style="pointer-events:auto" rel="noopener noreferrer"><div class="card-option" id="firma-res" >
                 <h1 style="color: black;">RESGUARDO</h1>
-                <img src="imagenes/firma.png" style="width: 150px;" alt="">
+                <img src="imagenes/firma.png" style="width: 200px;" alt="">
                 <!--<img src="imagenes/firma.png" style="width: 150px;" alt="">-->
             </div></a>';
     }
