@@ -3,11 +3,12 @@ include "conexion.php";
 session_start();
 
 require 'vendor/autoload.php';
+
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 //*************VALORES PARA EXCEL**************************/
 if (isset($_POST['doc-resg']) && !empty($_POST['doc-resg'])) {
-    list($nombre, $id_evidencia, $fecha,$dispositivo) = explode(',', $_POST['doc-resg']);
+    list($nombre, $id_evidencia, $fecha, $dispositivo) = explode(',', $_POST['doc-resg']);
     $id_eve = $id_evidencia;
     $nom = $nombre;
     $fech = $fecha;
@@ -18,12 +19,12 @@ if (isset($_POST['doc-resg']) && !empty($_POST['doc-resg'])) {
     $fech = null;
     $dis = null;
 }
-$nom_completo_registre = $_SESSION['nombre']." ".$_SESSION['apellidoP']." ".$_SESSION['apellidoM'];
+$nom_completo_registre = $_SESSION['nombre'] . " " . $_SESSION['apellidoP'] . " " . $_SESSION['apellidoM'];
 $datos = [
     'id' => $id_eve,
-    'usuario' => (empty($nom) ? sprintf("%s %s %s", trim($_POST["firstname"]), trim($_POST["lastname"]), trim($_POST["surname"])) : $nom),//$_POST['select-user'],
-    'dispositivo' => ($dis == null?$_POST['dispositivo']:$dis),
-    'fecha' => ($fech==null?$_POST['fecha-registro']:$fech),
+    'usuario' => (empty($nom) ? sprintf("%s %s %s", trim($_POST["firstname"]), trim($_POST["lastname"]), trim($_POST["surname"])) : $nom), //$_POST['select-user'],
+    'dispositivo' => ($dis == null ? $_POST['dispositivo'] : $dis),
+    'fecha' => ($fech == null ? $_POST['fecha-registro'] : $fech),
     'tipoMan' => ($_POST['option'] == "Solicitado" ? 'J9' : 'D9'),
     'puesto' => $_POST['puesto'],
     'numSerie' => $_POST['Nserie'],
@@ -66,7 +67,7 @@ try {
     $ur_mantenimiento = "MANTENIIENTO_" . $maximo["mantenimiento"] . ".pdf";
     //*********************************************** */
     if ($datos['id'] != null) {
-        $query_1 = "UPDATE evidencia set url_mantenimiento = '$ur_mantenimiento', estatus_mant = 0 WHERE id_evidencia = {$datos['id']}";//"INSERT INTO evidencia VALUES(DEFAULT,'{$datos['usuario']}','{$datos['fecha']}','{$datos['dispositivo']}',null,'$ur_resguardo','{$_SESSION['id_usuario']}',0,0)";
+        $query_1 = "UPDATE evidencia set url_mantenimiento = '$ur_mantenimiento', estatus_mant = 0 WHERE id_evidencia = {$datos['id']}"; //"INSERT INTO evidencia VALUES(DEFAULT,'{$datos['usuario']}','{$datos['fecha']}','{$datos['dispositivo']}',null,'$ur_resguardo','{$_SESSION['id_usuario']}',0,0)";
         $result_1 = mysqli_query($con, $query_1);
         //printf("entro".$result_1);
     } else {
@@ -88,9 +89,9 @@ try {
 
     // Modificar celdas específicas
     $worksheet->setCellValue('F7', $fecha_convertida); // fecha
-    $worksheet->setCellValue($datos['tipoMan'], '✓');// '✓' //TIPO DE MANTENIMIENTI
+    $worksheet->setCellValue($datos['tipoMan'], '✓'); // '✓' //TIPO DE MANTENIMIENTI
     $worksheet->setCellValue('F15', mb_convert_case($datos['usuario'], MB_CASE_TITLE, "UTF-8")); //NOMBRE PARTE SUPERIOR
-    $worksheet->setCellValue('B76', mb_convert_case($datos['usuario'], MB_CASE_TITLE, "UTF-8"));//NOMBRE PARTE INFERIOR
+    $worksheet->setCellValue('B76', mb_convert_case($datos['usuario'], MB_CASE_TITLE, "UTF-8")); //NOMBRE PARTE INFERIOR
     $worksheet->setCellValue("C17", mb_convert_case($datos['puesto'], MB_CASE_TITLE, "UTF-8"));
     $worksheet->setCellValue("J17", $datos['numSerie']);
     $worksheet->setCellValue("D19", $datos['disco']);
@@ -138,10 +139,35 @@ try {
     // Mostrar la salida del comando
     //echo "<pre>$salida</pre>";
     //redireccionamiento
-    
-    header('location:card_registro.php');
+    echo '
+            <!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACRIVERA</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+
+<body>
+    <!-- Aquí va tu código JavaScript dentro de una etiqueta <script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            title: "LISTO",
+            text: "Se creo exitosamente el registro...!",
+            icon: "success",
+        }).then(() => {
+            window.location.assign("card_registro.php");
+        });
+    </script>
+</body>
+
+</html>
+
+    ';
+    //header('location:card_registro.php');
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 }
-?>

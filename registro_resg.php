@@ -93,7 +93,7 @@
         <input type="text" id="SERIE" name="SERIE[]" onkeyup="this.value = this.value.toUpperCase();">
 
         <label for="FISICO">INV. FISICO</label>
-        <input type="text" id="FISICO" name="FISICO[]" onkeyup="this.value = this.value.toUpperCase();">
+        <input type="text" id="FISICO" name="FISICO[]" onkeyup="this.value = this.value.toUpperCase();" value="N/A" readonly>
         <center>
             <button type="button" onclick="agregarFila()"
                 id="btninsertTable">Agregar</button><!--poner siempre que es de tipo button-->

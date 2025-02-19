@@ -404,7 +404,7 @@ function agregarFila() {
   document.getElementById("MARCA").value = " ";
   document.getElementById("MODELO").value = " ";
   document.getElementById("SERIE").value = " ";
-  document.getElementById("FISICO").value = " ";
+  //document.getElementById("FISICO").value = " ";
 }
 
 function eliminarFila(btn) {
@@ -479,6 +479,11 @@ document.getElementById("btnenviar").addEventListener("click", (event) => {
     datosfinale.puesto == ""
   ) {
     console.log("faltan datos");
+    Swal.fire({
+      title: "Valores vacios",
+      text: "Falta texto por capturar..!",
+      icon: "error",
+    });
     return;
   }
   if (datosTabla.length <= 0) {
