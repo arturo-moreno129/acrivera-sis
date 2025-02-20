@@ -70,6 +70,12 @@ body{
     }
 }
 
+@media (max-width: 770px){
+    .imagen-bacground{
+        display: none;
+    }
+}
+
 .formulario{
     padding: 50px;
     background-color: var(--azul);

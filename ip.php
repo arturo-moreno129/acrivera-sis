@@ -13,12 +13,12 @@
         });*/
     var maximo = 0;
     document.addEventListener("DOMContentLoaded", function() {
-        const defaultHosts = "140.240.13.133,140.240.13.131,140.240.13.230,140.240.13.233,140.240.13.237,140.240.13.137";
+        const defaultHosts = "140.240.13.133,140.240.13.131,140.240.13.230,140.240.13.233,140.240.13.237";
         const hosts = defaultHosts.split(",").map(h => h.trim());
         startMonitoring(hosts);
     });
     const charts = {}; // Almacena los gráficos para cada host
-    const names = ["DATALOADER","MENSAJE BIENVENIDA ","FORTINET","ACTIVE DIRECTORY","HYP","SERVICIO RED"];//prueba
+    const names = ["DATALOADER","MENSAJE BIENVENIDA ","FORTINET","ACTIVE DIRECTORY","HYP"];//prueba
     function startMonitoring(hosts) {
         const chartContainer = document.getElementById("charts");
         chartContainer.innerHTML = ""; // Limpiar gráficos previos
