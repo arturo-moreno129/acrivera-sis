@@ -27,7 +27,7 @@ def incrustr_imagen(path_pdf,dat):
 
     # Definir la posición y tamaño de la imagen
     if dat == "0":
-        rect = fitz.Rect(77, 220, 150, 1000)  # (x1, y1, x2, y2)
+        rect = fitz.Rect(77, 210, 150, 1000)  # (x1, y1, x2, y2)
     else:
         rect = fitz.Rect(77, 415, 150, 1000)
 

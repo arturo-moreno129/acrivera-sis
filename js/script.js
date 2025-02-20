@@ -328,6 +328,7 @@ document.querySelectorAll('input[name="option_1"]').forEach((radio) => {
       const noasociar = document.querySelectorAll(".no-asociar");
       noasociar.forEach(function (noasociar) {
         noasociar.style.display = "block";
+        noasociar.required = true;
       });
     } else {
       //si selecciona asiciar
@@ -339,6 +340,7 @@ document.querySelectorAll('input[name="option_1"]').forEach((radio) => {
       const noasociar = document.querySelectorAll(".no-asociar");
       noasociar.forEach(function (noasociar) {
         noasociar.style.display = "none";
+        noasociar.required = false;
       });
     }
   });

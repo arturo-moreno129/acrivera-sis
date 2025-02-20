@@ -55,12 +55,12 @@ if (!isset($_SESSION['ususario'])) {
                         <span>Dashboard</span>
                     </a>
                 </li>
-                <!--<li>
+                <li>
                     <a href="registro.php">
                         <ion-icon name="document-outline"></ion-icon>
                         <span>Registro</span>
                     </a>
-                </li>-->
+                </li>
                 <li>
                     <a href="card_registro.php">
                         <ion-icon name="pencil-outline"></ion-icon>

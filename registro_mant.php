@@ -12,7 +12,7 @@ include 'header.php';
         <input type="radio" name="option_1" id=""  value = "1" checked>Asociar
         <input type="radio" name="option_1" id=""  value="2" >No Asociar <br><br>
         <label class="asociar" for="#" style="display: block;">Selecciona el documento a relacionar</label>
-        <select name="doc-resg" id="" class="asociar">
+        <select name="doc-resg" id="" class="asociar" required>
             <option value="">---SELCCIONA EL DOCUMENTO---</option>
             <?php 
                 $query_report = "SELECT * FROM evidencia WHERE estatus = 0 and url_mantenimiento is null";
@@ -50,17 +50,17 @@ include 'header.php';
         <!--puesto-->
         <label class="#" for="fpuesto" style="display: block;">Puesto</label>
         <input class="#" type="text" id="fpuesto" name="puesto" placeholder="Puesto del usuario"
-            style="display: block;">
+            style="display: block;" required>
         <!--numero de serie-->
         <label class="#" for="Nserie" style="display: block;">No. serie</label>
         <input class="#" type="text" id="Nserie" name="Nserie" placeholder="Numero de serie del PC"
-            onkeyup="this.value = this.value.toUpperCase();" style="display: block;">
+            onkeyup="this.value = this.value.toUpperCase();" style="display: block;" required>
         <!-- CAPACIDAD DISCO-->
         <label class="#" for="disco" style="display: block;">Capacidad de disco:</label>
-        <input type="number" name="disco" id="" min="0">GB <br><br>
+        <input type="number" name="disco" id="" min="0" required>GB <br><br>
         <!-- CAPACIDAD MEMORIA-->
         <label class="#" for="memoria" style="display: block;">Capacidad de memoria:</label>
-        <input type="number" name="memoria" id="" min="0">GB <br><br>
+        <input type="number" name="memoria" id="" min="0" required>GB <br><br>
 
         <table><!-- TIPO DE MANTENIMIENTO-->
             <thead>
