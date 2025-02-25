@@ -20,8 +20,9 @@ unset($_SESSION["pop-up"]) ?>
 <select id="mySelect" class="form-control">
     <option value="">SELECCIONA FILTRO DE BÚSQUEDA</option>
     <option value="0">USUARIO</option>
-    <option value="1">FECHA</option>
-    <option value="2">DISPOSITIVO</option>
+    <option value="1">REALIZADO POR</option>
+    <option value="2">FECHA</option>
+    <option value="3">DISPOSITIVO</option> <!--EL NUMERO TIENE QUE COINCIDIR CON EL DE LA TABLA-->
 </select>
 <center><input type="text" name="nombre" id="input-search" onkeyup="myFunction1()" placeholder="Ingresa el nombre a buscar"></center><br>
 
@@ -36,7 +37,7 @@ unset($_SESSION["pop-up"]) ?>
     <thead>
         <tr><!--th para encabezados-->
             <th>USUARIO</th>
-            <th style="text-align: center;">Realizado por</th>
+            <th style="text-align: center;">REALIZADO POR</th>
             <th style="text-align: center;">FECHA</th>
             <th style="text-align: center;">DISPOSITIVO</th>
             <th style="text-align: center;">TIPO DE MANTENIMEINTO</th>

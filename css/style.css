@@ -754,6 +754,12 @@ h2 {
     background-color: white;
 }
 
+#Resguardos {
+    background-color: gray ;
+}
+#Reparaciones{
+    background-color: gray ;
+}
 .prueba {
     border-bottom: solid 3px black;
     border-right: solid 3px black;

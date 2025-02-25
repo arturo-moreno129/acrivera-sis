@@ -425,88 +425,150 @@ function eliminarFila(btn) {
   return true; // Permite el envío si hay datos en la tabla
 }*/
 
-document.getElementById("btnenviar").addEventListener("click", (event) => {
-  event.preventDefault(); // Evita el envío por defecto del formulario
+const btnenviar = document.getElementById("btnenviar");
+if (btnenviar) {
+  btnenviar.addEventListener("click", (event) => {
+    event.preventDefault(); // Evita el envío por defecto del formulario
 
-  var tabla = document.getElementById("tabla");
-  var filas = tabla.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
-  var nombreselect = document.querySelector("#select-user").value;
-  var dispo = document.querySelector('[name="dispositivo"]').value;
-  var fecha = document.querySelector('[name="fecha-registro"]').value; //seleccionado por nombre
-  var equipo = document.querySelector('input[name="option1"]:checked').value; //obtiene el valor seleccionado
-  var puesto = document.querySelector('[name="puesto"]').value;
-  ///************nuevo nombre ***************/
-  var nom = document.querySelector("#fname1").value;
-  var apeM = document.querySelector("#lname1").value;
-  var apeP = document.querySelector("#Sname1").value;
-  var nombreUsu = "";
-  if (nombreselect != "") {
-    nombreUsu = nombreselect;
-  } else {
-    nom = nom.trim();
-    apeM = apeM.trim();
-    apeP = apeP.trim();
-    nombreUsu = nom.concat(" ", apeM, " ", apeP);
-  }
+    var tabla = document.getElementById("tabla");
+    var filas = tabla.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+    var nombreselect = document.querySelector("#select-user").value;
+    var dispo = document.querySelector('[name="dispositivo"]').value;
+    var fecha = document.querySelector('[name="fecha-registro"]').value; //seleccionado por nombre
+    var equipo = document.querySelector('input[name="option1"]:checked').value; //obtiene el valor seleccionado
+    var puesto = document.querySelector('[name="puesto"]').value;
+    ///************nuevo nombre ***************/
+    var nom = document.querySelector("#fname1").value;
+    var apeM = document.querySelector("#lname1").value;
+    var apeP = document.querySelector("#Sname1").value;
+    var nombreUsu = "";
+    if (nombreselect != "") {
+      nombreUsu = nombreselect;
+    } else {
+      nom = nom.trim();
+      apeM = apeM.trim();
+      apeP = apeP.trim();
+      nombreUsu = nom.concat(" ", apeM, " ", apeP);
+    }
 
-  var datosTabla = [];
+    var datosTabla = [];
 
-  for (var i = 0; i < filas.length; i++) {
-    var celdas = filas[i].getElementsByTagName("td");
+    for (var i = 0; i < filas.length; i++) {
+      var celdas = filas[i].getElementsByTagName("td");
 
-    datosTabla.push({
-      cantidad: celdas[0].innerText.trim(),
-      descripcion: celdas[1].innerText.trim(),
-      marca: celdas[2].innerText.trim(),
-      modelo: celdas[3].innerText.trim(),
-      serie: celdas[4].innerText.trim(),
-      fisico: celdas[5].innerText.trim(),
-    });
-  }
-  var datosfinale = {
-    nombre: nombreUsu,
-    datos: datosTabla,
-    dispositivo: dispo,
-    fecha: fecha,
-    equipo: equipo,
-    puesto: puesto,
-  };
+      datosTabla.push({
+        cantidad: celdas[0].innerText.trim(),
+        descripcion: celdas[1].innerText.trim(),
+        marca: celdas[2].innerText.trim(),
+        modelo: celdas[3].innerText.trim(),
+        serie: celdas[4].innerText.trim(),
+        fisico: celdas[5].innerText.trim(),
+      });
+    }
+    var datosfinale = {
+      nombre: nombreUsu,
+      datos: datosTabla,
+      dispositivo: dispo,
+      fecha: fecha,
+      equipo: equipo,
+      puesto: puesto,
+    };
 
-  console.log("Datos que se enviarán:", datosfinale); // Verificar datos antes de enviarlos
-  if (
-    datosfinale.nombre == "" ||
-    datosfinale.dispositivo == "" ||
-    datosfinale.fecha == "" ||
-    datosfinale.equipo == "" ||
-    datosfinale.puesto == ""
-  ) {
-    console.log("faltan datos");
+    console.log("Datos que se enviarán:", datosfinale); // Verificar datos antes de enviarlos
+    if (
+      datosfinale.nombre == "" ||
+      datosfinale.dispositivo == "" ||
+      datosfinale.fecha == "" ||
+      datosfinale.equipo == "" ||
+      datosfinale.puesto == ""
+    ) {
+      console.log("faltan datos");
+      Swal.fire({
+        title: "Valores vacios",
+        text: "Falta texto por capturar..!",
+        icon: "error",
+      });
+      return;
+    }
+    if (datosTabla.length <= 0) {
+      alert("Debes agregar al menos una fila antes de enviar.");
+      return;
+    }
+    fetch("create_registro.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ datosfinale }), // Enviar en formato JSON
+    })
+      .then((response) => response.text()) // Leer la respuesta como texto para depuración
+      .then((data) => {
+        Swal.fire({
+          title: "LISTO",
+          text: "Se creo exitosamente el registro...!",
+          icon: "success",
+        }).then(() => {
+          window.location.assign("card_registro.php");
+        });
+        console.log("Respuesta del servidor:", data);
+      })
+      .catch((error) => {
+        Swal.fire("Error de transmisión, contactar al área de soporte");
+        console.error("Error de transmisión:", error);
+      });
+  });
+}
+
+
+
+const formulario = document.querySelector('#formulario'); // Seleccionamos el formulario
+
+formulario.addEventListener("submit", (event) => {
+  // Validar formulario antes de hacer algo
+  if (!formulario.checkValidity()) {
+    event.preventDefault(); // Si no es válido, se previene el envío
     Swal.fire({
-      title: "Valores vacios",
-      text: "Falta texto por capturar..!",
-      icon: "error",
+      title: "Campos obligatorios",
+      text: "Por favor, completa todos los campos requeridos.",
+      icon: "warning",
     });
     return;
   }
-  if (datosTabla.length <= 0) {
-    alert("Debes agregar al menos una fila antes de enviar.");
-    return;
+
+  // Si el formulario es válido, procedemos con el fetch
+  event.preventDefault(); // Evitar el envío normal del formulario
+  var dispo = document.getElementById("inputdispo").value;
+  var soli = document.getElementById("inputsolicita").value;
+  var descri = document.getElementById("inputdescrip").value;
+  const fecha = new Date(); // Fecha actual
+  const anio = fecha.getFullYear(); // Año
+  const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Mes (asegurándonos que tenga 2 dígitos)
+  const dia = fecha.getDate().toString().padStart(2, '0'); // Día (asegurándonos que tenga 2 dígitos)
+
+  const fechaFormateada = `${anio}-${mes}-${dia}`;
+
+  datosreparacion = {
+    dispositivo: dispo,
+    solicitante: soli,
+    descripcion: descri,
+    fecha: fechaFormateada
   }
-  fetch("create_registro.php", {
+  // Aquí se pueden agregar los datos que quieres enviar
+  fetch("create_repa.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ datosfinale }), // Enviar en formato JSON
+    body: JSON.stringify({ datosreparacion }), // Aquí puedes enviar los datos reales
   })
-    .then((response) => response.text()) // Leer la respuesta como texto para depuración
+    .then((response) => response.text())
     .then((data) => {
       Swal.fire({
         title: "LISTO",
         text: "Se creo exitosamente el registro...!",
         icon: "success",
       }).then(() => {
-        window.location.assign("card_registro.php");
+        window.location.assign("reparacion.php");
       });
       console.log("Respuesta del servidor:", data);
     })

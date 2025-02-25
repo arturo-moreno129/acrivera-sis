@@ -68,6 +68,12 @@ if (!isset($_SESSION['ususario'])) {
                     </a>
                 </li>
                 <li>
+                    <a href="reparacion.php">
+                        <ion-icon name="build-outline"></ion-icon>
+                        <span>Reparacion</span>
+                    </a>
+                </li>
+                <li>
                     <a href="resguardos.php">
                         <ion-icon name="folder-outline"></ion-icon>
                         <span>Resguardos</span>
