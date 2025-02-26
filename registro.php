@@ -35,6 +35,7 @@
             <option value="COMBO T/M">COMBO T/M</option>
             <option value="UPS">UPS</option>
             <option value="LLAVE">LLAVE</option>
+            <option value="MONITOR">MONITOR</option>
             <option value="OTRO">OTRO</option>
         </select>
         <!--<input type="text" id="lname" name="device" placeholder="Dispositivo" onkeyup="this.value = this.value.toUpperCase();" required><br>-->
