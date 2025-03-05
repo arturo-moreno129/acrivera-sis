@@ -1,0 +1,21 @@
+Error en preConfirm:
+
+Swal.getInput().min = today.split("T")[0]; no tiene efecto dentro de preConfirm porque preConfirm se ejecuta después de que el usuario ya ingresó una fecha.
+Solución: La fecha mínima debe establecerse en didOpen, no en preConfirm.
+Error al obtener id de btnPrueba:
+
+document.getElementById("btnPrueba") solo funcionará si hay un único botón con ese id. Si hay varios, solo tomará el primero.
+Solución: Asegúrate de que btnPrueba es el botón correcto o usa event.target al hacer clic.
+Error en preConfirm al devolver valores:
+
+preConfirm devuelve un objeto con { today, id }, pero en then(), intentas extraer fechaEntrega, que no existe.
+Solución: Usa los nombres correctos en then().
+
+
+Resumen de mejoras:
+✅ Se establece la fecha mínima correctamente en didOpen.
+✅ Se valida que el usuario seleccione una fecha en preConfirm.
+✅ Se corrige la extracción de valores en then().
+✅ Se maneja el caso en que btnPrueba no existe.
+
+Ahora el código funcionará de manera más robusta y sin errores. 🚀

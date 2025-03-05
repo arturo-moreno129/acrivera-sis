@@ -77,7 +77,7 @@ function functionPass() {
   }
 }
 
-function myFunction1() {
+/*function myFunction1() {
   var input, filter, table, tr, td, i, txtValue, y;
   y = document.getElementById("mySelect").value;
   input = document.getElementById("input-search");
@@ -94,6 +94,34 @@ function myFunction1() {
         tr[i].style.display = "none";
       }
     }
+  }
+}*/
+function myFunction1(tableId, selectId, inputId) {
+  var input, filter, table, tr, td, i, txtValue, columnIndex;
+
+  input = document.getElementById(inputId);
+  filter = input.value.toUpperCase();
+  table = document.getElementById(tableId);
+  tr = table.getElementsByTagName("tr");
+  columnIndex = document.getElementById(selectId).value;
+
+  // Si no se selecciona un filtro, mostrar toda la tabla
+  if (columnIndex === "") {
+      for (i = 1; i < tr.length; i++) {
+          tr[i].style.display = "";
+      }
+      return;
+  }
+
+  columnIndex = parseInt(columnIndex); // Convertir a número
+
+  // Iterar sobre todas las filas, excepto la de encabezado
+  for (i = 1; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[columnIndex];
+      if (td) {
+          txtValue = td.textContent || td.innerText;
+          tr[i].style.display = txtValue.toUpperCase().includes(filter) ? "" : "none";
+      }
   }
 }
 

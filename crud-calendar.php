@@ -16,11 +16,12 @@ function eliminarEvento($id_mantenimiento)
         return ["status" => "error", "message" => "Error al eliminar el elemento."];
     }
 }
-function finalizarEvento($id_mantenimiento){
+function finalizarEvento($id_mantenimiento)
+{
     global $con; // Usa la conexión global
     $id_mantenimiento = intval($id_mantenimiento); // Convierte a entero para seguridad
     $sqlFinalizarTarea = "UPDATE mantenimientos SET estatus = 0 WHERE id_mantenimiento = '$id_mantenimiento'";
-    $resultadoFinal = mysqli_query($con,$sqlFinalizarTarea);
+    $resultadoFinal = mysqli_query($con, $sqlFinalizarTarea);
     if ($resultadoFinal) {
         return ["status" => "success", "message" => "Elemento finalizado correctamente."];
     } else {
@@ -38,6 +39,22 @@ function actualizarEvento($id_mantenimiento, $nuevoDato)
     $resultActualizar = mysqli_query($con, $sqlActualizar);
 
     if ($resultActualizar) {
+        return ["status" => "success", "message" => "Elemento actualizado correctamente."];
+    } else {
+        return ["status" => "error", "message" => "Error al actualizar el elemento."];
+    }
+}
+
+function updateDate($id,$fexhaupdate,$usuRec)
+{
+    global $con;
+    $idrepa = intval($id);
+    $fexhaupdate = mysqli_real_escape_string($con,$fexhaupdate);
+    $usuRec = mysqli_real_escape_string($con,$fexhaupdate);
+
+    $query = "UPDATE reparacion set nom_recepcion = '$usuRec', fecha_entrega = '$fexhaupdate',estatus=1 where id_repa = $idrepa";
+    $result = mysqli_query($con,$query);
+    if ($result) {
         return ["status" => "success", "message" => "Elemento actualizado correctamente."];
     } else {
         return ["status" => "error", "message" => "Error al actualizar el elemento."];
@@ -68,6 +85,14 @@ if (isset($_POST['action'])) {
             # code...
             if (isset($_POST['id'])) {
                 $response = finalizarEvento($_POST['id']);
+            } else {
+                $response = ["status" => "error", "message" => "ID no proporcionado."];
+            }
+            break;
+        case 'updateDate':
+            # code...
+            if (isset($_POST['id']) && isset($_POST['fecha']) && isset($_POST['usurecep'])) {
+                $response = updateDate($_POST['id'],$_POST['fecha'],$_POST['usurecep']);
             } else {
                 $response = ["status" => "error", "message" => "ID no proporcionado."];
             }

@@ -18,7 +18,7 @@
         startMonitoring(hosts);
     });
     const charts = {}; // Almacena los gráficos para cada host
-    const names = ["DATALOADER","MENSAJE BIENVENIDA ","FORTINET","ACTIVE DIRECTORY","HYP"];//prueba
+    const names = ["DATALOADER","MENSAJE BIENVENIDA ","FORTINET","ACTIVE DIRECTORY","COMPAQ"];//prueba
     function startMonitoring(hosts) {
         const chartContainer = document.getElementById("charts");
         chartContainer.innerHTML = ""; // Limpiar gráficos previos

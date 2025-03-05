@@ -340,7 +340,16 @@ h1 {
     color: var(--color-menu-hover-texto);
 }
 
-#input-search {
+#input-search-resguardo {
+    width: 50vw;
+    height: 3vw;
+    border: 3px solid var(--color-texto);
+    border-radius: 20px;
+    text-align: center;
+    font-size: 2vw;
+}
+
+#input-search-reparacion {
     width: 50vw;
     height: 3vw;
     border: 3px solid var(--color-texto);
@@ -404,10 +413,12 @@ h1 {
     .contnedor-buscador {
         margin-top: 60px;
     }
-    .menu{
+
+    .menu {
         background-color: #7fddf9;
     }
-    .usuario img{
+
+    .usuario img {
         height: 50px;
     }
 }
@@ -432,10 +443,23 @@ table * {
     position: relative;
 }
 
+/*td:nth-child(5) {
+    /* Cambia el número según la columna de "DESCRIPCIÓN" */
+    /*max-width: 200px;
+    /* Ajusta el ancho según necesites */
+    /*white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}*/
+
+
 td {
     background-color: white;
-    color: black
+    color: black;
+    max-width: 300px;
+    text-overflow: ellipsis;
 }
+
 
 th {
     color: var(--color-td);
@@ -755,11 +779,13 @@ h2 {
 }
 
 #Resguardos {
-    background-color: gray ;
+    background-color: gray;
 }
-#Reparaciones{
-    background-color: gray ;
+
+#Reparaciones {
+    background-color: gray;
 }
+
 .prueba {
     border-bottom: solid 3px black;
     border-right: solid 3px black;
@@ -819,6 +845,7 @@ h2 {
 .card-ip:hover {
     box-shadow: 0 8px 16px 0 rgba(55, 162, 233, 0.658);
 }
+
 /***********************CARD OPTIONS*************************/
 .container-options {
     width: 100%;
@@ -829,6 +856,7 @@ h2 {
     margin: auto;
     padding: 55px;
 }
+
 .card-option {
     width: 450px;
     /* Ajusta el ancho de cada tarjeta según sea necesario */
@@ -850,6 +878,7 @@ h2 {
 .card-option:hover {
     box-shadow: 0 8px 16px 0 rgba(55, 162, 233, 0.658);
 }
+
 /**********************Estado de wifi************************/
 
 .wifi {
@@ -989,14 +1018,16 @@ h1 {
 .label.link:hover {
     background-color: #373939;
 }
+
 /*************************************PERFIL DE USUARIO****************************/
-.contenedor{
+.contenedor {
     width: 500px;
     height: 500px;
     background-color: red;
-    
+
 }
-.info-text{
+
+.info-text {
     width: 300px;
     height: 100px;
     background-color: blue;
@@ -1010,24 +1041,27 @@ h1 {
     /* Ajusta el ancho de cada tarjeta según sea necesario */
     text-align: center;
     /* Organiza elementos en una columna */
-    
+
     /* Centra horizontalmente los elementos */
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
-.titulo-pendiente h1{
+
+.titulo-pendiente h1 {
     color: black;
     font-size: 50px;
 }
-#btninsertTable{
-  background-color: #04AA6D; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+
+#btninsertTable {
+    background-color: #04AA6D;
+    /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
 }

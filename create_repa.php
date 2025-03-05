@@ -10,7 +10,7 @@ $sol = strval($datos['datosreparacion']['solicitante']);
 $desc = strval($datos['datosreparacion']['descripcion']);
 $fech = $datos['datosreparacion']['fecha'];
 
-$query_insert = "INSERT INTO reparacion VALUES(DEFAULT,'{$dis}','{$sol}','{$desc}','{$fech}',0,'{$_SESSION['id_usuario']}')";
+$query_insert = "INSERT INTO reparacion VALUES(DEFAULT,'{$dis}','{$sol}','--------','{$desc}','{$fech}','--------',0,'{$_SESSION['id_usuario']}')";
 
 // Ejecutar la consulta
 if (mysqli_query($con, $query_insert)) {
