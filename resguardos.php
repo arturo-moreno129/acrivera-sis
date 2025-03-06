@@ -64,6 +64,7 @@ include "header.php";
                 ?>
             </tbody>
     </table>
+    <div id="pagination" class="flex items-center space-x-2 mt-4"></div>
 </div>
 
 
@@ -120,6 +121,7 @@ include "header.php";
             ?>
         </tbody>
     </table>
+    
 </div>
 
 <script>
@@ -180,7 +182,7 @@ include "header.php";
                                 if (data.status === "success") {
                                     console.log(data);
                                     Swal.fire({
-                                        title: data.message,//obtine el mensaje desde php
+                                        title: data.message, //obtine el mensaje desde php
                                         icon: "success",
                                         confirmButtonText: "OK"
                                     }).then((result) => {
@@ -204,6 +206,9 @@ include "header.php";
         });
     });
 </script>
+<script src="js/pagination.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+
 <?php
 include "footer.php"
 ?>
