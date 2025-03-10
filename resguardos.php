@@ -64,7 +64,7 @@ include "header.php";
                 ?>
             </tbody>
     </table>
-    <div id="pagination" class="flex items-center space-x-2 mt-4"></div>
+    <!--<div id="pagination" class="flex items-center space-x-2 mt-4"></div>--><!--PARA PAGINACION-->
 </div>
 
 
@@ -206,8 +206,8 @@ include "header.php";
         });
     });
 </script>
-<script src="js/pagination.js"></script>
-<script src="https://cdn.tailwindcss.com"></script>
+<!--<script src="js/pagination.js"></script>--><!--PRAR PAGINACION-->
+
 
 <?php
 include "footer.php"

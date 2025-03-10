@@ -2,7 +2,7 @@
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const rowsPerPage = 10; // Número de filas por página
+    const rowsPerPage = 7; // Número de filas por página
     const table = document.getElementById("myTableResguardo");
     const tbody = table.querySelector("tbody");
     const rows = Array.from(tbody.rows);

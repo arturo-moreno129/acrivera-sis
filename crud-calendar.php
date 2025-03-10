@@ -45,19 +45,43 @@ function actualizarEvento($id_mantenimiento, $nuevoDato)
     }
 }
 
-function updateDate($id,$fexhaupdate,$usuRec)
+function updateDate($id, $fexhaupdate, $usuRec)
 {
     global $con;
     $idrepa = intval($id);
-    $fexhaupdate = mysqli_real_escape_string($con,$fexhaupdate);
-    $usuRec = mysqli_real_escape_string($con,$fexhaupdate);
+    $fexhaupdate = mysqli_real_escape_string($con, $fexhaupdate);
+    $usuRec = mysqli_real_escape_string($con, $fexhaupdate);
 
     $query = "UPDATE reparacion set nom_recepcion = '$usuRec', fecha_entrega = '$fexhaupdate',estatus=1 where id_repa = $idrepa";
-    $result = mysqli_query($con,$query);
+    $result = mysqli_query($con, $query);
     if ($result) {
         return ["status" => "success", "message" => "Elemento actualizado correctamente."];
     } else {
         return ["status" => "error", "message" => "Error al actualizar el elemento."];
+    }
+}
+function obtenerDatos($idDir)
+{
+    global $con; // Usa la conexión global
+    $idDir = intval($idDir); // Convierte a entero para seguridad
+    $sqlselect = "SELECT * FROM directorio WHERE id_user = {$idDir}";
+    $resultadoFinal = mysqli_query($con, $sqlselect);
+    if ($resultadoFinal) {
+        $datos = mysqli_fetch_all($resultadoFinal, MYSQLI_ASSOC); //Convierte el resultado en array asociativo
+        return ["status" => "success", "message" => $datos];
+    } else {
+        return ["status" => "error", "message" => "Error al finalizar el elemento."];
+    }
+}
+function updateDir($id,$nom,$puesto,$correo,$extension){
+    global $con; // Usa la conexión global
+    $id = intval($id); // Convierte a entero para seguridad
+    $sqlupdate = "UPDATE directorio set nom_usu = '$nom',puesto = '$puesto',correo = '$correo',extencion = '$extension' where id_user = $id";
+    $result = mysqli_query($con,$sqlupdate);
+    if ($result) {
+        return ["status" => "success", "message" => "Se actualizo correctamente el directorio"];
+    } else {
+        return ["status" => "error", "message" => "Error al finalizar el elemento."];
     }
 }
 
@@ -92,7 +116,23 @@ if (isset($_POST['action'])) {
         case 'updateDate':
             # code...
             if (isset($_POST['id']) && isset($_POST['fecha']) && isset($_POST['usurecep'])) {
-                $response = updateDate($_POST['id'],$_POST['fecha'],$_POST['usurecep']);
+                $response = updateDate($_POST['id'], $_POST['fecha'], $_POST['usurecep']);
+            } else {
+                $response = ["status" => "error", "message" => "ID no proporcionado."];
+            }
+            break;
+        case 'obtenerDatos':
+            # code...
+            if (isset($_POST['id'])) {
+                $response = obtenerDatos($_POST['id']);
+            } else {
+                $response = ["status" => "error", "message" => "ID no proporcionado."];
+            }
+            break;
+        case 'updateDir':
+            # code...
+            if (isset($_POST['id']) && isset($_POST['nombre']) && isset($_POST['puesto']) && isset($_POST['correo']) && isset($_POST['extension'])) {
+                $response = updateDir($_POST['id'],$_POST['nombre'],$_POST['puesto'],$_POST['correo'],$_POST['extension']);
             } else {
                 $response = ["status" => "error", "message" => "ID no proporcionado."];
             }
