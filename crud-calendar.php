@@ -73,13 +73,25 @@ function obtenerDatos($idDir)
         return ["status" => "error", "message" => "Error al finalizar el elemento."];
     }
 }
-function updateDir($id,$nom,$puesto,$correo,$extension){
+function updateDir($id, $nom, $puesto, $correo, $extension)
+{
     global $con; // Usa la conexión global
     $id = intval($id); // Convierte a entero para seguridad
     $sqlupdate = "UPDATE directorio set nom_usu = '$nom',puesto = '$puesto',correo = '$correo',extencion = '$extension' where id_user = $id";
-    $result = mysqli_query($con,$sqlupdate);
+    $result = mysqli_query($con, $sqlupdate);
     if ($result) {
         return ["status" => "success", "message" => "Se actualizo correctamente el directorio"];
+    } else {
+        return ["status" => "error", "message" => "Error al finalizar el elemento."];
+    }
+}
+function insertDir($nom, $puesto, $correo, $extension, $area)
+{
+    global $con; // Usa la conexión global
+    $sqlinsert = "INSERT into directorio values(default,'$nom','$puesto','$correo','$extension','$area')";
+    $result = mysqli_query($con, $sqlinsert);
+    if ($result) {
+        return ["status" => "success", "message" => "Se inserto correctamente al directorio"];
     } else {
         return ["status" => "error", "message" => "Error al finalizar el elemento."];
     }
@@ -132,7 +144,15 @@ if (isset($_POST['action'])) {
         case 'updateDir':
             # code...
             if (isset($_POST['id']) && isset($_POST['nombre']) && isset($_POST['puesto']) && isset($_POST['correo']) && isset($_POST['extension'])) {
-                $response = updateDir($_POST['id'],$_POST['nombre'],$_POST['puesto'],$_POST['correo'],$_POST['extension']);
+                $response = updateDir($_POST['id'], $_POST['nombre'], $_POST['puesto'], $_POST['correo'], $_POST['extension']);
+            } else {
+                $response = ["status" => "error", "message" => "ID no proporcionado."];
+            }
+            break;
+        case 'insertDir':
+            # code...
+            if (isset($_POST['nombre']) && isset($_POST['puesto']) && isset($_POST['correo']) && isset($_POST['extension']) && isset($_POST['area'])) {
+                $response = insertDir($_POST['nombre'], $_POST['puesto'], $_POST['correo'], $_POST['extension'], $_POST['area']);
             } else {
                 $response = ["status" => "error", "message" => "ID no proporcionado."];
             }

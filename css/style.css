@@ -1093,3 +1093,12 @@ h1 {
 .area{
     background-color: gray;
 }
+
+
+#btnAdd {
+    transition: transform 0.3s ease;
+}
+
+#btnAdd:hover {
+    transform: translateX(15px);
+}

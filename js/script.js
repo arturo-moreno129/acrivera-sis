@@ -316,7 +316,7 @@ cards.forEach((card) => {
 //****************funcion estado del internet *********/
 window.addEventListener("load", () => {
   const statusWifi = document.querySelector(".wifi");
-
+  const buttonAdd = document.querySelector(".btnAdd")
   if (statusWifi) {
     const handleNetworkChange = () => {
       if (navigator.onLine) {

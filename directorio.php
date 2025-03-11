@@ -13,7 +13,10 @@ include 'header.php';
     <option value="1">PUESTO</option>
     <option value="3">CORREO CORPORATIVO</option>
 </select>
+
 <center><input type="text" name="nombre" id="input-search-directorio" onkeyup="myFunction1('myTableDirectorio', 'mySelectDirectorio', 'input-search-directorio')" placeholder="Ingresa el nombre a buscar"></center><br>
+
+<img id="btnAdd" src="imagenes/agregar.png" alt="" style="width: 100px; cursor:pointer" ><br><br>
 
 <table id="myTableDirectorio">
     <thead>
@@ -29,8 +32,8 @@ include 'header.php';
         <?php
         $query = "SELECT * FROM directorio";
         $result = mysqli_query($con, $query);
-        $arrayAreas = ['DG', 'DF', 'CL', 'AUD', 'CXC'];
-        $arrayNombres = ['Dirección General', 'Director Financiero', 'Contraloria ', 'Auditoría', 'Crédito y Cobranza'];
+        $arrayAreas = ['DG', 'DF', 'CL', 'AUD', 'CXC','CT','TA','PLD','EF','RH','MK','TI','CS','AA','VR','SV','HYP','AV','VC','VP','VS','VSN'];
+        $arrayNombres = ['Dirección General', 'Director Financiero', 'Contraloria ', 'Auditoría', 'Crédito y Cobranza','Contabilidad','Tesorería','PLD','Enlace Financiero','Recursos Humanos','Marketing','TI - Sistemas','Compras','Administración Almacén','Ventas de Refacciones','Servicio','Hojalatería y Pintura','Administración Ventas','Ventas Carga','Ventas Pasaje','Ventas Sprinter','Ventas Seminuevos'];
         $i = 0;
         if (mysqli_num_rows($result) > 0) {
             echo ' <tr>
@@ -51,7 +54,7 @@ include 'header.php';
                         <td style="text-align: center;">' . $row["puesto"] . '</td>
                         <td style="text-align: center;">' . $row["correo"] . '</td>
                         <td style="text-align: center;">' . $row["extencion"] . '</td>
-                        <td> <a href="#" style="pointer-events:auto" rel="noopener noreferrer"><img value="' . $row['id_user'] . '" class="btnPopUp" src="imagenes/pendiente_firma.png" alt="" style="width: 35px;"></a></td>                            
+                        <td> <a href="#" style="pointer-events:auto" rel="noopener noreferrer"><img value="' . $row['id_user'] . '" class="btnPopUp" src="imagenes/edit.png" alt="" style="width: 35px;"></a></td>                            
                       </tr>';
             }
         }

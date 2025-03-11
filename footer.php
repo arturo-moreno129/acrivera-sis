@@ -4,13 +4,13 @@
 <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
 <!--<script src="https://cdn.tailwindcss.com"></script>--><!--PARA PAGINACION-->
 <!-- Ícono flotante de WhatsApp -->
-<a href="https://wa.me/2204844702?text=Hola,%20me%20gustaría%20obtener%20más%20información."
+<!--<a href="https://wa.me/2204844702?text=Hola,%20me%20gustaría%20obtener%20más%20información."
    target="_blank" class="whatsapp-float">
    <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="WhatsApp">
-</a>
+</a>-->
 
 <!-- Estilos del botón flotante -->
-<style>
+<!--<style>
     .whatsapp-float {
         position: fixed;
         width: 60px;
@@ -31,7 +31,7 @@
         width: 30px;
         height: 30px;
     }
-</style>
+</style>-->
 
 </body>
 </main>
