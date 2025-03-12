@@ -97,7 +97,7 @@ function insert($nom, $fecha, $dispo, $url, $conetion,$flag)
    switch ($flag) {
     case 'R':
         # code...
-        $query_1 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo','$url[0]',null,'{$_SESSION['id_usuario']}',1,0)";
+        $query_1 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo','$url[0]',null,'{$_SESSION['id_usuario']}',1,1)";
         mysqli_query($conetion, $query_1);
         break;
     case 'M':
