@@ -95,17 +95,17 @@ function resguardo($array, $urlinsert, $mydate, $mydevice, $mycon,$myflag)
 function insert($nom, $fecha, $dispo, $url, $conetion,$flag)
 {
    switch ($flag) {
-    case 'R':
+    case 'R'://solo cuando se carga el archivo de resguardo
         # code...
         $query_1 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo','$url[0]',null,'{$_SESSION['id_usuario']}',1,1)";
         mysqli_query($conetion, $query_1);
         break;
-    case 'M':
+    case 'M'://solo cuando se carga el archivo de mantenimiento
         # code...
         $query_2 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo',null,'$url[0]','{$_SESSION['id_usuario']}',1,1)";
         mysqli_query($conetion, $query_2);
         break;
-    case 'A':
+    case 'A'://cuando se cargan ambos documentos
         # code...
         $query_3 = "INSERT INTO evidencia VALUES(DEFAULT,'$nom','$fecha','$dispo','$url[0]','$url[1]','{$_SESSION['id_usuario']}',1,1)";
         mysqli_query($conetion, $query_3);
