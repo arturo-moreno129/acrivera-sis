@@ -96,6 +96,18 @@ function insertDir($nom, $puesto, $correo, $extension, $area)
         return ["status" => "error", "message" => "Error al finalizar el elemento."];
     }
 }
+function deleteDir($id_DIR)
+{
+    global $con; // Usa la conexión global
+    $id_DIR = intval($id_DIR);
+    $sqlinsert = "DELETE from directorio where id_user =$id_DIR";
+    $result = mysqli_query($con, $sqlinsert);
+    if ($result) {
+        return ["status" => "success", "message" => "Se elimino correctamente"];
+    } else {
+        return ["status" => "error", "message" => "Error al finalizar el elemento."];
+    }
+}
 
 // Maneja la acción solicitada
 if (isset($_POST['action'])) {
@@ -153,6 +165,14 @@ if (isset($_POST['action'])) {
             # code...
             if (isset($_POST['nombre']) && isset($_POST['puesto']) && isset($_POST['correo']) && isset($_POST['extension']) && isset($_POST['area'])) {
                 $response = insertDir($_POST['nombre'], $_POST['puesto'], $_POST['correo'], $_POST['extension'], $_POST['area']);
+            } else {
+                $response = ["status" => "error", "message" => "ID no proporcionado."];
+            }
+            break;
+        case 'deleteDir':
+            # code...
+            if (isset($_POST['id'])) {
+                $response = deleteDir($_POST['id']);
             } else {
                 $response = ["status" => "error", "message" => "ID no proporcionado."];
             }

@@ -16,7 +16,7 @@ include 'header.php';
 
 <center><input type="text" name="nombre" id="input-search-directorio" onkeyup="myFunction1('myTableDirectorio', 'mySelectDirectorio', 'input-search-directorio')" placeholder="Ingresa el nombre a buscar"></center><br>
 
-<img id="btnAdd" src="imagenes/agregar.png" alt="" style="width: 100px; cursor:pointer" ><br><br>
+<img id="btnAdd" src="imagenes/agregar.png" alt="" style="width: 100px; cursor:pointer"><br><br>
 
 <table id="myTableDirectorio">
     <thead>
@@ -30,35 +30,41 @@ include 'header.php';
     </thead>
     <tbody>
         <?php
-        $query = "SELECT * FROM directorio";
+        $query = "SELECT * FROM directorio ORDER BY FIELD(area, 'DG', 'DF', 'CL', 'AUD', 'CXC', 'CT', 'TA', 'PLD', 'EF', 'RH', 'MK', 'TI', 'CS', 'AA', 'VR', 'SV', 'HYP', 'AV', 'VC', 'VP', 'VS', 'VSN')";
         $result = mysqli_query($con, $query);
-        $arrayAreas = ['DG', 'DF', 'CL', 'AUD', 'CXC','CT','TA','PLD','EF','RH','MK','TI','CS','AA','VR','SV','HYP','AV','VC','VP','VS','VSN'];
-        $arrayNombres = ['Dirección General', 'Director Financiero', 'Contraloria ', 'Auditoría', 'Crédito y Cobranza','Contabilidad','Tesorería','PLD','Enlace Financiero','Recursos Humanos','Marketing','TI - Sistemas','Compras','Administración Almacén','Ventas de Refacciones','Servicio','Hojalatería y Pintura','Administración Ventas','Ventas Carga','Ventas Pasaje','Ventas Sprinter','Ventas Seminuevos'];
-        $i = 0;
+
+        $arrayAreas = ['DG', 'DF', 'CL', 'AUD', 'CXC', 'CT', 'TA', 'PLD', 'EF', 'RH', 'MK', 'TI', 'CS', 'AA', 'VR', 'SV', 'HYP', 'AV', 'VC', 'VP', 'VS', 'VSN'];
+        $arrayNombres = ['Dirección General', 'Director Financiero', 'Contraloria ', 'Auditoría', 'Crédito y Cobranza', 'Contabilidad', 'Tesorería', 'PLD', 'Enlace Financiero', 'Recursos Humanos', 'Marketing', 'TI - Sistemas', 'Compras', 'Administración Almacén', 'Ventas de Refacciones', 'Servicio', 'Hojalatería y Pintura', 'Administración Ventas', 'Ventas Carga', 'Ventas Pasaje', 'Ventas Sprinter', 'Ventas Seminuevos'];
+
+        $area_actual = null;
+
         if (mysqli_num_rows($result) > 0) {
-            echo ' <tr>
-                        <th class="area" colspan="5" style="text-align: center;">' . $arrayNombres[$i] . '</th>
-                    </tr>';
             while ($row = mysqli_fetch_array($result)) {
-                if ($row['area'] != $arrayAreas[$i]) {
-                    # code...
-                    $i++;
-                    echo ' <tr>
-                            <th class="area" colspan="5" style="text-align: center;">' . $arrayNombres[$i] . '</th>
-                        </tr>';
-                }
-                echo '
-                   
-                    <tr>
-                        <td>' . $row["nom_usu"] . '</td>
-                        <td style="text-align: center;">' . $row["puesto"] . '</td>
-                        <td style="text-align: center;">' . $row["correo"] . '</td>
-                        <td style="text-align: center;">' . $row["extencion"] . '</td>
-                        <td> <a href="#" style="pointer-events:auto" rel="noopener noreferrer"><img value="' . $row['id_user'] . '" class="btnPopUp" src="imagenes/edit.png" alt="" style="width: 35px;"></a></td>                            
+                // Si el área cambia, imprimimos el encabezado de área
+                if ($row['area'] != $area_actual) {
+                    $area_actual = $row['area'];
+                    $index = array_search($area_actual, $arrayAreas);
+                    if ($index !== false) {
+                        echo '<tr>
+                        <th class="area" colspan="5" style="text-align: center;">' . $arrayNombres[$index] . '</th>
                       </tr>';
+                    }
+                }
+
+                // Imprimir el usuario
+                echo '<tr>
+                <td>' . $row["nom_usu"] . '</td>
+                <td style="text-align: center;">' . $row["puesto"] . '</td>
+                <td style="text-align: center;">' . $row["correo"] . '</td>
+                <td style="text-align: center;">' . $row["extencion"] . '</td>
+                <td> <a href="#" style="pointer-events:auto" rel="noopener noreferrer">
+                    <img value="' . $row['id_user'] . '" class="btnPopUp" src="imagenes/edit.png" alt="" style="width: 35px;">
+                </a></td>                            
+              </tr>';
             }
         }
         ?>
+
     </tbody>
 </table>
 <script src="js/scriptPopUp.js"></script>
