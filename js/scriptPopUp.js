@@ -17,6 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         console.log(data.message[0]);
                         const { id_user, nom_usu, puesto, correo, extencion } = data.message[0];
                         console.log(id_user, nom_usu, puesto, correo, extencion);
+                        const areas1 = ['DG', 'DF', 'CL', 'AUD', 'CXC', 'CT', 'TA', 'PLD', 'EF', 'RH', 'MK', 'TI', 'CS', 'AA', 'VR', 'SV', 'HYP', 'AV', 'VC', 'VP', 'VS', 'VSN'];
+                        const areaslong1 = ['Dirección General', 'Director Financiero', 'Contraloria ', 'Auditoría', 'Crédito y Cobranza', 'Contabilidad', 'Tesorería', 'PLD', 'Enlace Financiero', 'Recursos Humanos', 'Marketing', 'TI - Sistemas', 'Compras', 'Administración Almacén', 'Ventas de Refacciones', 'Servicio', 'Hojalatería y Pintura', 'Administración Ventas', 'Ventas Carga', 'Ventas Pasaje', 'Ventas Sprinter', 'Ventas Seminuevos'];
+
                         Swal.fire({
                             title: "Personal",
                             showDenyButton: true,
@@ -32,27 +35,42 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <input id="email" class="swal2-input" value="${correo}"><br>
                                     <label style="text-align: left; for="#">Extension:</label>
                                     <input id="extension" class="swal2-input" value="${extencion}"><br>
+                                    <select id="Narea1" class="form-control">
+                                        <option value="0">SELECCIONA UNA AREA</option>
+                                    </select>
                                 `,
+                            didOpen: () => {
+                                const select = document.getElementById("Narea1");
+                                var i = 0;
+                                areas1.forEach(area => {
+                                    let option = document.createElement("option");
+                                    option.value = area;
+                                    option.textContent = areaslong1[i];
+                                    select.appendChild(option);
+                                    i++;
+                                });
+                            },
                             preConfirm: () => {
                                 return {
                                     id: id_user,
                                     nombre: document.getElementById('nom').value,
                                     puesto: document.getElementById('puesto').value,
                                     correo: document.getElementById('email').value,
-                                    extension: document.getElementById('extension').value
+                                    extension: document.getElementById('extension').value,
+                                    slect1 : document.getElementById('Narea1').value
                                 };
                             }
                         })
                             .then((result) => {
                                 if (result.isConfirmed) {
-                                    const { id, nombre, puesto, correo, extension } = result.value;
-                                    
+                                    const { id, nombre, puesto, correo, extension, slect1 } = result.value;
+
                                     fetch('crud-calendar.php', {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/x-www-form-urlencoded'
                                         },
-                                        body: `action=updateDir&id=${id}&nombre=${nombre}&puesto=${puesto}&correo=${correo}&extension=${extension}`
+                                        body: `action=updateDir&id=${id}&nombre=${nombre}&puesto=${puesto}&correo=${correo}&extension=${extension}&area=${slect1}`
                                     })
                                         .then(response => response.json())
                                         .then(data => {
@@ -126,7 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 <input id="Nemail" class="swal2-input"><br>
                 <label style="text-align: left;">Extensión:</label>
                 <input type="number" id="Nextension" class="swal2-input"><br>
-                <label style="text-align: left;">Área:</label>
                 <select id="Narea" class="form-control">
                     <option value="0">SELECCIONA UNA AREA</option>
                 </select>

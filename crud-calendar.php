@@ -73,11 +73,11 @@ function obtenerDatos($idDir)
         return ["status" => "error", "message" => "Error al finalizar el elemento."];
     }
 }
-function updateDir($id, $nom, $puesto, $correo, $extension)
+function updateDir($id, $nom, $puesto, $correo, $extension, $area)
 {
     global $con; // Usa la conexión global
     $id = intval($id); // Convierte a entero para seguridad
-    $sqlupdate = "UPDATE directorio set nom_usu = '$nom',puesto = '$puesto',correo = '$correo',extencion = '$extension' where id_user = $id";
+    $sqlupdate = "UPDATE directorio set nom_usu = '$nom',puesto = '$puesto',correo = '$correo',extencion = '$extension',area = '$area' where id_user = $id";
     $result = mysqli_query($con, $sqlupdate);
     if ($result) {
         return ["status" => "success", "message" => "Se actualizo correctamente el directorio"];
@@ -155,8 +155,8 @@ if (isset($_POST['action'])) {
             break;
         case 'updateDir':
             # code...
-            if (isset($_POST['id']) && isset($_POST['nombre']) && isset($_POST['puesto']) && isset($_POST['correo']) && isset($_POST['extension'])) {
-                $response = updateDir($_POST['id'], $_POST['nombre'], $_POST['puesto'], $_POST['correo'], $_POST['extension']);
+            if (isset($_POST['id']) && isset($_POST['nombre']) && isset($_POST['puesto']) && isset($_POST['correo']) && isset($_POST['extension']) && isset($_POST['area'])) {
+                $response = updateDir($_POST['id'], $_POST['nombre'], $_POST['puesto'], $_POST['correo'], $_POST['extension'],$_POST['area']);
             } else {
                 $response = ["status" => "error", "message" => "ID no proporcionado."];
             }
