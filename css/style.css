@@ -1100,5 +1100,5 @@ h1 {
 }
 
 #btnAdd:hover {
-    transform: translateX(15px);
+    transform: translateY(5px);
 }

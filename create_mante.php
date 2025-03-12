@@ -64,7 +64,7 @@ try {
     $result = mysqli_query($con, $query);
     $maximo = mysqli_fetch_assoc($result);
     $maximo['mantenimiento'] += 1;
-    $ur_mantenimiento = "MANTENIIENTO_" . $maximo["mantenimiento"] . ".pdf";
+    $ur_mantenimiento = "MANTENIMIENTO_" . $maximo["mantenimiento"] . ".pdf";
     //*********************************************** */
     if ($datos['id'] != null) {
         $query_1 = "UPDATE evidencia set url_mantenimiento = '$ur_mantenimiento', estatus_mant = 0 WHERE id_evidencia = {$datos['id']}"; //"INSERT INTO evidencia VALUES(DEFAULT,'{$datos['usuario']}','{$datos['fecha']}','{$datos['dispositivo']}',null,'$ur_resguardo','{$_SESSION['id_usuario']}',0,0)";
