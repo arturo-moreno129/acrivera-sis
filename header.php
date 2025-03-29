@@ -82,7 +82,7 @@ if (!isset($_SESSION['ususario'])) {
                 <li>
                     <a href="directorio.php">
                         <ion-icon name="call-outline"></ion-icon>
-                        <span>directorio</span>
+                        <span>Directorio</span>
                     </a>
                 </li>
                 <!--<li>

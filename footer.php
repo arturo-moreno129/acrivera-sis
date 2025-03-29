@@ -1,7 +1,11 @@
 <script src="js/script.js"></script>
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+
+
+<!--<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>-->
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+<!--<script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>-->
 <!--<script src="https://cdn.tailwindcss.com"></script>--><!--PARA PAGINACION-->
 <!-- Ícono flotante de WhatsApp -->
 <!--<a href="https://wa.me/2204844702?text=Hola,%20me%20gustaría%20obtener%20más%20información."
