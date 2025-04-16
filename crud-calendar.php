@@ -108,6 +108,19 @@ function deleteDir($id_DIR)
         return ["status" => "error", "message" => "Error al finalizar el elemento."];
     }
 }
+function obtenerImpresoras($idDir)
+{
+    global $con; // Usa la conexión global
+    $idDir = intval($idDir); // Convierte a entero para seguridad
+    $sqlselect = "SELECT * FROM impresoras WHERE id_impresora = {$idDir}";
+    $resultadoFinal = mysqli_query($con, $sqlselect);
+    if ($resultadoFinal) {
+        $datos = mysqli_fetch_all($resultadoFinal, MYSQLI_ASSOC); //Convierte el resultado en array asociativo
+        return ["status" => "success", "message" => $datos];
+    } else {
+        return ["status" => "error", "message" => "Error al finalizar el elemento."];
+    }
+}
 
 // Maneja la acción solicitada
 if (isset($_POST['action'])) {
@@ -156,7 +169,7 @@ if (isset($_POST['action'])) {
         case 'updateDir':
             # code...
             if (isset($_POST['id']) && isset($_POST['nombre']) && isset($_POST['puesto']) && isset($_POST['correo']) && isset($_POST['extension']) && isset($_POST['area'])) {
-                $response = updateDir($_POST['id'], $_POST['nombre'], $_POST['puesto'], $_POST['correo'], $_POST['extension'],$_POST['area']);
+                $response = updateDir($_POST['id'], $_POST['nombre'], $_POST['puesto'], $_POST['correo'], $_POST['extension'], $_POST['area']);
             } else {
                 $response = ["status" => "error", "message" => "ID no proporcionado."];
             }
@@ -173,6 +186,14 @@ if (isset($_POST['action'])) {
             # code...
             if (isset($_POST['id'])) {
                 $response = deleteDir($_POST['id']);
+            } else {
+                $response = ["status" => "error", "message" => "ID no proporcionado."];
+            }
+            break;
+        case 'obtenerImpresoras':
+            # code...
+            if (isset($_POST['idprint'])) {
+                $response = obtenerImpresoras($_POST['idprint']);
             } else {
                 $response = ["status" => "error", "message" => "ID no proporcionado."];
             }

@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     puesto: document.getElementById('puesto').value,
                                     correo: document.getElementById('email').value,
                                     extension: document.getElementById('extension').value,
-                                    slect1 : document.getElementById('Narea1').value
+                                    slect1: document.getElementById('Narea1').value
                                 };
                             }
                         })
@@ -218,5 +218,70 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+    })
+
+    //******************************************funcionalidad para impresoras************************************
+    //accedemos a cada btn que se crea en la tabla
+    document.querySelectorAll('.btnPopUp2').forEach((btn) => {
+        //crramos el eventop click para cada elemento
+        btn.addEventListener("click", function () {
+            const idimpresora = this.getAttribute("value"); //obtenemos el id del elemento seleccionado
+            console.log(idimpresora);
+            fetch('crud-calendar.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `action=obtenerImpresoras&idprint=${idimpresora}`
+            })
+                .then(response => response.json())//deserializamos la cadena que nos regresa la consulta
+                .then(data => {
+                    if (data.status === "success") {
+                        const {id_impresora,ubicacion,marca,direccion_ip,direccion_mac} = data.message[0];
+                        console.log(ubicacion);
+                        /*Swal.fire({
+                            title: "Personal",
+                            showDenyButton: true,
+                            showCancelButton: true,
+                            confirmButtonText: "Actualizar",
+                            denyButtonText: "Eliminar",
+                            html: `
+                            <label style="text-align: left; for="#">Nombre:</label>
+                            <input id="nom" class="swal2-input" value="${nom_usu}"><br>
+                            <label style="text-align: left; for="#">Puesto:</label>
+                            <input id="puesto" class="swal2-input" value="${puesto}"><br>
+                            <label style="text-align: left; for="#">Correo:</label>
+                            <input id="email" class="swal2-input" value="${correo}"><br>
+                            <label style="text-align: left; for="#">Extension:</label>
+                            <input id="extension" class="swal2-input" value="${extencion}"><br>
+                            <select id="Narea1" class="form-control">
+                                <option value="0">SELECCIONA UNA AREA</option>
+                            </select>
+                        `,
+                            didOpen: () => {
+                                const select = document.getElementById("Narea1");
+                                var i = 0;
+                                areas1.forEach(area => {
+                                    let option = document.createElement("option");
+                                    option.value = area;
+                                    option.textContent = areaslong1[i];
+                                    select.appendChild(option);
+                                    i++;
+                                });
+                            },
+                            preConfirm: () => {
+                                return {
+                                    id: id_user,
+                                    nombre: document.getElementById('nom').value,
+                                    puesto: document.getElementById('puesto').value,
+                                    correo: document.getElementById('email').value,
+                                    extension: document.getElementById('extension').value,
+                                    slect1: document.getElementById('Narea1').value
+                                };
+                            }
+                        })*/
+                    }
+                })
+        })
     })
 });

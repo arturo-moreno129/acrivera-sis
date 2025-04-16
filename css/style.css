@@ -1102,3 +1102,6 @@ h1 {
 #btnAdd:hover {
     transform: translateY(5px);
 }
+.fc-day-today {
+    background-color: burlywood !important; /* Cambia a cualquier color */
+}

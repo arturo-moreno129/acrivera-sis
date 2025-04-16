@@ -107,21 +107,21 @@ function myFunction1(tableId, selectId, inputId) {
 
   // Si no se selecciona un filtro, mostrar toda la tabla
   if (columnIndex === "") {
-      for (i = 1; i < tr.length; i++) {
-          tr[i].style.display = "";
-      }
-      return;
+    for (i = 1; i < tr.length; i++) {
+      tr[i].style.display = "";
+    }
+    return;
   }
 
   columnIndex = parseInt(columnIndex); // Convertir a número
 
   // Iterar sobre todas las filas, excepto la de encabezado
   for (i = 1; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[columnIndex];
-      if (td) {
-          txtValue = td.textContent || td.innerText;
-          tr[i].style.display = txtValue.toUpperCase().includes(filter) ? "" : "none";
-      }
+    td = tr[i].getElementsByTagName("td")[columnIndex];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      tr[i].style.display = txtValue.toUpperCase().includes(filter) ? "" : "none";
+    }
   }
 }
 
