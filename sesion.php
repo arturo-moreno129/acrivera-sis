@@ -24,7 +24,7 @@ if ($row = mysqli_num_rows($result) > 0) {
                 $_SESSION['puesto'] = $row['puesto'];
                 $_SESSION['departamento'] = $row['departamento'];
                 //echo $_SESSION['ususario'], $_SESSION['nombre'], $_SESSION['apellidoP'], $_SESSION['apellidoM'], $_SESSION['puesto'], $_SESSION['departamento'];
-                header('location:dashboard.php');
+                header('location:main.php');
             } else {
                 header("location: index.php");
             }

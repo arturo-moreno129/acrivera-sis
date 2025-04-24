@@ -373,7 +373,9 @@ h1 {
     border: 3px solid var(--color-texto);
     border-radius: 20px;
 }
-
+.no-show {
+    display: block !important;
+}
 @media only screen and (max-width: 800px) {
     #input-button {
         width: 100px;
@@ -428,6 +430,23 @@ h1 {
 
     .usuario img {
         height: 50px;
+    }
+    .no-show {
+        display: none !important;
+    }
+    .fondo{
+        margin-top: 125px;
+        width: 100% !important;
+        height: auto;
+    }
+    table th {
+        font-size: 10px;
+    }
+    table td{
+        font-size: 10px;
+    }
+    .titulo-pendiente h1{
+        font-size: 45px !important;
     }
 }
 
@@ -754,8 +773,8 @@ h2 {
     outline: none;
     cursor: pointer;
     padding: 14px 16px;
-    font-size: 20px;
-    width: 25%;
+    font-size: 2.4vh;
+    width: 25vh;
 }
 
 .tablink:hover {
@@ -1104,4 +1123,13 @@ h1 {
 }
 .fc-day-today {
     background-color: burlywood !important; /* Cambia a cualquier color */
+}
+/****************** estilo main*****************************/
+.fondo{
+    width: 50%;
+    height: auto;
+}
+.fondo img{
+    width: 100%;
+    height: auto;
 }

@@ -11,7 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/estiloslogin.css">
-    <link rel="shortcut icon" href="./imagenes/logo_acr_white.png" type="image/x-icon" id="favicon">
+    <link rel="shortcut icon" href="./imagenes/logo_acr_black.png" type="image/x-icon" id="favicon">
+    <link rel="manifest" href="json/app.webmanifest">
 </head>
 
 <body>

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll('.btnPopUp').forEach((btn) => {
+    document.querySelectorAll('.btnPopUp').forEach((btn) => {//este metodo es para actualizar personal ya registrado
         btn.addEventListener('click', function () {
             const idDirec = this.getAttribute("value");
             console.log('es el id', idDirec);
@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }).then(result => {
             if (result.isConfirmed) {
                 const { nombre, puesto, correo, extension, area } = result.value;
-                console.log(nombre, puesto, correo, extension, area);
+                //console.log(nombre, puesto, correo, extension, area);
                 fetch('crud-calendar.php', {
                     method: 'POST',
                     headers: {
@@ -211,6 +211,9 @@ document.addEventListener("DOMContentLoaded", () => {
                                     location.reload();
                                 }
                             });
+                        }
+                        else {
+                            console.log(data.message)
                         }
                     });
             } else if (result.isDenied) {
@@ -237,7 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(response => response.json())//deserializamos la cadena que nos regresa la consulta
                 .then(data => {
                     if (data.status === "success") {
-                        const {id_impresora,ubicacion,marca,direccion_ip,direccion_mac} = data.message[0];
+                        const { id_impresora, ubicacion, marca, direccion_ip, direccion_mac } = data.message[0];
                         console.log(ubicacion);
                         /*Swal.fire({
                             title: "Personal",

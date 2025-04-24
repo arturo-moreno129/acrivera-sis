@@ -27,7 +27,7 @@
             </div></a>';
     }
     ?>
-
+    
 </div>
 <script src="js/card_option.js"></script>
 <?php include "footer.php" ?>

@@ -17,6 +17,7 @@ include 'header.php';
 <center><input type="text" name="nombre" id="input-search-directorio" onkeyup="myFunction1('myTableDirectorio', 'mySelectDirectorio', 'input-search-directorio')" placeholder="Ingresa el nombre a buscar"></center><br>
 
 <center><img id="btnAdd" src="imagenes/agregar.png" alt="" style="width: 100px; cursor:pointer"><br><br></center>
+<center><input type="submit" value="Exportar a excel"></center>
 
 <table id="myTableDirectorio">
     <thead>

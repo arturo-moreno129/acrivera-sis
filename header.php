@@ -14,7 +14,7 @@ if (!isset($_SESSION['ususario'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACRIVERA</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="shortcut icon" href="./imagenes/logo_acr_white.png" type="image/x-icon" id="favicon">
+    <link rel="shortcut icon" href="./imagenes/logo_acr_black.png" type="image/x-icon" id="favicon">
     <script src='fullcalendar/packages/core/index.global.js'></script>
     <script src='fullcalendar/packages/core/locales/es.global.js'></script>
     <script src='fullcalendar/dist/index.global.min.js'></script>
@@ -22,6 +22,9 @@ if (!isset($_SESSION['ususario'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!--Manifiest-->
+    <link rel="manifest" href="json/app.webmanifest">
+    <!--++++++++++-->
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
 
 </head>
@@ -49,13 +52,13 @@ if (!isset($_SESSION['ususario'])) {
                         <span>Usuario</span>
                     </a>
                 </li>-->
-                <li>
+                <li class="no-show">
                     <a href="dashboard.php">
                         <ion-icon name="speedometer-outline"></ion-icon>
                         <span>Dashboard</span>
                     </a>
                 </li>
-                <li>
+                <li class="no-show">
                     <a href="registro.php">
                         <ion-icon name="document-outline"></ion-icon>
                         <span>Registro</span>
@@ -73,13 +76,13 @@ if (!isset($_SESSION['ususario'])) {
                         <span>Resguardos</span>
                     </a>
                 </li>
-                <li>
+                <li class="no-show">
                     <a href="calendario.php">
                         <ion-icon name="calendar-outline"></ion-icon>
                         <span>Calendario</span>
                     </a>
                 </li>
-                <li>
+                <li class="no-show">
                     <a href="directorio.php">
                         <ion-icon name="call-outline"></ion-icon>
                         <span>Directorio</span>

@@ -551,57 +551,67 @@ if (btnenviar) {
 
 const formulario = document.querySelector('#formulario'); // Seleccionamos el formulario
 
-formulario.addEventListener("submit", (event) => {
-  // Validar formulario antes de hacer algo
-  if (!formulario.checkValidity()) {
-    event.preventDefault(); // Si no es válido, se previene el envío
-    Swal.fire({
-      title: "Campos obligatorios",
-      text: "Por favor, completa todos los campos requeridos.",
-      icon: "warning",
-    });
-    return;
-  }
-
-  // Si el formulario es válido, procedemos con el fetch
-  event.preventDefault(); // Evitar el envío normal del formulario
-  var dispo = document.getElementById("inputdispo").value;
-  var soli = document.getElementById("inputsolicita").value;
-  var descri = document.getElementById("inputdescrip").value;
-  const fecha = new Date(); // Fecha actual
-  const anio = fecha.getFullYear(); // Año
-  const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Mes (asegurándonos que tenga 2 dígitos)
-  const dia = fecha.getDate().toString().padStart(2, '0'); // Día (asegurándonos que tenga 2 dígitos)
-
-  const fechaFormateada = `${anio}-${mes}-${dia}`;
-
-  datosreparacion = {
-    dispositivo: dispo,
-    solicitante: soli,
-    descripcion: descri,
-    fecha: fechaFormateada
-  }
-  // Aquí se pueden agregar los datos que quieres enviar
-  fetch("create_repa.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ datosreparacion }), // Aquí puedes enviar los datos reales
-  })
-    .then((response) => response.text())
-    .then((data) => {
+if (formulario) {
+  formulario.addEventListener("submit", (event) => {
+    // Validar formulario antes de hacer algo
+    if (!formulario.checkValidity()) {
+      event.preventDefault(); // Si no es válido, se previene el envío
       Swal.fire({
-        title: "LISTO",
-        text: "Se creo exitosamente el registro...!",
-        icon: "success",
-      }).then(() => {
-        window.location.assign("reparacion.php");
+        title: "Campos obligatorios",
+        text: "Por favor, completa todos los campos requeridos.",
+        icon: "warning",
       });
-      console.log("Respuesta del servidor:", data);
+      return;
+    }
+
+    // Si el formulario es válido, procedemos con el fetch
+    event.preventDefault(); // Evitar el envío normal del formulario
+    var dispo = document.getElementById("inputdispo").value;
+    var soli = document.getElementById("inputsolicita").value;
+    var descri = document.getElementById("inputdescrip").value;
+    const fecha = new Date(); // Fecha actual
+    const anio = fecha.getFullYear(); // Año
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Mes (asegurándonos que tenga 2 dígitos)
+    const dia = fecha.getDate().toString().padStart(2, '0'); // Día (asegurándonos que tenga 2 dígitos)
+
+    const fechaFormateada = `${anio}-${mes}-${dia}`;
+
+    datosreparacion = {
+      dispositivo: dispo,
+      solicitante: soli,
+      descripcion: descri,
+      fecha: fechaFormateada
+    }
+    // Aquí se pueden agregar los datos que quieres enviar
+    fetch("create_repa.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ datosreparacion }), // Aquí puedes enviar los datos reales
     })
-    .catch((error) => {
-      Swal.fire("Error de transmisión, contactar al área de soporte");
-      console.error("Error de transmisión:", error);
-    });
-});
+      .then((response) => response.text())
+      .then((data) => {
+        Swal.fire({
+          title: "LISTO",
+          text: "Se creo exitosamente el registro...!",
+          icon: "success",
+        }).then(() => {
+          window.location.assign("reparacion.php");
+        });
+        console.log("Respuesta del servidor:", data);
+      })
+      .catch((error) => {
+        Swal.fire("Error de transmisión, contactar al área de soporte");
+        console.error("Error de transmisión:", error);
+      });
+  });
+}
+
+
+//palanca.addEventListener("click", () => {
+if (cloud) {
+  cloud.addEventListener("click", () => {
+    window.location.assign("main.php");
+  });
+}
