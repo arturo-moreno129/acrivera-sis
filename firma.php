@@ -15,7 +15,6 @@ include 'header.php'
     <script src="js/firma.js"></script>
 </div>
 
-
 <?php
 include 'footer.php'
 ?>

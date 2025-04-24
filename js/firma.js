@@ -35,7 +35,7 @@ $btnDescargar.onclick = () => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ imagen: base64Image,id_usu: id, cards: card }),
+        body: JSON.stringify({ imagen: base64Image, id_usu: id, cards: card }),
         //body: JSON.stringify({ datosfinale }),
     })
         .then(response => response.text())
@@ -47,9 +47,9 @@ $btnDescargar.onclick = () => {
                 title: "LISTO",
                 text: "Firma registrada exitosamente....!",
                 icon: "success",
-              }).then(() => {
+            }).then(() => {
                 window.location.assign(`pendientes.php?id=${datosjson.id}`);
-              });
+            });
             //alert('Imagen guardada exitosamente en el servidor.');//para la ipad
         })
         .catch(error => {
@@ -132,3 +132,43 @@ const onMouseODedoLevantado = () => {
 ["mouseup", "touchend"].forEach(nombreDeEvento => {
     $canvas.addEventListener(nombreDeEvento, onMouseODedoLevantado);
 });
+
+
+/// terminos y condiciones Camiones Rivera
+  document.addEventListener('DOMContentLoaded', function () {
+    Swal.fire({
+      title: "Términos y condiciones",
+      html: `
+        <p>Declaración de Privacidad sobre el Manejo de Firmas Electrónicas<br><br>
+        <strong>Corporativo Camiones Rivera</strong></p>
+        <p>
+        Camiones Rivera informa que la firma electrónica recabada a través del presente documento será utilizada exclusivamente para fines relacionados con los procesos, trámites o servicios proporcionados por el corporativo.<br><br>
+
+        La firma será tratada con estricta confidencialidad y se resguardará conforme a lo dispuesto en la <strong>Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP)</strong>, así como en su reglamento y demás normativas aplicables.<br><br>
+
+        En ningún caso la firma será utilizada para fines distintos a los autorizados por el firmante, ni será transferida a terceros sin su consentimiento expreso, salvo en los casos legalmente previstos.<br><br>
+
+        Camiones Rivera se compromete a implementar las medidas de seguridad administrativas, técnicas y físicas necesarias para proteger la información personal, incluyendo la firma electrónica, contra daño, pérdida, alteración, destrucción o el uso, acceso o tratamiento no autorizado.<br><br>
+
+        El uso indebido o no autorizado de la firma será sancionado conforme a lo establecido por la legislación vigente.
+        </p>
+        <p style="margin-top: 20px;">
+          <input type="checkbox" id="termsCheck"> Acepto los términos y condiciones
+        </p>
+      `,
+      confirmButtonText: `Continuar <i class="fa fa-arrow-right"></i>`,
+      focusConfirm: false,
+      preConfirm: () => {
+        const checkbox = document.getElementById('termsCheck');
+        if (!checkbox.checked) {
+          Swal.showValidationMessage('Debes aceptar los términos y condiciones');
+          return false;
+        }
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("¡Gracias!", "Has aceptado los términos y condiciones.", "success");
+      }
+    });
+  });
+
