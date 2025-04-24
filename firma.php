@@ -6,7 +6,7 @@ include 'header.php'
 
 
 <div class="contenedor-form">
-    <canvas style="border: 2px solid black; width: 100%; height: 500px;" id="canvas"></canvas><br>
+    <canvas style="border: 2px solid black; width: 100%; height: auto;" id="canvas"></canvas><br>
 
     <button id="btnLimpiar">Limpiar</button>
     <button id="btnDescargar">Enviar</button>

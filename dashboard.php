@@ -51,7 +51,7 @@ include 'header.php'
         <th style="text-align: center;">DIRECCION IP</th>
         <th style="text-align: center;">DIRECCION MAC</th>
         <th style="text-align: center;">CONTRASEÑA</th>
-        <!--<th style="text-align: center;">EDITAR</th>-->
+        <th style="text-align: center;">VER CONTRASEÑA</th>
       </tr>
       <thead>
       <tbody>
@@ -67,10 +67,10 @@ include 'header.php'
                     <td style="text-align: center;">' . $row['direccion_ip'] . '</td>
                     <td style="text-align: center;">' . $row['direccion_mac'] . '</td>
                     <td style="text-align: center;"><input type="password" name="" value=' . $row['contrasena'] . ' readonly></td>
-                    <!--<td> <a href="#" style="pointer-events:auto" rel="noopener noreferrer">
-                          <img value="' . $row['id_impresora'] . '" class="btnPopUp2" id="impresoras" src="imagenes/edit.png" alt="" style="width: 35px;">
+                    <td style="text-align: center;"> <a href="#" style="pointer-events:auto" rel="noopener noreferrer">
+                          <img value="' . $row['id_impresora'] . '" class="btnPopUp2" id="impresoras" src="imagenes/mostrar.png" alt="" style="width: 35px;">
                         </a>
-                    </td>-->
+                    </td>
                   </tr>';
           }
         }
