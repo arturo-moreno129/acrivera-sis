@@ -53,6 +53,16 @@ function exportarDirectorio($con)
                 $worksheet->setCellValue('B' . $conta_usu . '', $row["nom_usu"]);
                 $conta_usu++;
             }
+            try {
+                //code...
+                $outputFileName = 'imagenes_guardadas/Directorio_actualizado.xlsx';
+                $writer = new Xlsx($spreadsheet);
+                $writer->save($outputFileName);
+                echo json_encode(["status" => "success", "message" => "Exportacion Correctamente"]);
+            } catch (\Throwable $th) {
+                //throw $th;
+                echo json_encode(["status" => "error", "message" => "No se especificó ninguna acción."]);
+            }
         }
     } catch (Exception $e) {
         echo json_encode(["status" => "error", "message" => "No se especificó ninguna acción."]);

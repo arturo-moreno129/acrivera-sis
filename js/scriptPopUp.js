@@ -288,16 +288,26 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     })
     //***************boton para exportar a excel */
-    const btnExxport = document.querySelector("#btnExpor");
+    const btnExxport = document.querySelector("#btnExport");
     btnExxport.addEventListener('click', () => {
         fetch('exportDir.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: `action=obtenerImpresoras&idprint=$idimpresora`
+            body: `action=exportarDirectorio`
         })
-            .then()
-            .then()
+            .then(response => response.json())
+            .then(data => {
+                Swal.fire({
+                    title: "Listo!",
+                    text: data.message,
+                    icon: "success"
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                });
+            })
     })
 });
