@@ -288,26 +288,67 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     })
     //***************boton para exportar a excel */
-    const btnExxport = document.querySelector("#btnExport");
+    /*const btnExxport = document.querySelector("#btnExport");
     btnExxport.addEventListener('click', () => {
+        console.log('entro');
+
         fetch('exportDir.php', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json' // <- esto sí concuerda con JSON.stringify
             },
-            body: `action=exportarDirectorio`
+            body: JSON.stringify({ action: 'exportarDirectorio' }) // <- correcto
         })
             .then(response => response.json())
             .then(data => {
+                // Ya no necesitas JSON.parse() otra vez
                 Swal.fire({
                     title: "Listo!",
                     text: data.message,
-                    icon: "success"
+                    icon: data.status === "success" ? "success" : "error"
                 }).then(result => {
-                    if (result.isConfirmed) {
+                    if (result.isConfirmed && data.status === "success") {
                         location.reload();
                     }
                 });
             })
-    })
+            .catch(error => {
+                console.error("Error al exportar:", error);
+                Swal.fire("Error", "Ocurrió un problema al exportar el directorio.", "error");
+            });
+    });*/
+    const btnExxport = document.querySelector("#btnExport");
+    document.getElementById('btnExport').addEventListener('click', () => {
+        fetch('exportDir.php', {
+            method: 'POST'
+        })
+            .then(response => {
+                if (!response.ok) throw new Error('No se pudo generar el archivo');
+                return response.blob();
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'directorio_personal.xlsx';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+
+                Swal.fire({
+                    title: "¡Listo!",
+                    text: "El directorio se descargó correctamente.",
+                    icon: "success"
+                });
+            })
+            .catch(error => {
+                console.error('Error en la exportación:', error);
+                Swal.fire({
+                    title: "Error",
+                    text: "No se pudo exportar el archivo.",
+                    icon: "error"
+                });
+            });
+    });
+
 });
