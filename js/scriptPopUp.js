@@ -287,4 +287,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
         })
     })
+    //***************boton para exportar a excel */
+    const btnExxport = document.querySelector("#btnExpor");
+    btnExxport.addEventListener('click', () => {
+        fetch('exportDir.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `action=obtenerImpresoras&idprint=$idimpresora`
+        })
+            .then()
+            .then()
+    })
 });
