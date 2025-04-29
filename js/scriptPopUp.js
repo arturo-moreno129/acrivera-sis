@@ -126,8 +126,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //boton para agregar unusauario
     const btnAdd = document.querySelector('#btnAdd')
-    const areas = ['DG', 'DF', 'CL', 'AUD', 'CXC', 'CT', 'TA', 'PLD', 'EF', 'RH', 'MK', 'TI', 'CS', 'AA', 'VR', 'SV', 'HYP', 'AV', 'VC', 'VP', 'VS', 'VSN'];
-    const areaslong = ['Dirección General', 'Director Financiero', 'Contraloria ', 'Auditoría', 'Crédito y Cobranza', 'Contabilidad', 'Tesorería', 'PLD', 'Enlace Financiero', 'Recursos Humanos', 'Marketing', 'TI - Sistemas', 'Compras', 'Administración Almacén', 'Ventas de Refacciones', 'Servicio', 'Hojalatería y Pintura', 'Administración Ventas', 'Ventas Carga', 'Ventas Pasaje', 'Ventas Sprinter', 'Ventas Seminuevos'];
+    const areas = ['DG', 'DF', 'CL', 'AUD', 'CXC', 'CT', 'TA', 'PLD', 'EF', 'RH', 'MK', 'TI', 'CS', 'AA', 'VR', 'SV', 'HYP', 'AV', 'VC', 'VP', 'VS', 'VSN','SA','SAT','ST'];
+    const areaslong = ['Dirección General', 'Director Financiero', 'Contraloria ', 'Auditoría', 'Crédito y Cobranza', 'Contabilidad', 'Tesorería', 'PLD', 'Enlace Financiero', 'Recursos Humanos', 'Marketing', 'TI - Sistemas', 'Compras', 'Administración Almacén', 'Ventas de Refacciones', 'Servicio', 'Hojalatería y Pintura', 'Administración Ventas', 'Ventas Carga', 'Ventas Pasaje', 'Ventas Sprinter', 'Ventas Seminuevos','Sucursal Apizaco','Sucursal Alliance Tehuacán','Sucursal Teziutlán'];
     btnAdd.addEventListener('click', () => {
         Swal.fire({
             title: "Nuevo personal",
@@ -229,7 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //crramos el eventop click para cada elemento
         btn.addEventListener("click", function () {
             const idimpresora = this.getAttribute("value"); //obtenemos el id del elemento seleccionado
-            console.log(idimpresora);
+            //console.log(idimpresora);
             fetch('crud-calendar.php', {
                 method: 'POST',
                 headers: {
@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then(data => {
                     if (data.status === "success") {
                         const { id_impresora, ubicacion, marca, direccion_ip, direccion_mac } = data.message[0];
-                        console.log(ubicacion);
+                        console.log(id_impresora, ubicacion, marca, direccion_ip, direccion_mac);
                         /*Swal.fire({
                             title: "Personal",
                             showDenyButton: true,
@@ -288,67 +288,39 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     })
     //***************boton para exportar a excel */
-    /*const btnExxport = document.querySelector("#btnExport");
-    btnExxport.addEventListener('click', () => {
-        console.log('entro');
-
-        fetch('exportDir.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json' // <- esto sí concuerda con JSON.stringify
-            },
-            body: JSON.stringify({ action: 'exportarDirectorio' }) // <- correcto
-        })
-            .then(response => response.json())
-            .then(data => {
-                // Ya no necesitas JSON.parse() otra vez
-                Swal.fire({
-                    title: "Listo!",
-                    text: data.message,
-                    icon: data.status === "success" ? "success" : "error"
-                }).then(result => {
-                    if (result.isConfirmed && data.status === "success") {
-                        location.reload();
-                    }
-                });
-            })
-            .catch(error => {
-                console.error("Error al exportar:", error);
-                Swal.fire("Error", "Ocurrió un problema al exportar el directorio.", "error");
-            });
-    });*/
     const btnExxport = document.querySelector("#btnExport");
-    document.getElementById('btnExport').addEventListener('click', () => {
-        fetch('exportDir.php', {
-            method: 'POST'
+    if (btnExxport) {
+        btnExxport.addEventListener('click', () => {
+            fetch('exportDir.php', {
+                method: 'POST'
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('No se pudo generar el archivo');
+                    return response.blob();
+                })
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `directorio_actualizado.xlsx`;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+
+                    Swal.fire({
+                        title: "¡Listo!",
+                        text: "El directorio se descargó correctamente.",
+                        icon: "success"
+                    });
+                })
+                .catch(error => {
+                    console.error('Error en la exportación:', error);
+                    Swal.fire({
+                        title: "Error",
+                        text: "No se pudo exportar el archivo.",
+                        icon: "error"
+                    });
+                });
         })
-            .then(response => {
-                if (!response.ok) throw new Error('No se pudo generar el archivo');
-                return response.blob();
-            })
-            .then(blob => {
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'directorio_personal.xlsx';
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-
-                Swal.fire({
-                    title: "¡Listo!",
-                    text: "El directorio se descargó correctamente.",
-                    icon: "success"
-                });
-            })
-            .catch(error => {
-                console.error('Error en la exportación:', error);
-                Swal.fire({
-                    title: "Error",
-                    text: "No se pudo exportar el archivo.",
-                    icon: "error"
-                });
-            });
-    });
-
+    }
 });
