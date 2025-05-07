@@ -11,7 +11,8 @@ include 'header.php';
     <option value="">SELECCIONA FILTRO DE BÚSQUEDA</option>
     <option value="0">PERSONAL</option>
     <option value="1">PUESTO</option>
-    <option value="3">CORREO CORPORATIVO</option>
+    <option value="2">CORREO CORPORATIVO</option>
+    <option value="3">EXTENSION</option>
 </select>
 
 <center><input type="text" name="nombre" id="input-search-directorio" onkeyup="myFunction1('myTableDirectorio', 'mySelectDirectorio', 'input-search-directorio')" placeholder="Ingresa el nombre a buscar"></center><br>
