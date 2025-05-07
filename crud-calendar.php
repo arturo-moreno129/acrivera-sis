@@ -88,7 +88,7 @@ function updateDir($id, $nom, $puesto, $correo, $extension, $area)
 function insertDir($nom, $puesto, $correo, $extension, $area)
 {
     global $con; // Usa la conexión global
-    $sqlinsert = "INSERT into directorio values(default,'$nom','$puesto','$correo','$extension','$area')";
+    $sqlinsert = "INSERT into directorio values(default,'$nom','$puesto','$correo','$extension','$area',1)";
     $result = mysqli_query($con, $sqlinsert);
     if ($result) {
         return ["status" => "success", "message" => "Se inserto correctamente al directorio"];
@@ -100,7 +100,7 @@ function deleteDir($id_DIR)
 {
     global $con; // Usa la conexión global
     $id_DIR = intval($id_DIR);
-    $sqlinsert = "DELETE from directorio where id_user =$id_DIR";
+    $sqlinsert = "UPDATE directorio set estatus = 0 where id_user =$id_DIR";
     $result = mysqli_query($con, $sqlinsert);
     if ($result) {
         return ["status" => "success", "message" => "Se elimino correctamente"];

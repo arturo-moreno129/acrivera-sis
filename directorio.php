@@ -32,7 +32,7 @@ include 'header.php';
     </thead>
     <tbody>
         <?php
-        $query = "SELECT * FROM directorio ORDER BY FIELD(area, 'DG', 'DF', 'CL', 'AUD', 'CXC', 'CT', 'TA', 'PLD', 'EF', 'RH', 'MK', 'TI', 'CS', 'AA', 'VR', 'SV', 'HYP', 'AV', 'VC', 'VP', 'VS', 'VSN','SA','SAT','ST')";
+        $query = "SELECT * FROM directorio WHERE ESTATUS = 1 ORDER BY FIELD(area, 'DG', 'DF', 'CL', 'AUD', 'CXC', 'CT', 'TA', 'PLD', 'EF', 'RH', 'MK', 'TI', 'CS', 'AA', 'VR', 'SV', 'HYP', 'AV', 'VC', 'VP', 'VS', 'VSN','SA','SAT','ST')";
         $result = mysqli_query($con, $query);
 
         $arrayAreas = ['DG', 'DF', 'CL', 'AUD', 'CXC', 'CT', 'TA', 'PLD', 'EF', 'RH', 'MK', 'TI', 'CS', 'AA', 'VR', 'SV', 'HYP', 'AV', 'VC', 'VP', 'VS', 'VSN','SA','SAT','ST'];
@@ -53,7 +53,7 @@ include 'header.php';
                     }
                 }
 
-                // Imprimir el usuario
+                // Imprimir el usuario los botones estan funcionando en js/scriptPopUp.js
                 echo '<tr>
                 <td>' . $row["nom_usu"] . '</td>
                 <td style="text-align: center;">' . $row["puesto"] . '</td>

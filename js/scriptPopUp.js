@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             showDenyButton: true,
                             showCancelButton: true,
                             confirmButtonText: "Actualizar",
-                            denyButtonText: "Eliminar",
+                            denyButtonText: "Baja",
                             html: `
                                     <label style="text-align: left; for="#">Nombre:</label>
                                     <input id="nom" class="swal2-input" value="${nom_usu}"><br>
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                             }
                                         })
                                 } else if (result.isDenied) {
-                                    Swal.fire("Esatas seguro de eliminar al usuario", "", "warning").then(result => {
+                                    Swal.fire("Esatas seguro de dar de baja al usuario", "", "warning").then(result => {
                                         if (result.isConfirmed) {
                                             fetch('crud-calendar.php', {
                                                 method: 'POST',
