@@ -53,37 +53,37 @@ if (!isset($_SESSION['ususario'])) {
                     </a>
                 </li>-->
                 <li class="no-show">
-                    <a href="dashboard.php">
+                    <a href="dashboard">
                         <ion-icon name="speedometer-outline"></ion-icon>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="no-show">
-                    <a href="registro.php">
+                    <a href="registro">
                         <ion-icon name="document-outline"></ion-icon>
                         <span>Registro</span>
                     </a>
                 </li>
                 <li>
-                    <a href="card_registro.php">
+                    <a href="card_registro">
                         <ion-icon name="pencil-outline"></ion-icon>
                         <span>Registro</span>
                     </a>
                 </li>
                 <li>
-                    <a href="resguardos.php">
+                    <a href="resguardos">
                         <ion-icon name="folder-outline"></ion-icon>
                         <span>Resguardos</span>
                     </a>
                 </li>
                 <li class="no-show">
-                    <a href="calendario.php">
+                    <a href="calendario">
                         <ion-icon name="calendar-outline"></ion-icon>
                         <span>Calendario</span>
                     </a>
                 </li>
                 <li>
-                    <a href="directorio.php">
+                    <a href="directorio">
                         <ion-icon name="call-outline"></ion-icon>
                         <span>Directorio</span>
                     </a>

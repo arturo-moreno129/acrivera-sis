@@ -1,2 +1,8 @@
 ErrorDocument 404 /acrivera-sis/errores/404.html
 Options -Indexes
+
+RewriteEngine On
+
+# Permite acceder a archivos .php sin escribir la extensión
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^/]+)/?$ $1.php [L]

@@ -13,7 +13,7 @@ if (isset($_SESSION['pop-up'])) {
 }
 unset($_SESSION["pop-up"]) ?>
 
-<center>
+<!--<center>
     <h2 id="filtrado">Filtrar por:</h2>
 </center>
 
@@ -22,9 +22,9 @@ unset($_SESSION["pop-up"]) ?>
     <option value="0">USUARIO</option>
     <option value="1">REALIZADO POR</option>
     <option value="2">FECHA</option>
-    <option value="3">DISPOSITIVO</option> <!--EL NUMERO TIENE QUE COINCIDIR CON EL DE LA TABLA-->
+    <option value="3">DISPOSITIVO</option> EL NUMERO TIENE QUE COINCIDIR CON EL DE LA TABLA
 </select>
-<center><input type="text" name="nombre" id="input-search" onkeyup="myFunction1()" placeholder="Ingresa el nombre a buscar"></center><br>
+<center><input type="text" name="nombre" id="input-search" onkeyup="myFunction1()" placeholder="Ingresa el nombre a buscar"></center><br>-->
 
 <!--<div class="status-usuario">
     <p>

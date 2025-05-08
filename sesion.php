@@ -24,16 +24,16 @@ if ($row = mysqli_num_rows($result) > 0) {
                 $_SESSION['puesto'] = $row['puesto'];
                 $_SESSION['departamento'] = $row['departamento'];
                 //echo $_SESSION['ususario'], $_SESSION['nombre'], $_SESSION['apellidoP'], $_SESSION['apellidoM'], $_SESSION['puesto'], $_SESSION['departamento'];
-                header('location:main.php');
+                header('location:main');
             } else {
-                header("location: index.php");
+                header("location: index");
             }
         } else {
-            header("location: index.php");
+            header("location: index");
         }
     }
 } else {
-    header("location: index.php");
+    header("location: index");
 }
 
 
