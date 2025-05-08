@@ -7,17 +7,17 @@ const firmaMant = document.querySelector("#firma-mante");
 
 if (resguardo) {
   resguardo.addEventListener("click", () => {
-    window.location.assign("registro_resg.php");
+    window.location.assign("registro_resg");
   });
 }
 if (mant) {
   mant.addEventListener("click", () => {
-    window.location.assign("registro_mant.php");
+    window.location.assign("registro_mant");
   });
 }
 if (repara) {
   repara.addEventListener('click',()=>{
-    window.location.assign('reparacion.php')
+    window.location.assign('reparacion')
   })
 }
 if (firmaRes) {
