@@ -20,7 +20,7 @@ include "header.php";
         <option value="1">FECHA</option>
         <option value="2">DISPOSITIVO</option>
     </select>
-    <center><input type="text" name="nombre" id="input-search-resguardo" onkeyup="myFunction1('myTableResguardo', 'mySelectResguardo', 'input-search-resguardo')" placeholder="Ingresa el nombre a buscar"></center><br>
+    <center><input style="display: none;" type="text" name="nombre" id="input-search-resguardo" onkeyup="myFunction1('myTableResguardo', 'mySelectResguardo', 'input-search-resguardo')" placeholder="Ingresa el nombre a buscar"></center><br>
 
     <!--<div class="status-usuario">
     <p>
@@ -53,7 +53,7 @@ include "header.php";
                                 <td>' . $row["fecha"] . '</td>
                                 <td>' . $row["dispositivo"] . '</td>
                                 <td>' . ($row["url_resguardo"] != null ? '<a href="view_pdf.php?file=' . $row["nombre"] . "/" . $row["url_resguardo"] . '" style="pointer-events:auto" rel="noopener noreferrer"> <img id="pdf-icon" src="imagenes/pdf_img.png" alt="" style="width: 35px;"> </a>' : '<img id="pdf-icon" src="imagenes/error.png" alt="" style="width: 35px;">') . '</td>
-                                <td>' . ($row["url_mantenimiento"] != null ? '<a href="view_pdf.php?file=' .$row["nombre"] . "/" . $row["url_mantenimiento"] . '" style="pointer-events:auto" rel="noopener noreferrer"> <img id="pdf-icon" src="imagenes/pdf_img.png" alt="" style="width: 35px;"> </a>' : '<img id="pdf-icon" src="imagenes/error.png" alt="" style="width: 35px;">') . '</td>
+                                <td>' . ($row["url_mantenimiento"] != null ? '<a href="view_pdf.php?file=' . $row["nombre"] . "/" . $row["url_mantenimiento"] . '" style="pointer-events:auto" rel="noopener noreferrer"> <img id="pdf-icon" src="imagenes/pdf_img.png" alt="" style="width: 35px;"> </a>' : '<img id="pdf-icon" src="imagenes/error.png" alt="" style="width: 35px;">') . '</td>
                                 <td>' . (($row['estatus'] == 0 or $row['estatus_mant'] == 0) ? '<a href="pendientes.php?id=' . $row["id_evidencia"] . '" style="pointer-events:auto" rel="noopener noreferrer"> <img id="pdf-icon" src="imagenes/pendiente_firma.png" alt="" style="width: 35px;"> </a>' : '<img id="pdf-icon" src="imagenes/chek.png" alt="" style="width: 35px;">') . '</td>
                             </tr>';
                     }
@@ -81,7 +81,7 @@ include "header.php";
         <option value="1">FECHA</option>
         <option value="3">DISPOSITIVO</option>
     </select>
-    <center><input type="text" name="nombre" id="input-search-reparacion" onkeyup="myFunction1('myTableReparacion', 'mySelectReparacion', 'input-search-reparacion')" placeholder="Ingresa el nombre a buscar"></center><br>
+    <center><input style="display: none;" type="text" name="nombre" id="input-search-reparacion" onkeyup="myFunction1('myTableReparacion', 'mySelectReparacion', 'input-search-reparacion')" placeholder="Ingresa el nombre a buscar"></center><br>
 
     <table id="myTableReparacion">
         <thead>
@@ -121,7 +121,7 @@ include "header.php";
             ?>
         </tbody>
     </table>
-    
+
 </div>
 
 <script>
@@ -205,6 +205,22 @@ include "header.php";
             });
         });
     });
+    const selectOption = document.querySelector("#mySelectResguardo");
+    if (selectOption) {
+        selectOption.addEventListener('change', () => {
+            let flag = selectOption.value;
+            const inputbuscar = document.querySelector('#input-search-resguardo');
+            (flag == '') ? inputbuscar.style.display = 'none' : inputbuscar.style.display = 'block';
+        })
+    }
+    const selectOption2 = document.querySelector("#mySelectReparacion");
+    if (selectOption2) {
+        selectOption2.addEventListener('change', () => {
+            let flag = selectOption2.value;
+            const inputbuscar = document.querySelector('#input-search-reparacion');
+            (flag == '') ? inputbuscar.style.display = 'none' : inputbuscar.style.display = 'block';          
+        })
+    }
 </script>
 <!--<script src="js/pagination.js"></script>--><!--PRAR PAGINACION-->
 

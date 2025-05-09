@@ -15,10 +15,10 @@ include 'header.php';
     <option value="3">EXTENSION</option>
 </select>
 
-<center><input type="text" name="nombre" id="input-search-directorio" onkeyup="myFunction1('myTableDirectorio', 'mySelectDirectorio', 'input-search-directorio')" placeholder="Ingresa el nombre a buscar"></center><br>
+<center><input style="display: none;" type="text" name="nombre" id="input-search-directorio" onkeyup="myFunction1('myTableDirectorio', 'mySelectDirectorio', 'input-search-directorio')" placeholder="Ingresa el nombre a buscar"></center><br>
 <!--se ejecintan en el moduoo scriptPopUp.js-->
 <center><img id="btnAdd" src="imagenes/agregar.png" alt="" style="width: 100px; cursor:pointer"><br><br></center>
-<center><input id="btnExport"type="submit" value="Exportar a excel"></center>
+<center><input id="btnExport" type="submit" value="Exportar a excel"></center>
 <!------------------------------------------------>
 
 <table id="myTableDirectorio">
@@ -36,8 +36,8 @@ include 'header.php';
         $query = "SELECT * FROM directorio WHERE ESTATUS = 1 ORDER BY FIELD(area, 'DG', 'DF', 'CL', 'AUD', 'CXC', 'CT', 'TA', 'PLD', 'EF', 'RH', 'MK', 'TI', 'CS', 'AA', 'VR', 'SV', 'HYP', 'AV', 'VC', 'VP', 'VS', 'VSN','SA','SAT','ST')";
         $result = mysqli_query($con, $query);
 
-        $arrayAreas = ['DG', 'DF', 'CL', 'AUD', 'CXC', 'CT', 'TA', 'PLD', 'EF', 'RH', 'MK', 'TI', 'CS', 'AA', 'VR', 'SV', 'HYP', 'AV', 'VC', 'VP', 'VS', 'VSN','SA','SAT','ST'];
-        $arrayNombres = ['Dirección General', 'Director Financiero', 'Contraloria ', 'Auditoría', 'Crédito y Cobranza', 'Contabilidad', 'Tesorería', 'PLD', 'Enlace Financiero', 'Recursos Humanos', 'Marketing', 'TI - Sistemas', 'Compras', 'Administración Almacén', 'Ventas de Refacciones', 'Servicio', 'Hojalatería y Pintura', 'Administración Ventas', 'Ventas Carga', 'Ventas Pasaje', 'Ventas Sprinter', 'Ventas Seminuevos','Sucursal Apizaco','Sucursal Alliance Tehuacán','Sucursal Teziutlán'];
+        $arrayAreas = ['DG', 'DF', 'CL', 'AUD', 'CXC', 'CT', 'TA', 'PLD', 'EF', 'RH', 'MK', 'TI', 'CS', 'AA', 'VR', 'SV', 'HYP', 'AV', 'VC', 'VP', 'VS', 'VSN', 'SA', 'SAT', 'ST'];
+        $arrayNombres = ['Dirección General', 'Director Financiero', 'Contraloria ', 'Auditoría', 'Crédito y Cobranza', 'Contabilidad', 'Tesorería', 'PLD', 'Enlace Financiero', 'Recursos Humanos', 'Marketing', 'TI - Sistemas', 'Compras', 'Administración Almacén', 'Ventas de Refacciones', 'Servicio', 'Hojalatería y Pintura', 'Administración Ventas', 'Ventas Carga', 'Ventas Pasaje', 'Ventas Sprinter', 'Ventas Seminuevos', 'Sucursal Apizaco', 'Sucursal Alliance Tehuacán', 'Sucursal Teziutlán'];
 
         $area_actual = null;
 
@@ -71,6 +71,17 @@ include 'header.php';
     </tbody>
 </table>
 <script src="js/scriptPopUp.js"></script>
+<script>
+    const selectOption = document.querySelector("#mySelectDirectorio");
+    if (selectOption) {
+        selectOption.addEventListener('change', () => {
+            let flag = selectOption.value;
+            const inputbuscar = document.querySelector('#input-search-directorio');
+            (flag == '') ? inputbuscar.style.display = 'none': inputbuscar.style.display = 'block';
+
+        })
+    }
+</script>
 <?php
 include 'footer.php';
 ?>
