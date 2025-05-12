@@ -210,7 +210,7 @@ include "header.php";
         selectOption.addEventListener('change', () => {
             let flag = selectOption.value;
             const inputbuscar = document.querySelector('#input-search-resguardo');
-            (flag == '') ? inputbuscar.style.display = 'none' : inputbuscar.style.display = 'block';
+            (flag == '') ? inputbuscar.style.display = 'none' : inputbuscar.style.display = 'block'; 
         })
     }
     const selectOption2 = document.querySelector("#mySelectReparacion");
@@ -218,7 +218,7 @@ include "header.php";
         selectOption2.addEventListener('change', () => {
             let flag = selectOption2.value;
             const inputbuscar = document.querySelector('#input-search-reparacion');
-            (flag == '') ? inputbuscar.style.display = 'none' : inputbuscar.style.display = 'block';          
+            (flag == '') ? inputbuscar.style.display = 'none' : inputbuscar.style.display = 'block';
         })
     }
 </script>

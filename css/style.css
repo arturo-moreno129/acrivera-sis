@@ -852,7 +852,7 @@ h2 {
 
 /************************ES PARA LAS CARDS DE LAS IP*****************/
 .card-ip {
-    width: 450px;
+    width: 500px;
     /* Ajusta el ancho de cada tarjeta según sea necesario */
     height: 300px;
     text-align: left;

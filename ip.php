@@ -13,16 +13,16 @@
         });*/
     var maximo = 0;
     document.addEventListener("DOMContentLoaded", function() {
-        const defaultHosts = "140.240.13.133,140.240.13.131,140.240.13.230,140.240.13.233,140.240.13.237";
+        const defaultHosts = "140.240.13.133,140.240.13.131,140.240.13.230,140.240.13.233,140.240.13.237,140.240.13.203,140.240.13.204,140.240.13.207,140.240.13.219,140.240.13.205,140.240.13.120,140.240.13.208,140.240.13.209,140.240.13.210";
         const hosts = defaultHosts.split(",").map(h => h.trim());
         startMonitoring(hosts);
     });
     const charts = {}; // Almacena los gráficos para cada host
-    const names = ["DATALOADER","MENSAJE BIENVENIDA ","FORTINET","ACTIVE DIRECTORY","COMPAQ"];//prueba
+    const names = ["DATALOADER", "MENSAJE BIENVENIDA ", "FORTINET", "ACTIVE DIRECTORY", "COMPAQ","IMPRESORA TORRE DE CONTROL","IMPRESORA VENTAS AFUERA","IMPRESORA RECURSOS HUMANOS","IMPRESORA CONTABILIDAD","IMPRESORA RECEPCIÓN","IMPRESORA ALMACÉN","IMPRESORA VENTAS ADENTRO","IMPRESORA SERVICIO","IMPRESORA HYP"]; //prueba
     function startMonitoring(hosts) {
         const chartContainer = document.getElementById("charts");
         chartContainer.innerHTML = ""; // Limpiar gráficos previos
-        var i = 0;//prueba
+        var i = 0; //prueba
         hosts.forEach(host => {
             // Crear un contenedor para el gráfico
             const canvasContainer = document.createElement("div");
@@ -87,7 +87,7 @@
                 if (data.status === "success") { //&& data.time !== null ->para cuando es por wifi
                     const chart = charts[host];
                     const time = new Date().toLocaleTimeString();
-                    let dataTime = (data.time === null)?1: data.time;
+                    let dataTime = (data.time === null) ? 1 : data.time;
                     //para hacer un sombreado cuando el ping sea muy alto***////
                     if (dataTime > 10) {
                         const card = document.getElementById(data.ip);
@@ -110,6 +110,8 @@
                     chart.update();
                 } else {
                     //console.warn(`No se pudo hacer ping a ${host}:`, data.message || "Sin detalles.");
+                    const card = document.getElementById(data.ip);
+                    card.style.border = "solid 2px red"
                     const Toast = Swal.mixin({
                         toast: true,
                         position: "bottom-end",
