@@ -237,6 +237,12 @@
             color: '<?php echo ($dataEvento['estatus'] == 1) ? "#60c4f3" : "red" ?>',
             editable: '<?= ($dataEvento['estatus'] == 1 && $dataEvento['id_usuario'] == $_SESSION['id_usuario']) ?>',
             groupId: '<?php echo ($dataEvento['estatus'] == 1 && $dataEvento['id_usuario'] == $_SESSION['id_usuario']) ? 1 : 0 ?>',
+            extendedProps: {
+              //location: "Sala A",
+              description: '<?php echo $dataEvento['usuario_final']; ?>',
+              //organizer: "María",
+              //perro: 1
+            }
           },
         <?php } ?>
         /*{
@@ -334,6 +340,12 @@
                       },*/
 
       ],
+      eventDidMount: function(info) {
+        // Para mostrar la descripción como tooltip cuando se poneel mouse por ensima
+        if (info.event.extendedProps.description) {
+          info.el.setAttribute('title', info.event.extendedProps.description);
+        }
+      },
       eventDragStart: function(info) {
         // Mostrar un mensaje al iniciar el arrastre
         console.log('Iniciaste el arrastre de: ' + info.event.title);
