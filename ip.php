@@ -28,7 +28,7 @@
         var i = 0; //prueba
         hosts.forEach((host,i) => {
             // Crear un contenedor para el gráfico
-            hostNames[host] = names[i]; // Asociar IP con nombre
+            hostNames[host] = names[i]; // Asociar IP con nombre: se estas asociando el host con el nombre, es un a forma facil de acosiar infomracion de dos diferentes variables
             const canvasContainer = document.createElement("div");
             canvasContainer.innerHTML = `
                         
