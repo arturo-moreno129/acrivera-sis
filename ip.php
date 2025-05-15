@@ -19,12 +19,16 @@
     });
     const charts = {}; // Almacena los gráficos para cada host
     const names = ["DATALOADER", "MENSAJE BIENVENIDA ", "FORTINET", "ACTIVE DIRECTORY", "COMPAQ","IMPRESORA TORRE DE CONTROL","IMPRESORA VENTAS AFUERA","IMPRESORA RECURSOS HUMANOS","IMPRESORA CONTABILIDAD","IMPRESORA RECEPCIÓN","IMPRESORA ALMACÉN","IMPRESORA VENTAS ADENTRO","IMPRESORA SERVICIO","IMPRESORA HYP"]; //prueba
+    
+    const hostNames = {}; // Relación IP - Nombre
+
     function startMonitoring(hosts) {
         const chartContainer = document.getElementById("charts");
         chartContainer.innerHTML = ""; // Limpiar gráficos previos
         var i = 0; //prueba
-        hosts.forEach(host => {
+        hosts.forEach((host,i) => {
             // Crear un contenedor para el gráfico
+            hostNames[host] = names[i]; // Asociar IP con nombre
             const canvasContainer = document.createElement("div");
             canvasContainer.innerHTML = `
                         
@@ -125,7 +129,7 @@
                     });
                     Toast.fire({
                         icon: "error",
-                        title: `Se perdio la conexion al host ${host}`
+                        title: `Se perdio la conexion al host ${hostNames[host]} (${host})`
                     });
                 }
             })
