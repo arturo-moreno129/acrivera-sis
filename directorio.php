@@ -15,9 +15,11 @@ include 'header.php';
     <option value="3">EXTENSION</option>
 </select>
 
-<center><input style="display: none;" type="text" name="nombre" id="input-search-directorio" onkeyup="myFunction1('myTableDirectorio', 'mySelectDirectorio', 'input-search-directorio')" placeholder="Ingresa el nombre a buscar"></center><br>
+<center><input style="display: none;" type="text" name="nombre" id="input-search-directorio" onkeyup="myFunction1('myTableDirectorio', 'mySelectDirectorio', 'input-search-directorio')" placeholder="Ingresa el dato a buscar"></center><br>
 <!--se ejecintan en el moduoo scriptPopUp.js-->
-<center><img id="btnAdd" src="imagenes/agregar.png" alt="" style="width: 100px; cursor:pointer"><br><br></center>
+<?php if ($_SESSION['rol'] == 1): ?>
+    <center><img id="btnAdd" src="imagenes/agregar.png" alt="" style="width: 100px; cursor:pointer"><br><br></center>
+<?php endif; ?>
 <center><input id="btnExport" type="submit" value="Exportar a excel"></center>
 <!------------------------------------------------>
 
@@ -28,7 +30,9 @@ include 'header.php';
             <th style="text-align: center;">PUESTO</th>
             <th style="text-align: center;">CORREO CORPORATIVO</th>
             <th style="text-align: center;">EXTENSION</th>
-            <th style="text-align: center;">EDITAR</th>
+            <?php if ($_SESSION['rol'] == 1): ?>
+                <th style="text-align: center;">EDITAR</th>
+            <?php endif; ?>
         </tr>
     </thead>
     <tbody>
@@ -59,11 +63,15 @@ include 'header.php';
                 <td>' . $row["nom_usu"] . '</td>
                 <td style="text-align: center;">' . $row["puesto"] . '</td>
                 <td style="text-align: center;">' . $row["correo"] . '</td>
-                <td style="text-align: center;">' . $row["extencion"] . '</td>
-                <td> <a href="#" style="pointer-events:auto" rel="noopener noreferrer">
-                    <img value="' . $row['id_user'] . '" class="btnPopUp" src="imagenes/edit.png" alt="" style="width: 35px;">
-                </a></td>                            
-              </tr>';
+                <td style="text-align: center;">' . $row["extencion"] . '</td>';
+
+                if ($_SESSION['rol'] == 1) {
+                    echo '<td> <a href="#" style="pointer-events:auto" rel="noopener noreferrer">
+            <img value="' . $row['id_user'] . '" class="btnPopUp" src="imagenes/edit.png" alt="" style="width: 35px;">
+          </a></td>';
+                }
+
+                echo '</tr>';
             }
         }
         ?>

@@ -52,48 +52,57 @@ if (!isset($_SESSION['ususario'])) {
                         <span>Usuario</span>
                     </a>
                 </li>-->
-                <li class="no-show">
-                    <a href="dashboard">
-                        <ion-icon name="speedometer-outline"></ion-icon>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="no-show">
-                    <a href="registro">
-                        <ion-icon name="document-outline"></ion-icon>
-                        <span>Registro</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="card_registro">
-                        <ion-icon name="pencil-outline"></ion-icon>
-                        <span>Registro</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="resguardos">
-                        <ion-icon name="folder-outline"></ion-icon>
-                        <span>Resguardos</span>
-                    </a>
-                </li>
-                <li class="no-show">
-                    <a href="calendario">
-                        <ion-icon name="calendar-outline"></ion-icon>
-                        <span>Calendario</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="directorio">
-                        <ion-icon name="call-outline"></ion-icon>
-                        <span>Directorio</span>
-                    </a>
-                </li>
-                <!--<li>
+                <?php if ($_SESSION['rol'] == 1): ?>
+                    <li class="no-show">
+                        <a href="dashboard">
+                            <ion-icon name="speedometer-outline"></ion-icon>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="no-show">
+                        <a href="registro">
+                            <ion-icon name="document-outline"></ion-icon>
+                            <span>Registro</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="card_registro">
+                            <ion-icon name="pencil-outline"></ion-icon>
+                            <span>Registro</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="resguardos">
+                            <ion-icon name="folder-outline"></ion-icon>
+                            <span>Resguardos</span>
+                        </a>
+                    </li>
+                    <li class="no-show">
+                        <a href="calendario">
+                            <ion-icon name="calendar-outline"></ion-icon>
+                            <span>Calendario</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="directorio">
+                            <ion-icon name="call-outline"></ion-icon>
+                            <span>Directorio</span>
+                        </a>
+                    </li>
+                <?php elseif ($_SESSION['rol'] == 2): ?>
+                    <li>
+                        <a href="directorio">
+                            <ion-icon name="call-outline"></ion-icon>
+                            <span>Directorio</span>
+                        </a>
+                    </li>
+                    <!--<li>
                     <a href="#">
                         <ion-icon name="trash-outline"></ion-icon>
                         <span>Trash</span>
                     </a>
                 </li>-->
+                <?php endif; ?>
             </ul>
         </nav>
 
