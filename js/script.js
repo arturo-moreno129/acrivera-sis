@@ -97,33 +97,54 @@ function functionPass() {
   }
 }*/
 function myFunction1(tableId, selectId, inputId) {
-  var input, filter, table, tr, td, i, txtValue, columnIndex;
+  var input = document.getElementById(inputId);
+  var filter = input.value.toUpperCase();
+  var table = document.getElementById(tableId);
+  var tr = table.getElementsByTagName("tr");
+  var columnIndex = document.getElementById(selectId).value;
 
-  input = document.getElementById(inputId);
-  filter = input.value.toUpperCase();
-  table = document.getElementById(tableId);
-  tr = table.getElementsByTagName("tr");
-  columnIndex = document.getElementById(selectId).value;
+  columnIndex = columnIndex === "" ? null : parseInt(columnIndex);
 
-  // Si no se selecciona un filtro, mostrar toda la tabla
-  if (columnIndex === "") {
-    for (i = 1; i < tr.length; i++) {
-      tr[i].style.display = "";
+  // Mostrar u ocultar filas según el filtro
+  for (let i = 0; i < tr.length; i++) {
+    let row = tr[i];
+    // Si es una fila de encabezado de área, la ocultamos por ahora
+    if (row.classList.contains("area")) {
+      row.style.display = "none";
+      continue;
     }
-    return;
+
+    // Si es una fila de datos
+    let tds = row.getElementsByTagName("td");
+    if (tds.length > 0 && columnIndex !== null) {
+      let td = tds[columnIndex];
+      if (td) {
+        let txtValue = td.textContent || td.innerText;
+        row.style.display = txtValue.toUpperCase().includes(filter) ? "" : "none";
+      }
+    } else {
+      // Si no se aplica filtro, mostrar todo
+      row.style.display = "";
+    }
   }
 
-  columnIndex = parseInt(columnIndex); // Convertir a número
-
-  // Iterar sobre todas las filas, excepto la de encabezado
-  for (i = 1; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[columnIndex];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      tr[i].style.display = txtValue.toUpperCase().includes(filter) ? "" : "none";
+  // Mostrar encabezados de área solo si al menos una fila de datos debajo está visible
+  let rows = Array.from(tr);
+  for (let i = 0; i < rows.length; i++) {
+    if (rows[i].classList.contains("area")) {
+      let show = false;
+      for (let j = i + 1; j < rows.length; j++) {
+        if (rows[j].classList.contains("area")) break;
+        if (rows[j].style.display !== "none") {
+          show = true;
+          break;
+        }
+      }
+      rows[i].style.display = show ? "" : "none";
     }
   }
 }
+
 
 //***************FUNCION PARA APARECER TEXTOS */
 function newUser() {

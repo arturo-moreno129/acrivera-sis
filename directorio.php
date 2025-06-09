@@ -48,9 +48,9 @@ include 'header.php';
                     $area_actual = $row['area'];
                     $index = array_search($area_actual, $arrayAreas);
                     if ($index !== false) {
-                        echo '<tr>
-                        <th class="area" colspan="5" style="text-align: center;">' . $arrayNombres[$index] . '</th>
-                      </tr>';
+                        echo '<tr class="area">
+                                    <th colspan="5" style="text-align: center;">' . $arrayNombres[$index] . '</th>
+                                </tr>';
                     }
                 }
 
