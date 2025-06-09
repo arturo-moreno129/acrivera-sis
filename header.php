@@ -24,6 +24,7 @@ if (!isset($_SESSION['ususario'])) {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!--Manifiest-->
     <link rel="manifest" href="json/app.webmanifest">
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
     <!--++++++++++-->
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
 
