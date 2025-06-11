@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (isset($_SESSION['ususario'])) {
+    // Ya está logueado, redirigir al dashboard
+    header('Location: main');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -29,11 +39,11 @@
             </div>
             <div class="input">
                 <label for="usuario">Usuario</label>
-                <input placeholder="Ingresa tu nombre" type="text" id="user" name ="user">
+                <input placeholder="Ingresa tu nombre" type="text" id="user" name="user">
             </div>
             <div class="input">
                 <label for="contraseña">Contraseña</label>
-                <input placeholder="Ingresa tu contraseña" type="password" id="myPass" name = "password">
+                <input placeholder="Ingresa tu contraseña" type="password" id="myPass" name="password">
                 <p style="color: white;"><input type="checkbox" name="" id="checkbox3" style="width: 30px;" onclick="functionPass()">Mostrar contraseña</p>
             </div>
             <div class="password-olvidada">

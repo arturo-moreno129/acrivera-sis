@@ -2,8 +2,9 @@
 include("conexion.php");
 session_start();
 if (!isset($_SESSION['ususario'])) {
-    //echo "<h1>existe</h1>";
-    header("location:index.php");
+    // Si no hay sesión, redirigir al login
+    header('Location: index');
+    exit();
 }
 ?>
 <!DOCTYPE html>
