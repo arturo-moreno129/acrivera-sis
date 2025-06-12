@@ -365,6 +365,14 @@ h1 {
     text-align: center;
     font-size: 2vw;
 }
+#input-search-inentario {
+    width: 50vw;
+    height: 3vw;
+    border: 3px solid var(--color-texto);
+    border-radius: 20px;
+    text-align: center;
+    font-size: 2vw;
+}
 
 #input-button {
     width: 200px;
@@ -1136,6 +1144,20 @@ h1 {
 
 /******************** ESTILO BOTON EXPOERT DIRECTORIO*****************/
 #btnExport {
+    background-color: #4A90E2;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'Segoe UI', sans-serif;
+    margin-bottom: 20px;
+}
+#btnExportinventario {
     background-color: #4A90E2;
     color: white;
     font-size: 16px;

@@ -128,14 +128,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnAdd = document.querySelector('#btnAdd')
     const areas = ['DG', 'DF', 'CL', 'AUD', 'CXC', 'CT', 'TA', 'PLD', 'EF', 'RH', 'MK', 'TI', 'CS', 'AA', 'VR', 'SV', 'HYP', 'AV', 'VC', 'VP', 'VS', 'VSN', 'SA', 'SAT', 'ST'];
     const areaslong = ['Dirección General', 'Director Financiero', 'Contraloria ', 'Auditoría', 'Crédito y Cobranza', 'Contabilidad', 'Tesorería', 'PLD', 'Enlace Financiero', 'Recursos Humanos', 'Marketing', 'TI - Sistemas', 'Compras', 'Administración Almacén', 'Ventas de Refacciones', 'Servicio', 'Hojalatería y Pintura', 'Administración Ventas', 'Ventas Carga', 'Ventas Pasaje', 'Ventas Sprinter', 'Ventas Seminuevos', 'Sucursal Apizaco', 'Sucursal Alliance Tehuacán', 'Sucursal Teziutlán'];
-    btnAdd.addEventListener('click', () => {
-        Swal.fire({
-            title: "Nuevo personal",
-            showDenyButton: true,
-            showCancelButton: true,
-            confirmButtonText: "FINALIZAR",
-            denyButtonText: "CANCELAR",
-            html: `
+    if (btnAdd) {
+        btnAdd.addEventListener('click', () => {
+            Swal.fire({
+                title: "Nuevo personal",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "FINALIZAR",
+                denyButtonText: "CANCELAR",
+                html: `
                 <label style="text-align: left;">Nombre:</label>
                 <input id="Nnom" class="swal2-input"><br>
                 <label style="text-align: left;">Puesto:</label>
@@ -148,80 +149,82 @@ document.addEventListener("DOMContentLoaded", () => {
                     <option value="0">SELECCIONA UNA AREA</option>
                 </select>
             `,
-            didOpen: () => {
-                const select = document.getElementById("Narea");
-                var i = 0;
-                areas.forEach(area => {
-                    let option = document.createElement("option");
-                    option.value = area;
-                    option.textContent = areaslong[i];
-                    select.appendChild(option);
-                    i++;
-                });
-            },
-            preConfirm: () => {
-                const nombre = document.getElementById('Nnom').value;
-                const puesto = document.getElementById('Npuesto').value;
-                const correo = document.getElementById('Nemail').value;
-                const extension = document.getElementById('Nextension').value;
-                const slect = document.getElementById('Narea').value;
-
-                if (!nombre) {
-                    Swal.showValidationMessage("Debes ingresar el nombre");
-                    return false;
-                }
-                if (!puesto) {
-                    Swal.showValidationMessage("Debes ingresar el puesto");
-                    return false;
-                }
-                if (!correo) {
-                    Swal.showValidationMessage("Debes ingresar el correo");
-                    return false;
-                }
-                if (!extension) {
-                    Swal.showValidationMessage("Debes ingresar la extensión");
-                    return false;
-                }
-                if (slect == '0') {
-                    Swal.showValidationMessage("Debes seleccionar una área");
-                    return false;
-                }
-                return { nombre, puesto, correo, extension, area: slect };
-            }
-        }).then(result => {
-            if (result.isConfirmed) {
-                const { nombre, puesto, correo, extension, area } = result.value;
-                //console.log(nombre, puesto, correo, extension, area);
-                fetch('crud-calendar.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: `action=insertDir&nombre=${nombre}&puesto=${puesto}&correo=${correo}&extension=${extension}&area=${area}`
-                })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.status === 'success') {
-                            Swal.fire({
-                                title: "Listo!",
-                                text: data.message,
-                                icon: "success"
-                            }).then(result => {
-                                if (result.isConfirmed) {
-                                    location.reload();
-                                }
-                            });
-                        }
-                        else {
-                            console.log(data.message)
-                        }
+                didOpen: () => {
+                    const select = document.getElementById("Narea");
+                    var i = 0;
+                    areas.forEach(area => {
+                        let option = document.createElement("option");
+                        option.value = area;
+                        option.textContent = areaslong[i];
+                        select.appendChild(option);
+                        i++;
                     });
-            } else if (result.isDenied) {
-                Swal.fire("Los cambios no se guardaron", "", "info");
-            }
-        });
+                },
+                preConfirm: () => {
+                    const nombre = document.getElementById('Nnom').value;
+                    const puesto = document.getElementById('Npuesto').value;
+                    const correo = document.getElementById('Nemail').value;
+                    const extension = document.getElementById('Nextension').value;
+                    const slect = document.getElementById('Narea').value;
 
-    })
+                    if (!nombre) {
+                        Swal.showValidationMessage("Debes ingresar el nombre");
+                        return false;
+                    }
+                    if (!puesto) {
+                        Swal.showValidationMessage("Debes ingresar el puesto");
+                        return false;
+                    }
+                    if (!correo) {
+                        Swal.showValidationMessage("Debes ingresar el correo");
+                        return false;
+                    }
+                    if (!extension) {
+                        Swal.showValidationMessage("Debes ingresar la extensión");
+                        return false;
+                    }
+                    if (slect == '0') {
+                        Swal.showValidationMessage("Debes seleccionar una área");
+                        return false;
+                    }
+                    return { nombre, puesto, correo, extension, area: slect };
+                }
+            }).then(result => {
+                if (result.isConfirmed) {
+                    const { nombre, puesto, correo, extension, area } = result.value;
+                    //console.log(nombre, puesto, correo, extension, area);
+                    fetch('crud-calendar.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `action=insertDir&nombre=${nombre}&puesto=${puesto}&correo=${correo}&extension=${extension}&area=${area}`
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 'success') {
+                                Swal.fire({
+                                    title: "Listo!",
+                                    text: data.message,
+                                    icon: "success"
+                                }).then(result => {
+                                    if (result.isConfirmed) {
+                                        location.reload();
+                                    }
+                                });
+                            }
+                            else {
+                                console.log(data.message)
+                            }
+                        });
+                } else if (result.isDenied) {
+                    Swal.fire("Los cambios no se guardaron", "", "info");
+                }
+            });
+
+        })
+    }
+
 
     //******************************************funcionalidad para impresoras************************************
     //accedemos a cada btn que se crea en la tabla
@@ -323,4 +326,243 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
         })
     }
-});
+
+    /*****************************BOTON PARA INGRESAR UN NUEVO HOST AL INVENTARIO********************************** */
+    const btnAddinventario = document.querySelector('#btnAddinventario')
+    if (btnAddinventario) {
+        btnAddinventario.addEventListener('click', () => {
+            Swal.fire({
+                title: "Nuevo equipo",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "FINALIZAR",
+                denyButtonText: "CANCELAR",
+                html: `
+                <label style="text-align: left;">Usuario:</label>
+                <input id="Nnom" class="swal2-input"><br>
+                <label style="text-align: left;">Equipo:</label>
+                <input id="Npuesto" class="swal2-input"><br>
+                <label style="text-align: left;">Modelo:</label>
+                <input id="Nemail" class="swal2-input"><br>
+                <label style="text-align: left;">Marca:</label>
+                <input type="number" id="Nextension" class="swal2-input"><br>
+                <select id="Narea" class="form-control">
+                    <option value="0">SELECCIONA UNA AREA</option>
+                </select>
+            `,
+                didOpen: () => {
+                    const select = document.getElementById("Narea");
+                    var i = 0;
+                    areas.forEach(area => {
+                        let option = document.createElement("option");
+                        option.value = area;
+                        option.textContent = areaslong[i];
+                        select.appendChild(option);
+                        i++;
+                    });
+                },
+                preConfirm: () => {
+                    const nombre = document.getElementById('Nnom').value;
+                    const puesto = document.getElementById('Npuesto').value;
+                    const correo = document.getElementById('Nemail').value;
+                    const extension = document.getElementById('Nextension').value;
+                    const slect = document.getElementById('Narea').value;
+
+                    if (!nombre) {
+                        Swal.showValidationMessage("Debes ingresar el nombre");
+                        return false;
+                    }
+                    if (!puesto) {
+                        Swal.showValidationMessage("Debes ingresar el puesto");
+                        return false;
+                    }
+                    if (!correo) {
+                        Swal.showValidationMessage("Debes ingresar el correo");
+                        return false;
+                    }
+                    if (!extension) {
+                        Swal.showValidationMessage("Debes ingresar la extensión");
+                        return false;
+                    }
+                    if (slect == '0') {
+                        Swal.showValidationMessage("Debes seleccionar una área");
+                        return false;
+                    }
+                    return { nombre, puesto, correo, extension, area: slect };
+                }
+            }).then(result => {
+                if (result.isConfirmed) {
+                    const { nombre, puesto, correo, extension, area } = result.value;
+                    //console.log(nombre, puesto, correo, extension, area);
+                    fetch('crud-calendar.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `action=insertarInventario&nombre=${nombre}&puesto=${puesto}&correo=${correo}&extension=${extension}&area=${area}`
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 'success') {
+                                Swal.fire({
+                                    title: "Listo!",
+                                    text: data.message,
+                                    icon: "success"
+                                }).then(result => {
+                                    if (result.isConfirmed) {
+                                        location.reload();
+                                    }
+                                });
+                            }
+                            else {
+                                console.log(data.message)
+                            }
+                        });
+                } else if (result.isDenied) {
+                    Swal.fire("Los cambios no se guardaron", "", "info");
+                }
+            });
+        })
+
+    }
+    /*****************************FIN DEL BOTON HOST*************************************************************** */
+    /******************************BOTON PARA EDITAR REGISTROS DE INVENTARIO */
+    document.querySelectorAll('.btnPopUpInventario').forEach((btn) => {//este metodo es para actualizar personal ya registrado
+        btn.addEventListener('click', function () {
+            const idDirec = this.getAttribute("value");
+            console.log('es el id', idDirec);
+            fetch('crud-calendar.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `action=obtenerDatosInventario&id=${idDirec}`
+
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        //console.log(data.message[0]);
+                        const { id_inventario, usuario_asignado, tipo_equipo, modelo, marca,no_serie,nom_host,departamento } = data.message[0];
+                        const estatusInventario = [1,2];
+                        const estatuInvName = ['Activo','Baja'];
+                        //console.log(id_user, nom_usu, puesto, correo, extencion);
+                        //const areas1 = ['DG', 'DF', 'CL', 'AUD', 'CXC', 'CT', 'TA', 'PLD', 'EF', 'RH', 'MK', 'TI', 'CS', 'AA', 'VR', 'SV', 'HYP', 'AV', 'VC', 'VP', 'VS', 'VSN'];
+                        //const areaslong1 = ['Dirección General', 'Director Financiero', 'Contraloria ', 'Auditoría', 'Crédito y Cobranza', 'Contabilidad', 'Tesorería', 'PLD', 'Enlace Financiero', 'Recursos Humanos', 'Marketing', 'TI - Sistemas', 'Compras', 'Administración Almacén', 'Ventas de Refacciones', 'Servicio', 'Hojalatería y Pintura', 'Administración Ventas', 'Ventas Carga', 'Ventas Pasaje', 'Ventas Sprinter', 'Ventas Seminuevos'];
+
+                        Swal.fire({
+                            title: "Inventario",
+                            showDenyButton: true,
+                            showCancelButton: true,
+                            confirmButtonText: "Actualizar",
+                            //denyButtonText: "Baja",
+                            html: `
+                                    <label style="text-align: left; for="#">Nombre:</label>
+                                    <input id="usr" class="swal2-input" value="${usuario_asignado}"><br>
+                                    <label style="text-align: left; for="#">Puesto:</label>
+                                    <input id="equipo" class="swal2-input" value="${tipo_equipo}"><br>
+                                    <label style="text-align: left; for="#">Correo:</label>
+                                    <input id="modelo" class="swal2-input" value="${modelo}"><br>
+                                    <label style="text-align: left; for="#">Extension:</label>
+                                    <input id="marca" class="swal2-input" value="${marca}"><br>
+                                    <label style="text-align: left; for="#">Extension:</label>
+                                    <input id="no_serie" class="swal2-input" value="${no_serie}"><br>
+                                    <label style="text-align: left; for="#">Extension:</label>
+                                    <input id="nom_host" class="swal2-input" value="${nom_host}"><br>
+                                    <label style="text-align: left; for="#">Extension:</label>
+                                    <input id="departamento" class="swal2-input" value="${departamento}"><br>
+                                    <select id="Nareainv" class="form-control">
+                                        <option value="0">Estatus</option>
+                                    </select>
+                                `,
+                            didOpen: () => {
+                                const select = document.getElementById("Nareainv");
+                                var i = 0;
+                                estatusInventario.forEach(area => {
+                                    let option = document.createElement("option");
+                                    option.value = area;
+                                    option.textContent = estatuInvName[i];
+                                    select.appendChild(option);
+                                    i++;
+                                });
+                            },
+                            preConfirm: () => {
+                                return {
+                                    id: id_inventario,
+                                    usr: document.getElementById('usr').value,
+                                    equipo: document.getElementById('equipo').value,
+                                    modelo: document.getElementById('modelo').value,
+                                    marca: document.getElementById('marca').value,
+                                    no_serie: document.getElementById('no_serie').value,
+                                    nom_host: document.getElementById('nom_host').value,
+                                    departamento: document.getElementById('departamento').value,
+                                    slect2: document.getElementById('Nareainv').value
+                                };
+                            }
+                        })
+                            .then((result) => {
+                                if (result.isConfirmed) {
+                                    const { id, usr, equipo, modelo, marca,no_serie,nom_host,departamento, slect2 } = result.value;
+
+                                    fetch('crud-calendar.php', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/x-www-form-urlencoded'
+                                        },
+                                        body: `action=updateInv&id=${id}&usu=${usr}&equipo=${equipo}&modelo=${modelo}&marca=${marca}&noSerie=${no_serie}&host=${nom_host}&depa=${departamento}&area=${slect2}`
+                                    })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            if (data.status === 'success') {
+                                                Swal.fire({
+                                                    title: "Listo!",
+                                                    text: data.message,
+                                                    icon: "success"
+                                                }).then(result => {
+                                                    if (result.isConfirmed) {
+                                                        location.reload();
+                                                    }
+                                                })
+                                            }
+                                        })
+                                } else if (result.isDenied) {
+                                    Swal.fire("Esatas seguro de dar de baja al usuario", "", "warning").then(result => {
+                                        if (result.isConfirmed) {
+                                            fetch('crud-calendar.php', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/x-www-form-urlencoded'
+                                                },
+                                                body: `action=deleteInv&id=${id_inventario}`
+                                            })
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    if (data.status === 'success') {
+                                                        Swal.fire({
+                                                            title: "Listo!",
+                                                            text: data.message,
+                                                            icon: "success"
+                                                        }).then(result => {
+                                                            if (result.isConfirmed) {
+                                                                location.reload();
+                                                            }
+                                                        })
+                                                    }
+                                                })
+                                        }
+                                    })
+                                }
+
+                            });
+                    } else {
+                        console.log("error de consulta", data.message)
+                    }
+                })
+
+        });
+    });
+    /******************************FIN DEL BOTON */
+
+
+
+});// fin del DOM

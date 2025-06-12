@@ -108,11 +108,37 @@ function deleteDir($id_DIR)
         return ["status" => "error", "message" => "Error al finalizar el elemento."];
     }
 }
+function deleteInv($id_DIR)
+{
+    global $con; // Usa la conexión global
+    $id_DIR = intval($id_DIR);
+    $sqlinsert = "UPDATE inventario set estatus = 2 where id_inventario =$id_DIR";
+    $result = mysqli_query($con, $sqlinsert);
+    if ($result) {
+        return ["status" => "success", "message" => "Se elimino correctamente"];
+    } else {
+        return ["status" => "error", "message" => "Error al finalizar el elemento."];
+    }
+}
 function obtenerImpresoras($idDir)
 {
     global $con; // Usa la conexión global
     $idDir = intval($idDir); // Convierte a entero para seguridad
     $sqlselect = "SELECT * FROM impresoras WHERE id_impresora = {$idDir}";
+    $resultadoFinal = mysqli_query($con, $sqlselect);
+    if ($resultadoFinal) {
+        $datos = mysqli_fetch_all($resultadoFinal, MYSQLI_ASSOC); //Convierte el resultado en array asociativo
+        return ["status" => "success", "message" => $datos];
+    } else {
+        return ["status" => "error", "message" => "Error al finalizar el elemento."];
+    }
+}
+
+function obtenerDatosInventario($idDir)
+{
+    global $con; // Usa la conexión global
+    $idDir = intval($idDir); // Convierte a entero para seguridad
+    $sqlselect = "SELECT * FROM inventario WHERE id_inventario = {$idDir}";
     $resultadoFinal = mysqli_query($con, $sqlselect);
     if ($resultadoFinal) {
         $datos = mysqli_fetch_all($resultadoFinal, MYSQLI_ASSOC); //Convierte el resultado en array asociativo
@@ -194,6 +220,22 @@ if (isset($_POST['action'])) {
             # code...
             if (isset($_POST['idprint'])) {
                 $response = obtenerImpresoras($_POST['idprint']);
+            } else {
+                $response = ["status" => "error", "message" => "ID no proporcionado."];
+            }
+            break;
+        case 'obtenerDatosInventario':
+            # code...
+            if (isset($_POST['id'])) {
+                $response = obtenerDatosInventario($_POST['id']);
+            } else {
+                $response = ["status" => "error", "message" => "ID no proporcionado."];
+            }
+            break;
+        case 'updateInv':
+            # code...
+            if (isset($_POST['id']) && isset($_POST['usr']) && isset($_POST['equipo']) && isset($_POST['modelo']) && isset($_POST['marca']) && isset($_POST['area'])) {
+                $response = updateDir($_POST['id'], $_POST['nombre'], $_POST['puesto'], $_POST['correo'], $_POST['extension'], $_POST['area']);
             } else {
                 $response = ["status" => "error", "message" => "ID no proporcionado."];
             }

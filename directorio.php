@@ -67,8 +67,9 @@ include 'header.php';
 
                 if ($_SESSION['rol'] == 1) {
                     echo '<td> <a href="#" style="pointer-events:auto" rel="noopener noreferrer">
-            <img value="' . $row['id_user'] . '" class="btnPopUp" src="imagenes/edit.png" alt="" style="width: 35px;">
-          </a></td>';
+                                    <img value="' . $row['id_user'] . '" class="btnPopUp" src="imagenes/edit.png" alt="" style="width: 35px;">
+                               </a>
+                          </td>';
                 }
 
                 echo '</tr>';

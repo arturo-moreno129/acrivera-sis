@@ -91,6 +91,12 @@ if (!isset($_SESSION['ususario'])) {
                             <span>Directorio</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="inventario">
+                            <ion-icon name="clipboard-outline"></ion-icon>
+                            <span>inventario</span>
+                        </a>
+                    </li>
                 <?php elseif ($_SESSION['rol'] == 2): ?>
                     <li>
                         <a href="directorio">
