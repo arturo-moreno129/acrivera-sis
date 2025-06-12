@@ -85,6 +85,18 @@ function updateDir($id, $nom, $puesto, $correo, $extension, $area)
         return ["status" => "error", "message" => "Error al finalizar el elemento."];
     }
 }
+function updateInv($id, $usr, $equipo, $modelo, $marca,$no_serie,$nom_host,$departamento,$slect2)
+{
+    global $con; // Usa la conexión global
+    $id = intval($id); // Convierte a entero para seguridad
+    $sqlupdate = "UPDATE directorio set nom_usu = '$nom',puesto = '$puesto',correo = '$correo',extencion = '$extension',area = '$area' where id_user = $id";
+    $result = mysqli_query($con, $sqlupdate);
+    if ($result) {
+        return ["status" => "success", "message" => "Se actualizo correctamente el directorio"];
+    } else {
+        return ["status" => "error", "message" => "Error al finalizar el elemento."];
+    }
+}
 function insertDir($nom, $puesto, $correo, $extension, $area)
 {
     global $con; // Usa la conexión global
@@ -234,8 +246,8 @@ if (isset($_POST['action'])) {
             break;
         case 'updateInv':
             # code...
-            if (isset($_POST['id']) && isset($_POST['usr']) && isset($_POST['equipo']) && isset($_POST['modelo']) && isset($_POST['marca']) && isset($_POST['area'])) {
-                $response = updateDir($_POST['id'], $_POST['nombre'], $_POST['puesto'], $_POST['correo'], $_POST['extension'], $_POST['area']);
+            if (isset($_POST['id']) && isset($_POST['usr']) && isset($_POST['equipo']) && isset($_POST['modelo']) && isset($_POST['marca']) && isset($_POST['noSerie']) && isset($_POST['host']) && isset($_POST['depa']) && isset($_POST['area'])) {
+                $response = updateInv(isset($_POST['id']),isset($_POST['usr']),isset($_POST['equipo']),isset($_POST['modelo']),isset($_POST['marca']), isset($_POST['noSerie']), isset($_POST['host']), isset($_POST['depa']), isset($_POST['area']));
             } else {
                 $response = ["status" => "error", "message" => "ID no proporcionado."];
             }
