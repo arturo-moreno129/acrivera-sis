@@ -160,6 +160,18 @@ function obtenerDatosInventario($idDir)
     }
 }
 
+function insertarInventario($txtname, $txtequipo, $txtmodelo, $txtmarca, $txtno_serie, $txtnom_host, $txtdepartamento)
+{
+    global $con; // Usa la conexión global
+    $sqlinsert = "INSERT into inventario values(default,'$txtname','$txtequipo','$txtmodelo','$txtmarca','$txtno_serie','$txtnom_host','$txtdepartamento',1)";
+    $result = mysqli_query($con, $sqlinsert);
+    if ($result) {
+        return ["status" => "success", "message" => "Se inserto correctamente al inventario"];
+    } else {
+        return ["status" => "error", "message" => "Error al finalizar el elemento."];
+    }
+}
+
 // Maneja la acción solicitada
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -252,6 +264,14 @@ if (isset($_POST['action'])) {
                 $response = ["status" => "error", "message" => "ID no proporcionado."];
             }
             //$response = ["status" => "success", "message" => "entro al switch"];
+            break;
+        case 'insertarInventario':
+            # code...
+            if (isset($_POST['txtname']) && isset($_POST['txtequipo']) && isset($_POST['txtmodelo']) && isset($_POST['txtmarca']) && isset($_POST['txtno_serie']) && isset($_POST['txtnom_host']) && isset($_POST['txtdepartamento'])) {
+                $response = insertarInventario($_POST['txtname'], $_POST['txtequipo'], $_POST['txtmodelo'], $_POST['txtmarca'], $_POST['txtno_serie'], $_POST['txtnom_host'], $_POST['txtdepartamento']);
+            } else {
+                $response = ["status" => "error", "message" => "ID no proporcionado."];
+            }
             break;
         default:
             $response = ["status" => "error", "message" => "Acción no válida."];

@@ -23,7 +23,7 @@ include 'header.php';
 <?php if ($_SESSION['rol'] == 1): ?>
     <center><img id="btnAddinventario" src="imagenes/agregar.png" alt="" style="width: 100px; cursor:pointer"><br><br></center>
 <?php endif; ?>
-<center><input id="btnExportinventario" type="submit" value="Exportar a excel"></center>
+<!--<center><input id="btnExportinventario" type="submit" value="Exportar a excel"></center>-->
 <!------------------------------------------------>
 
 <table id="myTablaInventario">
@@ -42,7 +42,7 @@ include 'header.php';
         <thead>
         <tbody>
             <?php
-            $query = "select * From inventario ORDER BY usuario_asignado"; //where nombre = '$nombre'";
+            $query = "select * From inventario ORDER BY estatus"; //where nombre = '$nombre'";
             $result = mysqli_query($con, $query);
             if ($row = mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_array($result)) {
