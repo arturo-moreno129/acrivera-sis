@@ -430,7 +430,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll('.btnPopUpInventario').forEach((btn) => {//este metodo es para actualizar personal ya registrado
         btn.addEventListener('click', function () {
             const idDirec = this.getAttribute("value");
-            console.log('es el id', idDirec);
+            //console.log('es el id', idDirec);
             fetch('crud-calendar.php', {
                 method: 'POST',
                 headers: {
@@ -455,7 +455,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             showDenyButton: true,
                             showCancelButton: true,
                             confirmButtonText: "Actualizar",
-                            //denyButtonText: "Baja",
+                            denyButtonText: "Baja",
                             html: `
                                     <label style="text-align: left; for="#">Nombre:</label>
                                     <input id="usr" class="swal2-input" value="${usuario_asignado}"><br>
@@ -503,13 +503,13 @@ document.addEventListener("DOMContentLoaded", () => {
                             .then((result) => {
                                 if (result.isConfirmed) {
                                     const { id, usr, equipo, modelo, marca,no_serie,nom_host,departamento, slect2 } = result.value;
-
+                                    //console.table(result.value);
                                     fetch('crud-calendar.php', {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/x-www-form-urlencoded'
                                         },
-                                        body: `action=updateInv&id=${id}&usu=${usr}&equipo=${equipo}&modelo=${modelo}&marca=${marca}&noSerie=${no_serie}&host=${nom_host}&depa=${departamento}&area=${slect2}`
+                                        body: `action=updateInv&id=${id}&usu=${usr}&equipo=${equipo}&modelo=${modelo}&marca=${marca}&noSerie=${no_serie}&host=${nom_host}&depa=${departamento}&estatus=${slect2}`
                                     })
                                         .then(response => response.json())
                                         .then(data => {

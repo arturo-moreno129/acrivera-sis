@@ -85,11 +85,11 @@ function updateDir($id, $nom, $puesto, $correo, $extension, $area)
         return ["status" => "error", "message" => "Error al finalizar el elemento."];
     }
 }
-function updateInv($id, $usr, $equipo, $modelo, $marca,$no_serie,$nom_host,$departamento,$slect2)
+function updateInv($id, $usr, $equipo, $modelo, $marca, $no_serie, $nom_host, $departamento, $slect2)
 {
     global $con; // Usa la conexión global
     $id = intval($id); // Convierte a entero para seguridad
-    $sqlupdate = "UPDATE directorio set nom_usu = '$nom',puesto = '$puesto',correo = '$correo',extencion = '$extension',area = '$area' where id_user = $id";
+    $sqlupdate = "UPDATE inventario set usuario_asignado = '$usr',tipo_equipo = '$equipo',modelo = '$modelo',marca = '$marca',no_serie = '$no_serie',nom_host = '$nom_host',departamento = '$departamento',estatus = '$slect2' where id_inventario = $id";
     $result = mysqli_query($con, $sqlupdate);
     if ($result) {
         return ["status" => "success", "message" => "Se actualizo correctamente el directorio"];
@@ -246,11 +246,12 @@ if (isset($_POST['action'])) {
             break;
         case 'updateInv':
             # code...
-            if (isset($_POST['id']) && isset($_POST['usr']) && isset($_POST['equipo']) && isset($_POST['modelo']) && isset($_POST['marca']) && isset($_POST['noSerie']) && isset($_POST['host']) && isset($_POST['depa']) && isset($_POST['area'])) {
-                $response = updateInv(isset($_POST['id']),isset($_POST['usr']),isset($_POST['equipo']),isset($_POST['modelo']),isset($_POST['marca']), isset($_POST['noSerie']), isset($_POST['host']), isset($_POST['depa']), isset($_POST['area']));
+            if (isset($_POST['id']) && isset($_POST['usu']) && isset($_POST['equipo']) && isset($_POST['modelo']) && isset($_POST['marca']) && isset($_POST['noSerie']) && isset($_POST['host']) && isset($_POST['depa']) && isset($_POST['estatus'])) {
+                $response = updateInv($_POST['id'], $_POST['usu'], $_POST['equipo'], $_POST['modelo'], $_POST['marca'], $_POST['noSerie'], $_POST['host'], $_POST['depa'], $_POST['estatus']);
             } else {
                 $response = ["status" => "error", "message" => "ID no proporcionado."];
             }
+            //$response = ["status" => "success", "message" => "entro al switch"];
             break;
         default:
             $response = ["status" => "error", "message" => "Acción no válida."];

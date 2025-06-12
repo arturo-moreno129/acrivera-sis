@@ -56,10 +56,11 @@
         color: white;
         border: none;
         border-radius: 50%;
-        padding: 15px;
+        padding: 10px;
+        padding-top: 15px;
         cursor: pointer;
         font-size: 24px;
-        width: 57px;
+        width: 55px;
         height: auto;
     }
 
@@ -116,9 +117,7 @@
         </a>-->
     </div>
 
-    <button class="button" onclick="toggleWhatsappBox()">
-        <i class="fab fa-whatsapp"></i>
-    </button>
+    <button class="button" onclick="toggleWhatsappBox()"><ion-icon name="logo-whatsapp"></ion-icon></button>
 </div>
 
 <script>
