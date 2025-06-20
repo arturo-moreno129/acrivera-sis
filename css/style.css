@@ -357,6 +357,7 @@ h1 {
     text-align: center;
     font-size: 2vw;
 }
+
 #input-search-directorio {
     width: 50vw;
     height: 3vw;
@@ -365,6 +366,7 @@ h1 {
     text-align: center;
     font-size: 2vw;
 }
+
 #input-search-inentario {
     width: 50vw;
     height: 3vw;
@@ -381,9 +383,11 @@ h1 {
     border: 3px solid var(--color-texto);
     border-radius: 20px;
 }
+
 .no-show {
     display: block !important;
 }
+
 @media only screen and (max-width: 800px) {
     #input-button {
         width: 100px;
@@ -439,21 +443,26 @@ h1 {
     .usuario img {
         height: 50px;
     }
+
     .no-show {
         display: none !important;
     }
-    .fondo{
+
+    .fondo {
         margin-top: 125px;
         width: 100% !important;
         height: auto;
     }
+
     table th {
         font-size: 10px;
     }
-    table td{
+
+    table td {
         font-size: 10px;
     }
-    .titulo-pendiente h1{
+
+    .titulo-pendiente h1 {
         font-size: 45px !important;
     }
 }
@@ -480,9 +489,9 @@ table * {
 
 /*td:nth-child(5) {
     /* Cambia el número según la columna de "DESCRIPCIÓN" */
-    /*max-width: 200px;
+/*max-width: 200px;
     /* Ajusta el ancho según necesites */
-    /*white-space: nowrap;
+/*white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }*/
@@ -835,7 +844,7 @@ h2 {
     flex-wrap: wrap;
     justify-content: flex-start;
     margin: auto;
-    
+
 }
 
 .card {
@@ -1100,24 +1109,28 @@ h1 {
     display: inline-block;
     font-size: 16px;
 }
-#pagination button{
+
+#pagination button {
     background-color: white;
     border-color: white;
     color: black;
 }
+
 /*directorio*/
 
-.cabecera{
+.cabecera {
     width: 100%;
     height: 100px;
     background-color: var(--color-linea);
     text-align: center;
     border-radius: 5px;
 }
-.cabecera h1{
+
+.cabecera h1 {
     color: var(--color-texto);
 }
-.area{
+
+.area {
     background-color: gray;
 }
 
@@ -1129,15 +1142,19 @@ h1 {
 #btnAdd:hover {
     transform: translateY(5px);
 }
+
 .fc-day-today {
-    background-color: burlywood !important; /* Cambia a cualquier color */
+    background-color: burlywood !important;
+    /* Cambia a cualquier color */
 }
+
 /****************** estilo main*****************************/
-.fondo{
+.fondo {
     width: 50%;
     height: auto;
 }
-.fondo img{
+
+.fondo img {
     width: 100%;
     height: auto;
 }
@@ -1157,6 +1174,7 @@ h1 {
     font-family: 'Segoe UI', sans-serif;
     margin-bottom: 20px;
 }
+
 #btnExportinventario {
     background-color: #4A90E2;
     color: white;
@@ -1190,16 +1208,75 @@ h1 {
   }
   
   /* Para tablets */
- /* @media (min-width: 601px) and (max-width: 1024px) {
+/* @media (min-width: 601px) and (max-width: 1024px) {
     body {
       background-color: lightgreen;
     }
   }
   
   /* Para computadoras de escritorio */
-  /*@media (min-width: 1025px) {
+/*@media (min-width: 1025px) {
     body {
       background-color: lightcoral;
     }
-  }*
-  
+  }*/
+
+  #loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.spinner {
+  border: 8px solid #ddd;
+  border-top: 8px solid #5995fd;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#contenido {
+  display: none;
+}*/
+
+#loader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.spinner {
+    border: 8px solid #ddd;
+    border-top: 8px solid #5995fd;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#contenido {
+    display: none;
+}
