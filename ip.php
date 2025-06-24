@@ -114,6 +114,7 @@
                     chart.update();
                 } else {
                     //console.warn(`No se pudo hacer ping a ${host}:`, data.message || "Sin detalles.");
+                    reproducirTono();
                     const card = document.getElementById(data.ip);
                     card.style.border = "solid 2px red"
                     const Toast = Swal.mixin({

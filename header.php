@@ -146,6 +146,8 @@ if (!isset($_SESSION['ususario'])) {
 
     </div>
     <main>
+        <audio id="tonoNotificacion" src="audios/oh-no meloboom.mp3" preload="auto"></audio>
+        <!--<button onclick="reproducirTono()">Probar notificación</button>-->
         <?php
         //session_start();
         if (isset($_SESSION["alert"])) {

@@ -636,3 +636,8 @@ if (cloud) {
     window.location.assign("main.php");
   });
 }
+
+function reproducirTono() {
+  const tono = document.getElementById('tonoNotificacion');
+  tono.play();
+}
