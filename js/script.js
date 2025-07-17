@@ -8,7 +8,7 @@ const main = document.querySelector("main");
 
 const btn = document.querySelector(".push");
 
-const modoOscuroGuardado = localStorage.getItem("modoprueba");
+const modoOscuroGuardado = localStorage.getItem("darkMode");
 const cuerpo = document.body;
 
 if (modoOscuroGuardado === "activado") {
@@ -39,9 +39,9 @@ palanca.addEventListener("click", () => {
   body.classList.toggle("dark-mode");
   circulo.classList.toggle("prendido");
   if (cuerpo.classList.contains("dark-mode")) {
-    localStorage.setItem("modoprueba", "activado");
+    localStorage.setItem("darkMode", "activado");
   } else {
-    localStorage.setItem("modoprueba", "desactivado");
+    localStorage.setItem("darkMode", "desactivado");
   }
 });
 

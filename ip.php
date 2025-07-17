@@ -11,14 +11,14 @@
             const hosts = document.getElementById("hosts").value.split(",").map(h => h.trim());
             startMonitoring(hosts);
         });*/
-    var maximo = 0;
+    var maximo = 0; //140.240.13.131,, "MENSAJE BIENVENIDA"
     document.addEventListener("DOMContentLoaded", function() {
         const defaultHosts = "140.240.13.133,140.240.13.131,140.240.13.230,140.240.13.233,140.240.13.237,140.240.13.203,140.240.13.204,140.240.13.207,140.240.13.219,140.240.13.205,140.240.13.120,140.240.13.208,140.240.13.209,140.240.13.210";
         const hosts = defaultHosts.split(",").map(h => h.trim());
         startMonitoring(hosts);
     });
     const charts = {}; // Almacena los gráficos para cada host
-    const names = ["DATALOADER", "MENSAJE BIENVENIDA ", "FORTINET", "ACTIVE DIRECTORY", "COMPAQ","IMPRESORA TORRE DE CONTROL","IMPRESORA VENTAS AFUERA","IMPRESORA RECURSOS HUMANOS","IMPRESORA CONTABILIDAD","IMPRESORA RECEPCIÓN","IMPRESORA ALMACÉN","IMPRESORA VENTAS ADENTRO","IMPRESORA SERVICIO","IMPRESORA HYP"]; //prueba
+    const names = ["DATALOADER","MENSAJE BIENVENIDA","FORTINET", "ACTIVE DIRECTORY", "COMPAQ","IMPRESORA TORRE DE CONTROL","IMPRESORA VENTAS AFUERA","IMPRESORA RECURSOS HUMANOS","IMPRESORA CONTABILIDAD","IMPRESORA RECEPCIÓN","IMPRESORA ALMACÉN","IMPRESORA VENTAS ADENTRO","IMPRESORA SERVICIO","IMPRESORA HYP"]; //prueba
     
     const hostNames = {}; // Relación IP - Nombre
 
@@ -121,7 +121,7 @@
                         toast: true,
                         position: "bottom-end",
                         showConfirmButton: false,
-                        timer: 3000,
+                        timer: 6000,
                         timerProgressBar: true,
                         didOpen: (toast) => {
                             toast.onmouseenter = Swal.stopTimer;

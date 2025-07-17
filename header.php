@@ -146,7 +146,7 @@ if (!isset($_SESSION['ususario'])) {
 
     </div>
     <main>
-        <audio id="tonoNotificacion" src="audios/pikachu-pikachu meloboom.mp3" preload="auto"></audio>
+        <audio id="tonoNotificacion" src="audios/mariocoin.mp3" preload="auto"></audio>
         <!--<button onclick="reproducirTono()">Probar notificación</button>-->
         <?php
         //session_start();
