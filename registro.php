@@ -37,7 +37,8 @@
             <option value="LLAVE">LLAVE</option>
             <option value="MONITOR">MONITOR</option>
             <option value="BLUE LINK">BLUE LINK</option>
-            <option value="XENTRY">BLUE LINK</option>
+            <option value="XENTRY">XENTRY</option>
+            <option value="SOFTWARE">SOFTWARE</option>
             <option value="OTRO">OTRO</option>
         </select>
         <!--<input type="text" id="lname" name="device" placeholder="Dispositivo" onkeyup="this.value = this.value.toUpperCase();" required><br>-->

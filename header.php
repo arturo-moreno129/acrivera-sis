@@ -97,6 +97,12 @@ if (!isset($_SESSION['ususario'])) {
                             <span>inventario</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="descarga_apk">
+                            <ion-icon name="logo-google-playstore"></ion-icon>
+                            <span>Kigo App</span>
+                        </a>
+                    </li>
                 <?php elseif ($_SESSION['rol'] == 2): ?>
                     <li>
                         <a href="directorio">

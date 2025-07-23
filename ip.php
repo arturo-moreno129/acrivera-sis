@@ -18,15 +18,15 @@
         startMonitoring(hosts);
     });
     const charts = {}; // Almacena los gráficos para cada host
-    const names = ["DATALOADER","MENSAJE BIENVENIDA","FORTINET", "ACTIVE DIRECTORY", "COMPAQ","IMPRESORA TORRE DE CONTROL","IMPRESORA VENTAS AFUERA","IMPRESORA RECURSOS HUMANOS","IMPRESORA CONTABILIDAD","IMPRESORA RECEPCIÓN","IMPRESORA ALMACÉN","IMPRESORA VENTAS ADENTRO","IMPRESORA SERVICIO","IMPRESORA HYP"]; //prueba
-    
+    const names = ["DATALOADER", "MENSAJE BIENVENIDA", "FORTINET", "ACTIVE DIRECTORY", "COMPAQ", "IMPRESORA TORRE DE CONTROL", "IMPRESORA VENTAS AFUERA", "IMPRESORA RECURSOS HUMANOS", "IMPRESORA CONTABILIDAD", "IMPRESORA RECEPCIÓN", "IMPRESORA ALMACÉN", "IMPRESORA VENTAS ADENTRO", "IMPRESORA SERVICIO", "IMPRESORA HYP"]; //prueba
+
     const hostNames = {}; // Relación IP - Nombre
 
     function startMonitoring(hosts) {
         const chartContainer = document.getElementById("charts");
         chartContainer.innerHTML = ""; // Limpiar gráficos previos
         var i = 0; //prueba
-        hosts.forEach((host,i) => {
+        hosts.forEach((host, i) => {
             // Crear un contenedor para el gráfico
             hostNames[host] = names[i]; // Asociar IP con nombre: se estas asociando el host con el nombre, es un a forma facil de acosiar infomracion de dos diferentes variables
             const canvasContainer = document.createElement("div");
