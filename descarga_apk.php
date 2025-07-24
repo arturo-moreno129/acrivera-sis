@@ -16,12 +16,13 @@ include 'header.php'
 
     <script>
         // 🔁 Reemplaza esta IP y ruta por la de tu archivo .apk
-        const apkUrl = "https://drive.google.com/file/d/174h-qPQX8DEcMJ3b7IevFbs61o4_1xO6/view?usp=sharing";
+        //const apkUrl = "https://drive.google.com/file/d/174h-qPQX8DEcMJ3b7IevFbs61o4_1xO6/view?usp=sharing";
+        const apkUrl = "http://140.240.13.101/acrivera-sis/apk/kigo.apk";
 
         new QRCode(document.getElementById("qrcode"), {
             text: apkUrl,
-            width: 200,
-            height: 200
+            width: 400,
+            height: 400
         });
     </script>
 

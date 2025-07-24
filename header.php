@@ -99,7 +99,7 @@ if (!isset($_SESSION['ususario'])) {
                     </li>
                     <li>
                         <a href="descarga_apk">
-                            <ion-icon name="logo-google-playstore"></ion-icon>
+                            <ion-icon src="icons/logo-google-playstore.svg"></ion-icon>
                             <span>Kigo App</span>
                         </a>
                     </li>
