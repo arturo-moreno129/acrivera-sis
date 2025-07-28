@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         console.log(data.message[0]);
                         const { id_user, nom_usu, puesto, correo, extencion } = data.message[0];
                         console.log(id_user, nom_usu, puesto, correo, extencion);
-                        const areas1 = ['DG', 'DF', 'CL', 'AUD', 'CXC', 'CT', 'TA', 'PLD', 'EF', 'RH', 'MK', 'TI', 'CS', 'AA', 'VR', 'SV', 'HYP', 'AV', 'VC', 'VP', 'VS', 'VSN'];
-                        const areaslong1 = ['Dirección General', 'Director Financiero', 'Contraloria ', 'Auditoría', 'Crédito y Cobranza', 'Contabilidad', 'Tesorería', 'PLD', 'Enlace Financiero', 'Recursos Humanos', 'Marketing', 'TI - Sistemas', 'Compras', 'Administración Almacén', 'Ventas de Refacciones', 'Servicio', 'Hojalatería y Pintura', 'Administración Ventas', 'Ventas Carga', 'Ventas Pasaje', 'Ventas Sprinter', 'Ventas Seminuevos'];
+                        const areas1 = ['DG', 'DF', 'CL', 'AUD', 'CXC', 'CT', 'TA', 'PLD', 'EF', 'RH', 'MK', 'TI', 'CS', 'AA', 'VR', 'SV', 'HYP', 'AV', 'VC', 'VP', 'VS', 'VSN', 'SA', 'SAT', 'ST'];
+                        const areaslong1 = ['Dirección General', 'Director Financiero', 'Contraloria ', 'Auditoría', 'Crédito y Cobranza', 'Contabilidad', 'Tesorería', 'PLD', 'Enlace Financiero', 'Recursos Humanos', 'Marketing', 'TI - Sistemas', 'Compras', 'Administración Almacén', 'Ventas de Refacciones', 'Servicio', 'Hojalatería y Pintura', 'Administración Ventas', 'Ventas Carga', 'Ventas Pasaje', 'Ventas Sprinter', 'Ventas Seminuevos', 'Sucursal Apizaco', 'Sucursal Alliance Tehuacán-238 383 8745', 'Sucursal Teziutlán'];
 
                         Swal.fire({
                             title: "Personal",
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //boton para agregar unusauario
     const btnAdd = document.querySelector('#btnAdd')
     const areas = ['DG', 'DF', 'CL', 'AUD', 'CXC', 'CT', 'TA', 'PLD', 'EF', 'RH', 'MK', 'TI', 'CS', 'AA', 'VR', 'SV', 'HYP', 'AV', 'VC', 'VP', 'VS', 'VSN', 'SA', 'SAT', 'ST'];
-    const areaslong = ['Dirección General', 'Director Financiero', 'Contraloria ', 'Auditoría', 'Crédito y Cobranza', 'Contabilidad', 'Tesorería', 'PLD', 'Enlace Financiero', 'Recursos Humanos', 'Marketing', 'TI - Sistemas', 'Compras', 'Administración Almacén', 'Ventas de Refacciones', 'Servicio', 'Hojalatería y Pintura', 'Administración Ventas', 'Ventas Carga', 'Ventas Pasaje', 'Ventas Sprinter', 'Ventas Seminuevos', 'Sucursal Apizaco', 'Sucursal Alliance Tehuacán', 'Sucursal Teziutlán'];
+    const areaslong = ['Dirección General', 'Director Financiero', 'Contraloria ', 'Auditoría', 'Crédito y Cobranza', 'Contabilidad', 'Tesorería', 'PLD', 'Enlace Financiero', 'Recursos Humanos', 'Marketing', 'TI - Sistemas', 'Compras', 'Administración Almacén', 'Ventas de Refacciones', 'Servicio', 'Hojalatería y Pintura', 'Administración Ventas', 'Ventas Carga', 'Ventas Pasaje', 'Ventas Sprinter', 'Ventas Seminuevos', 'Sucursal Apizaco', 'Sucursal Alliance Tehuacán - 238 383 8745', 'Sucursal Teziutlán'];
     if (btnAdd) {
         btnAdd.addEventListener('click', () => {
             Swal.fire({
@@ -390,7 +390,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         Swal.showValidationMessage("Debes ingresar el puesto");
                         return false;
                     }
-                    return { txtname, txtequipo, txtmodelo, txtmarca, txtno_serie, txtnom_host, txtdepartamento};
+                    return { txtname, txtequipo, txtmodelo, txtmarca, txtno_serie, txtnom_host, txtdepartamento };
                 }
             }).then(result => {
                 if (result.isConfirmed) {

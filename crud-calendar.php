@@ -172,6 +172,19 @@ function insertarInventario($txtname, $txtequipo, $txtmodelo, $txtmarca, $txtno_
     }
 }
 
+function obtenerUsuarios()
+{
+    global $con; // Usa la conexión global
+    $sqlinsert = "SELECT * FROM usuario";
+    $result = mysqli_query($con, $sqlinsert);
+    if ($result) {
+        $datos = mysqli_fetch_all($result, MYSQLI_ASSOC); //Convierte el resultado en array asociativo
+        return ["status" => "success", "message" => $datos];
+    } else {
+        return ["status" => "error", "message" => "Error al finalizar el elemento."];
+    }
+}
+
 // Maneja la acción solicitada
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -272,6 +285,10 @@ if (isset($_POST['action'])) {
             } else {
                 $response = ["status" => "error", "message" => "ID no proporcionado."];
             }
+            break;
+        case 'obtenerUsuarios':
+            # code...
+            $response = obtenerUsuarios();
             break;
         default:
             $response = ["status" => "error", "message" => "Acción no válida."];

@@ -170,7 +170,12 @@
             showDenyButton: true,
             showCancelButton: true,
             confirmButtonText: "Eliminar",
-            denyButtonText: "Finalizar tarea"
+            denyButtonText: "Finalizar tarea",
+            cancelButtonText: 'Cancelar',
+            html: `
+           <button id="otro-boton" class="swal2-styled">Compartir con usuario</button>
+            `
+
           }).then((result) => {
             if (result.isConfirmed) {
               // Enviar solicitud AJAX para eliminar el evento
@@ -228,7 +233,7 @@
       events: [
         <?php
         include('conexion.php');
-        $SqlEventos   = ("SELECT * FROM mantenimientos");
+        $SqlEventos   = ("SELECT * FROM mantenimientos where id_usuario = {$_SESSION['id_usuario']}");
         $resulEventos = mysqli_query($con, $SqlEventos);
         while ($dataEvento = mysqli_fetch_array($resulEventos)) { ?> {
             id: '<?php echo $dataEvento['id_mantenimiento']; ?>',
@@ -362,5 +367,61 @@
     });
 
     calendar.render();
+  });
+
+  // Evento para el botón extra
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'otro-boton') {
+      fetch('crud-calendar.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: `action=obtenerUsuarios`
+
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === "success") {
+            console.log(data.message);
+            Swal.fire({
+                title: "Inventario",
+                //showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Actualizar",
+                //denyButtonText: "Baja",
+                html: `
+                                    <select id="usuarios" class="form-control">
+                                        <option value=></option>
+                                    </select>
+                                `,
+                didOpen: () => {
+                  const select = document.getElementById("usuarios");
+
+                  // Limpiar el select y agregar una opción por defecto
+                  select.innerHTML = '<option value="">Seleccione un usuario</option>';
+
+                  // Recorrer arreglo de usuarios
+                  data.message.forEach(usuario => {
+                    const option = document.createElement("option");
+                    option.value = usuario.id_usuario; // o usuario.usuario si prefieres
+                    option.textContent = `${usuario.nombre} ${usuario.apellidoP} ${usuario.apellidoM}`;
+                    select.appendChild(option);
+                  });
+                },
+                preConfirm: () => {
+                  return {
+                    slect2: document.getElementById('usuarios').value
+                  };
+                }
+              })
+              .then((result) => {
+                if (result.isConfirmed) {
+                  console.log(result.value)
+                }
+              })
+          }
+        })
+    }
   });
 </script>
