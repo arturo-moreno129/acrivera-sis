@@ -55,7 +55,7 @@ if (!isset($_SESSION['ususario'])) {
                     </a>
                 </li>-->
                 <?php if ($_SESSION['rol'] == 1): ?>
-                    <li class="no-show">
+                    <li>
                         <a href="dashboard">
                             <ion-icon name="speedometer-outline"></ion-icon>
                             <span>Dashboard</span>
@@ -67,13 +67,13 @@ if (!isset($_SESSION['ususario'])) {
                             <span>Registro</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="no-show">
                         <a href="card_registro">
                             <ion-icon name="pencil-outline"></ion-icon>
                             <span>Registro</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="no-show">
                         <a href="resguardos">
                             <ion-icon name="folder-outline"></ion-icon>
                             <span>Resguardos</span>
@@ -85,19 +85,19 @@ if (!isset($_SESSION['ususario'])) {
                             <span>Calendario</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="no-show">
                         <a href="directorio">
                             <ion-icon name="call-outline"></ion-icon>
                             <span>Directorio</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="no-show">
                         <a href="inventario">
                             <ion-icon name="clipboard-outline"></ion-icon>
                             <span>inventario</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="no-show">
                         <a href="descarga_apk">
                             <ion-icon src="icons/logo-google-playstore.svg"></ion-icon>
                             <span>Kigo App</span>
