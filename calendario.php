@@ -15,10 +15,15 @@ include("scriptCalendar.php");
             <div class="circle red"></div>
             <div class="label">FINALIZADO</div>
         </div>
-        <div class="status">
+        <!--<div class="status">
             <div class="label link"><a href="mantenimientos" style="text-decoration: none; color:white;">VER LISTADO DE MANTENIMEINTOS</a></div>
+        </div>-->
+        <div class="status">
+            <div class="label">
+                <p>Para compartir un evento, haga clic en él y seleccione "Compartir".</p>
+            </div>
         </div>
-        
+
     </div>
     <div id='calendar'></div>
 </div>

@@ -283,7 +283,8 @@
         while ($dataEvento = mysqli_fetch_array($resulEventos)) { ?> {
             id: '<?php echo $dataEvento['id_mantenimiento']; ?>',
             title: '<?php echo $dataEvento['usuario_final']; ?>',
-            start: '<?php echo $dataEvento['fecha']; ?>',
+            start: '<?php echo $dataEvento['fecha'].'T'.$dataEvento['horaInicio']; ?>',
+            end: '<?php echo $dataEvento['fecha'].'T'.$dataEvento['horaFin']; ?>',
             color: '<?php echo ($dataEvento['estatus'] == 1) ? "#60c4f3" : "red" ?>',
             editable: '<?= ($dataEvento['estatus'] == 1 && $dataEvento['id_usuario'] == $_SESSION['id_usuario']) ?>',
             groupId: '<?php echo ($dataEvento['estatus'] == 1 && $dataEvento['id_usuario'] == $_SESSION['id_usuario']) ? 1 : 0 ?>',
@@ -430,7 +431,7 @@
           if (data.status === "success") {
             console.log(data.message);
             Swal.fire({
-                title: "Inventario",
+                title: "Usuarios",
                 //showDenyButton: true,
                 showCancelButton: true,
                 confirmButtonText: "Actualizar",

@@ -175,7 +175,8 @@ function insertarInventario($txtname, $txtequipo, $txtmodelo, $txtmarca, $txtno_
 function obtenerUsuarios()
 {
     global $con; // Usa la conexión global
-    $sqlinsert = "SELECT * FROM usuario";
+    $usuario = $_SESSION['id_usuario'];
+    $sqlinsert = "SELECT * FROM usuario WHERE id_usuario != $usuario";
     $result = mysqli_query($con, $sqlinsert);
     if ($result) {
         $datos = mysqli_fetch_all($result, MYSQLI_ASSOC); //Convierte el resultado en array asociativo
