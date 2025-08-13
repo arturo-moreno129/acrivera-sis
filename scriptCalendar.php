@@ -1,5 +1,7 @@
 <script>
+  var eventoSeleccionadoId = null;
   document.addEventListener("DOMContentLoaded", function() {
+
     var calendarEl = document.getElementById("calendar");
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -25,36 +27,32 @@
         //if (claveUser == comparation) {
 
         Swal.fire({
-          title: 'Detalles del mantenimiento',
+          title: 'Detalles de la Reunion',
           html: `
-            <input id="swal-input-title" class="swal2-input" placeholder="Nombre del usuario" onkeyup="this.value = this.value.toUpperCase();"><br>
-            <input id="swal-input-dispo" class="swal2-input" placeholder="Nombre del dispositivo" onkeyup="this.value = this.value.toUpperCase();"><br>
-            <table>
-              <thead>
-                <tr>
-                    <th>Tipo de mantenimiento</th>
-                    <th>No.</th>
-                </tr>
-                <tr>
-                    <td><label for="html">Programado</label><br></td>
-                    <td><input type="radio" id="swal-input-programado" name="option" value="1" checked></td>
-                </tr>
-                 <tr>
-                    <td><label for="css">Solicitado</label><br></td>
-                    <td><input type="radio" id="swal-input-solicitado" name="option" value="2"></td>
-                </tr>
-              </thead>
-            </table> 
+            <label for="html">Titulo</label>
+            <input id="swal-input-title" class="swal2-input" placeholder="Reunion con invitados" onkeyup="this.value = this.value.toUpperCase();"><br><br>
+            <label for="html">Fecha</label>
+            <input type="date" class="swal2-input"><br>
+            <label for="html">Hora inicio</label>
+            <input type="time" id="swal-input-start" class="swal2-input">
+            <label for="html">Hora fin</label>
+            <input type="time" id="swal-input-end" class="swal2-input"><br><br>
+            <label for="html">Detalles</label><br>
+            <textarea id="swal-input-dispo" class="swal2-textarea" placeholder="Detalles de la reunion"></textarea><br>
         `,
+          width: 500,
           focusConfirm: false,
           showCancelButton: true,
           confirmButtonText: 'Guardar',
           cancelButtonText: 'Cancelar',
           preConfirm: () => {
             const title = document.getElementById('swal-input-title').value;
+            const fecha = document.querySelector('input[type="date"]').value;
+            const horaInicio = document.getElementById('swal-input-start').value;
+            const horaFin = document.getElementById('swal-input-end').value;
             const dispo = document.getElementById('swal-input-dispo').value;
             //const mail = document.getElementById('swal-input-mail').value;
-            const opciones = document.getElementsByName('option');
+            /*const opciones = document.getElementsByName('option');
             var seleccion = '';
             for (const opcion of opciones) {
               if (opcion.checked) {
@@ -62,17 +60,28 @@
                 break;
               }
             }
-            option = seleccion;
+            option = seleccion;*/
             if (!title) {
               Swal.showValidationMessage('Por favor, ingrese el usuario');
             }
             if (!dispo) {
               Swal.showValidationMessage('Por favor, ingrese el dispositivo');
             }
-
+            if (!fecha) {
+              Swal.showValidationMessage('Por favor, ingrese la fecha');
+            }
+            if (!horaInicio) {
+              Swal.showValidationMessage('Por favor, ingrese la hora de inicio');
+            }
+            if (!horaFin) {
+              Swal.showValidationMessage('Por favor, ingrese la hora de fin');
+            }
             return {
               title,
               dispo,
+              fecha,
+              horaInicio,
+              horaFin
               //mail
             };
           }
@@ -81,6 +90,9 @@
             const {
               title,
               dispo,
+              fecha,
+              horaInicio,
+              horaFin
               //mail
             } = result.value;
             /**PRUEBA ENVIO DE DATOS A PHP */
@@ -101,17 +113,32 @@
             inputTitle.name = "phptitle";
             inputTitle.value = title;
 
+            const inputDispo = document.createElement("input");
+            inputDispo.type = "hidden";
+            inputDispo.name = "phpdispo";
+            inputDispo.value = dispo;
+
             const inputDate = document.createElement("input");
             inputDate.type = "hidden";
             inputDate.name = "phpdate";
             inputDate.value = fecha;
+
+            const inputHoraInicio = document.createElement("input");
+            inputHoraInicio.type = "hidden";
+            inputHoraInicio.name = "phpHoraInicio";
+            inputHoraInicio.value = horaInicio;
+
+            const inputHoraFin = document.createElement("input");
+            inputHoraFin.type = "hidden";
+            inputHoraFin.name = "phpHoraFin";
+            inputHoraFin.value = horaFin;
 
             const inputUser = document.createElement("input");
             inputUser.type = "hidden";
             inputUser.name = "phpuser";
             inputUser.value = "<?php echo $_SESSION['id_usuario']; ?>";
 
-            const inputRadio = document.createElement("input");
+            /*const inputRadio = document.createElement("input");
             inputRadio.type = "hidden";
             inputRadio.name = "phpRadio";
             inputRadio.value = option;
@@ -119,7 +146,9 @@
             const inputdispo = document.createElement("input");
             inputdispo.type = "hidden";
             inputdispo.name = "phpdispo";
-            inputdispo.value = dispo;
+            inputdispo.value = dispo;*/
+
+
 
             /*const inputMail = document.createElement("input");
             inputMail.type = "hidden";
@@ -128,17 +157,21 @@
 
             // Agregar campos y enviar formulario
             form.appendChild(inputTitle);
+            form.appendChild(inputDispo);
             form.appendChild(inputDate);
-            form.appendChild(inputdispo);
             form.appendChild(inputUser);
-            form.appendChild(inputRadio);
+            //form.appendChild(inputRadio);
+            form.appendChild(inputHoraInicio);
+            form.appendChild(inputHoraFin);
+
             //form.appendChild(inputMail);
             document.body.appendChild(form);
             form.submit();
             /********************************* */
             calendar.addEvent({
               title: title,
-              start: fecha,
+              start: horaInicio,
+              end: horaFin,
               description: description, // Puedes agregar más campos si es necesario
               location: location,
             });
@@ -158,6 +191,8 @@
         calendar.unselect();
       },
       eventClick: function(arg) {
+
+        eventoSeleccionadoId = arg.event.id;
         if (arg.event.groupId == 0) {
           Swal.fire({
             title: "Acceso denegado",
@@ -233,7 +268,17 @@
       events: [
         <?php
         include('conexion.php');
-        $SqlEventos   = ("SELECT * FROM mantenimientos where id_usuario = {$_SESSION['id_usuario']}");
+        $SqlEventos   =
+          (
+            "SELECT m.*
+              FROM mantenimientos m
+              WHERE m.id_usuario = {$_SESSION['id_usuario']} and m.estatus != 2
+              UNION
+              SELECT m.*
+              FROM mantenimientos m
+              JOIN compartidos c ON m.id_mantenimiento = c.id_cita
+              WHERE c.id_usuario_compartido = {$_SESSION['id_usuario']} and m.estatus != 2"
+          );
         $resulEventos = mysqli_query($con, $SqlEventos);
         while ($dataEvento = mysqli_fetch_array($resulEventos)) { ?> {
             id: '<?php echo $dataEvento['id_mantenimiento']; ?>',
@@ -417,7 +462,28 @@
               })
               .then((result) => {
                 if (result.isConfirmed) {
-                  console.log(result.value)
+                  console.log("resultado:", result.value)
+                  const selectedUser = result.value.slect2;
+                  if (selectedUser) {
+                    // Aquí puedes hacer algo con el usuario seleccionado
+                    console.log("Usuario seleccionado:", selectedUser);
+                    fetch('crud-calendar.php', {
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `action=compartir&id=${eventoSeleccionadoId}&usuario=${selectedUser}`
+                      })
+                      .then(response => response.json())
+                      .then(data => {
+                        if (data.status === "success") {
+                          Swal.fire(data.message, "", "success");
+                        } else {
+                          Swal.fire("Error", data.message, "error");
+                        }
+                      })
+                      .catch(error => Swal.fire("Error", "No se pudo conectar con el servidor.", "error"));
+                  }
                 }
               })
           }

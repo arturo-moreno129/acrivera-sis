@@ -7,7 +7,7 @@ function eliminarEvento($id_mantenimiento)
     global $con; // Usa la conexión global
     $id_mantenimiento = intval($id_mantenimiento); // Convierte a entero para seguridad
 
-    $sqlEliminar = "DELETE FROM mantenimientos WHERE id_mantenimiento = $id_mantenimiento";
+    $sqlEliminar = "UPDATE mantenimientos SET estatus = 2 WHERE id_mantenimiento = '$id_mantenimiento'";
     $resultEliminar = mysqli_query($con, $sqlEliminar);
 
     if ($resultEliminar) {
@@ -184,6 +184,18 @@ function obtenerUsuarios()
         return ["status" => "error", "message" => "Error al finalizar el elemento."];
     }
 }
+function compartirEvento($id_mantenimiento, $id_usuario_compartido) {
+    global $con; // Usa la conexión global
+    $id_mantenimiento = intval($id_mantenimiento);
+    $id_usuario_compartido = intval($id_usuario_compartido);
+    $sqlinsert = "INSERT INTO compartidos (id_compartido, id_cita, id_usuario_compartido) VALUES (default, $id_mantenimiento, $id_usuario_compartido)";
+    $result = mysqli_query($con, $sqlinsert);
+    if ($result) {
+        return ["status" => "success", "message" => "Evento compartido correctamente"];
+    } else {
+        return ["status" => "error", "message" => "Error al compartir el evento."];
+    }
+}
 
 // Maneja la acción solicitada
 if (isset($_POST['action'])) {
@@ -289,6 +301,13 @@ if (isset($_POST['action'])) {
         case 'obtenerUsuarios':
             # code...
             $response = obtenerUsuarios();
+            break;
+        case 'compartir':
+            if (isset($_POST['id']) && isset($_POST['usuario'])) {
+                $response = compartirEvento($_POST['id'], $_POST['usuario']);
+            } else {
+                $response = ["status" => "error", "message" => "ID o usuario no proporcionado."];
+            }
             break;
         default:
             $response = ["status" => "error", "message" => "Acción no válida."];

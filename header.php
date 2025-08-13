@@ -80,12 +80,6 @@ if (!isset($_SESSION['ususario'])) {
                         </a>
                     </li>
                     <li class="no-show">
-                        <a href="calendario">
-                            <ion-icon name="calendar-outline"></ion-icon>
-                            <span>Calendario</span>
-                        </a>
-                    </li>
-                    <li class="no-show">
                         <a href="directorio">
                             <ion-icon name="call-outline"></ion-icon>
                             <span>Directorio</span>
@@ -108,6 +102,12 @@ if (!isset($_SESSION['ususario'])) {
                         <a href="directorio">
                             <ion-icon name="call-outline"></ion-icon>
                             <span>Directorio</span>
+                        </a>
+                    </li>
+                    <li class="no-show">
+                        <a href="calendario">
+                            <ion-icon name="calendar-outline"></ion-icon>
+                            <span>Calendario</span>
                         </a>
                     </li>
                     <!--<li>
