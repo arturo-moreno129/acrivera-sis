@@ -1,6 +1,6 @@
 <?php
 include('conexion.php'); // Incluye la conexión a la base de datos
-
+session_start();//se debe de poner siempre donde se usan sesiones
 // Función para eliminar un evento
 function eliminarEvento($id_mantenimiento)
 {
@@ -175,8 +175,8 @@ function insertarInventario($txtname, $txtequipo, $txtmodelo, $txtmarca, $txtno_
 function obtenerUsuarios()
 {
     global $con; // Usa la conexión global
-    $usuario = $_SESSION['id_usuario'];
-    $sqlinsert = "SELECT * FROM usuario WHERE id_usuario != $usuario";
+    $usuario_encontrado = $_SESSION['id_usuario'];
+    $sqlinsert = "SELECT * FROM usuario WHERE id_usuario != '{$usuario_encontrado}'";
     $result = mysqli_query($con, $sqlinsert);
     if ($result) {
         $datos = mysqli_fetch_all($result, MYSQLI_ASSOC); //Convierte el resultado en array asociativo

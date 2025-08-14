@@ -18,8 +18,8 @@
       selectMirror: true,
       select: function(arg) {
         //console.log(arg.start.toISOString().split('.')[0]);
-        const fecha = arg.start.toLocaleDateString('en-CA'); // Formato 'YYYY-MM-DD'
-        console.log(fecha);
+        const fechaCita = arg.start.toLocaleDateString('en-CA'); // Formato 'YYYY-MM-DD'
+        console.log("esta es la fecha: " + fechaCita);
 
         //var startTime = arg.start.toISOString().split('.')[0];
         //var claveUser = "1299790";
@@ -31,10 +31,8 @@
           html: `
             <label for="html">Titulo</label>
             <input id="swal-input-title" class="swal2-input" placeholder="Reunion con invitados" onkeyup="this.value = this.value.toUpperCase();"><br><br>
-            <label for="html">Fecha</label>
-            <input type="date" class="swal2-input"><br>
             <label for="html">Hora inicio</label>
-            <input type="time" id="swal-input-start" class="swal2-input">
+            <input type="time" id="swal-input-start" class="swal2-input"><br>
             <label for="html">Hora fin</label>
             <input type="time" id="swal-input-end" class="swal2-input"><br><br>
             <label for="html">Detalles</label><br>
@@ -47,7 +45,6 @@
           cancelButtonText: 'Cancelar',
           preConfirm: () => {
             const title = document.getElementById('swal-input-title').value;
-            const fecha = document.querySelector('input[type="date"]').value;
             const horaInicio = document.getElementById('swal-input-start').value;
             const horaFin = document.getElementById('swal-input-end').value;
             const dispo = document.getElementById('swal-input-dispo').value;
@@ -67,9 +64,6 @@
             if (!dispo) {
               Swal.showValidationMessage('Por favor, ingrese el dispositivo');
             }
-            if (!fecha) {
-              Swal.showValidationMessage('Por favor, ingrese la fecha');
-            }
             if (!horaInicio) {
               Swal.showValidationMessage('Por favor, ingrese la hora de inicio');
             }
@@ -79,7 +73,6 @@
             return {
               title,
               dispo,
-              fecha,
               horaInicio,
               horaFin
               //mail
@@ -90,7 +83,6 @@
             const {
               title,
               dispo,
-              fecha,
               horaInicio,
               horaFin
               //mail
@@ -121,7 +113,7 @@
             const inputDate = document.createElement("input");
             inputDate.type = "hidden";
             inputDate.name = "phpdate";
-            inputDate.value = fecha;
+            inputDate.value = fechaCita;
 
             const inputHoraInicio = document.createElement("input");
             inputHoraInicio.type = "hidden";
@@ -451,7 +443,7 @@
                   data.message.forEach(usuario => {
                     const option = document.createElement("option");
                     option.value = usuario.id_usuario; // o usuario.usuario si prefieres
-                    option.textContent = `${usuario.nombre} ${usuario.apellidoP} ${usuario.apellidoM}`;
+                    option.textContent = `${usuario.nombre.toUpperCase()} ${usuario.apellidoP.toUpperCase()} ${usuario.apellidoM.toUpperCase()}`;
                     select.appendChild(option);
                   });
                 },
