@@ -30,7 +30,7 @@
           title: 'Detalles de la Reunion',
           html: `
             <label for="html">Titulo</label>
-            <input id="swal-input-title" class="swal2-input" placeholder="Reunion con invitados" onkeyup="this.value = this.value.toUpperCase();"><br><br>
+            <input id="swal-input-title" class="swal2-input" placeholder="Recepción Vanes" onkeyup="this.value = this.value.toUpperCase();"><br><br>
             <label for="html">Hora inicio</label>
             <input type="time" id="swal-input-start" class="swal2-input"><br>
             <label for="html">Hora fin</label>

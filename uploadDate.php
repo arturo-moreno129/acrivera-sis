@@ -18,7 +18,7 @@ $correo = "correo@oulook.com";//$_POST['phpmail'];
 $query = "INSERT INTO mantenimientos VALUES(default,'$name','$date','$dispo',1,1,'$correo','$user','$horaInicio','$horaFin')";
 $resul = mysqli_query($con, $query);
 $_SESSION['pop-up'] = 1;
-header("location:mantenimientos.php");
+header("location:calendario");
 /*
 // Incluye el archivo de PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
