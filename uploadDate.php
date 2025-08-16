@@ -7,12 +7,12 @@ $user = $_POST['phpuser'];
 $horaInicio = $_POST['phpHoraInicio'];
 $horaFin = $_POST['phpHoraFin'];
 $dispo = $_POST['phpdispo'];//detalles de la reunion
-$correo = "correo@oulook.com";//$_POST['phpmail'];
+$correo = $_SESSION['nombre'] . " " . $_SESSION['apellidoP'] . " " . $_SESSION['apellidoM'];//$_POST['phpmail'];
 
 
 //$tipoMan = $_POST['phpRadio'];
 $dispo = $_POST['phpdispo'];//detalles de la reunion
-$correo = "correo@oulook.com";//$_POST['phpmail'];
+$correo = strtoupper($correo);//"correo@oulook.com";//$_POST['phpmail'];
 // Procesar los datos...
 //echo "Titulo: $title, Descripcion: $description, Fecha: $date, Usuario: $user";
 $query = "INSERT INTO mantenimientos VALUES(default,'$name','$date','$dispo',1,1,'$correo','$user','$horaInicio','$horaFin')";

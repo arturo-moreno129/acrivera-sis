@@ -1,6 +1,6 @@
 <?php
 include('conexion.php'); // Incluye la conexión a la base de datos
-session_start();//se debe de poner siempre donde se usan sesiones
+session_start(); //se debe de poner siempre donde se usan sesiones
 // Función para eliminar un evento
 function eliminarEvento($id_mantenimiento)
 {
@@ -185,7 +185,8 @@ function obtenerUsuarios()
         return ["status" => "error", "message" => "Error al finalizar el elemento."];
     }
 }
-function compartirEvento($id_mantenimiento, $id_usuario_compartido) {
+function compartirEvento($id_mantenimiento, $id_usuario_compartido)
+{
     global $con; // Usa la conexión global
     $id_mantenimiento = intval($id_mantenimiento);
     $id_usuario_compartido = intval($id_usuario_compartido);
@@ -194,7 +195,20 @@ function compartirEvento($id_mantenimiento, $id_usuario_compartido) {
     if ($result) {
         return ["status" => "success", "message" => "Evento compartido correctamente"];
     } else {
-        return ["status" => "error", "message" => "Error al compartir el evento."];
+        return ["status" => "error", "message" => "Error al compartir el evento. El evento ya fue compartido con este usuario."];
+    }
+}
+function actualizarFecha($id_evento, $nuevaFecha)
+{
+    global $con; // Usa la conexión global
+    $id_evento = intval($id_evento);
+    $nuevaFecha = mysqli_real_escape_string($con, $nuevaFecha);
+    $sqlupdate = "UPDATE mantenimientos SET fecha = '$nuevaFecha' WHERE id_mantenimiento = $id_evento";
+    $result = mysqli_query($con, $sqlupdate);
+    if ($result) {
+        return ["status" => "success", "message" => "Fecha actualizada correctamente"];
+    } else {
+        return ["status" => "error", "message" => "Error al actualizar la fecha."];
     }
 }
 
@@ -308,6 +322,13 @@ if (isset($_POST['action'])) {
                 $response = compartirEvento($_POST['id'], $_POST['usuario']);
             } else {
                 $response = ["status" => "error", "message" => "ID o usuario no proporcionado."];
+            }
+            break;
+        case 'actualizarFecha':
+            if (isset($_POST['id']) && isset($_POST['fecha'])) {
+                $response = actualizarFecha($_POST['id'], $_POST['fecha']);
+            } else {
+                $response = ["status" => "error", "message" => "ID o fecha no proporcionada."];
             }
             break;
         default:

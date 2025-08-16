@@ -20,12 +20,22 @@ include("scriptCalendar.php");
         </div>-->
         <div class="status">
             <div class="label">
-                <p>Para crear un evento, haga click en la fecha "Crear".</p>
+                <p>Para crear un evento, haga click en la fecha y llene los campos requeridos.</p>
             </div>
         </div>
         <div class="status">
             <div class="label">
                 <p>Para compartir un evento, haga click en él y seleccione "Compartir".</p>
+            </div>
+        </div>
+        <div class="status">
+            <div class="label">
+                <p>Para visualizar más información del evento, deje el cursor sobre él.</p>
+            </div>
+        </div>
+        <div class="status">
+            <div class="label">
+                <p>Para cambiar de fecha un evento, arrastre y suelte el evento en la nueva fecha.</p>
             </div>
         </div>
 

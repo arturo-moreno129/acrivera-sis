@@ -282,7 +282,7 @@
             groupId: '<?php echo ($dataEvento['estatus'] == 1 && $dataEvento['id_usuario'] == $_SESSION['id_usuario']) ? 1 : 0 ?>',
             extendedProps: {
               //location: "Sala A",
-              description: '<?php echo $dataEvento['usuario_final']; ?>',
+              description: 'Titulo: <?php echo $dataEvento['usuario_final']; ?>\nFecha: <?php echo $dataEvento['fecha']; ?>\nHora: <?php echo $dataEvento['horaInicio']; ?> - <?php echo $dataEvento['horaFin']; ?>\nDetalles: <?php echo $dataEvento['dispositivo']; ?>\nRealizado por: <?php echo $dataEvento['correo']; ?>',//es el placeholder de los eventos
               //organizer: "María",
               //perro: 1
             }
@@ -398,9 +398,27 @@
       },
       eventDrop: function(info) {
         // Aquí puedes manejar el evento después de que se suelta
-        console.log('El evento ' + info.event.title + ' fue movido a: ' + info.event.start);
+        //console.log(info.event.id+'El evento ' + info.event.title + ' fue movido a: ' + info.event.start.toISOString().slice(0, 10) + ' y finaliza en: ' + info.event.end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false }));
         // Restablecer el estilo del evento
         info.el.style.opacity = ''; // Restablecer opacidad
+        const id_evento = info.event.id;
+        const nuevaFecha = info.event.start.toISOString().slice(0, 10);
+        console.log("ID del evento: " + id_evento + ", Nueva fecha: " + nuevaFecha);
+        fetch('crud-calendar.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: `action=actualizarFecha&id=${id_evento}&fecha=${nuevaFecha}`
+        }).then(response => response.json())
+          .then(data => {
+            if (data.status === "success") {
+              Swal.fire(data.message, "", "success");
+            } else {
+              Swal.fire("Error", data.message, "error");
+            }
+          })
+          .catch(error => Swal.fire("Error", "No se pudo conectar con el servidor.", "error"));
       }
     });
 
