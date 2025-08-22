@@ -38,7 +38,7 @@ include("scriptCalendar.php");
                 <p>Para cambiar de fecha un evento, arrastre y suelte el evento en la nueva fecha.</p>
             </div>
         </div>
-
+        
     </div>
     <div id='calendar'></div>
 </div>

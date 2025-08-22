@@ -80,6 +80,7 @@
           }
         }).then((result) => {
           if (result.isConfirmed) {
+            //abrirOutlook("soporte2@acrivera.com.mx", "Hola!", "Este es un correo de prueba desde mi web");
             const {
               title,
               dispo,
@@ -275,14 +276,14 @@
         while ($dataEvento = mysqli_fetch_array($resulEventos)) { ?> {
             id: '<?php echo $dataEvento['id_mantenimiento']; ?>',
             title: '<?php echo $dataEvento['usuario_final']; ?>',
-            start: '<?php echo $dataEvento['fecha'].'T'.$dataEvento['horaInicio']; ?>',
-            end: '<?php echo $dataEvento['fecha'].'T'.$dataEvento['horaFin']; ?>',
+            start: '<?php echo $dataEvento['fecha'] . 'T' . $dataEvento['horaInicio']; ?>',
+            end: '<?php echo $dataEvento['fecha'] . 'T' . $dataEvento['horaFin']; ?>',
             color: '<?php echo ($dataEvento['estatus'] == 1) ? "#60c4f3" : "red" ?>',
             editable: '<?= ($dataEvento['estatus'] == 1 && $dataEvento['id_usuario'] == $_SESSION['id_usuario']) ?>',
             groupId: '<?php echo ($dataEvento['estatus'] == 1 && $dataEvento['id_usuario'] == $_SESSION['id_usuario']) ? 1 : 0 ?>',
             extendedProps: {
               //location: "Sala A",
-              description: 'Titulo: <?php echo $dataEvento['usuario_final']; ?>\nFecha: <?php echo $dataEvento['fecha']; ?>\nHora: <?php echo $dataEvento['horaInicio']; ?> - <?php echo $dataEvento['horaFin']; ?>\nDetalles: <?php echo $dataEvento['dispositivo']; ?>\nRealizado por: <?php echo $dataEvento['correo']; ?>',//es el placeholder de los eventos
+              description: 'Titulo: <?php echo $dataEvento['usuario_final']; ?>\nFecha: <?php echo $dataEvento['fecha']; ?>\nHora: <?php echo $dataEvento['horaInicio']; ?> - <?php echo $dataEvento['horaFin']; ?>\nDetalles: <?php echo $dataEvento['dispositivo']; ?>\nRealizado por: <?php echo $dataEvento['correo']; ?>', //es el placeholder de los eventos
               //organizer: "María",
               //perro: 1
             }
@@ -405,12 +406,12 @@
         const nuevaFecha = info.event.start.toISOString().slice(0, 10);
         console.log("ID del evento: " + id_evento + ", Nueva fecha: " + nuevaFecha);
         fetch('crud-calendar.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: `action=actualizarFecha&id=${id_evento}&fecha=${nuevaFecha}`
-        }).then(response => response.json())
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `action=actualizarFecha&id=${id_evento}&fecha=${nuevaFecha}`
+          }).then(response => response.json())
           .then(data => {
             if (data.status === "success") {
               Swal.fire(data.message, "", "success");
@@ -501,4 +502,9 @@
         })
     }
   });
+
+  function abrirOutlook(destinatario, asunto, cuerpo) {
+    const link = `mailto:${destinatario}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+    window.location.href = link;
+  }
 </script>
