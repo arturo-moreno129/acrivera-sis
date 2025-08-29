@@ -52,8 +52,8 @@ include "header.php";
                                 <td>' . $row["nombre"] . '</td>
                                 <td>' . $row["fecha"] . '</td>
                                 <td>' . $row["dispositivo"] . '</td>
-                                <td>' . ($row["url_resguardo"] != null ? '<a href="view_pdf.php?file=' . $row["nombre"] . "/" . $row["url_resguardo"] . '" style="pointer-events:auto" rel="noopener noreferrer"> <img id="pdf-icon" src="imagenes/pdf_img.png" alt="" style="width: 35px;"> </a>' : '<img id="pdf-icon" src="imagenes/error.png" alt="" style="width: 35px;">') . '</td>
-                                <td>' . ($row["url_mantenimiento"] != null ? '<a href="view_pdf.php?file=' . $row["nombre"] . "/" . $row["url_mantenimiento"] . '" style="pointer-events:auto" rel="noopener noreferrer"> <img id="pdf-icon" src="imagenes/pdf_img.png" alt="" style="width: 35px;"> </a>' : '<img id="pdf-icon" src="imagenes/error.png" alt="" style="width: 35px;">') . '</td>
+                                <td>' . ($row["url_resguardo"] != null ? '<a target="_blank" href="view_pdf.php?file=' . $row["nombre"] . "/" . $row["url_resguardo"] . '" style="pointer-events:auto" rel="noopener noreferrer"> <img id="pdf-icon" src="imagenes/pdf_img.png" alt="" style="width: 35px;"> </a>' : '<img id="pdf-icon" src="imagenes/error.png" alt="" style="width: 35px;">') . '</td>
+                                <td>' . ($row["url_mantenimiento"] != null ? '<a target="_blank" href="view_pdf.php?file=' . $row["nombre"] . "/" . $row["url_mantenimiento"] . '" style="pointer-events:auto" rel="noopener noreferrer"> <img id="pdf-icon" src="imagenes/pdf_img.png" alt="" style="width: 35px;"> </a>' : '<img id="pdf-icon" src="imagenes/error.png" alt="" style="width: 35px;">') . '</td>
                                 <td>' . (($row['estatus'] == 0 or $row['estatus_mant'] == 0) ? '<a href="pendientes.php?id=' . $row["id_evidencia"] . '" style="pointer-events:auto" rel="noopener noreferrer"> <img id="pdf-icon" src="imagenes/pendiente_firma.png" alt="" style="width: 35px;"> </a>' : '<img id="pdf-icon" src="imagenes/chek.png" alt="" style="width: 35px;">') . '</td>
                             </tr>';
                     }
@@ -210,7 +210,7 @@ include "header.php";
         selectOption.addEventListener('change', () => {
             let flag = selectOption.value;
             const inputbuscar = document.querySelector('#input-search-resguardo');
-            (flag == '') ? inputbuscar.style.display = 'none' : inputbuscar.style.display = 'block'; 
+            (flag == '') ? inputbuscar.style.display = 'none': inputbuscar.style.display = 'block';
         })
     }
     const selectOption2 = document.querySelector("#mySelectReparacion");
@@ -218,7 +218,7 @@ include "header.php";
         selectOption2.addEventListener('change', () => {
             let flag = selectOption2.value;
             const inputbuscar = document.querySelector('#input-search-reparacion');
-            (flag == '') ? inputbuscar.style.display = 'none' : inputbuscar.style.display = 'block';
+            (flag == '') ? inputbuscar.style.display = 'none': inputbuscar.style.display = 'block';
         })
     }
 </script>
