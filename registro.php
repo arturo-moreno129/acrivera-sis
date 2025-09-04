@@ -39,6 +39,7 @@
             <option value="BLUE LINK">BLUE LINK</option>
             <option value="XENTRY">XENTRY</option>
             <option value="SOFTWARE">SOFTWARE</option>
+            <option value="CARGADOR">CARGADOR</option>
             <option value="OTRO">OTRO</option>
         </select>
         <!--<input type="text" id="lname" name="device" placeholder="Dispositivo" onkeyup="this.value = this.value.toUpperCase();" required><br>-->
