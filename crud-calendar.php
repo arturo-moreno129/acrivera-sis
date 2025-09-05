@@ -212,6 +212,45 @@ function actualizarFecha($id_evento, $nuevaFecha)
     }
 }
 
+function actualizarConsumibles($id_consumible, $cantidad, $tipo)
+{
+    global $con; // Usa la conexión global
+    $id_consumible = intval($id_consumible);
+    $cantidad = intval($cantidad);
+    $tipo = $tipo; // 'entrada' o 'salida'
+    if ($tipo === 'entrada') {
+        $sqlupdate = "UPDATE consumibles SET cantidad_disponible = cantidad_disponible + $cantidad WHERE id_consumible = $id_consumible";
+        $result = mysqli_query($con, $sqlupdate);
+        if ($result) {
+            $sqlinsert = "INSERT INTO movimientos_consumibles VALUES (default, '$tipo', $cantidad, NOW(),'N/A',$id_consumible)";
+            $result = mysqli_query($con, $sqlinsert);
+            if ($result) {
+                return ["status" => "success", "message" => "Consumibles actualizados correctamente"];
+            } else {
+                return ["status" => "error", "message" => "Error al registrar el movimiento."];
+            }
+        } else {
+            return ["status" => "error", "message" => "Error al actualizar los consumibles."];
+        }
+    } elseif ($tipo === 'salida') {
+        $sqlupdate = "UPDATE consumibles SET cantidad_disponible = GREATEST(cantidad_disponible - $cantidad, 0) WHERE id_consumible = $id_consumible";//GREATEST(x(resultado de la resta), 0) → devuelve el valor más grande entre x y 0. si x es negativo, devuelve 0.
+        $result = mysqli_query($con, $sqlupdate);
+        if ($result) {
+            $sqlinsert = "INSERT INTO movimientos_consumibles VALUES (default, '$tipo', $cantidad, NOW(),'N/A',$id_consumible)";
+            $result = mysqli_query($con, $sqlinsert);
+            if ($result) {
+                return ["status" => "success", "message" => "Consumibles actualizados correctamente"];
+            } else {
+                return ["status" => "error", "message" => "Error al registrar el movimiento."];
+            }
+        } else {
+            return ["status" => "error", "message" => "Error al actualizar los consumibles."];
+        }
+    } else {
+        return ["status" => "error", "message" => "Tipo no válido. Debe ser 'entrada' o 'salida'."];
+    }
+}
+
 // Maneja la acción solicitada
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -327,6 +366,13 @@ if (isset($_POST['action'])) {
         case 'actualizarFecha':
             if (isset($_POST['id']) && isset($_POST['fecha'])) {
                 $response = actualizarFecha($_POST['id'], $_POST['fecha']);
+            } else {
+                $response = ["status" => "error", "message" => "ID o fecha no proporcionada."];
+            }
+            break;
+        case 'actualizarConsumibles':
+            if (isset($_POST['id_consumible']) && isset($_POST['cantidad']) && isset($_POST['tipo'])) {
+                $response = actualizarConsumibles($_POST['id_consumible'], $_POST['cantidad'], $_POST['tipo']);
             } else {
                 $response = ["status" => "error", "message" => "ID o fecha no proporcionada."];
             }

@@ -601,27 +601,72 @@ document.addEventListener("DOMContentLoaded", () => {
                         inputPlaceholder: 'Ingresa la cantidad',
                         showCancelButton: true,
                         confirmButtonText: 'Agregar',
-                        cancelButtonText: 'Cancelar'
+                        cancelButtonText: 'Cancelar',
+                        inputAttributes: {
+                            min: 1 // 👈 evita valores menores desde el input
+                        }
                     }).then((result) => {
                         if (result.isConfirmed) {
                             const cantidad = result.value;
+                            console.log(`Agregar ${cantidad} al consumible con ID: ${id_consumible}`);
                             // Aquí puedes agregar la lógica para agregar los consumibles
                             fetch('crud-calendar.php', {
                                 method: 'POST',
                                 headers: {
-                                    'Content-Type': 'application/json'
+                                    'Content-Type': 'application/x-www-form-urlencoded'
                                 },
-                                body: `action=actualizarConsumibles&id=${id_impresora}&cantidad=${cantidad}`
+                                body: `action=actualizarConsumibles&id_consumible=${id_consumible}&cantidad=${cantidad}&tipo=entrada`
                             }).then(response => response.json())
                                 .then(data => {
                                     if (data.status === 'success') {
-                                        Swal.fire("Consumibles agregados", "", "success");
+                                        Swal.fire("Consumibles agregados", "", "success").then(result => {
+                                            if (result.isConfirmed) {
+                                                location.reload();
+                                            }
+                                        });
+                                    } else {
+                                        Swal.fire("Error", data.message, "error");
                                     }
                                 });
                         }
                     });
-                } else if (result.isDenied) {
-                    Swal.fire("Changes are not saved", "", "info");
+                } else if (result.isDenied) {//para quitar consumibles
+                    Swal.fire({
+                        title: 'Quitar consumibles',
+                        input: 'number',
+                        inputLabel: 'Cantidad a quitar',
+                        inputPlaceholder: 'Ingresa la cantidad',
+                        showCancelButton: true,
+                        confirmButtonText: 'Quitar',
+                        cancelButtonText: 'Cancelar',
+                        inputAttributes: {
+                            min: 1 // 👈 evita valores menores desde el input
+                        },
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            const cantidad = result.value;
+                            console.log(`Quitar ${cantidad} al consumible con ID: ${id_consumible}`);
+                            // Aquí puedes agregar la lógica para quitar los consumibles
+                            fetch('crud-calendar.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded'
+                                },
+                                body: `action=actualizarConsumibles&id_consumible=${id_consumible}&cantidad=${cantidad}&tipo=salida`
+                            }).then(response => response.json())
+                                .then(data => {
+                                    if (data.status === 'success') {
+                                        Swal.fire("Consumibles quitados", "", "success").then(result => {
+                                            if (result.isConfirmed) {
+                                                location.reload();
+                                            }
+                                        });
+                                    } else {
+                                        Swal.fire("Error", data.message, "error");
+                                    }
+                                });
+                        }
+                    });
                 }
             });
         });
