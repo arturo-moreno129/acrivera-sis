@@ -564,7 +564,68 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     /******************************FIN DEL BOTON */
-
+    const card = document.querySelectorAll('.card1');
+    card.forEach((btn) => {
+        btn.addEventListener("click", function () {
+            const ubicacion = this.getAttribute("data_ubicacion");
+            const no_serie = this.getAttribute("data_no_serie");
+            const modelo = this.getAttribute("data_modelo");
+            const id_consumible = this.getAttribute("data_id_consumible");
+            const nombre = this.getAttribute("data_nombre");
+            const cantidad_disponible = this.getAttribute("data_cantidad_disponible");
+            //console.log(ubicacion, no_serie, modelo, id_consumible, cantidad_disponible);
+            /*Swal.fire({
+                title: "Detalles de la impresora",
+                confirmButtonText: "Cerrar",
+                html: `
+                    <p><strong>Ubicación:</strong> ${ubicacion}</p>
+                    <p><strong>No. de Serie:</strong> ${no_serie}</p>
+                    <p><strong>Modelo:</strong> ${modelo}</p>
+                    <p><strong>Tóner:</strong> ${id_consumible}</p>
+                    <p><strong>Consumibles disponibles:</strong> ${cantidad_disponible}</p>
+                `
+            });*/
+            Swal.fire({
+                title: "¿Que deseas hacer?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Agregar consumibles",
+                denyButtonText: `Quitar consumibles`,
+            }).then((result) => {
+                //Read more about isConfirmed, isDenied below 
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Agregar consumibles',
+                        input: 'number',
+                        inputLabel: 'Cantidad a agregar',
+                        inputPlaceholder: 'Ingresa la cantidad',
+                        showCancelButton: true,
+                        confirmButtonText: 'Agregar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            const cantidad = result.value;
+                            // Aquí puedes agregar la lógica para agregar los consumibles
+                            fetch('crud-calendar.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: `action=actualizarConsumibles&id=${id_impresora}&cantidad=${cantidad}`
+                            }).then(response => response.json())
+                                .then(data => {
+                                    if (data.status === 'success') {
+                                        Swal.fire("Consumibles agregados", "", "success");
+                                    }
+                                });
+                        }
+                    });
+                } else if (result.isDenied) {
+                    Swal.fire("Changes are not saved", "", "info");
+                }
+            });
+        });
+    });
 
 
 });// fin del DOM
