@@ -671,6 +671,4 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     });
-
-
 });// fin del DOM

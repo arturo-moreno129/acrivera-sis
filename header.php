@@ -55,15 +55,15 @@ if (!isset($_SESSION['ususario'])) {
                     </a>
                 </li>-->
                 <?php if ($_SESSION['rol'] == 1): ?>
-                    <li>
-                        <a href="dashboard">
-                            <ion-icon name="speedometer-outline"></ion-icon>
-                            <span>Dashboard</span>
+                     <li>
+                        <a href="monitoreo_red">
+                            <ion-icon name="radio-outline"></ion-icon>
+                            <span>Monitoreo de Red</span>
                         </a>
                     </li>
-                     <li>
+                    <li>
                         <a href="consumibles">
-                            <ion-icon name="print-outline"></ion-icon>
+                            <ion-icon name="flask-outline"></ion-icon>
                             <span>Consumibles</span>
                         </a>
                     </li>
