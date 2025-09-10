@@ -1,18 +1,208 @@
 <?php
 include 'header.php';
 ?>
+<style>
+    :root {
+        --bg: #0f172a;
+        /* slate-900 */
+        --card: #111827;
+        /* slate-800 */
+        --muted: #94a3b8;
+        /* slate-400 */
+        --text: #e5e7eb;
+        /* gray-200 */
+        --accent: #22c55e;
+        /* green-500 */
+        --accent-600: #16a34a;
+        /* green-600 */
+        --ring: rgba(34, 197, 94, .45);
+        --border: #1f2937;
+        /* slate-700 */
+        --danger: #ef4444;
+        /* red-500 */
+    }
+
+    .card-1 {
+        width: 100%;
+        max-width: 1000px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        overflow: hidden;
+    }
+
+    .card__header-1 {
+        padding: 22px 24px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(17, 24, 39, .65);
+        backdrop-filter: blur(6px);
+    }
+
+    .card__title-1 {
+        margin: 0;
+        font-size: clamp(18px, 2vw, 22px);
+        font-weight: 700;
+        letter-spacing: .3px;
+    }
+
+    .card__subtitle-1 {
+        margin-left: auto;
+        font-size: 12px;
+        color: var(--muted);
+    }
+
+    form.user-form-1 {
+        padding: 22px;
+        display: grid;
+        gap: 18px;
+    }
+
+    .grid-1 {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+
+    /* 2-column layout on md+, full width on mobile */
+    .col-6 {
+        grid-column: span 12;
+    }
+
+    @media (min-width: 760px) {
+        .col-6 {
+            grid-column: span 6;
+        }
+    }
+
+    .field {
+        display: grid;
+        gap: 8px;
+    }
+
+    .label {
+        font-size: 13px;
+        color: var(--muted);
+    }
+
+    .control {
+        position: relative;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    select {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: #0b1220;
+        color: var(--text);
+        outline: none;
+        transition: border-color .18s ease, box-shadow .18s ease, transform .06s ease;
+    }
+
+    input::placeholder {
+        color: #64748b;
+    }
+
+    .field:focus-within input,
+    .field:focus-within select {
+        border-color: var(--text);
+        box-shadow: 0 0 0 4px var(--text);
+    }
+
+    .hint {
+        font-size: 12px;
+        color: var(--muted);
+    }
+
+    .actions {
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+        border-top: 1px solid var(--border);
+        padding-top: 16px;
+        margin-top: 8px;
+    }
+
+    .btn {
+        appearance: none;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform .06s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .btn:active {
+        transform: translateY(1px);
+    }
+
+    .btn--primary {
+        background: linear-gradient(180deg, var(--accent), var(--accent-600));
+        color: white;
+        box-shadow: 0 8px 16px rgba(34, 197, 94, .25);
+    }
+
+    .btn--ghost {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--border);
+    }
+
+    /* Small required asterisk */
+    .req::after {
+        content: " *";
+        color: var(--danger);
+    }
+
+    /* Make password field and role select stand out slightly */
+    .important input,
+    .important select {
+        background: linear-gradient(180deg, #0c1427, #0b1220);
+    }
+
+    .rol {
+        color: black;
+    }
+</style>
+<?php if (isset($_SESSION['mensaje']) && $_SESSION['mensaje'] != null): ?>
+    <script>
+        swal.fire({
+            title: 'Éxito',
+            text: '<?php echo $_SESSION['mensaje'] ?? '' ?>',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+        });
+    </script>
+<?php elseif (isset($_SESSION['mensaje']) && $_SESSION['mensaje'] == null): ?>
+    <script>
+        swal.fire({
+            title: 'Error',
+            text: 'No se pudo crear el usuario. Verifica que todos los campos requeridos estén completos.',
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        });
+    </script>
+<?php endif; ?>
+
 <section class="card-1" role="region" aria-labelledby="titulo-form">
     <header class="card__header-1">
         <h1 class="card__title-1" id="titulo-form">Alta de Usuarios</h1>
         <p class="card__subtitle-1">Completa los campos requeridos</p>
     </header>
-    <form class="user-form-1" action="#" method="post" autocomplete="off">
+    <form class="user-form-1" action="newUsuario.php" method="post" autocomplete="off" novalidate>
         <div class="grid-1">
             <!-- Usuario -->
             <div class="field col-6">
                 <label class="label req" for="usuario">Usuario</label>
                 <div class="control">
-                    <input id="usuario" name="usuario" type="text" placeholder="ej. amoreno" minlength="3" maxlength="32" pattern="[a-zA-Z0-9_.-]+" title="Solo letras, números y . _ -" required />
+                    <input id="usuario" name="usuario" type="text" placeholder="ej. amoreno" minlength="3" maxlength="32" pattern="[a-zA-Z0-9_.-]+" title="Solo letras, números y . _ -" required autocomplete="off" />
                 </div>
                 <small class="hint">De 3 a 32 caracteres. Sin espacios.</small>
             </div>
@@ -72,9 +262,8 @@ include 'header.php';
                 <div class="control">
                     <select id="rol" name="rol" required>
                         <option value="" disabled selected>Selecciona un rol</option>
-                        <option value="admin">Administrador</option>
-                        <option value="editor">Editor</option>
-                        <option value="usuario">Usuario</option>
+                        <option class="rol" value="1">Administrador</option>
+                        <option class="rol" value="2">Usuario</option>
                     </select>
                 </div>
                 <small class="hint">Define los permisos del usuario en el sistema.</small>

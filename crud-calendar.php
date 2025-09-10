@@ -212,17 +212,18 @@ function actualizarFecha($id_evento, $nuevaFecha)
     }
 }
 
-function actualizarConsumibles($id_consumible, $cantidad, $tipo)
+function actualizarConsumibles($id_consumible, $id_impresora, $cantidad, $tipo)
 {
     global $con; // Usa la conexión global
     $id_consumible = intval($id_consumible);
+    $id_impresora = intval($id_impresora);
     $cantidad = intval($cantidad);
     $tipo = $tipo; // 'entrada' o 'salida'
     if ($tipo === 'entrada') {
         $sqlupdate = "UPDATE consumibles SET cantidad_disponible = cantidad_disponible + $cantidad WHERE id_consumible = $id_consumible";
         $result = mysqli_query($con, $sqlupdate);
         if ($result) {
-            $sqlinsert = "INSERT INTO movimientos_consumibles VALUES (default, '$tipo', $cantidad, NOW(),'N/A',$id_consumible)";
+            $sqlinsert = "INSERT INTO movimientos_consumibles VALUES (default, '$tipo', $cantidad, NOW(),'N/A',$id_consumible, $id_impresora)";
             $result = mysqli_query($con, $sqlinsert);
             if ($result) {
                 return ["status" => "success", "message" => "Consumibles actualizados correctamente"];
@@ -236,7 +237,7 @@ function actualizarConsumibles($id_consumible, $cantidad, $tipo)
         $sqlupdate = "UPDATE consumibles SET cantidad_disponible = GREATEST(cantidad_disponible - $cantidad, 0) WHERE id_consumible = $id_consumible";//GREATEST(x(resultado de la resta), 0) → devuelve el valor más grande entre x y 0. si x es negativo, devuelve 0.
         $result = mysqli_query($con, $sqlupdate);
         if ($result) {
-            $sqlinsert = "INSERT INTO movimientos_consumibles VALUES (default, '$tipo', $cantidad, NOW(),'N/A',$id_consumible)";
+            $sqlinsert = "INSERT INTO movimientos_consumibles VALUES (default, '$tipo', $cantidad, NOW(),'N/A',$id_consumible, $id_impresora)";
             $result = mysqli_query($con, $sqlinsert);
             if ($result) {
                 return ["status" => "success", "message" => "Consumibles actualizados correctamente"];
@@ -371,8 +372,8 @@ if (isset($_POST['action'])) {
             }
             break;
         case 'actualizarConsumibles':
-            if (isset($_POST['id_consumible']) && isset($_POST['cantidad']) && isset($_POST['tipo'])) {
-                $response = actualizarConsumibles($_POST['id_consumible'], $_POST['cantidad'], $_POST['tipo']);
+            if (isset($_POST['id_consumible']) && isset($_POST['id_impresora']) && isset($_POST['cantidad']) && isset($_POST['tipo'])) {
+                $response = actualizarConsumibles($_POST['id_consumible'], $_POST['id_impresora'], $_POST['cantidad'], $_POST['tipo']);
             } else {
                 $response = ["status" => "error", "message" => "ID o fecha no proporcionada."];
             }

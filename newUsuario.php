@@ -1,5 +1,34 @@
 <?php
-/*include 'conexion.php';
+session_start();
+include 'conexion.php';
+
+$usuario = $_POST['usuario'] ?? null;
+$nombre = $_POST['nombre'] ?? null;
+$apellido_paterno = $_POST['apellido_paterno'] ?? null;
+$apellido_materno = $_POST['apellido_materno'] ?? null;
+$puesto = $_POST['puesto'] ?? null;
+$departamento = $_POST['departamento'] ?? null;
+$contrasena = $_POST['contrasena'] ?? null;
+$rol = $_POST['rol'] ?? null;
+if ($usuario != null && $nombre != null && $apellido_paterno != null && $puesto != null && $departamento != null && $contrasena != null && $rol != null) {
+    # code...
+    $password = $contrasena;
+    // Hasheamos la contraseña con un algoritmo seguro (por defecto, PASSWORD_BCRYPT)
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    $query = "INSERT into usuario values(default,'$usuario','$nombre','$apellido_paterno','$apellido_materno','$puesto','$departamento','$hashed_password',$rol)";
+    mysqli_query($con, $query);
+    if (mysqli_errno($con)) {
+        $_SESSION['mensaje'] = "Error al crear el usuario: " . mysqli_error($con);
+        header("Location: altaUsuario.php");
+        exit();
+    }
+    $_SESSION['mensaje'] = "Usuario $usuario creado correctamente.";
+    header("Location: altaUsuario.php");
+    exit();
+} else {
+    $_SESSION['mensaje'] = null;
+}
+
 $password = "inicio0725"; //$_POST['password'];
 // Hasheamos la contraseña con un algoritmo seguro (por defecto, PASSWORD_BCRYPT)
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -13,4 +42,3 @@ $query = "INSERT into usuario values(default,'AFlores','Antonio','Flores','Atemp
 //echo mysqli_query($con, $query);
 //$query= "UPDATE usuario SET contrasena = '$hashed_password' WHERE id_usuario > 1";
 //mysqli_query($con, $query);
-?>

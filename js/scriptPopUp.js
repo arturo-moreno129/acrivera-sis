@@ -573,6 +573,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const id_consumible = this.getAttribute("data_id_consumible");
             const nombre = this.getAttribute("data_nombre");
             const cantidad_disponible = this.getAttribute("data_cantidad_disponible");
+            const id_impresora = this.getAttribute("data_id_impresora");
             //console.log(ubicacion, no_serie, modelo, id_consumible, cantidad_disponible);
             /*Swal.fire({
                 title: "Detalles de la impresora",
@@ -608,14 +609,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             const cantidad = result.value;
-                            console.log(`Agregar ${cantidad} al consumible con ID: ${id_consumible}`);
+                            console.log(`Agregar ${cantidad} al consumible con ID: ${id_consumible} de la impresora con ID: ${id_impresora}`);
                             // Aquí puedes agregar la lógica para agregar los consumibles
                             fetch('crud-calendar.php', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/x-www-form-urlencoded'
                                 },
-                                body: `action=actualizarConsumibles&id_consumible=${id_consumible}&cantidad=${cantidad}&tipo=entrada`
+                                body: `action=actualizarConsumibles&id_consumible=${id_consumible}&id_impresora=${id_impresora}&cantidad=${cantidad}&tipo=entrada`
                             }).then(response => response.json())
                                 .then(data => {
                                     if (data.status === 'success') {
@@ -652,7 +653,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 headers: {
                                     'Content-Type': 'application/x-www-form-urlencoded'
                                 },
-                                body: `action=actualizarConsumibles&id_consumible=${id_consumible}&cantidad=${cantidad}&tipo=salida`
+                                body: `action=actualizarConsumibles&id_consumible=${id_consumible}&id_impresora=${id_impresora}&cantidad=${cantidad}&tipo=salida`
                             }).then(response => response.json())
                                 .then(data => {
                                     if (data.status === 'success') {

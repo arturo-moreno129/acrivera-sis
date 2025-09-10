@@ -67,6 +67,12 @@ if (!isset($_SESSION['ususario'])) {
                             <span>Consumibles</span>
                         </a>
                     </li>
+                     <li>
+                        <a href="altaUsuario">
+                            <ion-icon name="person-add-outline"></ion-icon>
+                            <span>Alta de Usuario</span>
+                        </a>
+                    </li>
                     <li class="no-show">
                         <a href="registro">
                             <ion-icon name="document-outline"></ion-icon>

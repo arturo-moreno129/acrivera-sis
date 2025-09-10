@@ -21,7 +21,8 @@ include 'header.php'
           data_modelo="<?php echo $row['modelo']; ?>"
           data_id_consumible="<?php echo $row['id_consumible']; ?>"
           data_nombre="<?php echo $row['nombre']; ?>"
-          data_cantidad_disponible="<?php echo $row['cantidad_disponible']; ?>">
+          data_cantidad_disponible="<?php echo $row['cantidad_disponible']; ?>"
+          data_id_impresora="<?php echo $row['id_impresora']; ?>">
           <div class="card-header1">
             <ion-icon name="print-outline"></ion-icon>
             <h1 id="impresora-title">Impresora</h1>
@@ -29,6 +30,10 @@ include 'header.php'
           <div class="info1">
             <span class="label1"><ion-icon name="business-outline"></ion-icon> Área:</span>
             <span class="value1"><?php echo $row['ubicacion']; ?></span>
+          </div>
+          <div class="info1">
+            <span class="label1"><ion-icon name="business-outline"></ion-icon> Marca:</span>
+            <span class="value1"><?php echo $row['marca']; ?></span>
           </div>
           <div class="info1">
             <span class="label1"><ion-icon name="barcode-outline"></ion-icon> Número de serie:</span>
