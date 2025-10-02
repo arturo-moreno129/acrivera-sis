@@ -109,7 +109,7 @@
         <p style="margin: 0; font-size: 14px;">Nuestro equipo de Soporte Técnico está disponible para ayudarte con cualquier inconveniente relacionado con el uso de nuestras plataformas.</p>
 
         <a class="whatsapp-contact" href="https://wa.me/2223358474?text=Hola,%20necesito%20ayuda" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="whatsapp"> José Arturo Moreno Aguilar
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="whatsapp"> Soporte Técnico
         </a>
 
         <!--<a class="whatsapp-contact" href="https://wa.me/521XXXXXXXXXX?text=Hola%20Elizabeth,%20necesito%20ayuda" target="_blank">
@@ -126,7 +126,7 @@
         box.style.display = box.style.display === "block" ? "none" : "block";
     }
 </script>
-
+<script src="socket.js"></script>
 </body>
 </main>
 
