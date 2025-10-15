@@ -234,7 +234,7 @@ function actualizarConsumibles($id_consumible, $id_impresora, $cantidad, $tipo)
             return ["status" => "error", "message" => "Error al actualizar los consumibles."];
         }
     } elseif ($tipo === 'salida') {
-        $sqlupdate = "UPDATE consumibles SET cantidad_disponible = GREATEST(cantidad_disponible - $cantidad, 0) WHERE id_consumible = $id_consumible";//GREATEST(x(resultado de la resta), 0) → devuelve el valor más grande entre x y 0. si x es negativo, devuelve 0.
+        $sqlupdate = "UPDATE consumibles SET cantidad_disponible = GREATEST(cantidad_disponible - $cantidad, 0) WHERE id_consumible = $id_consumible"; //GREATEST(x(resultado de la resta), 0) → devuelve el valor más grande entre x y 0. si x es negativo, devuelve 0.
         $result = mysqli_query($con, $sqlupdate);
         if ($result) {
             $sqlinsert = "INSERT INTO movimientos_consumibles VALUES (default, '$tipo', $cantidad, NOW(),'N/A',$id_consumible, $id_impresora)";
@@ -251,7 +251,23 @@ function actualizarConsumibles($id_consumible, $id_impresora, $cantidad, $tipo)
         return ["status" => "error", "message" => "Tipo no válido. Debe ser 'entrada' o 'salida'."];
     }
 }
+function exportarPorArea($area)
+{
+    global $con; // Usa la conexión global
+    $area = mysqli_real_escape_string($con, $area); // Escapa el valor para seguridad
 
+    ($area != 'ALL') ? $query = "SELECT correo FROM directorio WHERE area = '$area' AND ESTATUS = 1 ORDER BY nom_usu" : $query = "SELECT correo FROM directorio WHERE ESTATUS = 1 ORDER BY nom_usu";
+
+
+    $result = mysqli_query($con, $query);
+
+    if (mysqli_num_rows($result) > 0) {
+        $datos = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        return ["status" => "success", "message" => $datos];
+    } else {
+        return ["status" => "error", "message" => "No se encontraron registros para el área especificada."];
+    }
+}
 // Maneja la acción solicitada
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -374,6 +390,13 @@ if (isset($_POST['action'])) {
         case 'actualizarConsumibles':
             if (isset($_POST['id_consumible']) && isset($_POST['id_impresora']) && isset($_POST['cantidad']) && isset($_POST['tipo'])) {
                 $response = actualizarConsumibles($_POST['id_consumible'], $_POST['id_impresora'], $_POST['cantidad'], $_POST['tipo']);
+            } else {
+                $response = ["status" => "error", "message" => "ID o fecha no proporcionada."];
+            }
+            break;
+        case 'exportarPorArea':
+            if (isset($_POST['area'])) {
+                $response = exportarPorArea($_POST['area']);
             } else {
                 $response = ["status" => "error", "message" => "ID o fecha no proporcionada."];
             }

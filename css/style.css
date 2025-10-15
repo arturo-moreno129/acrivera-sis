@@ -1194,6 +1194,7 @@ h1 {
     margin-bottom: 20px;
 }
 
+
 #btnExportinventario {
     background-color: #4A90E2;
     color: white;
@@ -1217,6 +1218,27 @@ h1 {
 #btnExport:active {
     transform: scale(0.98);
     box-shadow: none;
+}
+
+/*********************** ESTILO BOTON EXPORTAR POR AREA***************************/
+#btnExport2 {
+    background-color: #c958e6;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'Segoe UI', sans-serif;
+    margin-bottom: 20px;
+}
+
+#btnExport2:hover {
+    background-color: #9351a3;
+    transform: scale(1.03);
 }
 
 /* Para dispositivos móviles */
@@ -1420,3 +1442,8 @@ h1 {
 }
 
 /*********************************************** ESTILO DEL FORMULARIO de alta de usuario  ***************************/
+
+.swal2-select {
+    width: 100% !important;
+    box-sizing: border-box;
+}

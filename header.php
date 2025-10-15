@@ -62,6 +62,12 @@ if (!isset($_SESSION['ususario'])) {
                         </a>
                     </li>
                     <li>
+                        <a href="internet">
+                            <ion-icon name="qr-code-outline"></ion-icon>
+                            <span>QR Internet</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="consumibles">
                             <ion-icon name="flask-outline"></ion-icon>
                             <span>Consumibles</span>

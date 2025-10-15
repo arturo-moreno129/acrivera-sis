@@ -20,7 +20,10 @@ include 'header.php';
 <?php if ($_SESSION['rol'] == 1): ?>
     <center><img id="btnAdd" src="imagenes/agregar.png" alt="" style="width: 100px; cursor:pointer"><br><br></center>
 <?php endif; ?>
-<center><input id="btnExport" type="submit" value="Exportar a excel"></center>
+<center>
+    <input id="btnExport" type="submit" value="Exportar a excel">
+    <input id="btnExport2" type="submit" value="Exportar correos por área">
+</center>
 <!------------------------------------------------>
 
 <table id="myTableDirectorio">
