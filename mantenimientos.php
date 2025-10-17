@@ -3,11 +3,11 @@ include "header.php";
 
 if (isset($_SESSION['pop-up'])) {
 ?><script>
-    Swal.fire({
-    title: "Buen trbajo!",
-    text: "¡Se guardo correctamente el mantenimiento!",
-    icon: "success"
-    });
+        Swal.fire({
+            title: "Buen trbajo!",
+            text: "¡Se guardo correctamente el mantenimiento!",
+            icon: "success"
+        });
     </script>
 <?php
 }
@@ -47,7 +47,21 @@ unset($_SESSION["pop-up"]) ?>
         <tbody>
             <?php
             //$query = "SELECT * From mantenimientos ORDER BY fecha"; //where nombre = '$nombre'";
-            $query = "SELECT * from mantenimientos as m inner join usuario as u on m.id_usuario = u.id_usuario ORDER BY fecha";
+            $usuario = mysqli_real_escape_string($con, $_SESSION['usuario']);
+
+            $query = ($_SESSION['rol'] != 1)
+                ? "SELECT *
+                FROM mantenimientos AS m
+                INNER JOIN usuario AS u ON m.id_usuario = u.id_usuario
+                WHERE u.usuario = '$usuario'
+                AND m.estatus IN (0, 1)
+                ORDER BY m.fecha"
+                        : "SELECT *
+                FROM mantenimientos AS m
+                INNER JOIN usuario AS u ON m.id_usuario = u.id_usuario
+                WHERE m.estatus IN (0, 1)
+                ORDER BY m.fecha";
+
             $result = mysqli_query($con, $query);
             if ($row = mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_array($result)) {
@@ -55,10 +69,10 @@ unset($_SESSION["pop-up"]) ?>
                     '<tr>
                                 <td>' . $row["usuario_final"] . '</td>
                                 <td style="text-align: center;">' . $row["usuario"] . '</td>
-                                <td style="text-align: center;">' . $row["fecha"] . '</td>
+                                <td style="text-align: center; width: 100px;">' . $row["fecha"] . '</td>
                                 <td style="text-align: center;">' . $row["dispositivo"] . '</td>
-                                <td style="text-align: center;">' . ($row["tipoMan"]==1?"Programado":"Solicitado") . '</td>
-                                <td style="text-align: center;">' . ($row["estatus"]==1?'<img title="En proceso" id="pdf-icon" src="imagenes/proceso.png" alt="" style="width: 120px; cursor: pointer;">' : '<img title="Realizado" id="pdf-icon" src="imagenes/terminada.png" alt="" style="width: 100px; cursor: pointer;"> </a>') . '</td>
+                                <td style="text-align: center;">' . ($row["tipoMan"] == 1 ? "Programado" : "Solicitado") . '</td>
+                                <td style="text-align: center;">' . ($row["estatus"] == 1 ? '<img title="En proceso" id="pdf-icon" src="imagenes/proceso.png" alt="" style="width: 120px; cursor: pointer;">' : '<img title="Realizado" id="pdf-icon" src="imagenes/terminada.png" alt="" style="width: 100px; cursor: pointer;"> </a>') . '</td>
                             </tr>';
                 }
             }

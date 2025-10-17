@@ -15,10 +15,10 @@
     }*/
     mysqli_report(MYSQLI_REPORT_OFF); // Desactiva los errores fatales de MySQLi
 
-    $dbHost = '127.0.0.1';
+    $dbHost = '140.240.13.197';
     $dbName = 'bd_acrivera';
     $dbUser = 'root';
-    $dbPass = "";
+    $dbPass = "Benito290496$";
 
     $con = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
 

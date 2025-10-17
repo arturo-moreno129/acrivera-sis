@@ -15,9 +15,9 @@ include("scriptCalendar.php");
             <div class="circle red"></div>
             <div class="label">FINALIZADO</div>
         </div>
-        <!--<div class="status">
-            <div class="label link"><a href="mantenimientos" style="text-decoration: none; color:white;">VER LISTADO DE MANTENIMEINTOS</a></div>
-        </div>-->
+        <div class="status">
+            <div class="label link" style="background-color: green;"><a href="mantenimientos" style="text-decoration: none; color:white;">VER LISTADO DEL CALENDARIO</a></div>
+        </div>
         <div class="status">
             <div class="label">
                 <p>Para crear un evento, haga click en la fecha y llene los campos requeridos.</p>
