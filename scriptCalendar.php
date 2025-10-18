@@ -3,9 +3,14 @@
   document.addEventListener("DOMContentLoaded", function() {
 
     var calendarEl = document.getElementById("calendar");
+    // 🗓️ Leer la fecha pasada por la URL (si existe)
+    const params = new URLSearchParams(window.location.search);
+    const fechaURL = params.get('fecha');
+    const fechaInicial = fechaURL ? fechaURL : new Date();
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: "dayGridMonth",
+      initialDate: fechaInicial,
       locale: "es",
       headerToolbar: {
         left: "prev,next today",

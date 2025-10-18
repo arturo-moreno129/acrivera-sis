@@ -56,7 +56,7 @@ unset($_SESSION["pop-up"]) ?>
                 WHERE u.usuario = '$usuario'
                 AND m.estatus IN (0, 1)
                 ORDER BY m.fecha"
-                        : "SELECT *
+                : "SELECT *
                 FROM mantenimientos AS m
                 INNER JOIN usuario AS u ON m.id_usuario = u.id_usuario
                 WHERE m.estatus IN (0, 1)
@@ -69,10 +69,10 @@ unset($_SESSION["pop-up"]) ?>
                     '<tr>
                                 <td>' . $row["usuario_final"] . '</td>
                                 <td style="text-align: center;">' . $row["usuario"] . '</td>
-                                <td style="text-align: center; width: 100px;">' . $row["fecha"] . '</td>
+                                <td id="fecha" style="text-align: center; width: 100px;">' . $row["fecha"] . '</td>
                                 <td style="text-align: center;">' . $row["dispositivo"] . '</td>
                                 <td style="text-align: center;">' . ($row["tipoMan"] == 1 ? "Programado" : "Solicitado") . '</td>
-                                <td style="text-align: center;">' . ($row["estatus"] == 1 ? '<img title="En proceso" id="pdf-icon" src="imagenes/proceso.png" alt="" style="width: 120px; cursor: pointer;">' : '<img title="Realizado" id="pdf-icon" src="imagenes/terminada.png" alt="" style="width: 100px; cursor: pointer;"> </a>') . '</td>
+                                <td style="text-align: center;">' . ($row["estatus"] == 1 ? '<img class="estatus" title="En proceso" id="pdf-icon" src="imagenes/proceso.png" alt="" style="width: 120px; cursor: pointer;">' : '<img class="estatus" title="Realizado" id="pdf-icon" src="imagenes/terminada.png" alt="" style="width: 100px; cursor: pointer;"> </a>') . '</td>
                             </tr>';
                 }
             }
@@ -83,5 +83,12 @@ unset($_SESSION["pop-up"]) ?>
 <?php
 include "footer.php"
 ?>
-
+<script>
+    document.querySelectorAll('.estatus').forEach(function(element) {
+        element.addEventListener('click', function() {
+            const fecha = this.closest('tr').querySelector('#fecha').innerText;
+            window.location.href = `calendario.php?fecha=${fecha}`;
+        });
+    });
+</script>
 <input type="submit" value="">
