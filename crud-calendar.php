@@ -193,7 +193,13 @@ function compartirEvento($id_mantenimiento, $id_usuario_compartido)
     $sqlinsert = "INSERT INTO compartidos (id_compartido, id_cita, id_usuario_compartido) VALUES (default, $id_mantenimiento, $id_usuario_compartido)";
     $result = mysqli_query($con, $sqlinsert);
     if ($result) {
-        return ["status" => "success", "message" => "Evento compartido correctamente"];
+        $queryNotificacion = "INSERT INTO notificaciones (id_notificacion, usuario_id, texto, url, leida, creada_en) VALUES (default, $id_usuario_compartido, 'Se ha compartido un nuevo evento contigo.', 'calendario', default, default)";
+        $resultNotificacion = mysqli_query($con, $queryNotificacion);
+        if ($resultNotificacion) {
+            return ["status" => "success", "message" => "Evento compartido correctamente"];
+        } else {
+            return ["status" => "error", "message" => "Error al crear la notificación."];
+        }
     } else {
         return ["status" => "error", "message" => "Error al compartir el evento. El evento ya fue compartido con este usuario."];
     }
@@ -266,6 +272,21 @@ function exportarPorArea($area)
         return ["status" => "success", "message" => $datos];
     } else {
         return ["status" => "error", "message" => "No se encontraron registros para el área especificada."];
+    }
+}
+function actualizarNotificacion($id_notificacion, $leida)
+{
+    global $con; // Usa la conexión global
+    $id_notificacion = intval($id_notificacion);
+    $leida = intval($leida); // Asegúrate de que sea 0 o 1
+
+    $sqlupdate = "UPDATE notificaciones SET leida = $leida WHERE id_notificacion = $id_notificacion";
+    $result = mysqli_query($con, $sqlupdate);
+
+    if ($result) {
+        return ["status" => "success", "message" => "Notificación actualizada correctamente"];
+    } else {
+        return ["status" => "error", "message" => "Error al actualizar la notificación."];
     }
 }
 // Maneja la acción solicitada
@@ -397,6 +418,13 @@ if (isset($_POST['action'])) {
         case 'exportarPorArea':
             if (isset($_POST['area'])) {
                 $response = exportarPorArea($_POST['area']);
+            } else {
+                $response = ["status" => "error", "message" => "ID o fecha no proporcionada."];
+            }
+            break;
+        case 'actualizarNotificacion':
+            if (isset($_POST['id']) && isset($_POST['leida'])) {
+                $response = actualizarNotificacion($_POST['id'], $_POST['leida']);
             } else {
                 $response = ["status" => "error", "message" => "ID o fecha no proporcionada."];
             }

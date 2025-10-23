@@ -177,7 +177,6 @@ if (!isset($_SESSION['ususario'])) {
     </div>
 
     <main>
-
         <header class="header-notificaciones">
             <div class="notificaciones-menu" id="notificacionesMenu">
                 <ion-icon name="notifications-outline"></ion-icon>
@@ -189,7 +188,7 @@ if (!isset($_SESSION['ususario'])) {
                 </div>
             </div>
             <div class="usuario">
-                José Arturo Moreno Aguilar
+                <samp><strong><?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellidoP'] . ' ' . $_SESSION['apellidoM']; ?></strong></samp>
                 <img src="imagenes/avatar_h.webp" alt="Foto de perfil" class="foto-perfil">
             </div>
         </header>
@@ -219,15 +218,20 @@ if (!isset($_SESSION['ususario'])) {
         <style>
             .header-notificaciones {
                 display: flex;
-                justify-content: flex-end;
+                justify-content: center;
+                /* centra todo horizontalmente */
                 align-items: center;
+                /* centra verticalmente */
+                gap: 20px;
+                /* espacio entre notificaciones y usuario */
                 padding: 10px 20px;
                 background-color: #fff;
                 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                gap: 20px;
-                margin-bottom: 10px;
                 border-radius: 30px;
+                margin: 10px auto;
+                width: 500px;
             }
+
 
             .notificaciones-menu {
                 position: relative;
@@ -285,7 +289,8 @@ if (!isset($_SESSION['ususario'])) {
             }
 
             .notificacion:hover {
-                background-color: #f9f9f9;
+                background-color: #3080e9ff;
+                border-radius: 50px;
             }
 
             .notificacion.leida {
@@ -305,8 +310,22 @@ if (!isset($_SESSION['ususario'])) {
             const listaNotificaciones = document.getElementById('listaNotificaciones');
             const cantidadNotificaciones = document.getElementById('cantidadNotificaciones');
 
+            <?php
+            // Ejemplo de notificaciones desde PHP (podrías obtenerlas de la base de datos)
+            $queryNotificaciones = "SELECT * FROM notificaciones WHERE usuario_id = " . intval($_SESSION['id_usuario']) . " ORDER BY creada_en DESC LIMIT 5";
+
+            $resultNotificaciones = mysqli_query($con, $queryNotificaciones);
+            ?>
             // Array de notificaciones con estado de lectura
             let notificaciones = [];
+            <?php while ($row = mysqli_fetch_assoc($resultNotificaciones)) { ?>
+                notificaciones.push({
+                    id: <?php echo $row['id_notificacion']; ?>,
+                    texto: "<?php echo $row['texto']; ?>",
+                    leida: <?php echo $row['leida'] ? 'true' : 'false'; ?>,
+                    url: "<?php echo $row['url']; ?>"
+                });
+            <?php } ?>
 
             // Función para actualizar el listado de notificaciones
             function actualizarNotificaciones() {
@@ -323,9 +342,26 @@ if (!isset($_SESSION['ususario'])) {
 
                     // Evento click para marcar como leída Y actualizar base de datos
                     a.addEventListener('click', () => {
-                        n.leida = true;
+                        /*n.leida = true;
                         a.classList.add('leida');
-                        actualizarContador();
+                        actualizarContador();*/
+                        /* Aquí iría la llamada AJAX para actualizar en la base de datos */
+                        fetch('crud-calendar.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded'
+                                },
+                                body: `action=actualizarNotificacion&id=${n.id}&leida=1`
+                            }).then(response => response.json())
+                            .then(data => {
+                                if (data.status === "success") {
+                                    Swal.fire(data.message, "", "success");
+                                } else {
+                                    Swal.fire("Error", data.message, "error");
+                                }
+                            })
+                            .catch(error => Swal.fire("Error", "No se pudo conectar con el servidor.", "error"));
+                        /******************************************************* */
                     });
 
                     listaNotificaciones.appendChild(a);
@@ -357,9 +393,9 @@ if (!isset($_SESSION['ususario'])) {
             // Simulación de nuevas notificaciones cada 5 segundos
             /*setInterval(() => {
                 const nueva = {
-                    texto: "Notificación nueva " + new Date().toLocaleTimeString(),
+                    texto: "se creo un evento en el calendario " + new Date().toLocaleTimeString(),
                     leida: false,
-                    url: "calendario" // todas apuntan a calendario
+                    url: "calendario" // todas apuntan a calendariso
                 };
                 notificaciones.push(nueva);
                 actualizarNotificaciones();
