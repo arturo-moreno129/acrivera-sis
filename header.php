@@ -55,7 +55,7 @@ if (!isset($_SESSION['ususario'])) {
                     </a>
                 </li>-->
                 <?php if ($_SESSION['rol'] == 1): ?>
-                     <li>
+                    <li>
                         <a href="monitoreo_red">
                             <ion-icon name="radio-outline"></ion-icon>
                             <span>Monitoreo de Red</span>
@@ -73,7 +73,7 @@ if (!isset($_SESSION['ususario'])) {
                             <span>Consumibles</span>
                         </a>
                     </li>
-                     <li>
+                    <li>
                         <a href="altaUsuario">
                             <ion-icon name="person-add-outline"></ion-icon>
                             <span>Alta de Usuario</span>
@@ -175,7 +175,25 @@ if (!isset($_SESSION['ususario'])) {
         </div>
 
     </div>
+
     <main>
+
+        <header class="header-notificaciones">
+            <div class="notificaciones-menu" id="notificacionesMenu">
+                <ion-icon name="notifications-outline"></ion-icon>
+                <span class="cantidad-notificaciones" id="cantidadNotificaciones">0</span>
+
+                <!-- Contenedor de notificaciones -->
+                <div class="lista-notificaciones" id="listaNotificaciones">
+                    <!-- Notificaciones se cargan con JS -->
+                </div>
+            </div>
+            <div class="usuario">
+                José Arturo Moreno Aguilar
+                <img src="imagenes/avatar_h.webp" alt="Foto de perfil" class="foto-perfil">
+            </div>
+        </header>
+
         <audio id="tonoNotificacion" src="audios/mariocoin.mp3" preload="auto"></audio>
         <!--<button onclick="reproducirTono()">Probar notificación</button>-->
         <?php
@@ -197,3 +215,153 @@ if (!isset($_SESSION['ususario'])) {
         }
 
         ?>
+
+        <style>
+            .header-notificaciones {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                padding: 10px 20px;
+                background-color: #fff;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                gap: 20px;
+                margin-bottom: 10px;
+                border-radius: 30px;
+            }
+
+            .notificaciones-menu {
+                position: relative;
+                cursor: pointer;
+                font-size: 24px;
+                color: #333;
+            }
+
+            .cantidad-notificaciones {
+                position: absolute;
+                top: -5px;
+                right: -10px;
+                background-color: red;
+                color: white;
+                border-radius: 50%;
+                padding: 2px 6px;
+                font-size: 12px;
+            }
+
+            .lista-notificaciones {
+                max-height: 0;
+                overflow-y: auto;
+                /* scroll vertical */
+                position: absolute;
+                top: 40px;
+                right: 0;
+                background-color: #fff;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                border-radius: 10px;
+                min-width: 250px;
+                z-index: 100;
+                transition: max-height 0.3s ease, opacity 0.3s ease;
+                opacity: 0;
+            }
+
+            .lista-notificaciones.show {
+                max-height: 400px;
+                opacity: 1;
+            }
+
+            .notificacion {
+                display: block;
+                /* ocupa toda la fila */
+                padding: 10px;
+                border-bottom: 1px solid #eee;
+                cursor: pointer;
+                font-size: 14px;
+                color: #000;
+                background-color: #fff;
+                text-decoration: none;
+            }
+
+            .notificacion:last-child {
+                border-bottom: none;
+            }
+
+            .notificacion:hover {
+                background-color: #f9f9f9;
+            }
+
+            .notificacion.leida {
+                color: #888;
+            }
+
+            .foto-perfil {
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        </style>
+
+        <script>
+            const notificacionesMenu = document.getElementById('notificacionesMenu');
+            const listaNotificaciones = document.getElementById('listaNotificaciones');
+            const cantidadNotificaciones = document.getElementById('cantidadNotificaciones');
+
+            // Array de notificaciones con estado de lectura
+            let notificaciones = [];
+
+            // Función para actualizar el listado de notificaciones
+            function actualizarNotificaciones() {
+                listaNotificaciones.innerHTML = ''; // Limpiar
+                const ultimas = notificaciones.slice(-5).reverse(); // Últimas 5
+
+                ultimas.forEach((n) => {
+                    const a = document.createElement('a');
+                    a.href = n.url; // apuntar a la URL
+                    a.classList.add('notificacion');
+                    a.textContent = n.texto;
+                    if (n.leida) a.classList.add('leida');
+                    a.style.display = 'block';
+
+                    // Evento click para marcar como leída Y actualizar base de datos
+                    a.addEventListener('click', () => {
+                        n.leida = true;
+                        a.classList.add('leida');
+                        actualizarContador();
+                    });
+
+                    listaNotificaciones.appendChild(a);
+                });
+
+                actualizarContador();
+            }
+
+            // Función para actualizar contador
+            function actualizarContador() {
+                const noLeidas = notificaciones.filter(n => !n.leida).length;
+                cantidadNotificaciones.textContent = noLeidas;
+            }
+
+            // Inicializa
+            actualizarNotificaciones();
+
+            // Toggle dropdown
+            notificacionesMenu.addEventListener('click', (e) => {
+                e.stopPropagation();
+                listaNotificaciones.classList.toggle('show');
+            });
+
+            // Cerrar al hacer clic fuera
+            document.addEventListener('click', () => {
+                listaNotificaciones.classList.remove('show');
+            });
+
+            // Simulación de nuevas notificaciones cada 5 segundos
+            /*setInterval(() => {
+                const nueva = {
+                    texto: "Notificación nueva " + new Date().toLocaleTimeString(),
+                    leida: false,
+                    url: "calendario" // todas apuntan a calendario
+                };
+                notificaciones.push(nueva);
+                actualizarNotificaciones();
+            }, 5000);*/
+        </script>
