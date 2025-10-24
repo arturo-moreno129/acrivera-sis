@@ -330,7 +330,7 @@ if (!isset($_SESSION['ususario'])) {
             // Función para actualizar el listado de notificaciones
             function actualizarNotificaciones() {
                 listaNotificaciones.innerHTML = ''; // Limpiar
-                const ultimas = notificaciones.slice(-5).reverse(); // Últimas 5
+                const ultimas = notificaciones.slice(-5); // Últimas 5
 
                 ultimas.forEach((n) => {
                     const a = document.createElement('a');
