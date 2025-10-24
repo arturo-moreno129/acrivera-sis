@@ -228,7 +228,7 @@ if (!isset($_SESSION['ususario'])) {
                 background-color: #fff;
                 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
                 border-radius: 30px;
-                margin: 10px auto;
+                margin-left: calc(70% - 500px);
                 width: 500px;
             }
 
@@ -355,9 +355,9 @@ if (!isset($_SESSION['ususario'])) {
                             }).then(response => response.json())
                             .then(data => {
                                 if (data.status === "success") {
-                                    Swal.fire(data.message, "", "success");
+                                    //Swal.fire(data.message, "", "success");
                                 } else {
-                                    Swal.fire("Error", data.message, "error");
+                                    //Swal.fire("Error", data.message, "error");
                                 }
                             })
                             .catch(error => Swal.fire("Error", "No se pudo conectar con el servidor.", "error"));
@@ -391,13 +391,20 @@ if (!isset($_SESSION['ususario'])) {
             });
 
             // Simulación de nuevas notificaciones cada 5 segundos
-            /*setInterval(() => {
-                const nueva = {
-                    texto: "se creo un evento en el calendario " + new Date().toLocaleTimeString(),
-                    leida: false,
-                    url: "calendario" // todas apuntan a calendariso
-                };
-                notificaciones.push(nueva);
-                actualizarNotificaciones();
-            }, 5000);*/
+            setInterval(() => {
+                fetch('obtener_notificaciones.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Reinicia el arreglo con los datos más recientes
+                        notificaciones = data.map(n => ({
+                            id: n.id_notificacion,
+                            texto: n.texto,
+                            leida: n.leida == 1,
+                            url: n.url
+                        }));
+                        //console.log('Nuevas notificaciones recibidas:', notificaciones);
+                        actualizarNotificaciones();
+                    })
+                    .catch(error => console.error('Error al obtener notificaciones:', error));
+            }, 5000);
         </script>

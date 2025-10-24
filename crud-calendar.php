@@ -11,6 +11,15 @@ function eliminarEvento($id_mantenimiento)
     $resultEliminar = mysqli_query($con, $sqlEliminar);
 
     if ($resultEliminar) {
+        $queryObtenerIdusaurio = "SELECT * from compartidos as c inner join mantenimientos as m on c.id_cita = m.id_mantenimiento where m.id_mantenimiento = $id_mantenimiento";
+        $resultIdUsuario = mysqli_query($con, $queryObtenerIdusaurio);
+        if (mysqli_num_rows($resultIdUsuario) > 0) {
+            while ($row = mysqli_fetch_assoc($resultIdUsuario)) {
+                $id_usuario_compartido = $row['id_usuario_compartido'];
+                $queryNotificacion = "INSERT INTO notificaciones (id_notificacion, usuario_id, texto, url, leida, creada_en) VALUES (default, $id_usuario_compartido, 'Un evento compartido ha sido eliminado.', 'calendario', default, default)";
+                mysqli_query($con, $queryNotificacion);
+            }
+        }
         return ["status" => "success", "message" => "Elemento eliminado correctamente."];
     } else {
         return ["status" => "error", "message" => "Error al eliminar el elemento."];
