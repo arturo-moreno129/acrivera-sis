@@ -641,3 +641,8 @@ function reproducirTono() {
   const tono = document.getElementById('tonoNotificacion');
   tono.play();
 }
+
+function reproducirTonoPush() {
+  const tonoPush = document.getElementById('tonoPush');
+  tonoPush.play();
+}

@@ -194,6 +194,7 @@ if (!isset($_SESSION['ususario'])) {
         </header>
 
         <audio id="tonoNotificacion" src="audios/mariocoin.mp3" preload="auto"></audio>
+        <audio id="tonoPush" src="audios/pikachu-pikachu meloboom.mp3" preload="auto"></audio>
         <!--<button onclick="reproducirTono()">Probar notificación</button>-->
         <?php
         //session_start();
@@ -404,7 +405,21 @@ if (!isset($_SESSION['ususario'])) {
                         }));
                         //console.log('Nuevas notificaciones recibidas:', notificaciones);
                         actualizarNotificaciones();
+                        reproducirTonoPush();
                     })
                     .catch(error => console.error('Error al obtener notificaciones:', error));
             }, 5000);
+
+            /*setInterval(() => {
+                const nueva = {
+                    texto: "NotificaciÃ³n nueva " + new Date().toLocaleTimeString(),
+                    texto: "se creo un evento en el calendario " + new Date().toLocaleTimeString(),
+                    leida: false,
+                    url: "calendario" // todas apuntan a calendario
+
+                };
+                notificaciones.push(nueva);
+                actualizarNotificaciones();
+                reproducirTonoPush();
+            }, 5000);*/
         </script>
