@@ -411,9 +411,9 @@ if (!isset($_SESSION['ususario'])) {
                             .filter(id => !idsPrevios.includes(id));
 
                         // Si hay al menos un ID nuevo, suena el tono
-                        if (idsNuevos.length > 0) {
+                        /*if (idsNuevos.length > 0) {
                             reproducirTonoPush();
-                        }
+                        }*/
 
                         // Actualiza datos
                         notificaciones = nuevasNotificaciones;
