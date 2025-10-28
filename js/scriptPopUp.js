@@ -305,7 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const url = window.URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.href = url;
-                    a.download = `directorio_actualizado.xlsx`;
+                    a.download = `Directorio Organizacional - ACR.xlsx`;
                     document.body.appendChild(a);
                     a.click();
                     a.remove();
