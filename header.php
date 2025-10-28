@@ -392,23 +392,38 @@ if (!isset($_SESSION['ususario'])) {
             });
 
             // Simulación de nuevas notificaciones cada 5 segundos
+            let idsPrevios = [];
+
             setInterval(() => {
                 fetch('obtener_notificaciones.php')
                     .then(response => response.json())
                     .then(data => {
-                        // Reinicia el arreglo con los datos más recientes
-                        notificaciones = data.map(n => ({
+                        const nuevasNotificaciones = data.map(n => ({
                             id: n.id_notificacion,
                             texto: n.texto,
                             leida: n.leida == 1,
                             url: n.url
                         }));
-                        //console.log('Nuevas notificaciones recibidas:', notificaciones);
+
+                        // Obtiene los IDs nuevos que antes no estaban
+                        const idsNuevos = nuevasNotificaciones
+                            .map(n => n.id)
+                            .filter(id => !idsPrevios.includes(id));
+
+                        // Si hay al menos un ID nuevo, suena el tono
+                        if (idsNuevos.length > 0) {
+                            reproducirTonoPush();
+                        }
+
+                        // Actualiza datos
+                        notificaciones = nuevasNotificaciones;
+                        idsPrevios = nuevasNotificaciones.map(n => n.id);
+
                         actualizarNotificaciones();
-                        reproducirTonoPush();
                     })
                     .catch(error => console.error('Error al obtener notificaciones:', error));
             }, 5000);
+
 
             /*setInterval(() => {
                 const nueva = {
