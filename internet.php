@@ -103,7 +103,7 @@ include 'footer.php';
   Parkimovil.addEventListener('click', () => {
     Swal.fire({
       title: "WiFi Parkimovil",
-      text: "conectado a la red Parkimovil",
+      text: "Contraseña: 2023.Mar.ParkiM",
       imageUrl: "imagenes/wifi_parkimovil.png",
       imageWidth: 400,
       imageHeight: 400,
