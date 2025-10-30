@@ -177,6 +177,7 @@ if (!isset($_SESSION['ususario'])) {
     </div>
 
     <main>
+
         <header class="header-notificaciones">
             <div class="notificaciones-menu" id="notificacionesMenu">
                 <ion-icon name="notifications-outline"></ion-icon>
@@ -192,7 +193,7 @@ if (!isset($_SESSION['ususario'])) {
                 <img src="imagenes/avatar_h.webp" alt="Foto de perfil" class="foto-perfil">
             </div>
         </header>
-
+        <button id="btnPush">Enviar notificación push</button>
         <audio id="tonoNotificacion" src="audios/mariocoin.mp3" preload="auto"></audio>
         <audio id="tonoPush" src="audios/pikachu-pikachu meloboom.mp3" preload="auto"></audio>
         <!--<button onclick="reproducirTono()">Probar notificación</button>-->
@@ -307,6 +308,39 @@ if (!isset($_SESSION['ususario'])) {
         </style>
 
         <script>
+            // --- Registrar SW y suscribirse ---
+            if ('serviceWorker' in navigator && 'PushManager' in window) {
+                navigator.serviceWorker.register('sw.js').then(async reg => {
+                    console.log('Service Worker registrado');
+
+                    // Obtener clave pública VAPID
+                    const resp = await fetch('/vapid-public');
+                    const {
+                        publicKey
+                    } = await resp.json();
+
+                    const subscription = await reg.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: urlBase64ToUint8Array(publicKey)
+                    });
+
+                    await fetch('/subscribe', {
+                        method: 'POST',
+                        body: JSON.stringify(subscription),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                }).catch(console.error);
+            }
+
+            // Convierte base64 a Uint8Array
+            function urlBase64ToUint8Array(base64String) {
+                const padding = '='.repeat((4 - base64String.length % 4) % 4);
+                const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+                const rawData = window.atob(base64);
+                return Uint8Array.from([...rawData].map(c => c.charCodeAt(0)));
+            }
             const notificacionesMenu = document.getElementById('notificacionesMenu');
             const listaNotificaciones = document.getElementById('listaNotificaciones');
             const cantidadNotificaciones = document.getElementById('cantidadNotificaciones');
@@ -375,6 +409,15 @@ if (!isset($_SESSION['ususario'])) {
             function actualizarContador() {
                 const noLeidas = notificaciones.filter(n => !n.leida).length;
                 cantidadNotificaciones.textContent = noLeidas;
+
+                // Mostrar número en el icono de la PWA
+                if ('setAppBadge' in navigator) {
+                    if (noLeidas > 0) {
+                        navigator.setAppBadge(noLeidas);
+                    } else {
+                        navigator.clearAppBadge();
+                    }
+                }
             }
 
             // Inicializa
@@ -394,7 +437,7 @@ if (!isset($_SESSION['ususario'])) {
             // Simulación de nuevas notificaciones cada 5 segundos
             let idsPrevios = [];
 
-            setInterval(() => {
+            /*setInterval(() => {
                 fetch('obtener_notificaciones.php')
                     .then(response => response.json())
                     .then(data => {
@@ -411,9 +454,9 @@ if (!isset($_SESSION['ususario'])) {
                             .filter(id => !idsPrevios.includes(id));
 
                         // Si hay al menos un ID nuevo, suena el tono
-                        /*if (idsNuevos.length > 0) {
-                            reproducirTonoPush();
-                        }*/
+                        //if (idsNuevos.length > 0) {
+                        //reproducirTonoPush();
+                        //}
 
                         // Actualiza datos
                         notificaciones = nuevasNotificaciones;
@@ -422,7 +465,7 @@ if (!isset($_SESSION['ususario'])) {
                         actualizarNotificaciones();
                     })
                     .catch(error => console.error('Error al obtener notificaciones:', error));
-            }, 5000);
+            }, 5000);*/
 
 
             /*setInterval(() => {
@@ -437,4 +480,11 @@ if (!isset($_SESSION['ususario'])) {
                 actualizarNotificaciones();
                 reproducirTonoPush();
             }, 5000);*/
+        </script>
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js').then(() => {
+                    console.log('Service Worker registrado');
+                }).catch(err => console.error('Error al registrar SW:', err));
+            }
         </script>
