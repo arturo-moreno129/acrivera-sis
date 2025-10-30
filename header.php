@@ -193,7 +193,6 @@ if (!isset($_SESSION['ususario'])) {
                 <img src="imagenes/avatar_h.webp" alt="Foto de perfil" class="foto-perfil">
             </div>
         </header>
-        <button id="btnPush">Enviar notificación push</button>
         <audio id="tonoNotificacion" src="audios/mariocoin.mp3" preload="auto"></audio>
         <audio id="tonoPush" src="audios/pikachu-pikachu meloboom.mp3" preload="auto"></audio>
         <!--<button onclick="reproducirTono()">Probar notificación</button>-->
