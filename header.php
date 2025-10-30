@@ -437,7 +437,7 @@ if (!isset($_SESSION['ususario'])) {
             // Simulación de nuevas notificaciones cada 5 segundos
             let idsPrevios = [];
 
-            /*setInterval(() => {
+            setInterval(() => {
                 fetch('obtener_notificaciones.php')
                     .then(response => response.json())
                     .then(data => {
@@ -465,7 +465,7 @@ if (!isset($_SESSION['ususario'])) {
                         actualizarNotificaciones();
                     })
                     .catch(error => console.error('Error al obtener notificaciones:', error));
-            }, 5000);*/
+            }, 5000);
 
 
             /*setInterval(() => {
