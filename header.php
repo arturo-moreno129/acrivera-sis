@@ -307,39 +307,7 @@ if (!isset($_SESSION['ususario'])) {
         </style>
 
         <script>
-            // --- Registrar SW y suscribirse ---
-            if ('serviceWorker' in navigator && 'PushManager' in window) {
-                navigator.serviceWorker.register('sw.js').then(async reg => {
-                    console.log('Service Worker registrado');
-
-                    // Obtener clave pública VAPID
-                    const resp = await fetch('/vapid-public');
-                    const {
-                        publicKey
-                    } = await resp.json();
-
-                    const subscription = await reg.pushManager.subscribe({
-                        userVisibleOnly: true,
-                        applicationServerKey: urlBase64ToUint8Array(publicKey)
-                    });
-
-                    await fetch('/subscribe', {
-                        method: 'POST',
-                        body: JSON.stringify(subscription),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    });
-                }).catch(console.error);
-            }
-
-            // Convierte base64 a Uint8Array
-            function urlBase64ToUint8Array(base64String) {
-                const padding = '='.repeat((4 - base64String.length % 4) % 4);
-                const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
-                const rawData = window.atob(base64);
-                return Uint8Array.from([...rawData].map(c => c.charCodeAt(0)));
-            }
+            
             const notificacionesMenu = document.getElementById('notificacionesMenu');
             const listaNotificaciones = document.getElementById('listaNotificaciones');
             const cantidadNotificaciones = document.getElementById('cantidadNotificaciones');

@@ -47,7 +47,7 @@ unset($_SESSION["pop-up"]) ?>
         <tbody>
             <?php
             //$query = "SELECT * From mantenimientos ORDER BY fecha"; //where nombre = '$nombre'";
-            $usuario = mysqli_real_escape_string($con, $_SESSION['usuario']);
+            $usuario = mysqli_real_escape_string($con, $_SESSION['ususario']);
 
             $query = ($_SESSION['rol'] != 1)
                 ? "SELECT *
