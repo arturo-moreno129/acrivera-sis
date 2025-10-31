@@ -307,7 +307,6 @@ if (!isset($_SESSION['ususario'])) {
         </style>
 
         <script>
-            
             const notificacionesMenu = document.getElementById('notificacionesMenu');
             const listaNotificaciones = document.getElementById('listaNotificaciones');
             const cantidadNotificaciones = document.getElementById('cantidadNotificaciones');

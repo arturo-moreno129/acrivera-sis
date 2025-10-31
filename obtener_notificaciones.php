@@ -5,9 +5,11 @@ session_start();
 $idUsuario = $_SESSION['id_usuario'];
 
 $query = "SELECT id_notificacion, texto, leida, url, creada_en 
-          FROM notificaciones 
-          WHERE usuario_id = $idUsuario 
-          ORDER BY creada_en DESC LIMIT 5";
+FROM notificaciones 
+WHERE usuario_id = $idUsuario
+ORDER BY leida ASC, creada_en DESC
+LIMIT 5";
+
 $result = mysqli_query($con, $query);
 
 $notificaciones = [];
@@ -17,4 +19,3 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 
 echo json_encode($notificaciones);
-?>
