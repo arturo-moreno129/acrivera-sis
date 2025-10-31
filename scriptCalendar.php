@@ -445,7 +445,6 @@
         .then(response => response.json())
         .then(data => {
           if (data.status === "success") {
-            console.log(data.message);
             Swal.fire({
                 title: "Usuarios",
                 //showDenyButton: true,
@@ -479,11 +478,11 @@
               })
               .then((result) => {
                 if (result.isConfirmed) {
-                  console.log("resultado:", result.value)
+                  //console.log("resultado:", result.value)
                   const selectedUser = result.value.slect2;
                   if (selectedUser) {
                     // Aquí puedes hacer algo con el usuario seleccionado
-                    console.log("Usuario seleccionado:", selectedUser);
+                    //console.log("Usuario seleccionado:", selectedUser);
                     fetch('crud-calendar.php', {
                         method: 'POST',
                         headers: {
