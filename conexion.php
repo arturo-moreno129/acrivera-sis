@@ -1,5 +1,5 @@
 <?php
-    /*$dbHost='127.0.0.1';
+/*$dbHost='127.0.0.1';
     $dbName='bd_acrivera';
     $dbUser='root';
     $dbPass="";
@@ -13,20 +13,20 @@
         //echo $ex=getMessage();
         echo 'error';
     }*/
-    mysqli_report(MYSQLI_REPORT_OFF); // Desactiva los errores fatales de MySQLi
+mysqli_report(MYSQLI_REPORT_OFF); // Desactiva los errores fatales de MySQLi
 
-    $dbHost = '140.240.13.200';
-    $dbName = 'bd_acrivera';
-    $dbUser = 'root';
-    $dbPass = "Benito290496$";
+$dbHost = '140.240.13.200';
+$dbName = 'bd_acrivera';
+$dbUser = 'root';
+$dbPass = "Benito290496$";
 
-    $con = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
+$con = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
 
-    if (!$con) {
-        echo "<script>alert('Error: No se pudo conectar a la base de datos');</script>";
-        header('Location: error.html');
-        //return false; // Devuelve false si no se conecta
-    }
+if (!$con) {
+    echo "<script>alert('Error: No se pudo conectar a la base de datos');</script>";
+    header('Location: error.html');
+    define('NO_DB_ACCESS', true);
+    //return false; // Devuelve false si no se conecta
+}
 
-    return $con; // Retorna la conexión si es exitosa*/
-?>
+return $con; // Retorna la conexión si es exitosa*/
