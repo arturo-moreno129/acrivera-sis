@@ -332,103 +332,99 @@ document.addEventListener("DOMContentLoaded", () => {
         btnExxport2.addEventListener('click', () => {
             Swal.fire({
                 title: "Directorio",
-                //showDenyButton: true,
                 showCancelButton: true,
                 confirmButtonText: "Actualizar",
-                //denyButtonText: "Baja",
                 html: `<select id="Nareainv" class="form-control">
-                                        <option style="color: gray;" value="0">Selecciona una área</option>
-                                        <option style="color: red;" value="ALL">Todas las áreas</option>
-                                        <option value="DG">Direccion general</option>
-                                        <option value="DF">Director Financiero</option>
-                                        <option value="CL">Contraloria</option>
-                                        <option value="AUD">Auditoría</option>
-                                        <option value="CXC">Crédito y Cobranza</option>
-                                        <option value="CT">Contabilidad</option>
-                                        <option value="TA">Tesorería</option>
-                                        <option value="PLD">PLD</option>
-                                        <option value="EF">Enlace Financiero</option>
-                                        <option value="RH">Recursos Humanos</option>
-                                        <option value="MK">Marketing</option>
-                                        <option value="TI">TI - Sistemas</option>
-                                        <option value="CS">Compras</option>
-                                        <option value="AA">Administración Almacén</option>
-                                        <option value="VR">Ventas de Refacciones</option>
-                                        <option value="SV">Servicio</option>
-                                        <option value="HYP">Hojalatería y Pintura</option>
-                                        <option value="AV">Administración Ventas</option>
-                                        <option value="VC">Ventas Carga</option>
-                                        <option value="VP">Ventas Pasaje</option>
-                                        <option value="VS">Ventas Sprinter</option>
-                                        <option value="VSN">Ventas Seminuevos</option>
-                                        <option value="SA">Sucursal Apizaco</option>
-                                        <option value="SAT">Sucursal Alliance Tehuacán</option>
-                                        <option value="ST">Sucursal Tehuacán</option>
-                                    </select>`,
-                didOpen: () => {
-                    const select = document.getElementById("Nareainv");
-                    select.addEventListener("change", (event) => {
-                        const selectedValue = event.target.value;
-                        //console.log("Selected value:", selectedValue);
-                    });
-                },
+                        <option style="color: gray;" value="0">Selecciona una área</option>
+                        <option style="color: red;" value="ALL">Todas las áreas</option>
+                        <option value="DG">Direccion general</option>
+                        <option value="DF">Director Financiero</option>
+                        <option value="CL">Contraloria</option>
+                        <option value="AUD">Auditoría</option>
+                        <option value="CXC">Crédito y Cobranza</option>
+                        <option value="CT">Contabilidad</option>
+                        <option value="TA">Tesorería</option>
+                        <option value="PLD">PLD</option>
+                        <option value="EF">Enlace Financiero</option>
+                        <option value="RH">Recursos Humanos</option>
+                        <option value="MK">Marketing</option>
+                        <option value="TI">TI - Sistemas</option>
+                        <option value="CS">Compras</option>
+                        <option value="AA">Administración Almacén</option>
+                        <option value="VR">Ventas de Refacciones</option>
+                        <option value="SV">Servicio</option>
+                        <option value="HYP">Hojalatería y Pintura</option>
+                        <option value="AV">Administración Ventas</option>
+                        <option value="VC">Ventas Carga</option>
+                        <option value="VP">Ventas Pasaje</option>
+                        <option value="VS">Ventas Sprinter</option>
+                        <option value="VSN">Ventas Seminuevos</option>
+                        <option value="SA">Sucursal Apizaco</option>
+                        <option value="SAT">Sucursal Alliance Tehuacán</option>
+                        <option value="ST">Sucursal Tehuacán</option>
+                    </select>`,
                 preConfirm: () => {
                     const area = document.getElementById("Nareainv").value;
                     if (area === "0") {
                         Swal.showValidationMessage("Debes seleccionar una área");
                         return false;
                     }
-                    return {
-                        area: document.getElementById("Nareainv").value
-                    }
+                    return { area };
                 }
             }).then(result => {
                 if (result.isConfirmed) {
                     const { area } = result.value;
                     fetch('crud-calendar.php', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        },
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                         body: `action=exportarPorArea&area=${area}`
-                    }).then(response => response.json()).then(data => {
-                        if (data.status === 'success') {
-                            Swal.fire({
-                                title: "Éxito",
-                                text: "El archivo se ha generado correctamente.",
-                                icon: "success"
-                            }).then(result => {
-                                if (result.isConfirmed) {
-                                    //console.log('Descargar archivo:', data.message);
-                                    const correos = Object.values(data.message)
-                                        .map(valor => valor.correo)
-                                        .join("\n");
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 'success') {
+                                Swal.fire({
+                                    title: "Éxito",
+                                    text: "El archivo se ha generado correctamente.",
+                                    icon: "success"
+                                }).then(result => {
+                                    if (result.isConfirmed) {
+                                        const correos = Object.values(data.message)
+                                            .map(valor => valor.correo)
+                                            .join(", "); // separados por coma para Outlook
 
-                                    //console.log(correos); // Verificación en consola
-                                    Swal.fire({
-                                        title: "Mensaje",
-                                        input: "textarea",
-                                        inputLabel: "Contenido del archivo",
-                                        inputPlaceholder: "Escribe tu mensaje aquí...",
-                                        inputValue: correos,
-                                        inputAttributes: {
-                                            "aria-label": "Type your message here",
-                                            "readonly": true,
-                                            "style": "height: 300px; overflow-y: scroll;"
-                                        },
-                                        showCancelButton: true
-                                    });
-                                }
-                            });
-                        }
-                        //console.log(data.message);
-                    });
-                    //console.log(area);
-
+                                        // SweetAlert con botón de copiar
+                                        Swal.fire({
+                                            title: "Correos del área",
+                                            html: `
+                                        <textarea id="listaCorreos" readonly style="width:100%; height:200px; border-radius:5px;">${correos}</textarea>
+                                        <button id="copiarBtn" class="swal2-confirm swal2-styled" style="margin-top:10px;">Copiar correos</button>
+                                    `,
+                                            showConfirmButton: false,
+                                            didOpen: () => {
+                                                const copiarBtn = document.getElementById('copiarBtn');
+                                                copiarBtn.addEventListener('click', () => {
+                                                    const textarea = document.getElementById('listaCorreos');
+                                                    textarea.select();
+                                                    document.execCommand('copy');
+                                                    Swal.fire({
+                                                        icon: 'success',
+                                                        title: '¡Copiado!',
+                                                        text: 'Los correos se copiaron al portapapeles. Puedes pegarlos en Outlook.',
+                                                        timer: 3000,
+                                                        showConfirmButton: false
+                                                    });
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
                 }
             });
         });
     }
+    //******************************************fin de funcionalidad para impresoras************************************
 
 
     /*****************************BOTON PARA INGRESAR UN NUEVO HOST AL INVENTARIO********************************** */

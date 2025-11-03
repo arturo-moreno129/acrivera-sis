@@ -454,3 +454,41 @@ if (!isset($_SESSION['ususario'])) {
                 }).catch(err => console.error('Error al registrar SW:', err));
             }
         </script>
+        <script>
+            setInterval(() => {
+                fetch('obtener_eventos.php')
+                    .then(response => response.json())
+                    .then(eventos => {
+                        const ahora = new Date();
+
+                        eventos.forEach(evento => {
+                            const fechaEvento = new Date(evento.fecha_hora); // ejemplo: "2025-10-30 18:30:00"
+                            const diffMs = fechaEvento - ahora;
+
+                            // Faltan menos de 10 minutos
+                            if (diffMs > 0 && diffMs <= 10 * 60 * 1000 && !evento.alertado) {
+
+                                // Mostrar alerta con SweetAlert
+                                Swal.fire({
+                                    title: '⏰ ¡Evento próximo!',
+                                    html: `El evento <b>${evento.nombre}</b> está por comenzar a las <b>${fechaEvento.toLocaleTimeString()}</b>`,
+                                    icon: 'warning',
+                                    confirmButtonText: 'Entendido',
+                                    timer: 15000,
+                                    timerProgressBar: true
+                                });
+
+                                // Marcar como alertado (para no repetir)
+                                fetch('marcar_alertado.php', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded'
+                                    },
+                                    body: `id=${evento.id}`
+                                });
+                            }
+                        });
+                    })
+                    .catch(error => console.error('Error al obtener eventos:', error));
+            }, 30000);
+        </script>
