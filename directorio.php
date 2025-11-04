@@ -22,7 +22,7 @@ include 'header.php';
 <?php endif; ?>
 <center>
     <input id="btnExport" type="submit" value="Exportar a excel">
-    <input id="btnExport2" type="submit" value="Exportar correos por área">
+    <input id="btnExport2" type="submit" value="Generar Layout de correos para Outlook">
 </center>
 <!------------------------------------------------>
 
