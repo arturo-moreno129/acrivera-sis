@@ -24,7 +24,7 @@ $con = mysqli_connect($dbHost, $dbUser, $dbPass, $dbName);
 
 if (!$con) {
     echo "<script>alert('Error: No se pudo conectar a la base de datos');</script>";
-    header('Location: error.html');
+    header('Location: error');
     define('NO_DB_ACCESS', true);
     //return false; // Devuelve false si no se conecta
 }
