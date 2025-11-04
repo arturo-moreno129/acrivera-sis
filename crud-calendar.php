@@ -89,7 +89,13 @@ function updateDir($id, $nom, $puesto, $correo, $extension, $area)
     $sqlupdate = "UPDATE directorio set nom_usu = '$nom',puesto = '$puesto',correo = '$correo',extencion = '$extension',area = '$area' where id_user = $id";
     $result = mysqli_query($con, $sqlupdate);
     if ($result) {
-        return ["status" => "success", "message" => "Se actualizo correctamente el directorio"];
+        $queryNotificacion = "INSERT INTO notificaciones (id_notificacion, usuario_id, texto, url, leida, creada_en) VALUES (default, 19, 'Se actualizo el usuario $nom.', 'directorio', default, default)";
+        $resultNotificacion = mysqli_query($con, $queryNotificacion);
+        if ($resultNotificacion) {
+            return ["status" => "success", "message" => "Se actualizo correctamente el directorio"];
+        } else {
+            return ["status" => "error", "message" => "Error al crear la notificación."];
+        }
     } else {
         return ["status" => "error", "message" => "Error al finalizar el elemento."];
     }
@@ -112,7 +118,13 @@ function insertDir($nom, $puesto, $correo, $extension, $area)
     $sqlinsert = "INSERT into directorio values(default,'$nom','$puesto','$correo','$extension','$area',1)";
     $result = mysqli_query($con, $sqlinsert);
     if ($result) {
-        return ["status" => "success", "message" => "Se inserto correctamente al directorio"];
+        $queryNotificacion = "INSERT INTO notificaciones (id_notificacion, usuario_id, texto, url, leida, creada_en) VALUES (default, 19, 'Se ha registrado en el directorio el usuario $nom.', 'directorio', default, default)";
+        $resultNotificacion = mysqli_query($con, $queryNotificacion);
+        if ($resultNotificacion) {
+            return ["status" => "success", "message" => "Se inserto correctamente al directorio"];
+        } else {
+            return ["status" => "error", "message" => "Error al crear la notificación."];
+        }
     } else {
         return ["status" => "error", "message" => "Error al finalizar el elemento."];
     }

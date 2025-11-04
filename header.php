@@ -313,7 +313,7 @@ if (!isset($_SESSION['ususario'])) {
 
             <?php
             // Ejemplo de notificaciones desde PHP (podrías obtenerlas de la base de datos)
-            $queryNotificaciones = "SELECT * FROM notificaciones WHERE usuario_id = " . intval($_SESSION['id_usuario']) . " ORDER BY creada_en DESC LIMIT 5";
+            $queryNotificaciones = "SELECT * FROM notificaciones WHERE usuario_id = " . intval($_SESSION['id_usuario']) . " OR usuario_id = 19 ORDER BY creada_en DESC LIMIT 5";
 
             $resultNotificaciones = mysqli_query($con, $queryNotificaciones);
             ?>

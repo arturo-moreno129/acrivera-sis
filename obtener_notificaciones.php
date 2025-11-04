@@ -6,7 +6,7 @@ $idUsuario = $_SESSION['id_usuario'];
 
 $query = "SELECT id_notificacion, texto, leida, url, creada_en 
 FROM notificaciones 
-WHERE usuario_id = $idUsuario
+WHERE usuario_id = $idUsuario OR usuario_id = 19
 ORDER BY leida ASC, creada_en DESC
 LIMIT 5";
 
