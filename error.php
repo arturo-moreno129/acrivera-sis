@@ -1,9 +1,9 @@
 <?php
 // Bloquea el acceso directo
-if (!defined('NO_DB_ACCESS')) {
+/*if (!defined('NO_DB_ACCESS')) {
     header("Location: main");
     exit();
-}
+}*/
 ?>
 
 <!DOCTYPE html>
