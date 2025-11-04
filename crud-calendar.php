@@ -135,8 +135,15 @@ function deleteDir($id_DIR)
     $id_DIR = intval($id_DIR);
     $sqlinsert = "UPDATE directorio set estatus = 0 where id_user =$id_DIR";
     $result = mysqli_query($con, $sqlinsert);
+
     if ($result) {
-        return ["status" => "success", "message" => "Se elimino correctamente"];
+        $queryNotificacion = "INSERT INTO notificaciones (id_notificacion, usuario_id, texto, url, leida, creada_en) VALUES (default, 19, 'Se elimino un usuario del directorio', 'directorio', default, default)";
+        $resultNotificacion = mysqli_query($con, $queryNotificacion);
+        if ($resultNotificacion) {
+            return ["status" => "success", "message" => "Se elimino correctamente"];
+        } else {
+            return ["status" => "error", "message" => "Error al crear la notificación."];
+        }
     } else {
         return ["status" => "error", "message" => "Error al finalizar el elemento."];
     }
