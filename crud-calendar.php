@@ -85,21 +85,42 @@ function obtenerDatos($idDir)
 function updateDir($id, $nom, $puesto, $correo, $extension, $area)
 {
     global $con; // Usa la conexión global
-    $id = intval($id); // Convierte a entero para seguridad
-    $sqlupdate = "UPDATE directorio set nom_usu = '$nom',puesto = '$puesto',correo = '$correo',extencion = '$extension',area = '$area' where id_user = $id";
+    $id = intval($id); // Seguridad: convertir a entero
+
+    // Actualizar información del directorio
+    $sqlupdate = "UPDATE directorio 
+                  SET nom_usu = '$nom', 
+                      puesto = '$puesto', 
+                      correo = '$correo', 
+                      extencion = '$extension', 
+                      area = '$area' 
+                  WHERE id_user = $id";
     $result = mysqli_query($con, $sqlupdate);
+
     if ($result) {
-        $queryNotificacion = "INSERT INTO notificaciones (id_notificacion, usuario_id, texto, url, leida, creada_en) VALUES (default, 19, 'Se actualizo el usuario $nom.', 'directorio', default, default)";
-        $resultNotificacion = mysqli_query($con, $queryNotificacion);
-        if ($resultNotificacion) {
-            return ["status" => "success", "message" => "Se actualizo correctamente el directorio"];
+        // Obtener todos los usuarios registrados
+        $usuarios = mysqli_query($con, "SELECT id_usuario FROM usuario");
+
+        if ($usuarios && mysqli_num_rows($usuarios) > 0) {
+            // Insertar una notificación para cada usuario
+            while ($u = mysqli_fetch_assoc($usuarios)) {
+                $idUsuario = $u['id_usuario'];
+                $texto = "Se actualizó la información del usuario $nom en el directorio.";
+
+                $queryNotificacion = "INSERT INTO notificaciones (usuario_id, texto, url)
+                                      VALUES ($idUsuario, '$texto', 'directorio')";
+                mysqli_query($con, $queryNotificacion);
+            }
+
+            return ["status" => "success", "message" => "Se actualizó correctamente el directorio y se notificó a todos los usuarios."];
         } else {
-            return ["status" => "error", "message" => "Error al crear la notificación."];
+            return ["status" => "warning", "message" => "Usuario actualizado, pero no hay usuarios para notificar."];
         }
     } else {
-        return ["status" => "error", "message" => "Error al finalizar el elemento."];
+        return ["status" => "error", "message" => "Error al actualizar el elemento en el directorio."];
     }
 }
+
 function updateInv($id, $usr, $equipo, $modelo, $marca, $no_serie, $nom_host, $departamento, $slect2)
 {
     global $con; // Usa la conexión global
@@ -115,39 +136,68 @@ function updateInv($id, $usr, $equipo, $modelo, $marca, $no_serie, $nom_host, $d
 function insertDir($nom, $puesto, $correo, $extension, $area)
 {
     global $con; // Usa la conexión global
-    $sqlinsert = "INSERT into directorio values(default,'$nom','$puesto','$correo','$extension','$area',1)";
+
+    // Insertar en el directorio
+    $sqlinsert = "INSERT INTO directorio VALUES (DEFAULT, '$nom', '$puesto', '$correo', '$extension', '$area', 1)";
     $result = mysqli_query($con, $sqlinsert);
+
     if ($result) {
-        $queryNotificacion = "INSERT INTO notificaciones (id_notificacion, usuario_id, texto, url, leida, creada_en) VALUES (default, 19, 'Se ha registrado en el directorio el usuario $nom.', 'directorio', default, default)";
-        $resultNotificacion = mysqli_query($con, $queryNotificacion);
-        if ($resultNotificacion) {
-            return ["status" => "success", "message" => "Se inserto correctamente al directorio"];
+        // Obtener todos los usuarios registrados
+        $usuarios = mysqli_query($con, "SELECT id_usuario FROM usuario");
+
+        if ($usuarios && mysqli_num_rows($usuarios) > 0) {
+            // Insertar una notificación para cada usuario
+            while ($u = mysqli_fetch_assoc($usuarios)) {
+                $idUsuario = $u['id_usuario'];
+                $texto = "Se ha registrado en el directorio el usuario $nom.";
+
+                $queryNotificacion = "INSERT INTO notificaciones (usuario_id, texto, url)
+                                      VALUES ($idUsuario, '$texto', 'directorio')";
+                mysqli_query($con, $queryNotificacion);
+            }
+
+            return ["status" => "success", "message" => "Se insertó correctamente en el directorio y se notificó a todos los usuarios."];
         } else {
-            return ["status" => "error", "message" => "Error al crear la notificación."];
+            return ["status" => "warning", "message" => "Usuario agregado, pero no hay usuarios para notificar."];
         }
     } else {
-        return ["status" => "error", "message" => "Error al finalizar el elemento."];
+        return ["status" => "error", "message" => "Error al insertar el elemento en el directorio."];
     }
 }
+
 function deleteDir($id_DIR)
 {
     global $con; // Usa la conexión global
     $id_DIR = intval($id_DIR);
-    $sqlinsert = "UPDATE directorio set estatus = 0 where id_user =$id_DIR";
-    $result = mysqli_query($con, $sqlinsert);
+
+    // Cambiar el estatus del usuario a inactivo
+    $sqlUpdate = "UPDATE directorio SET estatus = 0 WHERE id_user = $id_DIR";
+    $result = mysqli_query($con, $sqlUpdate);
 
     if ($result) {
-        $queryNotificacion = "INSERT INTO notificaciones (id_notificacion, usuario_id, texto, url, leida, creada_en) VALUES (default, 19, 'Se elimino un usuario del directorio', 'directorio', default, default)";
-        $resultNotificacion = mysqli_query($con, $queryNotificacion);
-        if ($resultNotificacion) {
-            return ["status" => "success", "message" => "Se elimino correctamente"];
+        // Obtener todos los usuarios registrados
+        $usuarios = mysqli_query($con, "SELECT id_usuario FROM usuario");
+
+        if ($usuarios && mysqli_num_rows($usuarios) > 0) {
+            // Insertar una notificación para cada usuario
+            while ($u = mysqli_fetch_assoc($usuarios)) {
+                $idUsuario = $u['id_usuario'];
+                $texto = "Se eliminó un usuario del directorio.";
+
+                $queryNotificacion = "INSERT INTO notificaciones (usuario_id, texto, url)
+                                      VALUES ($idUsuario, '$texto', 'directorio')";
+                mysqli_query($con, $queryNotificacion);
+            }
+
+            return ["status" => "success", "message" => "Se eliminó correctamente y se notificó a todos los usuarios."];
         } else {
-            return ["status" => "error", "message" => "Error al crear la notificación."];
+            return ["status" => "warning", "message" => "Usuario eliminado, pero no hay usuarios para notificar."];
         }
     } else {
-        return ["status" => "error", "message" => "Error al finalizar el elemento."];
+        return ["status" => "error", "message" => "Error al eliminar el elemento."];
     }
 }
+
 function deleteInv($id_DIR)
 {
     global $con; // Usa la conexión global
