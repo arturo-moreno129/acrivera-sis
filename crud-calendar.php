@@ -173,7 +173,7 @@ function deleteDir($id_DIR)
     // Cambiar el estatus del usuario a inactivo
     $sqlUpdate = "UPDATE directorio SET estatus = 0 WHERE id_user = $id_DIR";
     $result = mysqli_query($con, $sqlUpdate);
-
+    $usuarioDirectorio = obtenerDatos($id_DIR);
     if ($result) {
         // Obtener todos los usuarios registrados
         $usuarios = mysqli_query($con, "SELECT id_usuario FROM usuario");
@@ -182,7 +182,7 @@ function deleteDir($id_DIR)
             // Insertar una notificación para cada usuario
             while ($u = mysqli_fetch_assoc($usuarios)) {
                 $idUsuario = $u['id_usuario'];
-                $texto = "Se eliminó un usuario del directorio.";
+                $texto = "Se eliminó un usuario del directorio: {$usuarioDirectorio['message'][0]['nom_usu']}";
 
                 $queryNotificacion = "INSERT INTO notificaciones (usuario_id, texto, url)
                                       VALUES ($idUsuario, '$texto', 'directorio')";
