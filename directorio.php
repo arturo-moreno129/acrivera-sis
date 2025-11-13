@@ -65,7 +65,7 @@ include 'header.php';
                 echo '<tr>
                 <td>' . $row["nom_usu"] . '</td>
                 <td style="text-align: center;">' . $row["puesto"] . '</td>
-                <td style="text-align: center;">' . $row["correo"] . '</td>
+                <td style="text-align: center;"><a href="mailto:' . $row["correo"] . '">' . $row["correo"] . '</a></td>
                 <td style="text-align: center;">' . $row["extencion"] . '</td>';
 
                 if ($_SESSION['rol'] == 1) {
@@ -81,6 +81,7 @@ include 'header.php';
         ?>
 
     </tbody>
+    
 </table>
 <script src="js/scriptPopUp.js"></script>
 <script>

@@ -447,14 +447,80 @@ if (!isset($_SESSION['ususario'])) {
                 reproducirTonoPush();
             }, 5000);*/
         </script>
+        <!-- Botón para activar las notificaciones -->
+        <button id="btnNotificaciones" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; border: none; background: #333; color: #fff; border-radius: 8px; cursor: pointer;">
+            🔔 Activar notificaciones
+        </button>
+
         <script>
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('sw.js').then(() => {
-                    //console.log('Service Worker registrado');
-                }).catch(err => console.error('Error al registrar SW:', err));
+            // ✅ Convierte la clave pública VAPID a formato Uint8Array
+            function urlBase64ToUint8Array(base64String) {
+                const padding = '='.repeat((4 - base64String.length % 4) % 4);
+                const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+                const rawData = window.atob(base64);
+                const outputArray = new Uint8Array(rawData.length);
+                for (let i = 0; i < rawData.length; ++i) {
+                    outputArray[i] = rawData.charCodeAt(i);
+                }
+                return outputArray;
             }
+
+            // ✅ Registrar el Service Worker y suscribirse a notificaciones push
+            async function registrarServiceWorker() {
+                if ('serviceWorker' in navigator && 'PushManager' in window) {
+                    try {
+                        const reg = await navigator.serviceWorker.register('sw.js');
+                        console.log('✅ Service Worker registrado:', reg.scope);
+
+                        const subsExistente = await reg.pushManager.getSubscription();
+                        if (!subsExistente) {
+                            const nuevaSubs = await reg.pushManager.subscribe({
+                                userVisibleOnly: true,
+                                applicationServerKey: urlBase64ToUint8Array('BLP3CuKaxos2Rl294_NOKxeEaPe6c_j2RV-zYExiACvKaV1hNb7Cf9M-9xTenqAeF1k2tUDz05-NiE18swyhfCk') // ⚠️ Pega aquí tu clave pública VAPID
+                            });
+
+                            // Guardar la suscripción en el servidor
+                            await fetch('guardar_suscripcion.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(nuevaSubs)
+                            });
+
+                            console.log('📩 Usuario suscrito correctamente a notificaciones push.');
+                            alert('✅ Notificaciones activadas correctamente');
+                        } else {
+                            console.log('🔔 Ya estabas suscrito a notificaciones.');
+                            alert('Ya tienes las notificaciones activadas.');
+                        }
+                    } catch (err) {
+                        console.error('❌ Error al registrar el SW o suscribirse:', err);
+                        alert('Hubo un error al activar las notificaciones. Revisa la consola.');
+                    }
+                } else {
+                    alert('Tu navegador no soporta notificaciones push.');
+                }
+            }
+
+            // ✅ Pedir permiso al hacer clic en el botón
+            document.addEventListener('DOMContentLoaded', () => {
+                const boton = document.getElementById('btnNotificaciones');
+                if (boton) {
+                    boton.addEventListener('click', async () => {
+                        const permiso = await Notification.requestPermission();
+                        if (permiso === 'granted') {
+                            registrarServiceWorker();
+                        } else {
+                            alert('⚠️ No diste permiso para mostrar notificaciones.');
+                        }
+                    });
+                }
+            });
         </script>
-        <script>
+
+
+        <!--<script>
             setInterval(() => {
                 fetch('obtener_eventos.php')
                     .then(response => response.json())
@@ -491,4 +557,4 @@ if (!isset($_SESSION['ususario'])) {
                     })
                     .catch(error => console.error('Error al obtener eventos:', error));
             }, 30000);
-        </script>
+        </script>-->
