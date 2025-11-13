@@ -448,9 +448,9 @@ if (!isset($_SESSION['ususario'])) {
             }, 5000);*/
         </script>
         <!-- Botón para activar las notificaciones -->
-        <button id="btnNotificaciones" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; border: none; background: #333; color: #fff; border-radius: 8px; cursor: pointer;">
+        <!--<button id="btnNotificaciones" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; border: none; background: #333; color: #fff; border-radius: 8px; cursor: pointer;">
             🔔 Activar notificaciones
-        </button>
+        </button>-->
 
         <script>
             // ✅ Convierte la clave pública VAPID a formato Uint8Array
