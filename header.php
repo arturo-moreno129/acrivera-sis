@@ -520,7 +520,7 @@ if (!isset($_SESSION['ususario'])) {
         </script>
 
 
-        <!--<script>
+        <script>
             setInterval(() => {
                 fetch('obtener_eventos.php')
                     .then(response => response.json())
@@ -528,33 +528,32 @@ if (!isset($_SESSION['ususario'])) {
                         const ahora = new Date();
 
                         eventos.forEach(evento => {
-                            const fechaEvento = new Date(evento.fecha_hora); // ejemplo: "2025-10-30 18:30:00"
+                            const fechaEvento = new Date(evento.fecha + 'T' + evento.horaInicio);
                             const diffMs = fechaEvento - ahora;
 
-                            // Faltan menos de 10 minutos
+                            console.log(`Evento: ${evento.usuario_final}, Inicia en: ${fechaEvento}, Diferencia (ms): ${diffMs}`);
+                            // Cuando falten menos de 10 minutos
                             if (diffMs > 0 && diffMs <= 10 * 60 * 1000 && !evento.alertado) {
 
-                                // Mostrar alerta con SweetAlert
-                                Swal.fire({
+                                // Abrir ventana automáticamente
+                                window.open(
+                                    'popup.php?id=' + evento.id_mantenimiento,
+                                    '_blank',
+                                    'width=600,height=500'
+                                );
+
+                                // Mostrar SweetAlert (opcional)
+                                /*Swal.fire({
                                     title: '⏰ ¡Evento próximo!',
-                                    html: `El evento <b>${evento.nombre}</b> está por comenzar a las <b>${fechaEvento.toLocaleTimeString()}</b>`,
+                                    html: `El evento <b>${evento.usuario_final}</b> está por comenzar a las <b>${fechaEvento.toLocaleTimeString()}</b>`,
                                     icon: 'warning',
                                     confirmButtonText: 'Entendido',
                                     timer: 15000,
                                     timerProgressBar: true
-                                });
-
-                                // Marcar como alertado (para no repetir)
-                                fetch('marcar_alertado.php', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/x-www-form-urlencoded'
-                                    },
-                                    body: `id=${evento.id}`
-                                });
+                                });*/
                             }
                         });
                     })
                     .catch(error => console.error('Error al obtener eventos:', error));
-            }, 30000);
-        </script>-->
+            }, 60000); // Cada 60 segundos
+        </script>
