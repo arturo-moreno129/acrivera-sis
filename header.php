@@ -519,8 +519,22 @@ if (!isset($_SESSION['ususario'])) {
             });
         </script>
 
-
         <script>
+            let ventanaPopup = null;
+
+            function abrirPopup(id) {
+                // Si ya hay una ventana abierta → la cierro
+                if (ventanaPopup && !ventanaPopup.closed) {
+                    ventanaPopup.close();
+                }
+
+                ventanaPopup = window.open(
+                    'popup.php?id=' + id,
+                    '_blank',
+                    'width=600,height=500'
+                );
+            }
+
             setInterval(() => {
                 fetch('obtener_eventos.php')
                     .then(response => response.json())
@@ -532,25 +546,23 @@ if (!isset($_SESSION['ususario'])) {
                             const diffMs = fechaEvento - ahora;
 
                             console.log(`Evento: ${evento.usuario_final}, Inicia en: ${fechaEvento}, Diferencia (ms): ${diffMs}`);
-                            // Cuando falten menos de 10 minutos
+
                             if (diffMs > 0 && diffMs <= 10 * 60 * 1000 && !evento.alertado) {
 
-                                // Abrir ventana automáticamente
-                                window.open(
-                                    'popup.php?id=' + evento.id_mantenimiento,
-                                    '_blank',
-                                    'width=600,height=500'
-                                );
+                                // Abrir popup de forma controlada
+                                abrirPopup(evento.id_mantenimiento);
 
-                                // Mostrar SweetAlert (opcional)
-                                /*Swal.fire({
+                                // (Opcional) Alerta con SweetAlert
+                                /*
+                                Swal.fire({
                                     title: '⏰ ¡Evento próximo!',
                                     html: `El evento <b>${evento.usuario_final}</b> está por comenzar a las <b>${fechaEvento.toLocaleTimeString()}</b>`,
                                     icon: 'warning',
                                     confirmButtonText: 'Entendido',
                                     timer: 15000,
                                     timerProgressBar: true
-                                });*/
+                                });
+                                */
                             }
                         });
                     })
