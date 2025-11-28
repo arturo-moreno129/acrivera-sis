@@ -190,7 +190,7 @@ if (!isset($_SESSION['ususario'])) {
             </div>
             <div class="usuario">
                 <samp><strong><?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellidoP'] . ' ' . $_SESSION['apellidoM']; ?></strong></samp>
-                <img src="imagenes/avatar_h.webp" alt="Foto de perfil" class="foto-perfil">
+                <img src=<?php echo $_SESSION['sexo'] == 'M' ? "imagenes/avatar_h.webp" : "imagenes/avatar_m.png"; ?> alt="Foto de perfil" class="foto-perfil">
             </div>
         </header>
         <audio id="tonoNotificacion" src="audios/mariocoin.mp3" preload="auto"></audio>

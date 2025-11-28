@@ -21,6 +21,7 @@ if ($row = mysqli_num_rows($result) > 0) {
                 $_SESSION['nombre'] = $row['nombre'];
                 $_SESSION['apellidoP'] = $row['apellidoP'];
                 $_SESSION['apellidoM'] = $row['apellidoM'];
+                $_SESSION['sexo'] = $row['sexo'];
                 $_SESSION['puesto'] = $row['puesto'];
                 $_SESSION['departamento'] = $row['departamento'];
                 $_SESSION['rol'] = $row['rol'];
