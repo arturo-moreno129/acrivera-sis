@@ -367,6 +367,57 @@ function actualizarNotificacion($id_notificacion, $leida)
         return ["status" => "error", "message" => "Error al actualizar la notificación."];
     }
 }
+function obtnerUsuarioPorId($id_usuario)
+{
+    global $con; // Usa la conexión global
+    $id_usuario = intval($id_usuario); // Convierte a entero para seguridad
+    $sqlselect = "SELECT * FROM usuario WHERE id_usuario = {$id_usuario}";
+    $resultadoFinal = mysqli_query($con, $sqlselect);
+    if ($resultadoFinal) {
+        $datos = mysqli_fetch_all($resultadoFinal, MYSQLI_ASSOC); //Convierte el resultado en array asociativo
+        return ["status" => "success", "message" => $datos];
+    } else {
+        return ["status" => "error", "message" => "Error al finalizar el elemento."];
+    }
+}
+function actualizarUsuario($id_usuario, $usuario, $nombre, $apellidoP, $apellidoM, $sexo, $puesto, $departamento, $rol)
+{
+    global $con; // Usa la conexión global
+    $id_usuario = intval($id_usuario); // Convierte a entero para seguridad
+
+    $sqlupdate = "UPDATE usuario 
+                  SET usuario = '$usuario', 
+                      nombre = '$nombre', 
+                      apellidoP = '$apellidoP', 
+                      apellidoM = '$apellidoM', 
+                      sexo = '$sexo', 
+                      puesto = '$puesto', 
+                      departamento = '$departamento', 
+                      rol = $rol 
+                  WHERE id_usuario = $id_usuario";
+    $result = mysqli_query($con, $sqlupdate);
+
+    if ($result) {
+        return ["status" => "success", "message" => "Usuario actualizado correctamente."];
+    } else {
+        return ["status" => "error", "message" => "Error al actualizar el usuario."];
+    }
+}
+function eliminarUsuario($id_usuario, $estatus)
+{
+    global $con; // Usa la conexión global
+    $id_usuario = intval($id_usuario); // Convierte a entero para seguridad
+    $estatus = mysqli_real_escape_string($con, $estatus); // Escapa el valor para seguridad
+
+    $sqlDelete = "UPDATE usuario set estatus = '$estatus' where id_usuario = $id_usuario";
+    $result = mysqli_query($con, $sqlDelete);
+
+    if ($result) {
+        return ["status" => "success", "message" => "Usuario eliminado correctamente."];
+    } else {
+        return ["status" => "error", "message" => $id_usuario."Error al eliminar el usuario."];
+    }
+}
 // Maneja la acción solicitada
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
@@ -505,6 +556,28 @@ if (isset($_POST['action'])) {
                 $response = actualizarNotificacion($_POST['id'], $_POST['leida']);
             } else {
                 $response = ["status" => "error", "message" => "ID o fecha no proporcionada."];
+            }
+            break;
+        case 'obtnerUsuarioPorId':
+            if (isset($_POST['id_usuario'])) {
+                $response = obtnerUsuarioPorId($_POST['id_usuario']);
+            } else {
+                $response = ["status" => "error", "message" => "ID o fecha no proporcionada."];
+            }
+            break;
+        case 'actualizarUsuario':
+            if (isset($_POST['id_usuario']) && isset($_POST['usuario']) && isset($_POST['nombre']) && isset($_POST['apellidoP']) && isset($_POST['apellidoM']) && isset($_POST['sexo']) && isset($_POST['puesto']) && isset($_POST['departamento']) && isset($_POST['rol'])) {
+                $response = actualizarUsuario($_POST['id_usuario'], $_POST['usuario'], $_POST['nombre'], $_POST['apellidoP'], $_POST['apellidoM'], $_POST['sexo'], $_POST['puesto'], $_POST['departamento'], $_POST['rol']);
+            } else {
+                $response = ["status" => "error", "message" => "ID o fecha no proporcionada."];
+            }
+            break;
+        case 'eliminarUsuario':
+            # code...
+            if (isset($_POST['id_usuario']) && isset($_POST['estatus'])) {
+                $response = eliminarUsuario($_POST['id_usuario'], $_POST['estatus']);
+            } else {
+                $response = ["status" => "error", "message" => "ID no proporcionado."];
             }
             break;
         default:

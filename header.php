@@ -62,6 +62,12 @@ if (!isset($_SESSION['ususario'])) {
                         </a>
                     </li>
                     <li>
+                        <a href="panelAdmin">
+                            <ion-icon name="terminal-outline"></ion-icon>
+                            <span>Panel Admin</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="internet">
                             <ion-icon name="qr-code-outline"></ion-icon>
                             <span>QR Internet</span>
