@@ -1,21 +1,6 @@
 <?php
-//session_start();
-
-// Verificar que exista la sesión
-if (!isset($_SESSION['ususario'])) {
-    header("Location: index");
-    exit();
-}
-
-// Verificar que sea administrador
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 1) {
-    header("Location: index");
-    exit();
-}
-
-include("header.php");
+include 'header.php';
 ?>
-
 <div class="users-container">
     <h2 class="users-title">Usuarios Registrados</h2>
 
