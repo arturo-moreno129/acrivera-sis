@@ -1,8 +1,4 @@
 <?php
-if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 1) {
-    header('location: index');
-    exit();
-}
 include 'header.php';
 ?>
 <div class="users-container">
