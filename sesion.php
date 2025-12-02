@@ -9,7 +9,7 @@ $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 $query = "INSERT INTO USUARIO VALUE(DEFAULT,'JMoreno','JOSE ARTURO','MORENO','AGUILAR','SOPORTE','SISTEMAS','$hashed_password')";
 mysqli_query($con, $query);*/
 
-$query = "SELECT * FROM USUARIO WHERE USUARIO ='$user'";
+$query = "SELECT * FROM USUARIO WHERE USUARIO ='$user' and estatus = 'Activo'";
 $result = mysqli_query($con, $query);
 if ($row = mysqli_num_rows($result) > 0) {
     // Si la consulta fue exitosa, puedes acceder a los datos.

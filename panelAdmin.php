@@ -11,6 +11,7 @@ include 'header.php';
                 <th>Nombre</th>
                 <th>Usuario</th>
                 <th>Rol</th>
+                <th>Puesto</th>
                 <th>Acciones</th>
                 <th>Estatus</th>
             </tr>
@@ -20,7 +21,7 @@ include 'header.php';
             <!-- Ejemplo de usuario (esto luego lo llenas con PHP o JS) -->
             <?php
             // Aquí iría el código PHP para obtener y mostrar los usuarios desde la base de datos
-            $query = "SELECT id_usuario,usuario, nombre,apellidoP,apellidoM,puesto, rol, estatus FROM usuario order by rol asc";
+            $query = "SELECT id_usuario,usuario, nombre,apellidoP,apellidoM,puesto, rol,sexo, estatus FROM usuario order by rol asc";
             $result = mysqli_query($con, $query);
             while ($row = mysqli_fetch_assoc($result)) {
 
@@ -41,6 +42,7 @@ include 'header.php';
         <td>" . $row['nombre'] . " " . $row['apellidoP'] . " " . $row['apellidoM'] . "</td>
         <td>" . $row['usuario'] . "</td>
         <td>" . ($row['rol'] == 1 ? "Administrador" : "Usuario") . "</td>
+        <td>" . $row['puesto'] . "</td>
 
         <td>$acciones</td>
 
