@@ -10,12 +10,13 @@ $puesto = $_POST['puesto'] ?? null;
 $departamento = $_POST['departamento'] ?? null;
 $contrasena = $_POST['contrasena'] ?? null;
 $rol = $_POST['rol'] ?? null;
-if ($usuario != null && $nombre != null && $apellido_paterno != null && $puesto != null && $departamento != null && $contrasena != null && $rol != null) {
+$sexo = $_POST['sexo'] ?? null;
+if ($usuario != null && $nombre != null && $apellido_paterno != null && $puesto != null && $departamento != null && $contrasena != null && $rol != null && $sexo != null) {
     # code...
     $password = $contrasena;
     // Hasheamos la contraseña con un algoritmo seguro (por defecto, PASSWORD_BCRYPT)
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    $query = "INSERT into usuario values(default,'$usuario','$nombre','$apellido_paterno','$apellido_materno','$puesto','$departamento','$hashed_password',$rol)";
+    $query = "INSERT into usuario values(default,'$usuario','$nombre','$apellido_paterno','$apellido_materno','$sexo','$puesto','$departamento','$hashed_password',$rol,'Activo')";
     mysqli_query($con, $query);
     if (mysqli_errno($con)) {
         $_SESSION['mensaje'] = "Error al crear el usuario: " . mysqli_error($con);
@@ -29,7 +30,7 @@ if ($usuario != null && $nombre != null && $apellido_paterno != null && $puesto 
     $_SESSION['mensaje'] = null;
 }
 
-$password = "inicio0725"; //$_POST['password'];
+/*$password = "inicio0725"; //$_POST['password'];
 // Hasheamos la contraseña con un algoritmo seguro (por defecto, PASSWORD_BCRYPT)
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 $query = "INSERT into usuario values(default,'AFlores','Antonio','Flores','Atempa','Supervisor de Vigilancia','Recursos Humanos','$hashed_password',2)";

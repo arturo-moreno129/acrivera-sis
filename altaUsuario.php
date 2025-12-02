@@ -230,7 +230,18 @@ include 'header.php';
                     <input id="ap_materno" name="apellido_materno" type="text" placeholder="Apellido materno" />
                 </div>
             </div>
-
+            
+            <div class="field col-6 important">
+                <label class="label req" for="sexo">Sexo</label>
+                <div class="control">
+                    <select id="sexo" name="sexo" required>
+                        <option value="" disabled selected>Selecciona un sexo</option>
+                        <option class="rol" value="M">Masculino</option>
+                        <option class="rol" value="F">Femenino</option>
+                    </select>
+                </div>
+                <small class="hint">Define los permisos del usuario en el sistema.</small>
+            </div>
             <!-- Puesto -->
             <div class="field col-6">
                 <label class="label req" for="puesto">Puesto</label>
