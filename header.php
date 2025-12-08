@@ -196,7 +196,15 @@ if (!isset($_SESSION['ususario'])) {
             </div>
             <div class="usuario">
                 <samp><strong><?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellidoP'] . ' ' . $_SESSION['apellidoM']; ?></strong></samp>
-                <img src=<?php echo $_SESSION['sexo'] == 'M' ? "imagenes/avatar_h.webp" : "imagenes/avatar_m.png"; ?> alt="Foto de perfil" class="foto-perfil">
+                <!-- Mostrar foto de perfil o emoji según el sexo -->
+                <?php if ($_SESSION['id_usuario'] == 8): ?>
+                    <img src="imagenes/m_belen.jpg" alt="Foto de perfil" class="foto-perfil" id="fotoPerfil">
+                <?php else: ?>
+                    <img src="<?php echo $_SESSION['sexo'] == 'M' ? 'imagenes/avatar_h.webp' : 'imagenes/avatar_m.png'; ?>"
+                        alt="Foto de perfil" class="foto-perfil" id="fotoPerfil">
+                <?php endif; ?>
+
+
             </div>
         </header>
         <audio id="tonoNotificacion" src="audios/mariocoin.mp3" preload="auto"></audio>
@@ -309,6 +317,7 @@ if (!isset($_SESSION['ususario'])) {
                 height: 35px;
                 border-radius: 50%;
                 object-fit: cover;
+                cursor: pointer;
             }
         </style>
 
@@ -574,4 +583,19 @@ if (!isset($_SESSION['ususario'])) {
                     })
                     .catch(error => console.error('Error al obtener eventos:', error));
             }, 60000); // Cada 60 segundos
+
+            document.addEventListener("DOMContentLoaded", function() {
+                const foto = document.getElementById("fotoPerfil");
+
+                foto.addEventListener("click", function() {
+                    Swal.fire({
+                        title: "Foto de perfil",
+                        imageUrl: foto.src,
+                        imageAlt: 'Foto de perfil',
+                        imageWidth: 350, // tamaño grande
+                        imageHeight: 'auto',
+                        confirmButtonText: "Cerrar"
+                    });
+                });
+            });
         </script>
