@@ -1,4 +1,15 @@
-Recibido: carpetas/JOSE ARTURO MORENO AGUILAR/RESGUARDO_4.pdf0
-Archivo copiado exitosamente.
-PDF guardado con éxito en: carpetas/JOSE ARTURO MORENO AGUILAR/RESGUARDO_4.pdf
-Archivo eliminado exitosamente.
+Recibido: carpetas/PRUEBA JOSE PRUEBA JOSE PRUEBA JOSE/MANTENIMIENTO_1.pdf1
+Traceback (most recent call last):
+  File "C:\xampp\htdocs\acrivera-sis\prueba_firma_pdf.py", line 57, in <module>
+    incrustr_imagen(ruta_pdf,dato)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\xampp\htdocs\acrivera-sis\prueba_firma_pdf.py", line 12, in incrustr_imagen
+    shutil.copy(origen, destino)  # Copia el archivo
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\JMoreno\AppData\Local\Programs\Python\Python313\Lib\shutil.py", line 428, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\JMoreno\AppData\Local\Programs\Python\Python313\Lib\shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ~~~~^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'carpetas/PRUEBA JOSE PRUEBA JOSE PRUEBA JOSE/MANTENIMIENTO_1.pdf'
