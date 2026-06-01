@@ -326,6 +326,42 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
         })
     }
+    //******************Boton para exportar inventario */
+    const btnExportinventario = document.querySelector("#btnExportinventario");
+    if (btnExportinventario) {
+        btnExportinventario.addEventListener('click', () => {
+            fetch('exportInventario.php', {
+                method: 'POST'
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error('No se pudo generar el archivo');
+                    return response.blob();
+                })
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `Inventario - ACR.xlsx`;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+
+                    Swal.fire({
+                        title: "¡Listo!",
+                        text: "El inventario se descargó correctamente.",
+                        icon: "success"
+                    });
+                })
+                .catch(error => {
+                    console.error('Error en la exportación:', error);
+                    Swal.fire({
+                        title: "Error",
+                        text: "No se pudo exportar el archivo.",
+                        icon: "error"
+                    });
+                });
+        })
+    }
     //***************boton para exportar a BLOC DE NOTAS */
     const btnExxport2 = document.querySelector("#btnExport2");
     if (btnExxport2) {
