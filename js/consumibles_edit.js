@@ -99,7 +99,9 @@ document.addEventListener('DOMContentLoaded', function () {
                   if (v && data.direccion_ip !== undefined) v.textContent = data.direccion_ip;
                 }
               }
-              Swal.fire('Listo', 'Consumible actualizado', 'success');
+              Swal.fire('Listo', 'Consumible actualizado', 'success').then(() => {
+                location.reload();
+              });
             } else {
               Swal.fire('Error', res.message || 'No se pudo actualizar', 'error');
             }
