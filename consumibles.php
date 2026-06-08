@@ -24,6 +24,7 @@ include 'header.php'
           data_id_consumible="<?php echo $row['id_consumible']; ?>"
           data_nombre="<?php echo $row['nombre']; ?>"
           data_cantidad_disponible="<?php echo $row['cantidad_disponible']; ?>"
+          data_direccion_ip="<?php echo $row['direccion_ip']; ?>"
           data_id_impresora="<?php echo $row['id_impresora']; ?>">
           <div class="card-header1">
             <ion-icon name="print-outline"></ion-icon>

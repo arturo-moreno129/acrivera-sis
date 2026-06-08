@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
             no_serie: document.getElementById('sw_no_serie').value,
             modelo: document.getElementById('sw_modelo').value,
             nombre: document.getElementById('sw_nombre').value,
+            cantidad_disponible: cantidadVal,
             direccion_ip: (document.getElementById('sw_direccion_ip') && document.getElementById('sw_direccion_ip').value) || ''
           };
         }

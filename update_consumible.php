@@ -16,6 +16,7 @@ $no_serie = isset($input['no_serie']) ? $con->real_escape_string($input['no_seri
 $modelo = isset($input['modelo']) ? $con->real_escape_string($input['modelo']) : '';
 $nombre = isset($input['nombre']) ? $con->real_escape_string($input['nombre']) : '';
 $cantidad_disponible = isset($input['cantidad_disponible']) ? intval($input['cantidad_disponible']) : 0;
+$direccion_ip = isset($input['direccion_ip']) ? $con->real_escape_string($input['direccion_ip']) : '';
 
 if (!$id_impresora || !$id_consumible) {
     echo json_encode(['success' => false, 'message' => 'IDs inválidos']);
@@ -25,8 +26,8 @@ if (!$id_impresora || !$id_consumible) {
 $success = true;
 $con->begin_transaction();
 try {
-    $stmt = $con->prepare("UPDATE impresoras SET ubicacion = ?, marca = ?, no_serie = ?, modelo = ? WHERE id_impresora = ?");
-    $stmt->bind_param('ssssi', $ubicacion, $marca, $no_serie, $modelo, $id_impresora);
+    $stmt = $con->prepare("UPDATE impresoras SET ubicacion = ?, marca = ?, no_serie = ?, modelo = ?, direccion_ip = ? WHERE id_impresora = ?");
+    $stmt->bind_param('sssssi', $ubicacion, $marca, $no_serie, $modelo, $direccion_ip, $id_impresora);
     $stmt->execute();
     $stmt->close();
 
