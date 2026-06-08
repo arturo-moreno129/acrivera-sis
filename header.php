@@ -76,13 +76,13 @@ if (!isset($_SESSION['ususario'])) {
                     <li>
                         <a href="consumibles">
                             <ion-icon name="flask-outline"></ion-icon>
-                            <span>Consumibles</span>
+                            <span>Impresoras</span>
                         </a>
                     </li>
                     <li>
                         <a href="consumibles_module">
-                            <ion-icon name="layers-outline"></ion-icon>
-                            <span>Consumibles CRUD</span>
+                            <ion-icon name="eyedrop-outline"></ion-icon>
+                            <span>Toners</span>
                         </a>
                     </li>
                     <li>
