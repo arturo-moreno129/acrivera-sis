@@ -80,6 +80,12 @@ if (!isset($_SESSION['ususario'])) {
                         </a>
                     </li>
                     <li>
+                        <a href="consumibles_module">
+                            <ion-icon name="layers-outline"></ion-icon>
+                            <span>Consumibles CRUD</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="altaUsuario">
                             <ion-icon name="person-add-outline"></ion-icon>
                             <span>Alta de Usuario</span>
