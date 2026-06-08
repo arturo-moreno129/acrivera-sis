@@ -25,12 +25,12 @@ document.addEventListener('DOMContentLoaded', function () {
         confirmButtonText: 'Guardar',
         cancelButtonText: 'Cancelar',
         html: `
-          <input id="sw_ubicacion" class="swal2-input" placeholder="Ubicación">
-          <input id="sw_marca" class="swal2-input" placeholder="Marca">
-          <input id="sw_no_serie" class="swal2-input" placeholder="Número de serie">
-          <input id="sw_modelo" class="swal2-input" placeholder="Modelo">
-          <input id="sw_nombre" class="swal2-input" placeholder="Tóner (nombre)">
-          <input id="sw_cantidad" type="number" min="0" class="swal2-input" placeholder="Cantidad disponible">
+          <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Ubicación</label><input id="sw_ubicacion" class="swal2-input" placeholder="Ubicación"></div>
+          <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Marca</label><input id="sw_marca" class="swal2-input" placeholder="Marca"></div>
+          <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Número de serie</label><input id="sw_no_serie" class="swal2-input" placeholder="Número de serie"></div>
+          <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Modelo</label><input id="sw_modelo" class="swal2-input" placeholder="Modelo"></div>
+          <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Tóner (nombre)</label><input id="sw_nombre" class="swal2-input" placeholder="Tóner (nombre)"></div>
+          <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Cantidad disponible</label><input id="sw_cantidad" type="number" min="0" class="swal2-input" placeholder="Cantidad disponible"></div>
         `,
         didOpen: () => {
           document.getElementById('sw_ubicacion').value = ubicacionVal;
