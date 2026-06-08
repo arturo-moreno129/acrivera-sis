@@ -46,6 +46,10 @@ include 'header.php'
             <span class="value1"><?php echo $row['modelo']; ?></span>
           </div>
           <div class="info1">
+            <span class="label1"><ion-icon name="cellular-outline"></ion-icon> Dirección IP:</span>
+            <span class="value1"><?php echo $row['direccion_ip']; ?></span>
+          </div>
+          <div class="info1">
             <span class="label1"><ion-icon name="color-fill-outline"></ion-icon> Tóner:</span>
             <span class="value1"><?php echo $row['nombre']; ?></span>
           </div>
@@ -57,6 +61,7 @@ include 'header.php'
             <button class="edit-btn" data-id-impresora="<?php echo $row['id_impresora']; ?>" data-id-consumible="<?php echo $row['id_consumible']; ?>">Editar</button>
             <button class="update-consumibles" style="margin-left:8px;" data-id-impresora="<?php echo $row['id_impresora']; ?>" data-id-consumible="<?php echo $row['id_consumible']; ?>">Actualizar consumibles</button>
           </div>
+          
         </div>
     <?php
       } // while

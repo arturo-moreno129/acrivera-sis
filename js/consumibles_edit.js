@@ -11,12 +11,19 @@ document.addEventListener('DOMContentLoaded', function () {
       const noSerieVal = card.getAttribute('data_no_serie') || '';
       const modeloVal = card.getAttribute('data_modelo') || '';
       const nombreVal = card.getAttribute('data_nombre') || '';
+      const direccionIpAttr = card.getAttribute('data_direccion_ip') || '';
       const cantidadVal = card.getAttribute('data_cantidad_disponible') || 0;
       const marcaEl = Array.from(card.querySelectorAll('.info1')).find(i => i.textContent.includes('Marca'));
       let marcaVal = '';
       if (marcaEl) {
         const v = marcaEl.querySelector('.value1');
         if (v) marcaVal = v.textContent.trim();
+      }
+      const ipEl = Array.from(card.querySelectorAll('.info1')).find(i => i.textContent.toLowerCase().includes('ip') || i.textContent.toLowerCase().includes('dirección'));
+      let ipVal = '';
+      if (ipEl) {
+        const v = ipEl.querySelector('.value1');
+        if (v) ipVal = v.textContent.trim();
       }
 
       Swal.fire({
@@ -30,7 +37,8 @@ document.addEventListener('DOMContentLoaded', function () {
           <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Número de serie</label><input id="sw_no_serie" class="swal2-input" placeholder="Número de serie"></div>
           <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Modelo</label><input id="sw_modelo" class="swal2-input" placeholder="Modelo"></div>
           <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Tóner (nombre)</label><input id="sw_nombre" class="swal2-input" placeholder="Tóner (nombre)"></div>
-          <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Cantidad disponible</label><input id="sw_cantidad" type="number" min="0" class="swal2-input" placeholder="Cantidad disponible"></div>
+          <!-- Campo 'Cantidad disponible' eliminado del modal (se actualiza con 'Actualizar consumibles') -->
+          <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Dirección IP</label><input id="sw_direccion_ip" class="swal2-input" placeholder="Dirección IP"></div>
         `,
         didOpen: () => {
           document.getElementById('sw_ubicacion').value = ubicacionVal;
@@ -38,7 +46,10 @@ document.addEventListener('DOMContentLoaded', function () {
           document.getElementById('sw_no_serie').value = noSerieVal;
           document.getElementById('sw_modelo').value = modeloVal;
           document.getElementById('sw_nombre').value = nombreVal;
-          document.getElementById('sw_cantidad').value = cantidadVal;
+          // `cantidad disponible` se gestiona por separado; no se inicializa aquí
+          // establecer IP si existe
+          const swIp = document.getElementById('sw_direccion_ip');
+          if (swIp) swIp.value = direccionIpAttr || ipVal || '';
         },
         preConfirm: () => {
           return {
@@ -49,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
             no_serie: document.getElementById('sw_no_serie').value,
             modelo: document.getElementById('sw_modelo').value,
             nombre: document.getElementById('sw_nombre').value,
-            cantidad_disponible: document.getElementById('sw_cantidad').value
+            direccion_ip: (document.getElementById('sw_direccion_ip') && document.getElementById('sw_direccion_ip').value) || ''
           };
         }
       }).then(result => {
@@ -69,15 +80,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 cardEl.setAttribute('data_no_serie', data.no_serie);
                 cardEl.setAttribute('data_modelo', data.modelo);
                 cardEl.setAttribute('data_nombre', data.nombre);
-                cardEl.setAttribute('data_cantidad_disponible', data.cantidad_disponible);
+                // `cantidad_disponible` no se actualiza desde este modal; se mantiene el valor actual en la card
+                // actualizar atributo de IP
+                if (data.direccion_ip !== undefined) cardEl.setAttribute('data_direccion_ip', data.direccion_ip);
                 const values = cardEl.querySelectorAll('.value1');
-                if (values.length >= 6) {
+                if (values.length >= 5) {
                   values[0].textContent = data.ubicacion;
                   values[1].textContent = res.marca || data.marca || values[1].textContent;
                   values[2].textContent = data.no_serie;
                   values[3].textContent = data.modelo;
                   values[4].textContent = data.nombre;
-                  values[5].textContent = data.cantidad_disponible + ' pz';
+                }
+                // si existe elemento para IP en la card, actualizar su valor
+                const ipElCard = Array.from(cardEl.querySelectorAll('.info1')).find(i => i.textContent.toLowerCase().includes('ip') || i.textContent.toLowerCase().includes('dirección'));
+                if (ipElCard) {
+                  const v = ipElCard.querySelector('.value1');
+                  if (v && data.direccion_ip !== undefined) v.textContent = data.direccion_ip;
                 }
               }
               Swal.fire('Listo', 'Consumible actualizado', 'success');
