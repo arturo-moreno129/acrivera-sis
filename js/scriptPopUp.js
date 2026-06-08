@@ -700,28 +700,20 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     /******************************FIN DEL BOTON */
-    const card = document.querySelectorAll('.card1');
-    card.forEach((btn) => {
-        btn.addEventListener("click", function () {
-            const ubicacion = this.getAttribute("data_ubicacion");
-            const no_serie = this.getAttribute("data_no_serie");
-            const modelo = this.getAttribute("data_modelo");
-            const id_consumible = this.getAttribute("data_id_consumible");
-            const nombre = this.getAttribute("data_nombre");
-            const cantidad_disponible = this.getAttribute("data_cantidad_disponible");
-            const id_impresora = this.getAttribute("data_id_impresora");
-            //console.log(ubicacion, no_serie, modelo, id_consumible, cantidad_disponible);
-            /*Swal.fire({
-                title: "Detalles de la impresora",
-                confirmButtonText: "Cerrar",
-                html: `
-                    <p><strong>Ubicación:</strong> ${ubicacion}</p>
-                    <p><strong>No. de Serie:</strong> ${no_serie}</p>
-                    <p><strong>Modelo:</strong> ${modelo}</p>
-                    <p><strong>Tóner:</strong> ${id_consumible}</p>
-                    <p><strong>Consumibles disponibles:</strong> ${cantidad_disponible}</p>
-                `
-            });*/
+    // Mover el handler de SweetAlert a un botón dedicado dentro de la tarjeta
+    document.querySelectorAll('.update-consumibles').forEach((btn) => {
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const card = this.closest('.card1');
+            if (!card) return;
+            const ubicacion = card.getAttribute("data_ubicacion");
+            const no_serie = card.getAttribute("data_no_serie");
+            const modelo = card.getAttribute("data_modelo");
+            const id_consumible = card.getAttribute("data_id_consumible");
+            const nombre = card.getAttribute("data_nombre");
+            const cantidad_disponible = card.getAttribute("data_cantidad_disponible");
+            const id_impresora = card.getAttribute("data_id_impresora");
+
             Swal.fire({
                 title: "¿Que deseas hacer?",
                 showDenyButton: true,
@@ -729,7 +721,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 confirmButtonText: "Agregar consumibles",
                 denyButtonText: `Quitar consumibles`,
             }).then((result) => {
-                //Read more about isConfirmed, isDenied below 
                 if (result.isConfirmed) {
                     Swal.fire({
                         title: 'Agregar consumibles',
@@ -739,35 +730,25 @@ document.addEventListener("DOMContentLoaded", () => {
                         showCancelButton: true,
                         confirmButtonText: 'Agregar',
                         cancelButtonText: 'Cancelar',
-                        inputAttributes: {
-                            min: 1 // 👈 evita valores menores desde el input
-                        }
+                        inputAttributes: { min: 1 }
                     }).then((result) => {
                         if (result.isConfirmed) {
                             const cantidad = result.value;
-                            console.log(`Agregar ${cantidad} al consumible con ID: ${id_consumible} de la impresora con ID: ${id_impresora}`);
-                            // Aquí puedes agregar la lógica para agregar los consumibles
                             fetch('crud-calendar.php', {
                                 method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/x-www-form-urlencoded'
-                                },
+                                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                                 body: `action=actualizarConsumibles&id_consumible=${id_consumible}&id_impresora=${id_impresora}&cantidad=${cantidad}&tipo=entrada`
                             }).then(response => response.json())
                                 .then(data => {
                                     if (data.status === 'success') {
-                                        Swal.fire("Consumibles agregados", "", "success").then(result => {
-                                            if (result.isConfirmed) {
-                                                location.reload();
-                                            }
-                                        });
+                                        Swal.fire("Consumibles agregados", "", "success").then(result => { if (result.isConfirmed) location.reload(); });
                                     } else {
                                         Swal.fire("Error", data.message, "error");
                                     }
                                 });
                         }
                     });
-                } else if (result.isDenied) {//para quitar consumibles
+                } else if (result.isDenied) {
                     Swal.fire({
                         title: 'Quitar consumibles',
                         input: 'number',
@@ -776,28 +757,18 @@ document.addEventListener("DOMContentLoaded", () => {
                         showCancelButton: true,
                         confirmButtonText: 'Quitar',
                         cancelButtonText: 'Cancelar',
-                        inputAttributes: {
-                            min: 1 // 👈 evita valores menores desde el input
-                        },
+                        inputAttributes: { min: 1 },
                     }).then((result) => {
                         if (result.isConfirmed) {
                             const cantidad = result.value;
-                            console.log(`Quitar ${cantidad} al consumible con ID: ${id_consumible}`);
-                            // Aquí puedes agregar la lógica para quitar los consumibles
                             fetch('crud-calendar.php', {
                                 method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/x-www-form-urlencoded'
-                                },
+                                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                                 body: `action=actualizarConsumibles&id_consumible=${id_consumible}&id_impresora=${id_impresora}&cantidad=${cantidad}&tipo=salida`
                             }).then(response => response.json())
                                 .then(data => {
                                     if (data.status === 'success') {
-                                        Swal.fire("Consumibles quitados", "", "success").then(result => {
-                                            if (result.isConfirmed) {
-                                                location.reload();
-                                            }
-                                        });
+                                        Swal.fire("Consumibles quitados", "", "success").then(result => { if (result.isConfirmed) location.reload(); });
                                     } else {
                                         Swal.fire("Error", data.message, "error");
                                     }

@@ -803,28 +803,105 @@ h2 {
 /* Set height of body and the document to 100% */
 
 /* Style tab links */
+.tablinks-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px 0;
+}
+
 .tablink {
     background-color: #555;
     color: black;
-    float: left;
     border: none;
     outline: none;
     cursor: pointer;
     padding: 14px 16px;
     font-size: 2.4vh;
-    width: 25vh;
+    flex: 1 1 180px;
+    min-width: 140px;
+    max-width: 260px;
+    text-align: center;
+    border-radius: 12px;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .tablink:hover {
     background-color: #777;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.tablink.active {
+    background-color: #777;
+    color: black;
 }
 
 /* Style the tab content (and add height:100% for full page content) */
 .tabcontent {
     color: black;
     display: none;
-    padding: 100px 20px;
+    padding: 80px 20px;
     height: 100%;
+}
+
+@media (max-width: 768px) {
+    .tablink {
+        flex: 1 1 100%;
+        min-width: 0;
+        max-width: 100%;
+        font-size: 0.95rem;
+        padding: 14px 16px;
+        border-radius: 12px;
+    }
+
+    .tabcontent {
+        padding: 40px 14px;
+    }
+
+    .container1 {
+        gap: 14px;
+        padding: 14px;
+    }
+
+    .card1 {
+        padding: 16px;
+    }
+
+    .card-header1 {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .card-header1 h2 {
+        font-size: 1.2rem;
+    }
+
+    .info1 {
+        padding: 10px;
+    }
+
+    .label1 {
+        font-size: 0.95rem;
+    }
+
+    .value1 {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tabcontent {
+        padding: 30px 12px;
+    }
+
+    .tablink {
+        font-size: 0.95rem;
+        padding: 12px 14px;
+    }
 }
 
 #Home {
@@ -1392,6 +1469,62 @@ h1 {
     transform: translateY(-6px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
+
+/* Modal styles para edición */
+.modal {
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 95%;
+    max-width: 520px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+.modal-content h2 { margin-top:0; }
+.modal-content input[type=text], .modal-content input[type=number] {
+    width: 100%;
+    padding: 8px 10px;
+    margin: 6px 0 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+.modal-content label { font-weight:600; font-size:0.9rem; }
+.close-modal {
+    float: right;
+    font-size: 22px;
+    cursor: pointer;
+}
+.edit-btn {
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.edit-btn:hover { transform: translateY(-1px); }
+
+.update-consumibles {
+    background-color: #28a745; /* verde agradable */
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.update-consumibles:hover { transform: translateY(-1px); opacity: 0.95; }
 
 .card-header1 {
     display: flex;

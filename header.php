@@ -115,7 +115,7 @@ if (!isset($_SESSION['ususario'])) {
                             <span>Directorio</span>
                         </a>
                     </li>
-                    <li class="no-show">
+                    <li>
                         <a href="inventario">
                             <ion-icon name="clipboard-outline"></ion-icon>
                             <span>inventario</span>
@@ -344,7 +344,7 @@ if (!isset($_SESSION['ususario'])) {
             <?php } ?>
 
             // Función para actualizar el listado de notificaciones
-            function actualizarNotificaciones() {
+            /*function actualizarNotificaciones() {
                 listaNotificaciones.innerHTML = ''; // Limpiar
                 const ultimas = notificaciones.slice(-5); // Últimas 5
 
@@ -361,7 +361,7 @@ if (!isset($_SESSION['ususario'])) {
                         /*n.leida = true;
                         a.classList.add('leida');
                         actualizarContador();*/
-                        /* Aquí iría la llamada AJAX para actualizar en la base de datos */
+                        /* Aquí iría la llamada AJAX para actualizar en la base de datos 
                         fetch('crud-calendar.php', {
                                 method: 'POST',
                                 headers: {
@@ -377,7 +377,7 @@ if (!isset($_SESSION['ususario'])) {
                                 }
                             })
                             .catch(error => Swal.fire("Error", "No se pudo conectar con el servidor.", "error"));
-                        /******************************************************* */
+                        /******************************************************* 
                     });
 
                     listaNotificaciones.appendChild(a);

@@ -5,7 +5,7 @@
 
 <div id="charts" class="container"></div>
 
-<script>
+<!--<script>
     /*document.getElementById("pingForm").addEventListener("submit", function(e) {
             e.preventDefault();
             const hosts = document.getElementById("hosts").value.split(",").map(h => h.trim());

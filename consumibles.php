@@ -1,8 +1,10 @@
 <?php
 include 'header.php'
 ?>
-<button class="tablink" onclick="openPage('Home', this, 'white')" id="defaultOpen">INVENTARIO</button>
-<button class="tablink" onclick="openPage('News', this, 'white')">DASHBOARD</button>
+<div class="tablinks-wrapper">
+  <button class="tablink" onclick="openPage('Home', this, 'white')" id="defaultOpen">INVENTARIO</button>
+  <button class="tablink" onclick="openPage('News', this, 'white')">DASHBOARD</button>
+</div>
 <!--<button class="tablink" onclick="openPage('Contact', this, 'white')">Contact</button>-->
 <!--<button class="tablink" onclick="openPage('About', this, 'white')" id="defaultOpen">PING</button>-->
 
@@ -51,12 +53,43 @@ include 'header.php'
             <span style="color: <?php echo ($row['cantidad_disponible'] == 0) ? 'red' : ''; ?>;" class="label1"><ion-icon name="cube-outline"></ion-icon> Consumibles disponibles:</span>
             <span class="value1"><?php echo $row['cantidad_disponible']; ?> pz</span>
           </div>
+          <div style="display:flex; justify-content:flex-end; margin-top:8px;">
+            <button class="edit-btn" data-id-impresora="<?php echo $row['id_impresora']; ?>" data-id-consumible="<?php echo $row['id_consumible']; ?>">Editar</button>
+            <button class="update-consumibles" style="margin-left:8px;" data-id-impresora="<?php echo $row['id_impresora']; ?>" data-id-consumible="<?php echo $row['id_consumible']; ?>">Actualizar consumibles</button>
+          </div>
         </div>
     <?php
       } // while
     } // if
     ?>
     <script src="js/scriptPopUp.js"></script>
+    <!-- Modal de edición -->
+    <div id="editModal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2>Editar impresora / consumible</h2>
+        <form id="editForm">
+          <input type="hidden" name="id_impresora" id="id_impresora">
+          <input type="hidden" name="id_consumible" id="id_consumible">
+          <label>Ubicación</label>
+          <input type="text" name="ubicacion" id="ubicacion">
+          <label>Marca</label>
+          <input type="text" name="marca" id="marca">
+          <label>Número de serie</label>
+          <input type="text" name="no_serie" id="no_serie">
+          <label>Modelo</label>
+          <input type="text" name="modelo" id="modelo">
+          <label>Tóner (nombre)</label>
+          <input type="text" name="nombre" id="nombre">
+          <label>Cantidad disponible</label>
+          <input type="number" name="cantidad_disponible" id="cantidad_disponible" min="0">
+          <div style="margin-top:12px; text-align:right;">
+            <button type="submit" id="saveEdit">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="js/consumibles_edit.js"></script>
   </div>
 </div>
 
