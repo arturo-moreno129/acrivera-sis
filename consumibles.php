@@ -11,7 +11,7 @@ include 'header.php'
 <div id="Home" class="tabcontent">
   <div class="container1">
     <?php
-    $query = "SELECT * from impresoras as i inner join consumibles as c on i.id_consumible = c.id_consumible;";
+    $query = "SELECT * from impresoras as i inner join consumibles as c on i.id_consumible = c.id_consumible ORDER BY i.id_impresora ASC;";
     $result  = mysqli_query($con, $query);
 
     if (mysqli_num_rows($result) > 0) { // ✅ corrección aquí

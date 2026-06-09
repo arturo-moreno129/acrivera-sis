@@ -1,4 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
+  let tonersList = [];
+
+  // Cargar lista de tóners al cargar la página
+  fetch('consumibles_api.php?action=list')
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        tonersList = data.data;
+      }
+    })
+    .catch(error => console.error('Error cargando tóners:', error));
+
   // Reemplaza el modal por un SweetAlert al hacer click en el botón 'Editar'
   document.querySelectorAll('.edit-btn').forEach(btn => {
     btn.addEventListener('click', function (e) {
@@ -26,6 +38,13 @@ document.addEventListener('DOMContentLoaded', function () {
         if (v) ipVal = v.textContent.trim();
       }
 
+      // Generar opciones de tóner
+      const tonerOptions = tonersList.map(toner => `
+        <option value="${toner.id_consumible}" ${toner.id_consumible == id_consumible ? 'selected' : ''}>
+          ${toner.nombre}
+        </option>
+      `).join('');
+
       Swal.fire({
         title: 'Editar impresora / consumible',
         showCancelButton: true,
@@ -36,8 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Marca</label><input id="sw_marca" class="swal2-input" placeholder="Marca"></div>
           <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Número de serie</label><input id="sw_no_serie" class="swal2-input" placeholder="Número de serie"></div>
           <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Modelo</label><input id="sw_modelo" class="swal2-input" placeholder="Modelo"></div>
-          <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Tóner (nombre)</label><input id="sw_nombre" class="swal2-input" placeholder="Tóner (nombre)"></div>
-          <!-- Campo 'Cantidad disponible' eliminado del modal (se actualiza con 'Actualizar consumibles') -->
+          <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Tóner</label><select id="sw_toner" class="swal2-select" style="width:100%; padding:8px; font-size:14px; border:1px solid #ddd; border-radius:4px;">${tonerOptions}</select></div>
           <div style="text-align:left;margin-bottom:8px;"><label style="display:block;margin-bottom:4px;font-weight:600;color:#333;font-size:14px;">Dirección IP</label><input id="sw_direccion_ip" class="swal2-input" placeholder="Dirección IP"></div>
         `,
         didOpen: () => {
@@ -45,24 +63,30 @@ document.addEventListener('DOMContentLoaded', function () {
           document.getElementById('sw_marca').value = marcaVal;
           document.getElementById('sw_no_serie').value = noSerieVal;
           document.getElementById('sw_modelo').value = modeloVal;
-          document.getElementById('sw_nombre').value = nombreVal;
-          // `cantidad disponible` se gestiona por separado; no se inicializa aquí
-          // establecer IP si existe
           const swIp = document.getElementById('sw_direccion_ip');
           if (swIp) swIp.value = direccionIpAttr || ipVal || '';
         },
         preConfirm: () => {
-          return {
+          const newTonerSelect = document.getElementById('sw_toner');
+          const selectedTonerValue = newTonerSelect ? parseInt(newTonerSelect.value, 10) : id_consumible;
+          
+          const resultData = {
             id_impresora,
             id_consumible,
             ubicacion: document.getElementById('sw_ubicacion').value,
             marca: document.getElementById('sw_marca').value,
             no_serie: document.getElementById('sw_no_serie').value,
             modelo: document.getElementById('sw_modelo').value,
-            nombre: document.getElementById('sw_nombre').value,
             cantidad_disponible: cantidadVal,
             direccion_ip: (document.getElementById('sw_direccion_ip') && document.getElementById('sw_direccion_ip').value) || ''
           };
+
+          // Si cambió el tóner, agregar selected_consumible_id
+          if (selectedTonerValue !== id_consumible) {
+            resultData.selected_consumible_id = selectedTonerValue;
+          }
+
+          return resultData;
         }
       }).then(result => {
         if (result.isConfirmed) {
@@ -73,33 +97,52 @@ document.addEventListener('DOMContentLoaded', function () {
             body: JSON.stringify(data)
           }).then(r => r.json()).then(res => {
             if (res.success) {
-              // update card in DOM
-              const selector = `.card1[data_id_impresora="${data.id_impresora}"]`;
-              const cardEl = document.querySelector(selector);
-              if (cardEl) {
-                cardEl.setAttribute('data_ubicacion', data.ubicacion);
-                cardEl.setAttribute('data_no_serie', data.no_serie);
-                cardEl.setAttribute('data_modelo', data.modelo);
-                cardEl.setAttribute('data_nombre', data.nombre);
-                // `cantidad_disponible` no se actualiza desde este modal; se mantiene el valor actual en la card
-                // actualizar atributo de IP
-                if (data.direccion_ip !== undefined) cardEl.setAttribute('data_direccion_ip', data.direccion_ip);
-                const values = cardEl.querySelectorAll('.value1');
-                if (values.length >= 5) {
-                  values[0].textContent = data.ubicacion;
-                  values[1].textContent = res.marca || data.marca || values[1].textContent;
-                  values[2].textContent = data.no_serie;
-                  values[3].textContent = data.modelo;
-                  values[4].textContent = data.nombre;
+              // Actualizar la tarjeta sin hacer reload
+              if (card) {
+                card.setAttribute('data_ubicacion', data.ubicacion);
+                card.setAttribute('data_no_serie', data.no_serie);
+                card.setAttribute('data_modelo', data.modelo);
+                card.setAttribute('data_direccion_ip', data.direccion_ip);
+
+                // Si cambió el tóner, actualizar data_nombre y data_id_consumible
+                if (data.selected_consumible_id) {
+                  const newTonerName = tonersList.find(t => t.id_consumible == data.selected_consumible_id)?.nombre || '';
+                  card.setAttribute('data_nombre', newTonerName);
+                  card.setAttribute('data_id_consumible', data.selected_consumible_id);
+
+                  // Actualizar data-id-consumible en los botones
+                  const editBtn = card.querySelector('.edit-btn');
+                  const updateConsBtn = card.querySelector('.update-consumibles');
+                  if (editBtn) editBtn.setAttribute('data-id-consumible', data.selected_consumible_id);
+                  if (updateConsBtn) updateConsBtn.setAttribute('data-id-consumible', data.selected_consumible_id);
                 }
-                // si existe elemento para IP en la card, actualizar su valor
-                const ipElCard = Array.from(cardEl.querySelectorAll('.info1')).find(i => i.textContent.toLowerCase().includes('ip') || i.textContent.toLowerCase().includes('dirección'));
-                if (ipElCard) {
-                  const v = ipElCard.querySelector('.value1');
-                  if (v && data.direccion_ip !== undefined) v.textContent = data.direccion_ip;
-                }
+
+                // Actualizar los valores visibles en la tarjeta
+                const infoElements = card.querySelectorAll('.info1');
+                infoElements.forEach((info, index) => {
+                  const value = info.querySelector('.value1');
+                  if (!value) return;
+
+                  if (info.textContent.includes('Área') && index === 0) {
+                    value.textContent = data.ubicacion;
+                  } else if (info.textContent.includes('Marca')) {
+                    value.textContent = data.marca;
+                  } else if (info.textContent.includes('Número de serie')) {
+                    value.textContent = data.no_serie;
+                  } else if (info.textContent.includes('Modelo')) {
+                    value.textContent = data.modelo;
+                  } else if (info.textContent.toLowerCase().includes('dirección') || info.textContent.toLowerCase().includes('ip')) {
+                    value.textContent = data.direccion_ip;
+                  } else if (info.textContent.includes('Tóner')) {
+                    if (data.selected_consumible_id) {
+                      const newTonerName = tonersList.find(t => t.id_consumible == data.selected_consumible_id)?.nombre || '';
+                      value.textContent = newTonerName;
+                    }
+                  }
+                });
               }
-              Swal.fire('Listo', 'Consumible actualizado', 'success').then(() => {
+
+              Swal.fire('Listo', 'Impresora actualizada', 'success').then(() => {
                 location.reload();
               });
             } else {
