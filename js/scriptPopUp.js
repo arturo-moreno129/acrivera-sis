@@ -532,6 +532,8 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <input id="txtnom_host" class="swal2-input" ><br>
                                     <label style="text-align: left; for="#">Area:</label>
                                     <input id="txtdepartamento" class="swal2-input" ><br>
+                                    <label style="text-align: left; for="#">Ubicacion:</label>
+                                    <input id="txtubicacion" class="swal2-input" ><br>
             `,
                 preConfirm: () => {
                     const txtname = document.getElementById('txtname').value;
@@ -541,6 +543,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const txtno_serie = document.getElementById('txtno_serie').value;
                     const txtnom_host = document.getElementById('txtnom_host').value;
                     const txtdepartamento = document.getElementById('txtdepartamento').value;
+                    const txtubicacion = document.getElementById('txtubicacion').value;
 
                     if (!txtname) {
                         Swal.showValidationMessage("Debes ingresar el nombre");
@@ -570,18 +573,18 @@ document.addEventListener("DOMContentLoaded", () => {
                         Swal.showValidationMessage("Debes ingresar el puesto");
                         return false;
                     }
-                    return { txtname, txtequipo, txtmodelo, txtmarca, txtno_serie, txtnom_host, txtdepartamento };
+                    return { txtname, txtequipo, txtmodelo, txtmarca, txtno_serie, txtnom_host, txtdepartamento, txtubicacion };
                 }
             }).then(result => {
                 if (result.isConfirmed) {
-                    const { txtname, txtequipo, txtmodelo, txtmarca, txtno_serie, txtnom_host, txtdepartamento } = result.value;
+                    const { txtname, txtequipo, txtmodelo, txtmarca, txtno_serie, txtnom_host, txtdepartamento, txtubicacion } = result.value;
                     //console.log(nombre, puesto, correo, extension, area);
                     fetch('crud-calendar.php', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded'
                         },
-                        body: `action=insertarInventario&txtname=${txtname}&txtequipo=${txtequipo}&txtmodelo=${txtmodelo}&txtmarca=${txtmarca}&txtno_serie=${txtno_serie}&txtnom_host=${txtnom_host}&txtdepartamento=${txtdepartamento}`
+                        body: `action=insertarInventario&txtname=${encodeURIComponent(txtname)}&txtequipo=${encodeURIComponent(txtequipo)}&txtmodelo=${encodeURIComponent(txtmodelo)}&txtmarca=${encodeURIComponent(txtmarca)}&txtno_serie=${encodeURIComponent(txtno_serie)}&txtnom_host=${encodeURIComponent(txtnom_host)}&txtdepartamento=${encodeURIComponent(txtdepartamento)}&txtubicacion=${encodeURIComponent(txtubicacion)}`
                     })
                         .then(response => response.json())
                         .then(data => {
@@ -626,6 +629,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (data.status === "success") {
                         //console.log(data.message[0]);
                         const { id_inventario, usuario_asignado, tipo_equipo, modelo, marca, no_serie, nom_host, departamento, estatus } = data.message[0];
+                        const ubicacionValor = data.message[0].Ubicacion || data.message[0].ubicacion || '';
                         const estatusInventario = [0, 1];
                         const estatuInvName = ['Baja', 'Activo'];
                         //console.log(id_user, nom_usu, puesto, correo, extencion);
@@ -649,9 +653,11 @@ document.addEventListener("DOMContentLoaded", () => {
                                     <input id="marca" class="swal2-input" value="${marca}"><br>
                                     <label style="text-align: left; for="#">No. Serie:</label>
                                     <input id="no_serie" class="swal2-input" value="${no_serie}"><br>
-                                    <label style="text-align: left; for="#">Nom Host:</label>
+                                    <label style="text-align: left;">Nom Host:</label>
                                     <input id="nom_host" class="swal2-input" value="${nom_host}"><br>
-                                    <label style="text-align: left; for="#">Area:</label>
+                                    <label style="text-align: left;">Ubicacion:</label>
+                                    <input id="ubicacion" class="swal2-input" value="${ubicacionValor}"><br>
+                                    <label style="text-align: left;">Area:</label>
                                     <input id="departamento" class="swal2-input" value="${departamento}"><br>
                                     <select id="Nareainv" class="form-control">
                                         <option value=${estatus}>${estatuInvName[estatus]}</option>
@@ -677,6 +683,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     marca: document.getElementById('marca').value,
                                     no_serie: document.getElementById('no_serie').value,
                                     nom_host: document.getElementById('nom_host').value,
+                                    ubicacion: document.getElementById('ubicacion').value,
                                     departamento: document.getElementById('departamento').value,
                                     slect2: document.getElementById('Nareainv').value
                                 };
@@ -684,14 +691,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                             .then((result) => {
                                 if (result.isConfirmed) {
-                                    const { id, usr, equipo, modelo, marca, no_serie, nom_host, departamento, slect2 } = result.value;
-                                    //console.table(result.value);
+                                    const { id, usr, equipo, modelo, marca, no_serie, nom_host, ubicacion, departamento, slect2 } = result.value;
                                     fetch('crud-calendar.php', {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/x-www-form-urlencoded'
                                         },
-                                        body: `action=updateInv&id=${id}&usu=${usr}&equipo=${equipo}&modelo=${modelo}&marca=${marca}&noSerie=${no_serie}&host=${nom_host}&depa=${departamento}&estatus=${slect2}`
+                                        body: `action=updateInv&id=${id}&usu=${usr}&equipo=${equipo}&modelo=${modelo}&marca=${marca}&noSerie=${no_serie}&host=${nom_host}&ubicacion=${encodeURIComponent(ubicacion)}&depa=${departamento}&estatus=${slect2}`
                                     })
                                         .then(response => response.json())
                                         .then(data => {

@@ -16,6 +16,7 @@ include 'header.php';
     <option value="4">NO. SERIE</option>
     <option value="5">HOST</option>
     <option value="6">DEPARTAMENTO</option>
+    <option value="7">UBICACION</option>
 </select>
 
 <center><input style="display: none;" type="text" name="nombre" id="input-search-inentario" onkeyup="myFunction1('myTablaInventario', 'mySelectorInventario', 'input-search-inentario')" placeholder="Ingresa el dato a buscar"></center><br>
@@ -36,6 +37,7 @@ include 'header.php';
             <th style="text-align: center;">NO. SERIE</th>
             <th style="text-align: center;">HOST</th>
             <th style="text-align: center;">DEPARTAMENTO</th>
+            <th style="text-align: center;">UBICACION</th>
             <th style="text-align: center;">ESTATUS</th>
             <th style="text-align: center;">EDITAR</th>
         </tr>
@@ -55,6 +57,7 @@ include 'header.php';
                         <td>' . $row["no_serie"] . '</td>
                         <td>' . $row["nom_host"] . '</td>
                         <td>' . $row["departamento"] . '</td>
+                        <td>' . $row["Ubicacion"] . '</td>
                         <td>' . (($row['estatus'] == 1) ? '<img id="pdf-icon" src="imagenes/chek.png" alt="" style="width: 35px;">' : '<img id="pdf-icon" src="imagenes/error.png" alt="" style="width: 35px;">') . '</td>';
                     if ($_SESSION['rol'] == 1) {
                         echo '<td> <a href="#" style="pointer-events:auto" rel="noopener noreferrer">

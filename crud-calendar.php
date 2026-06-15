@@ -121,14 +121,24 @@ function updateDir($id, $nom, $puesto, $correo, $extension, $area)
     }
 }
 
-function updateInv($id, $usr, $equipo, $modelo, $marca, $no_serie, $nom_host, $departamento, $slect2)
+function updateInv($id, $usr, $equipo, $modelo, $marca, $no_serie, $nom_host, $ubicacion, $departamento, $slect2)
 {
     global $con; // Usa la conexión global
     $id = intval($id); // Convierte a entero para seguridad
-    $sqlupdate = "UPDATE inventario set usuario_asignado = '$usr',tipo_equipo = '$equipo',modelo = '$modelo',marca = '$marca',no_serie = '$no_serie',nom_host = '$nom_host',departamento = '$departamento',estatus = '$slect2' where id_inventario = $id";
+    $usr = mysqli_real_escape_string($con, $usr);
+    $equipo = mysqli_real_escape_string($con, $equipo);
+    $modelo = mysqli_real_escape_string($con, $modelo);
+    $marca = mysqli_real_escape_string($con, $marca);
+    $no_serie = mysqli_real_escape_string($con, $no_serie);
+    $nom_host = mysqli_real_escape_string($con, $nom_host);
+    $ubicacion = mysqli_real_escape_string($con, $ubicacion);
+    $departamento = mysqli_real_escape_string($con, $departamento);
+    $slect2 = intval($slect2);
+
+    $sqlupdate = "UPDATE inventario SET usuario_asignado = '$usr', tipo_equipo = '$equipo', modelo = '$modelo', marca = '$marca', no_serie = '$no_serie', nom_host = '$nom_host', Ubicacion = '$ubicacion', departamento = '$departamento', estatus = $slect2 WHERE id_inventario = $id";
     $result = mysqli_query($con, $sqlupdate);
     if ($result) {
-        return ["status" => "success", "message" => "Se actualizo correctamente el directorio"];
+        return ["status" => "success", "message" => "Se actualizo correctamente el inventario"];
     } else {
         return ["status" => "error", "message" => "Error al finalizar el elemento."];
     }
@@ -238,15 +248,25 @@ function obtenerDatosInventario($idDir)
     }
 }
 
-function insertarInventario($txtname, $txtequipo, $txtmodelo, $txtmarca, $txtno_serie, $txtnom_host, $txtdepartamento)
+function insertarInventario($txtname, $txtequipo, $txtmodelo, $txtmarca, $txtno_serie, $txtnom_host, $txtdepartamento, $txtubicacion)
 {
     global $con; // Usa la conexión global
-    $sqlinsert = "INSERT into inventario values(default,'$txtname','$txtequipo','$txtmodelo','$txtmarca','$txtno_serie','$txtnom_host','$txtdepartamento',1)";
+    // Sanitizar entradas
+    $txtname = mysqli_real_escape_string($con, $txtname);
+    $txtequipo = mysqli_real_escape_string($con, $txtequipo);
+    $txtmodelo = mysqli_real_escape_string($con, $txtmodelo);
+    $txtmarca = mysqli_real_escape_string($con, $txtmarca);
+    $txtno_serie = mysqli_real_escape_string($con, $txtno_serie);
+    $txtnom_host = mysqli_real_escape_string($con, $txtnom_host);
+    $txtdepartamento = mysqli_real_escape_string($con, $txtdepartamento);
+    $txtubicacion = mysqli_real_escape_string($con, $txtubicacion);
+
+    $sqlinsert = "INSERT INTO inventario (id_inventario, usuario_asignado, tipo_equipo, modelo, marca, no_serie, nom_host, departamento, Ubicacion, estatus) VALUES (DEFAULT, '$txtname', '$txtequipo', '$txtmodelo', '$txtmarca', '$txtno_serie', '$txtnom_host', '$txtdepartamento', '$txtubicacion', 1)";
     $result = mysqli_query($con, $sqlinsert);
     if ($result) {
         return ["status" => "success", "message" => "Se inserto correctamente al inventario"];
     } else {
-        return ["status" => "error", "message" => "Error al finalizar el elemento."];
+        return ["status" => "error", "message" => "Error al finalizar el elemento: " . mysqli_error($con)];
     }
 }
 
@@ -504,8 +524,8 @@ if (isset($_POST['action'])) {
             break;
         case 'updateInv':
             # code...
-            if (isset($_POST['id']) && isset($_POST['usu']) && isset($_POST['equipo']) && isset($_POST['modelo']) && isset($_POST['marca']) && isset($_POST['noSerie']) && isset($_POST['host']) && isset($_POST['depa']) && isset($_POST['estatus'])) {
-                $response = updateInv($_POST['id'], $_POST['usu'], $_POST['equipo'], $_POST['modelo'], $_POST['marca'], $_POST['noSerie'], $_POST['host'], $_POST['depa'], $_POST['estatus']);
+            if (isset($_POST['id']) && isset($_POST['usu']) && isset($_POST['equipo']) && isset($_POST['modelo']) && isset($_POST['marca']) && isset($_POST['noSerie']) && isset($_POST['host']) && isset($_POST['ubicacion']) && isset($_POST['depa']) && isset($_POST['estatus'])) {
+                $response = updateInv($_POST['id'], $_POST['usu'], $_POST['equipo'], $_POST['modelo'], $_POST['marca'], $_POST['noSerie'], $_POST['host'], $_POST['ubicacion'], $_POST['depa'], $_POST['estatus']);
             } else {
                 $response = ["status" => "error", "message" => "ID no proporcionado."];
             }
@@ -513,8 +533,8 @@ if (isset($_POST['action'])) {
             break;
         case 'insertarInventario':
             # code...
-            if (isset($_POST['txtname']) && isset($_POST['txtequipo']) && isset($_POST['txtmodelo']) && isset($_POST['txtmarca']) && isset($_POST['txtno_serie']) && isset($_POST['txtnom_host']) && isset($_POST['txtdepartamento'])) {
-                $response = insertarInventario($_POST['txtname'], $_POST['txtequipo'], $_POST['txtmodelo'], $_POST['txtmarca'], $_POST['txtno_serie'], $_POST['txtnom_host'], $_POST['txtdepartamento']);
+            if (isset($_POST['txtname']) && isset($_POST['txtequipo']) && isset($_POST['txtmodelo']) && isset($_POST['txtmarca']) && isset($_POST['txtno_serie']) && isset($_POST['txtnom_host']) && isset($_POST['txtdepartamento']) && isset($_POST['txtubicacion'])) {
+                $response = insertarInventario($_POST['txtname'], $_POST['txtequipo'], $_POST['txtmodelo'], $_POST['txtmarca'], $_POST['txtno_serie'], $_POST['txtnom_host'], $_POST['txtdepartamento'], $_POST['txtubicacion']);
             } else {
                 $response = ["status" => "error", "message" => "ID no proporcionado."];
             }

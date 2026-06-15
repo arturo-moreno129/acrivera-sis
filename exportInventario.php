@@ -32,10 +32,11 @@ function exportarInventario($con, $filtro)
     $sheet->setCellValue('F1', 'No. Serie');
     $sheet->setCellValue('G1', 'Nombre Host');
     $sheet->setCellValue('H1', 'Departamento');
-    $sheet->setCellValue('I1', 'Estatus');
+    $sheet->setCellValue('I1', 'Ubicacion');
+    $sheet->setCellValue('J1', 'Estatus');
 
     // Estilo de encabezados
-    $sheet->getStyle('A1:I1')->applyFromArray([
+    $sheet->getStyle('A1:J1')->applyFromArray([
         'font' => [
             'bold' => true,
             'color' => ['rgb' => '000000']
@@ -71,6 +72,7 @@ function exportarInventario($con, $filtro)
             no_serie,
             nom_host,
             departamento,
+            Ubicacion,
             estatus
         FROM inventario
         $where
@@ -95,7 +97,8 @@ function exportarInventario($con, $filtro)
         $sheet->setCellValue('F' . $fila, $row['no_serie']);
         $sheet->setCellValue('G' . $fila, $row['nom_host']);
         $sheet->setCellValue('H' . $fila, $row['departamento']);
-        $sheet->setCellValue('I' . $fila, $row['estatus']);
+        $sheet->setCellValue('I' . $fila, $row['Ubicacion']);
+        $sheet->setCellValue('J' . $fila, $row['estatus']);
 
         $fila++;
     }
@@ -105,7 +108,7 @@ function exportarInventario($con, $filtro)
         ->setFormatCode('0');
 
     // Autoajustar columnas
-    foreach (range('A', 'I') as $columna) {
+    foreach (range('A', 'J') as $columna) {
         $sheet->getColumnDimension($columna)->setAutoSize(true);
     }
 
@@ -113,7 +116,7 @@ function exportarInventario($con, $filtro)
     $sheet->freezePane('A2');
 
     // Filtro automático
-    $sheet->setAutoFilter('A1:I1');
+    $sheet->setAutoFilter('A1:J1');
 
     // Descargar archivo
     $today = date('Y-m-d');
