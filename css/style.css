@@ -1817,3 +1817,52 @@ h1 {
     border-radius: 50%;
     object-fit: cover;
 }
+
+/* Priorizar columna USUARIO en la tabla de inventario y evitar amontonamiento */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#myTablaInventario {
+    table-layout: auto; /* permitir que columnas tomen su ancho natural */
+    width: 100%;
+    min-width: 900px; /* fuerza scroll en pantallas muy pequeñas */
+}
+
+#myTablaInventario th,
+#myTablaInventario td {
+    padding: 12px 10px;
+    vertical-align: middle;
+}
+
+#myTablaInventario th {
+    font-size: 14px;
+}
+
+#myTablaInventario th:first-child,
+#myTablaInventario td:first-child {
+    width: 38%;
+    min-width: 200px;
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* columnas secundarias más estrechas con ellipsis */
+#myTablaInventario td:not(:first-child) {
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 800px) {
+    #myTablaInventario {
+        min-width: 700px;
+    }
+    #myTablaInventario th:first-child,
+    #myTablaInventario td:first-child {
+        width: 100%;
+        min-width: initial;
+    }
+}
