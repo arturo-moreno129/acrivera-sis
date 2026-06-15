@@ -330,37 +330,81 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnExportinventario = document.querySelector("#btnExportinventario");
     if (btnExportinventario) {
         btnExportinventario.addEventListener('click', () => {
-            fetch('exportInventario.php', {
-                method: 'POST'
-            })
-                .then(response => {
-                    if (!response.ok) throw new Error('No se pudo generar el archivo');
-                    return response.blob();
-                })
-                .then(blob => {
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = `Inventario - ACR.xlsx`;
-                    document.body.appendChild(a);
-                    a.click();
-                    a.remove();
-
-                    Swal.fire({
-                        title: "¡Listo!",
-                        text: "El inventario se descargó correctamente.",
-                        icon: "success"
+            Swal.fire({
+                title: "Exportar Inventario",
+                text: "Selecciona qué deseas exportar:",
+                icon: "question",
+                html: `
+                    <div style="text-align: left; padding: 20px;">
+                        <label style="display: flex; align-items: center; margin: 15px 0; cursor: pointer;">
+                            <input type="radio" name="filtroInventario" value="activos" style="margin-right: 10px;">
+                            <span>Solo Activos</span>
+                        </label>
+                        <label style="display: flex; align-items: center; margin: 15px 0; cursor: pointer;">
+                            <input type="radio" name="filtroInventario" value="inactivos" style="margin-right: 10px;">
+                            <span>Solo Inactivos</span>
+                        </label>
+                        <label style="display: flex; align-items: center; margin: 15px 0; cursor: pointer;">
+                            <input type="radio" name="filtroInventario" value="todos" checked style="margin-right: 10px;">
+                            <span>Todos</span>
+                        </label>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: "Exportar",
+                cancelButtonText: "Cancelar",
+                didOpen: () => {
+                    // Asegurar que los radio buttons sean funcionales
+                    document.querySelectorAll('input[name="filtroInventario"]').forEach(input => {
+                        input.addEventListener('change', function() {
+                            // Opcional: acción al cambiar
+                        });
                     });
-                })
-                .catch(error => {
-                    console.error('Error en la exportación:', error);
-                    Swal.fire({
-                        title: "Error",
-                        text: "No se pudo exportar el archivo.",
-                        icon: "error"
-                    });
-                });
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const filtroSeleccionado = document.querySelector('input[name="filtroInventario"]:checked').value;
+                    exportarInventarioFiltrado(filtroSeleccionado);
+                }
+            });
         })
+    }
+
+    function exportarInventarioFiltrado(filtro) {
+        fetch('exportInventario.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `filtro=${filtro}`
+        })
+            .then(response => {
+                if (!response.ok) throw new Error('No se pudo generar el archivo');
+                return response.blob();
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `Inventario - ACR.xlsx`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+
+                Swal.fire({
+                    title: "¡Listo!",
+                    text: "El inventario se descargó correctamente.",
+                    icon: "success"
+                });
+            })
+            .catch(error => {
+                console.error('Error en la exportación:', error);
+                Swal.fire({
+                    title: "Error",
+                    text: "No se pudo exportar el archivo.",
+                    icon: "error"
+                });
+            });
     }
     //***************boton para exportar a BLOC DE NOTAS */
     const btnExxport2 = document.querySelector("#btnExport2");

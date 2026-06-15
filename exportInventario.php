@@ -11,9 +11,12 @@ use PhpOffice\PhpSpreadsheet\Style\Fill;
 
 $today = date('Y-m-d');
 
-exportarInventario($con);
+// Obtener el filtro del POST
+$filtro = isset($_POST['filtro']) ? $_POST['filtro'] : 'todos';
 
-function exportarInventario($con)
+exportarInventario($con, $filtro);
+
+function exportarInventario($con, $filtro)
 {
     // Crear Excel
     $spreadsheet = new Spreadsheet();
@@ -49,6 +52,14 @@ function exportarInventario($con)
         ]
     ]);
 
+    // Construir la consulta según el filtro
+    $where = '';
+    if ($filtro === 'activos') {
+        $where = 'WHERE estatus = 1';
+    } elseif ($filtro === 'inactivos') {
+        $where = 'WHERE estatus = 0';
+    }
+    
     // Consulta
     $query = "
         SELECT
@@ -62,6 +73,7 @@ function exportarInventario($con)
             departamento,
             estatus
         FROM inventario
+        $where
         ORDER BY id_inventario ASC
     ";
 
