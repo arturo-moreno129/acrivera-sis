@@ -44,7 +44,7 @@ include 'header.php';
         <thead>
         <tbody>
             <?php
-            $query = "select * From inventario ORDER BY estatus"; //where nombre = '$nombre'";
+            $query = "select * From inventario where estatus = 1"; //where nombre = '$nombre'";
             $result = mysqli_query($con, $query);
             if ($row = mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_array($result)) {
