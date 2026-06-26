@@ -3,6 +3,7 @@ include "header.php";
 ?>
 <button class="tablink" onclick="openPage('Resguardos', this, 'white')" id="defaultOpen">RESGUARDOS</button>
 <button class="tablink" onclick="openPage('Reparaciones', this, 'white')">REPARACIONES</button>
+<button class="tablink" onclick="openPage('Resguardos-Pendientes', this, 'white')">PENDIENTES</button>
 <!--<button class="tablink" onclick="openPage('News', this, 'white')">News</button>
 <button class="tablink" onclick="openPage('Contact', this, 'white')">Contact</button>-->
 
@@ -28,7 +29,7 @@ include "header.php";
         &emsp;&emsp;&emsp;Estatus: <label for="">ACTIVO</label> <i class="fa-solid fa-circle-check" style="color:green"></i>
         &emsp;&emsp;&emsp;Ver usuario: <a href="usuario.php" style="text-decoration:none;"><i class="fa-solid fa-circle-user"></i></a>
     </p>
-</div>--><br>
+    </div>--><br>
     <table id="myTableResguardo">
         <thead>
             <tr><!--th para encabezados-->
@@ -44,6 +45,66 @@ include "header.php";
                 <?php
                 $new_url_files = "carpetas/";
                 $query = "select * From evidencia ORDER BY nombre"; //where nombre = '$nombre'";
+                $result = mysqli_query($con, $query);
+                if ($row = mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_array($result)) {
+                        echo
+                        '<tr>
+                                <td>' . $row["nombre"] . '</td>
+                                <td>' . $row["fecha"] . '</td>
+                                <td>' . $row["dispositivo"] . '</td>
+                                <td>' . ($row["url_resguardo"] != null ? '<a target="_blank" href="view_pdf.php?file=' . $row["nombre"] . "/" . $row["url_resguardo"] . '" style="pointer-events:auto" rel="noopener noreferrer"> <img id="pdf-icon" src="imagenes/pdf_img.png" alt="" style="width: 35px;"> </a>' : '<img id="pdf-icon" src="imagenes/error.png" alt="" style="width: 35px;">') . '</td>
+                                <td>' . ($row["url_mantenimiento"] != null ? '<a target="_blank" href="view_pdf.php?file=' . $row["nombre"] . "/" . $row["url_mantenimiento"] . '" style="pointer-events:auto" rel="noopener noreferrer"> <img id="pdf-icon" src="imagenes/pdf_img.png" alt="" style="width: 35px;"> </a>' : '<img id="pdf-icon" src="imagenes/error.png" alt="" style="width: 35px;">') . '</td>
+                                <td>' . (($row['estatus'] == 0 or $row['estatus_mant'] == 0) ? '<a href="pendientes.php?id=' . $row["id_evidencia"] . '" style="pointer-events:auto" rel="noopener noreferrer"> <img id="pdf-icon" src="imagenes/pendiente_firma.png" alt="" style="width: 35px;"> </a>' : '<img id="pdf-icon" src="imagenes/chek.png" alt="" style="width: 35px;">') . '</td>
+                            </tr>';
+                    }
+                } else {
+                    $_SESSION["alert"] = "No se encontro el suaurio";
+                }
+                //echo strtoupper($nombre) 
+                ?>
+            </tbody>
+    </table>
+    <!--<div id="pagination" class="flex items-center space-x-2 mt-4"></div>--><!--PARA PAGINACION-->
+</div>
+
+
+<div id="Resguardos-Pendientes" class="tabcontent"><!--Resguardos Pendientes-->
+    <center>
+        <h1>BUSCAR RESGUARDO</h1>
+    </center>
+    <h2 id="filtrado">Filtrar por:</h2>
+
+    <select id="mySelectResguardo" class="form-control">
+        <option value="">SELECCIONA FILTRO DE BÚSQUEDA</option>
+        <option value="0">USUARIO</option>
+        <option value="1">FECHA</option>
+        <option value="2">DISPOSITIVO</option>
+    </select>
+    <center><input style="display: none;" type="text" name="nombre" id="input-search-resguardo" onkeyup="myFunction1('myTableResguardo', 'mySelectResguardo', 'input-search-resguardo')" placeholder="Ingresa el nombre a buscar"></center><br>
+
+    <!--<div class="status-usuario">
+    <p>
+        Nombre: <input type="submit" value="JOSE ARTURO MORENO AGUILAR" style="color:white; width: 350px; border-radius:5px;background-color:gray;" disabled>
+        &emsp;&emsp;&emsp;Estatus: <label for="">ACTIVO</label> <i class="fa-solid fa-circle-check" style="color:green"></i>
+        &emsp;&emsp;&emsp;Ver usuario: <a href="usuario.php" style="text-decoration:none;"><i class="fa-solid fa-circle-user"></i></a>
+    </p>
+    </div>--><br>
+    <table id="myTableResguardo">
+        <thead>
+            <tr><!--th para encabezados-->
+                <th>USUARIO</th>
+                <th style="text-align: center;">FECHA</th>
+                <th style="text-align: center;">DISPOSITIVO</th>
+                <th style="text-align: center;">PDF RES</th>
+                <th style="text-align: center;">PDF MANT</th>
+                <th style="text-align: center;">ESTATUS</th>
+            </tr>
+            <thead>
+            <tbody>
+                <?php
+                $new_url_files = "carpetas/";
+                $query = "select * From evidencia where estatus = 0 or estatus_mant = 0"; //where nombre = '$nombre'";
                 $result = mysqli_query($con, $query);
                 if ($row = mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_array($result)) {

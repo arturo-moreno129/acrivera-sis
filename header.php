@@ -103,7 +103,7 @@ if (!isset($_SESSION['ususario'])) {
                             <span>Registro</span>
                         </a>
                     </li>
-                    <li class="no-show">
+                    <li>
                         <a href="resguardos">
                             <ion-icon name="folder-outline"></ion-icon>
                             <span>Resguardos</span>

@@ -1,4 +1,2 @@
-Recibido: carpetas/ABEL DE JESUS MORA FLORES/RESGUARDO_5.pdf0
-Archivo copiado exitosamente.
-PDF guardado con éxito en: carpetas/ABEL DE JESUS MORA FLORES/RESGUARDO_5.pdf
-Archivo eliminado exitosamente.
+Recibido: C:/xampp/htdocs/acrivera-sis/imagenes_guardadas/archivo_modificado_RESGUARDO.xlsxC:/xampp/htdocs/acrivera-sis/carpetas/PEPE PICA PAPAS/RESGUARDO_6.pdf
+Archivo PDF generado exitosamente: C:/xampp/htdocs/acrivera-sis/carpetas/PEPE PICA PAPAS/RESGUARDO_6.pdf
