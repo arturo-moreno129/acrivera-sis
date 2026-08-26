@@ -4,7 +4,7 @@
     <h1>PENDIENTE POR FIRMA</h1>
 </div>
 <div class="container-options">
-<a href="http://" style="text-decoration: none;" ></a>
+<!--<a href="http://" style="text-decoration: none;" ></a>-->
     <?php
     $query_resguard = "SELECT * FROM bd_acrivera.evidencia WHERE id_evidencia = '{$_GET['id']}' and estatus = 0";
     $result = mysqli_query($con, $query_resguard);
